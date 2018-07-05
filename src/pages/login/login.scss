@@ -1,0 +1,101 @@
+page-login {
+
+	ion-content{
+
+		.scroll-content{
+
+		}
+		section.main-content{
+			background-image:url('../../assets/imgs/login-bg.png');
+			background-size:cover;
+			background-repeat:no-repeat;
+			background-position:center;
+			height:100%;
+			width:100%;
+
+
+			&.mobile{
+				header{
+					padding:15vh 0 0;
+				}
+			}
+
+			header{
+				display:inline-block;
+				clear:both;
+				width:100%;
+				padding:10vh 0 0;
+
+				img{
+					display:block;
+					margin:2vh auto;
+					max-height:93px;
+					height:100%;
+				}
+			}
+
+			div.main{
+				display:block;
+				padding:0 10vw;
+				text-align:center;
+
+				ion-row{
+					width:30rem;
+					text-align:center;
+					margin:auto;
+					padding-top:2.25vh;
+					input{
+						margin-top: 20px;
+					    border: 0;
+					    outline: 0;
+					    background: transparent;
+					    border-bottom: 1px solid white;
+					    color: white;
+					    width: 100%;
+					    font-size: 20px;
+					    font-family:'Raleway', sans-serif;
+
+					    &::placeholder{
+					    	color:inherit;
+					    	font-size:16px;
+					    }
+					}
+
+					button[ion-button]{
+						margin-top: 32px;
+					    text-transform: uppercase;
+					    border-radius: 50px;
+					    font-size: 13px;
+					    font-weight: 400;
+					    width: 200px;
+					    height: 45px;
+					    color: black;
+					    font-family: 'Raleway', sans-serif !important;
+					    -webkit-box-shadow: 1px 0px 15px 0px rgba(50,50,50,0.53);
+					    -moz-box-shadow: 1px 0px 15px 0px rgba(50,50,50,0.53);
+					    box-shadow: 1px 0px 15px 0px rgba(50,50,50,0.53);
+					    background-color:#fff;
+					}
+
+				} // end of ion-row
+
+				span.links{
+					display:block;
+					clear:both;
+					margin-top:1.8vh;
+					button[ion-button]{
+						background:transparent;
+						color:#fff;
+						font-family: 'Raleway', sans-serif;
+						text-transform:none;
+						font-size:18px;
+					}
+				}
+
+			} // end of div.main
+		
+		}// end of main-contentin
+
+	}
+
+}

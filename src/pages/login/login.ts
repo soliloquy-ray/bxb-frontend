@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { SignUpPage } from '../sign-up/sign-up';
+
 /**
  * Generated class for the LoginPage page.
  *
@@ -31,4 +33,11 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
+  toReg(){
+  	this.navCtrl.setRoot(SignUpPage,{},{animate:true, direction:"forward"});
+  }
+  
+  reorient(){
+  	this.isMobile = mobilecheck();
+  }
 }

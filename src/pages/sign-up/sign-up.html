@@ -1,18 +1,117 @@
-<!--
-  Generated template for the SignUpPage page.
+<ion-content (window:resize)="reorient($event)">
+	<ion-fab top left *ngIf="!isMobile">
+		<button ion-fab (tap)="toHome()"></button>
+		<!--ion-fab-list side="right">
+		   <button ion-fab mini>Button</button>
+		   <button ion-fab mini>Button 2</button>
+		</ion-fab-list-->
+	 </ion-fab>
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>signUp</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
+	 <section class="main" [ngClass]="{'mobile':isMobile}">
+	 	<form name="employee-data">
+		 	<span class="header" *ngIf = "isMobile">
+		 		<button ion-button (tap)="toHome()"></button>
+		 	</span>
+	 		<p>Complete Information Below</p>
+	 		<ion-row>
+	 			<p class="label">
+	 				First Name
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="firstName" [(ngModel)] = "userData.firstName" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Middle Name
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="middleName" [(ngModel)] = "userData.middleName" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Last Name
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="lastName" [(ngModel)] = "userData.lastName" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Username
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="userName" [(ngModel)] = "userData.userName" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Email
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="email" [(ngModel)] = "userData.email" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Company Code
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="companyCode" [(ngModel)] = "userData.companyCode" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Employee ID
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="employeeId" [(ngModel)] = "userData.employeeId" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Payroll Account
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="companyCode" [(ngModel)] = "userData.payrollAccount" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Password
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="companyCode" [(ngModel)] = "userData.password" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Confirm Password
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="companyCode" [(ngModel)] = "confirmPass" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row class="bot">
+	 			<p class="label">
+	 				Mobile
+	 			</p>
+	 			<span class="content">
+		 			<select [innerHTML] = "prefixes"></select>
+		 			<input class="short" type="text" name="mobile" [(ngModel)] = "userData.mobile" />
+		 		</span>
+	 		</ion-row>
+	 		<ion-row class="center">
+	 			<span>
+	 				<input type="checkbox" name="agreeTerms"/>
+	 				<p>I have read and understood the <a (tap)="goToTerms()">terms and conditions</a>.</p>
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<button ion-button (tap)="submitReg()">Create Account</button>
+	 		</ion-row>
+	 	</form>
+	 </section>
 
 </ion-content>

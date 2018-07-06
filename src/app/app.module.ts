@@ -4,27 +4,33 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
+import { ComponentsModule } from '../components/components.module';
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { SignUpPage } from '../pages/sign-up/sign-up';
+import { HrDashboardPage } from '../pages/hr-dashboard/hr-dashboard';
 
 var pages = [
   MyApp,
   HomePage,
   LoginPage,
-  SignUpPage
+  SignUpPage,
+  HrDashboardPage
 ];
 
 @NgModule({
   declarations:pages,
   imports: [
+    ComponentsModule,
     BrowserModule,
     IonicModule.forRoot(MyApp, {}, {
       links: [
         { component: HomePage, name: 'Home', segment: 'home' },
         { component: LoginPage, name: 'LoginPage', segment: 'login' },
         { component: SignUpPage, name: 'SignUpPage', segment: 'sign-up' },
+        { component: HrDashboardPage, name: 'HrDashboardPage', segment: 'hr-dashboard' },
       ]
     })
   ],

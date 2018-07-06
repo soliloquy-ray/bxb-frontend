@@ -12,6 +12,13 @@
 		 	<span class="header" *ngIf = "isMobile">
 		 		<button ion-button (tap)="toHome()"></button>
 		 	</span>
+
+		 	<div class="uploader">
+				<input type="file" accept="image/*" (change)="takePic($event)">
+				<ion-avatar item-start>
+					<img #prev/>
+				</ion-avatar>
+		 	</div>
 	 		<p>Complete Information Below</p>
 	 		<ion-row>
 	 			<p class="label">
@@ -112,6 +119,17 @@
 	 			<button ion-button (tap)="submitReg()">Create Account</button>
 	 		</ion-row>
 	 	</form>
+
+	 	<footer>
+	 		<span>
+	 			<img src="../../assets/imgs/bxb-logo-dark.png" (tap)="toHome()"/>
+	 		</span>
+	 		<nav class="links">
+	 			<p class="link">Terms &amp; Conditions</p>
+	 			<p class="link">Privacy Policy</p>
+	 		</nav>
+	 		<p class="copyright">&copy; 2018 BRICK BY BRICK, ALL RIGHTS RESERVED</p>
+	 	</footer>
 	 </section>
 
 </ion-content>

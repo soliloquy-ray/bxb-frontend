@@ -1,6 +1,6 @@
 export var intlPrefixes = `<option data-countrycode="PH" value="63">PH (+63)</option>
 
-  <option disabled="disabled">null (+null)</option>
+  <option disabled="disabled">Other Countries</option>
   <option data-countrycode="DZ" value="213">DZ (+213)</option>
   <option data-countrycode="AD" value="376">AD (+376)</option>
   <option data-countrycode="AO" value="244">AO (+244)</option>

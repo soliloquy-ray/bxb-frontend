@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { SignUpPage } from '../sign-up/sign-up';
+import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 
 /**
  * Generated class for the LoginPage page.
@@ -36,7 +37,11 @@ export class LoginPage {
   toReg(){
   	this.navCtrl.setRoot(SignUpPage,{},{animate:true, direction:"forward"});
   }
-  
+
+  toForget(){
+  	this.navCtrl.setRoot(ForgotPasswordPage,{},{animate:true, direction:"forward"});
+  }
+
   reorient(){
   	this.isMobile = mobilecheck();
   }

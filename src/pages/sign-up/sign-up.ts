@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { LoginPage } from '../login/login';
+import { TermsPage } from '../terms/terms';
 import { user } from '../../models/user';
 
 import { intlPrefixes } from '../../ext/mob_prefixes';
@@ -86,6 +87,11 @@ export class SignUpPage {
   	});
 
   	alert.present();
+  }
+
+  goToTerms(){
+  	window.open(window.location.origin+"/#/terms");
+  	//this.navCtrl.setRoot(TermsPage,{},{animate:true, direction:"forward"});
   }
 /*
 	uploadFile(file) {

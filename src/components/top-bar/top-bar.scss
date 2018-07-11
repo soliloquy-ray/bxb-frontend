@@ -1,5 +1,5 @@
 top-bar {
-
+		display:inline-table;
 	section.content{
 		display:inline-table;
 		position:relative;
@@ -53,21 +53,33 @@ top-bar {
 							vertical-align:middle;
 							background-color:#337ab7 !important;
 							border: 1px solid #2e6da4;
-							height:45px;
 							border-radius:4px;
 
 							button{
-								background-image:url('../../assets/imgs/notifbell.png');
-								background-size:contain;
-								background-position:center;
-								background-repeat:no-repeat;
 								filter:invert(100%);
 								padding:0.5rem;
-								width:45px;
-								height:100%;
+								width:auto;
+								height:40px;
 								background-color:transparent;
 								box-shadow:none;
 								margin:0;
+
+								div.img-cnt{
+									display:inline-block;
+
+									img{
+										display:block;
+										height:30px;
+										width:30px;
+										box-shadow:none;
+										margin:0;
+									}
+								}
+								ion-icon{
+									display:inline-block;
+									margin:0 0 0 4px;
+									color:#000;
+								}
 							}
 						}
 
@@ -77,6 +89,9 @@ top-bar {
 							height:45px;
 							width:45px;
 							margin:auto 10px;
+							border-radius:100%;
+							border:0;
+							box-shadow:0 0 3px 2px #0067ff;
 						}
 
 						a.link{
@@ -88,6 +103,7 @@ top-bar {
 							width:200px;
 							text-align:left;
 							padding-left:25px;
+							cursor:pointer;
 						}
 					}
 

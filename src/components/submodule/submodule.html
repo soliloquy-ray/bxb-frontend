@@ -1,0 +1,13 @@
+<!-- Generated template for the SubmoduleComponent component -->
+<section class="body">
+	<p class="title">{{title}}</p>
+	<div class="container">
+		<div class="main-content">
+			<ng-content>
+
+			</ng-content>
+		</div>
+		<div class="footer" *ngIf="footerDetails" [innerHTML]="footerDetails">
+		</div>
+	</div>
+</section>

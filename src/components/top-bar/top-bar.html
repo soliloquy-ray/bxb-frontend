@@ -1,5 +1,5 @@
 <!-- Generated template for the TopBarComponent component -->
-<section class="content">
+<section class="content" (window:resize)="reorient($event)"  [ngClass]="{'mobile':isMobile}">
 	<div class="nav">
 		<ion-row>
 			<ion-col col-4>
@@ -10,11 +10,15 @@
 			</ion-col>
 			<ion-col col-8>
 				<span class="notifs">
-					<button ion-button class="notification" (tap)="presentPopover($event)">
+					<button ion-button class="notification" (mouseover)="presentNotifs($event)">
+						<div class="img-cnt">
+							<img src="../../assets/imgs/notifbell.png"/>
+						</div>
+						<ion-icon name="md-arrow-dropdown"></ion-icon>
 					</button>
 				</span>
-				<img class="profilePic"/>
-				<a class="link">My account</a>
+				<img #pic class="profilePic"/>
+				<a class="link" (tap)="presentMyAcc($event)">My account</a>
 			</ion-col>
 		</ion-row>
 	</div>

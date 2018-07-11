@@ -6,6 +6,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { ComponentsModule } from '../components/components.module';
 
+import { AccountLinkComponent } from '../components/account-link/account-link';
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
@@ -21,7 +23,8 @@ var pages = [
   SignUpPage,
   ForgotPasswordPage,
   HrDashboardPage,
-  TermsPage
+  TermsPage,
+  AccountLinkComponent
 ];
 
 @NgModule({

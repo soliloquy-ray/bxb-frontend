@@ -15,6 +15,14 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+@font-face {
+  font-family: "Raleway";
+  src: local("Raleway Light"), local("Raleway-Light"), url("https://fonts.gstatic.com/s/raleway/v12/1Ptrg8zYS_SKggPNwIYqWqZPAA.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 300;
+  unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 a,span,div,b,p{
 	font-family: 'Raleway', sans-serif !important;
 }
@@ -25,4 +33,10 @@ a,span,div,b,p{
 
 .alert-md .alert-message{
 	overflow:hidden;
+}
+
+ion-popover.top-45{
+	.popover-content{
+		transform:scale(1) translateY(45px) !important;
+	}
 }

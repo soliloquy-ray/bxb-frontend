@@ -15,6 +15,7 @@ import { SignUpPage } from '../pages/sign-up/sign-up';
 import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
 import { HrDashboardPage } from '../pages/hr-dashboard/hr-dashboard';
 import { TermsPage } from '../pages/terms/terms';
+import { LoansPage } from '../pages/loans/loans';
 
 var pages = [
   MyApp,
@@ -24,7 +25,8 @@ var pages = [
   ForgotPasswordPage,
   HrDashboardPage,
   TermsPage,
-  AccountLinkComponent
+  AccountLinkComponent,
+  LoansPage
 ];
 
 @NgModule({
@@ -40,6 +42,7 @@ var pages = [
         { component: ForgotPasswordPage, name: 'ForgotPasswordPage', segment: 'forgot' },
         { component: HrDashboardPage, name: 'HrDashboardPage', segment: 'hr-dashboard' },
         { component: TermsPage, name: 'TermsPage', segment: 'terms' },
+        { component: LoansPage, name: 'LoansPage', segment: 'loans' },
       ]
     })
   ],

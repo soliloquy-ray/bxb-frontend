@@ -8,6 +8,32 @@ top-bar {
 		margin:0;
 		height:15vh;
 
+		&.mobile{
+			padding:2vh 4vw;
+			background-color:#264568;
+			box-shadow:2px 2px 9px 1px #555;
+
+			div.nav{
+				vertical-align:middle;
+				ion-row.row{
+					ion-col{
+						&[col-8]{
+							flex:0 0 33.33333%;
+							width:33.33333%;
+							max-width:33.33333%;
+							white-space:nowrap;
+						}
+
+						&[col-4]{
+							flex:0 0 66.66667%;
+							width: 66.66667%;
+							max-width:66.66667%;
+						}
+					}
+				}
+			}
+		}
+
 		div.nav{
 			display: table-cell;
 			vertical-align: bottom;
@@ -92,6 +118,7 @@ top-bar {
 							border-radius:100%;
 							border:0;
 							box-shadow:0 0 3px 2px #0067ff;
+							cursor:pointer;
 						}
 
 						a.link{

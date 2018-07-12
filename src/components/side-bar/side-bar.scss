@@ -83,3 +83,27 @@ side-bar {
 	}
 
 }
+
+
+ion-menu{
+	.menu-inner{
+		side-bar{
+			.content{
+				width:100%;
+				padding:4vw;
+
+				p.title{
+					font-size: 2.5vh;
+				}
+				
+				ion-item{
+
+					.link{
+						font-size:2.5vh;
+					}
+
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,126 @@
+page-loans {
+	ion-content.content{
+		background-color:#f7f7f7;
+
+		side-bar{
+			section.content{
+				background-color: transparent;
+			}	
+		}
+
+		&.mobile{
+
+			section.main-content{
+				padding:0;
+				font-size:2.5vh;
+
+				p{
+					font-size:2.5vh;
+					&.title{
+					}
+				}
+
+				ion-row.row{
+					ion-col[col-4].col{
+						width:100%;
+						max-width:100%;
+						flex:none;
+					}
+				}
+
+			}
+		}
+
+		section.main-content{
+			display:block;
+			padding:1vh 5vw 1vh calc(220px + 1.5vw);
+
+			div.container{
+				div.main-content{
+					padding:1vh 1.5vw;
+				}
+			}
+
+			p.title{
+				max-height:auto;
+				overflow:initial;
+				height:auto;
+				padding-bottom:2vh;
+			}
+
+			div.segmentable{
+				position:relative;
+				display:block;
+				clear:both;
+				width:100%;
+				height:auto;
+				padding-top:2vh;
+				box-shadow:none;
+				&>div{
+					height:100%;
+					box-shadow:none;
+					padding:1vw;
+					span.search{
+						display:inline-block;
+						border-radius:4px;
+						box-shadow: 0 0 1px 0px #333;
+						width:auto;
+						margin:1vh 1vh 3vh;
+						padding:0.5vw;
+						position:relative;
+						ion-icon{
+							position: absolute;
+						    top: 0;
+						    left: 0;
+						    display: block;
+						    height: 100%;
+						    width: 40px;
+						    font-size: 20px;
+						    text-align: center;
+						    padding: 7px;
+						    background-color: lightgray;
+						}
+						input{
+							border:0;
+							margin-left:40px;
+							width:200px;
+						}
+					}
+
+					.table{
+						box-shadow:none;
+						font-family: 'Roboto', sans-serif;
+						ion-row{
+							&.thead{
+								ion-col{
+									/*white-space:nowrap;
+									text-overflow:ellipsis;
+									overflow:hidden;*/
+									text-align:center;
+									text-transform:uppercase;
+									font-weight:bold;
+									letter-spacing:-0.1vh;
+									padding:2.5px;
+									word-wrap:normal;
+									margin:auto;
+								}
+							}
+							&.data{
+								ion-col{
+									text-align:center;
+									padding:2.5px;
+									margin:auto;
+								}
+							}
+						}
+
+					}
+				}
+			}
+
+		}
+
+
+	}
+
+}

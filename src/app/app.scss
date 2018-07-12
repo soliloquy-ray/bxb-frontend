@@ -24,7 +24,7 @@
 }
 
 a,span,div,b,p{
-	font-family: 'Raleway', sans-serif !important;
+	font-family: 'Raleway', sans-serif;
 }
 
 .center{
@@ -35,8 +35,42 @@ a,span,div,b,p{
 	overflow:hidden;
 }
 
-ion-popover.top-45{
-	.popover-content{
-		transform:scale(1) translateY(45px) !important;
+
+ion-content section.main-content submodule ion-segment.segment{
+	.segment-button{
+		white-space:initial;
+		border-color:#0067ff;
+		color:#0067ff;
+
+		&.segment-activated{
+			color:#fff;
+			background-color:#0067ff;
+			border-top-right-radius:8px;
+			border-top-left-radius:8px;
+		}
+	}
+}
+
+ion-popover{
+	&.top-45{
+		.popover-content{
+			transform:scale(1) translateY(45px) !important;
+		}
+	}
+
+	&.mobile{
+		.popover-content{
+		    font-size: 2.5vh;
+		    text-align: center;
+
+		    account-link{
+		    	section.content{
+		    		padding:3vh;
+		    		a.link{
+		    			padding:1vh;
+		    		}
+		    	}
+		    }
+		}
 	}
 }

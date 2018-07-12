@@ -1,0 +1,147 @@
+<ion-content (window:resize)="reorient($event)" [ngClass]="{'mobile':isMobile}">
+	<top-bar></top-bar>
+	<side-bar *ngIf = "!isMobile" [highlights]="'creditsum'"></side-bar>
+
+	<section class="main-content">
+		<ion-row>
+			<ion-col col-12>
+				<submodule [title]="'Portfolio Loans/Loan Status'">
+					
+					<ion-segment [(ngModel)]="loanStatus" color="primary" (ionChange)="segmentChanged($event)">
+						<ion-segment-button value="pending">
+							Pending
+					    </ion-segment-button>
+					    <ion-segment-button value="approved">
+					    	Approved
+					    </ion-segment-button>
+						<ion-segment-button value="cancel">
+							Cancel
+					    </ion-segment-button>
+					    <ion-segment-button value="completed">
+					    	Completed
+					    </ion-segment-button>
+					</ion-segment>
+
+					<div [ngSwitch]="loanStatus" class='segmentable'>
+						<div *ngSwitchCase = "'pending'">
+							<span class="search">
+								<ion-icon name="ios-search"></ion-icon>
+								<input type="text" (ionInput)="search($event)" placeholder="Search any fields"/>
+							</span>
+							<ion-grid class="table">
+								<ion-row  justify-content-center class="thead header">
+									<ion-col >
+										First Name
+									</ion-col>
+									<ion-col >
+										Last Name
+									</ion-col>
+									<ion-col col-2>
+										Transaction ID
+									</ion-col>
+									<ion-col >
+										Date of Inception
+									</ion-col>
+									<ion-col >
+										Term
+									</ion-col>
+									<ion-col >
+										Amount
+									</ion-col>
+									<ion-col col-2>
+										Purpose
+									</ion-col>
+								</ion-row>
+								<ion-row justify-content-center class="data" *ngFor = "let rowData of loans?.pending; let i = index">
+									<ion-col >
+										{{rowData?.firstName}}
+									</ion-col>
+									<ion-col >
+										{{rowData?.lastName}}
+									</ion-col>
+									<ion-col col-2>
+										{{rowData?.transID}}
+									</ion-col>
+									<ion-col >
+										{{rowData?.inceptionDate}}
+									</ion-col>
+									<ion-col >
+										{{rowData?.term}}
+									</ion-col>
+									<ion-col >
+										{{rowData?.amt | currency:'PHP':'symbol':'4.2-2'}}
+									</ion-col>
+									<ion-col col-2>
+										{{rowData?.purpose}}
+									</ion-col>
+								</ion-row>
+							</ion-grid>
+						</div>
+						<div *ngSwitchCase = "'approved'">
+							<span class="search">
+								<ion-icon name="ios-search"></ion-icon>
+								<input type="text" (ionInput)="search($event)" placeholder="Search any fields"/>
+							</span>
+							<ion-grid class="table">
+								<ion-row  justify-content-center class="thead header">
+									<ion-col >
+										First Name
+									</ion-col>
+									<ion-col >
+										Last Name
+									</ion-col>
+									<ion-col col-2>
+										Transaction ID
+									</ion-col>
+									<ion-col >
+										Date of Inception
+									</ion-col>
+									<ion-col >
+										Term
+									</ion-col>
+									<ion-col >
+										Amount
+									</ion-col>
+									<ion-col col-2>
+										Purpose
+									</ion-col>
+									<ion-col>
+										&nbsp;
+									</ion-col>
+								</ion-row>
+								<ion-row justify-content-center class="data" *ngFor = "let rowData of loans?.pending; let i = index">
+									<ion-col >
+										{{rowData?.firstName}}
+									</ion-col>
+									<ion-col >
+										{{rowData?.lastName}}
+									</ion-col>
+									<ion-col col-2>
+										{{rowData?.transID}}
+									</ion-col>
+									<ion-col >
+										{{rowData?.inceptionDate}}
+									</ion-col>
+									<ion-col >
+										{{rowData?.term}}
+									</ion-col>
+									<ion-col >
+										{{rowData?.amt | currency:'PHP':'symbol':'4.2-2'}}
+									</ion-col>
+									<ion-col col-2>
+										{{rowData?.purpose}}
+									</ion-col>
+									<ion-col col-1>
+										<ion-icon style="color:#0067ff;font-size:2.3vw;" name="md-information-circle"></ion-icon>
+									</ion-col>
+								</ion-row>
+							</ion-grid>
+						</div>
+					</div>
+				</submodule>
+			</ion-col>
+		</ion-row>
+		
+	</section>
+
+</ion-content>

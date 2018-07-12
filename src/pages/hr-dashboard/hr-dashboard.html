@@ -1,6 +1,6 @@
-<ion-content>
+<ion-content (window:resize)="reorient($event)" [ngClass]="{'mobile':isMobile}">
 	<top-bar></top-bar>
-	<side-bar></side-bar>
+	<side-bar *ngIf = "!isMobile" [highlights]="'dashboard'"></side-bar>
 
 	<section class="main-content">
 		<h2 class="c-code">Company Code: 002</h2>

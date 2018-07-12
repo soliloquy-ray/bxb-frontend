@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { PopoverController } from 'ionic-angular';
+import { PopoverController, MenuController } from 'ionic-angular';
 
 import { AccountLinkComponent } from '../account-link/account-link';
 
@@ -20,7 +20,7 @@ export class TopBarComponent {
   text: string;
   isMobile: boolean = mobilecheck();
 
-  constructor(private pop:PopoverController) {
+  constructor(private pop:PopoverController, private menu: MenuController) {
     console.log('Hello TopBarComponent Component');
     this.text = 'Hello World';
   }
@@ -35,16 +35,21 @@ export class TopBarComponent {
 
   presentMyAcc(event){
 
-  	let popover = this.pop.create(AccountLinkComponent,{},{cssClass:'top-45 width-less'});
-  	popover.present({
-  		ev:event
-  	});
+  	if(this.isMobile){
+
+	  	this.menu.open(); 	
+  	}else{
+	  	let popover = this.pop.create(AccountLinkComponent,{},{cssClass:'top-45'});
+	  	popover.present({
+	  		ev:event
+	  	});  		
+  	}
 
   }
 
   presentNotifs(event){
 
-  	let popover = this.pop.create(AccountLinkComponent,{},{cssClass:'top-45'});
+  	let popover = this.pop.create(AccountLinkComponent,{},{cssClass:(this.isMobile ? 'mobile':'top-45')});
   	popover.present({
   		ev:event
   	});

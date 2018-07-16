@@ -1,0 +1,136 @@
+page-disclosure-statement {
+	ion-header{
+		ion-navbar{
+			ion-title{
+				&.title-ios.title{
+					padding:0 3vw;
+					div.toolbar-title.toolbar-title-ios{
+						text-align:left;
+						width:100%;
+					}
+				}
+
+			}
+		}
+	}
+
+	ion-content{
+
+		section.content{
+			position:relative;
+			display:inline-block;
+			width:100%;
+			clear:both;
+
+			span.header{
+				width:100%;
+				display:inline-table;
+
+				&>*{
+					display:inline-block;
+					vertical-align:middle;
+				}
+
+				div.title{
+					width:calc(100% - 90px);
+					font-size:24px;
+					ion-icon{
+						display:inline-block;
+						vertical-align:middle;
+						padding:0 1vw 0 0;
+					}
+				}
+
+				button{
+					width:90px;
+					margin:0;
+     				background-color: #0067ff;
+     				border-radius:50px;
+					ion-icon{
+						margin-right:0.6vw;
+					}
+				}
+			}
+
+			div.body{
+				padding:1vh;
+				ion-row{
+
+					ion-col{
+						font-family:'Roboto', sans-serif;
+						font-weight:bolder;
+						&.bundle{
+							background-color:#f7f7f7;
+							margin:0.5vh auto;
+							padding:0 1.5vw 0 0;
+							ion-col{
+								padding:1.5vh 1vh;
+							}
+							&::after{
+								content: "";
+							    position: absolute;
+							    top: 0;
+							    right: 0;
+							    height: 100%;
+							    width: 1vw;
+							    background-color: #fff;
+							}
+						}
+
+						&.label{
+							text-align:left;
+						}
+
+						&.data{
+							text-align:right;
+						}
+					}
+				}
+			}
+
+			&.mobile{
+				div.body{
+					ion-row{
+
+						ion-col{
+							&:not(.bundle){
+								flex:none;
+								&.label{
+									padding:0.5vh 1vh;
+								}
+
+								&.data{
+									padding:0.5vh 1vh 1.5vh;
+									text-align:left;
+									font-weight:normal;
+								}
+							}
+						}
+
+					}
+				}
+
+			}//section.mobile
+
+		} // section.content
+	} //end of ion-content
+
+	ion-footer{
+		text-align:right;
+		button[ion-button]{
+			background-color:inherit;
+			border-radius:8px;
+			border:0;
+			box-shadow:0 0 2px 1px #888;
+			color:#333;
+			display:inline-table;
+			padding:0 2vh;
+
+			ion-icon{
+				margin-right:1vw;
+				font-size:20px;
+			}
+		}
+	}
+
+}

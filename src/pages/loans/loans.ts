@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, ModalController, Modal } from 'ionic-angular';
 
+import { DisclosureStatementPage } from '../disclosure-statement/disclosure-statement';
 /**
  * Generated class for the LoansPage page.
  *
@@ -28,6 +29,7 @@ export class LoansPage {
 
 	isMobile : boolean = mobilecheck();
 	loanStatus = 'pending';
+	mod:Modal;
 	loans = {
 		'pending':[
 		{
@@ -57,15 +59,61 @@ export class LoansPage {
 		},
 		]
 	};
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController) {
+
+	payments = [
+		{
+			"paymentDate":"06-15-2018",
+			"paymentNum":1,
+			"amt":8400,
+			"bal":25200
+		},
+		{
+			"paymentDate":"06-30-2018",
+			"paymentNum":2,
+			"amt":8400,
+			"bal":16800
+		},
+		{
+			"paymentDate":"07-15-2018",
+			"paymentNum":3,
+			"amt":8400,
+			"bal":8400
+		},
+		{
+			"paymentDate":"07-30-2018",
+			"paymentNum":4,
+			"amt":8400,
+			"bal":0
+		}
+	];
+
+  	userData = {
+  		firstName:"Per",
+  		middleName:"Sohn",
+  		lastName:"McPherson",
+		userName: "beexby",
+		email: "user@email.com",
+		companyCode: "CC2",
+		employeeId: "BX17445Z",
+		payrollAccount: "ABC1294FAS-15-AF1125",
+		password: "Passerby",
+		mobile: "9189101112"	
+  	};
+	searched : any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController) {
+  	this.searched = this.loans;
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoansPage');
+  ionViewDidEnter() {
+  	this.menu.close();
   }
 
   ionViewWillLeave(){
-  	this.menu.close();
+  	try{
+  		this.mod.dismiss();
+  	}catch(e){
+  		console.warn(e);
+  	}
   }
   
   reorient($event){
@@ -74,6 +122,24 @@ export class LoansPage {
 
   segmentChanged($event){
   	//console.info($event);
+  }
+
+  search($event){
+  	let val = $event.target.value.toLowerCase();
+  	if(val.trim() == ""){
+  		this.searched = this.loans;
+  	}
+  	else{
+  		let lns = this.loans.pending.filter(a=>{if(a.amt.toLowerCase().indexOf(val) > -1 || a.firstName.toLowerCase().indexOf(val) > -1 || a.inceptionDate.toLowerCase().indexOf(val) > -1 || a.lastName.toLowerCase().indexOf(val) > -1 || a.purpose.toLowerCase().indexOf(val) > -1 || a.term.toString().toLowerCase().indexOf(val) > -1 || a.transID.toLowerCase().indexOf(val) > -1) return a;});
+  		console.log(lns);
+  		this.searched = {'pending':lns};
+  	}
+
+  }
+
+  showModal(i){
+  	this.mod = this.modal.create(DisclosureStatementPage,{data:this.loans.pending[i], payments:this.payments, user:this.userData},{cssClass:`whitemodal ${this.isMobile ? "mobile" : ""}`});
+  	this.mod.present();
   }
 
 }

@@ -12,10 +12,13 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { SignUpPage } from '../pages/sign-up/sign-up';
+import { SignupTinPage } from '../pages/signup-tin/signup-tin';
 import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
 import { HrDashboardPage } from '../pages/hr-dashboard/hr-dashboard';
 import { TermsPage } from '../pages/terms/terms';
 import { LoansPage } from '../pages/loans/loans';
+
+import { DisclosureStatementPage } from '../pages/disclosure-statement/disclosure-statement';
 
 var pages = [
   MyApp,
@@ -26,7 +29,9 @@ var pages = [
   HrDashboardPage,
   TermsPage,
   AccountLinkComponent,
-  LoansPage
+  LoansPage,
+  SignupTinPage,
+  DisclosureStatementPage
 ];
 
 @NgModule({
@@ -43,6 +48,8 @@ var pages = [
         { component: HrDashboardPage, name: 'HrDashboardPage', segment: 'hr-dashboard' },
         { component: TermsPage, name: 'TermsPage', segment: 'terms' },
         { component: LoansPage, name: 'LoansPage', segment: 'loans' },
+        { component: SignupTinPage, name: 'SignupTinPage', segment: 'tin' },
+        { component: DisclosureStatementPage, name: 'DisclosureStatementPage', segment: 'ds' },
       ]
     })
   ],

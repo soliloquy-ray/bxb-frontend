@@ -26,7 +26,7 @@
 						<div *ngSwitchCase = "'pending'">
 							<span class="search">
 								<ion-icon name="ios-search"></ion-icon>
-								<input type="text" (ionInput)="search($event)" placeholder="Search any fields"/>
+								<input type="text" (keyup)="search($event)" placeholder="Search any fields"/>
 							</span>
 							<ion-grid class="table">
 								<ion-row  justify-content-center class="thead header">
@@ -52,7 +52,7 @@
 										Purpose
 									</ion-col>
 								</ion-row>
-								<ion-row justify-content-center class="data" *ngFor = "let rowData of loans?.pending; let i = index">
+								<ion-row justify-content-center class="data" *ngFor = "let rowData of searched?.pending; let i = index">
 									<ion-col >
 										{{rowData?.firstName}}
 									</ion-col>
@@ -69,7 +69,7 @@
 										{{rowData?.term}}
 									</ion-col>
 									<ion-col >
-										{{rowData?.amt | currency:'PHP':'symbol':'4.2-2'}}
+										{{rowData?.amt | currency:'PHP':'symbol-narrow':'1.2-2'}}
 									</ion-col>
 									<ion-col col-2>
 										{{rowData?.purpose}}
@@ -126,13 +126,13 @@
 										{{rowData?.term}}
 									</ion-col>
 									<ion-col >
-										{{rowData?.amt | currency:'PHP':'symbol':'4.2-2'}}
+										{{rowData?.amt | currency:'PHP':'symbol-narrow':'1.2-2'}}
 									</ion-col>
 									<ion-col col-2>
 										{{rowData?.purpose}}
 									</ion-col>
 									<ion-col col-1>
-										<ion-icon style="color:#0067ff;font-size:2.3vw;" name="md-information-circle"></ion-icon>
+										<ion-icon (tap)="showModal(i)" style="color:#0067ff;font-size:2.3vw;" name="md-information-circle"></ion-icon>
 									</ion-col>
 								</ion-row>
 							</ion-grid>

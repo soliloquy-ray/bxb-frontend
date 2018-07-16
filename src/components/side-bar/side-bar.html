@@ -3,6 +3,11 @@
 	<img src="../assets/imgs/bxb-logo-circle.svg"/>
   <nav>
   	<p class="title">Menu</p>
+  	<ion-item *ngIf="mob">
+  		<a class="link">
+        	<b>My Profile</b>
+    	</a>
+  	</ion-item>
   	<ion-item [ngClass]="{'selected':hl=='dashboard'}">
   		<a class="link" href='/#/hr-dashboard'>
   			<svg enable-background="new 0 0 433.5 433.5" version="1.1" viewBox="0 0 433.5 433.5" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
@@ -45,6 +50,11 @@
   		<a class="link">
   			<ion-icon name="ios-list-box"></ion-icon>
         	<b>Activity Log</b>
+    	</a>
+  	</ion-item>
+  	<ion-item *ngIf="mob">
+  		<a class="link" href="/">
+        	<b>Logout</b>
     	</a>
   	</ion-item>
   </nav>

@@ -1,0 +1,179 @@
+<!--
+  Generated template for the DisclosureStatementPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title><ion-icon style="margin:0 1vw;" name="ios-information-circle-outline"></ion-icon>Disclosure Statement
+  	<ion-icon (tap)="close()" name="ios-close" style="float:right;"></ion-icon></ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding (window:resize)="reorient($event)">
+
+	<section class="content" [ngClass]="{'mobile':isMobile}">
+		<span class="header">
+			<div class="title">
+				<ion-icon name="md-information-circle"></ion-icon>
+				BXB Disclosure and Payment Schedule
+			</div>
+
+			<button class="print" ion-button>
+				<ion-icon name="md-print"></ion-icon>
+				Print
+			</button>
+		</span>
+
+		<div class="body">
+			<ion-row>
+				<ion-col class="bundle">
+					<ion-row>
+						<ion-col class="label">Principal</ion-col>
+						<ion-col class="data">{{loan?.amt | currency:'PHP':'symbol-narrow':'1.2-2'}}</ion-col>
+					</ion-row>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col class="bundle">
+					<ion-row>
+						<ion-col class="label">UDI</ion-col>
+						<ion-col class="data">{{loan?.amt / 20 | currency:'PHP':'symbol-narrow':'1.2-2'}}</ion-col>
+					</ion-row>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col class="bundle">
+					<ion-row>
+						<ion-col class="label">Gross Cash Out</ion-col>
+						<ion-col class="data">{{loan?.amt | currency:'PHP':'symbol-narrow':'1.2-2'}}</ion-col>
+					</ion-row>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col class="bundle">
+					<ion-row>
+						<ion-col class="label">First Name</ion-col>
+						<ion-col class="data">{{loan?.firstName}}</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col class="label">Date</ion-col>
+						<ion-col class="data">{{loan?.inceptionDate}}</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col class="label">Birthday</ion-col>
+						<ion-col class="data">10-07-1979</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col class="label">Type</ion-col>
+						<ion-col class="data">NA</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col class="label">Payroll Account No.</ion-col>
+						<ion-col class="data">7190064572</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col class="label">Term</ion-col>
+						<ion-col class="data">{{loan?.term}}</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col class="label">Transaction No.</ion-col>
+						<ion-col class="data">{{loan?.transID}}</ion-col>
+					</ion-row>
+				</ion-col>
+				<ion-col class="bundle">
+					<ion-row>
+						<ion-col class="label">Last Name</ion-col>
+						<ion-col class="data">{{loan?.lastName}}</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col class="label">Company ID</ion-col>
+						<ion-col class="data">18-002</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col class="label">Age</ion-col>
+						<ion-col class="data">38</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col class="label">Bank</ion-col>
+						<ion-col class="data">BDO</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col class="label">Type</ion-col>
+						<ion-col class="data">4 Paydays</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col class="label">Rate</ion-col>
+						<ion-col class="data">2.5%</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col class="label">Member ID</ion-col>
+						<ion-col class="data">00202</ion-col>
+					</ion-row>
+				</ion-col>
+			</ion-row>
+		</div>
+
+		<!-- TO DO: Additional computations -->
+
+		<span class="header">
+			<div class="title">
+				<ion-icon name="md-calendar"></ion-icon>
+				Schedule of Payment
+			</div>
+		</span>
+
+		<div class="body">
+			<ion-row>
+				<ion-col class="bundle">
+					<ion-row>
+						<ion-col class="label">TOTAL</ion-col>
+						<ion-col class="data">33,600.00</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col col-3>
+							Date of Payment
+						</ion-col>
+						<ion-col col-3>
+							Number of Payment
+						</ion-col>
+						<ion-col col-3>
+							Amount
+						</ion-col>
+						<ion-col col-3>
+							Balance
+						</ion-col>
+					</ion-row>
+					<ion-row *ngFor = "let payment of payments; let i = index;">
+						<ion-col col-3>
+							{{payment?.paymentDate}}
+						</ion-col>
+						<ion-col col-3>
+							{{payment?.paymentNum}}
+						</ion-col>
+						<ion-col col-3>
+							{{payment?.amt | number : '1.2-2'}}
+						</ion-col>
+						<ion-col col-3>
+							{{payment?.bal | number : '1.2-2'}}
+						</ion-col>
+					</ion-row>
+				</ion-col>
+			</ion-row>
+		</div>
+
+		<p class="disclaimer">
+			To view the terms and conditions of this availment you may click <a class="link" href="/#/terms">here</a>
+		</p>
+	</section>
+</ion-content>
+<!--ion-footer>
+	<button ion-button (tap)="close()">
+		<ion-icon name="ios-close-circle-outline"></ion-icon>
+		Close
+	</button>
+</ion-footer-->

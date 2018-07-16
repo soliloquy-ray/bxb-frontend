@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 
-import { SignUpPage } from '../sign-up/sign-up';
+//import { SignUpPage } from '../sign-up/sign-up';
+import { SignupTinPage } from '../signup-tin/signup-tin';
 import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 
 /**
@@ -26,16 +27,16 @@ export class LoginPage {
 
 	userData:login = {loginInfo:"", pass:""};
 	isMobile: boolean = mobilecheck();
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController) {
   	console.log(this.isMobile);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+  ionViewDidEnter() {
+  	this.menu.close();
   }
 
   toReg(){
-  	this.navCtrl.setRoot(SignUpPage,{},{animate:true, direction:"forward"});
+  	this.navCtrl.setRoot(SignupTinPage,{},{animate:true, direction:"forward"});
   }
 
   toForget(){

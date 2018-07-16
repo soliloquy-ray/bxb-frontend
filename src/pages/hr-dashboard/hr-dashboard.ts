@@ -44,12 +44,12 @@ export class HrDashboardPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController) {
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
     console.log('ionViewDidLoad HrDashboardPage');
+  	this.menu.close();
   }
 
   ionViewWillLeave(){
-  	this.menu.close();
   }
 
   reorient($event){

@@ -1,5 +1,5 @@
 <ion-menu [content]="mycontent" side="left" type="push" [enabled]="isMobile" swipeEnabled="true">
-	<side-bar></side-bar>
+	<side-bar [mobile]="isMobile"></side-bar>
 </ion-menu>
 
 <ion-nav #mycontent [root]="rootPage" (window:resize)="reorient($event)"></ion-nav>

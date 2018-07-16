@@ -1,0 +1,31 @@
+<ion-content (window:resize)="reorient($event)">
+	<ion-fab top left *ngIf="!isMobile">
+		<button ion-fab (tap)="toHome()"></button>
+		<!--ion-fab-list side="right">
+		   <button ion-fab mini>Button</button>
+		   <button ion-fab mini>Button 2</button>
+		</ion-fab-list-->
+	 </ion-fab>
+
+	 <section class="main" [ngClass]="{'mobile':isMobile}">
+	 	<form name="employee-data">
+		 	<span class="header" *ngIf = "isMobile">
+		 		<button ion-button (tap)="toHome()"></button>
+		 	</span>
+	 		<h2>Enter your TIN</h2>
+	 		<ion-row>
+	 			<p class="label">
+	 				Tax Identification Number (TIN)
+	 			</p>
+	 			<span class="content" [ngClass] = "{'err':tinValid}">
+	 				<input (keyup)="ch($event)" type="text" name="tin" [(ngModel)] = "tin" pattern="([0-9]{3,4})(-[0-9]{3,4}){2,}" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<button ion-button (tap)="verify()" [disabled]="tinValid">Submit</button>
+	 		</ion-row>
+	 	</form>
+	 	<foot></foot>
+	 </section>
+
+</ion-content>

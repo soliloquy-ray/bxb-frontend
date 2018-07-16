@@ -111,7 +111,7 @@
 	 		</ion-row>
 	 		<ion-row class="center">
 	 			<span>
-	 				<input type="checkbox" name="agreeTerms"/>
+	 				<ion-checkbox (ionChange)="stat($event)" name="agreeTerms" [(ngModel)]="agreement"></ion-checkbox>
 	 				<p>I have read and understood the <a class="link" (tap)="goToTerms()">terms and conditions</a>.</p>
 	 			</span>
 	 		</ion-row>

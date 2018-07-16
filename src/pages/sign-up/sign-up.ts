@@ -27,6 +27,7 @@ export class SignUpPage {
 	confirmPass: string = '';
 	prefixes = this.sanitizer.bypassSecurityTrustHtml(intlPrefixes);
 	isMobile : boolean = mobilecheck();
+	agreement:boolean = false;
 	@ViewChild('prev') prev: ElementRef;
   constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer, private alert: AlertController) {
   	this.initData();
@@ -38,21 +39,22 @@ export class SignUpPage {
 
   initData(){
   	this.userData = {
-  		firstName:"",
-  		middleName:"",
-  		lastName:"",
-		userName: "",
-		email: "",
-		companyCode: "",
-		employeeId: "",
-		payrollAccount: "",
-		password: "",
-		mobile: ""	
+  		firstName:"Per",
+  		middleName:"Sohn",
+  		lastName:"McPherson",
+		userName: "beexby",
+		email: "user@email.com",
+		companyCode: "CC2",
+		employeeId: "BX17445Z",
+		payrollAccount: "ABC1294FAS-15-AF1125",
+		password: "Passerby",
+		mobile: "9189101112"	
   	};
   }
 
   ngAfterViewInit(){
   	this.prev.nativeElement.src = "../../assets/imgs/tmp-img.png";	
+  	this.initData();
   }
 
   toHome(){
@@ -92,6 +94,10 @@ export class SignUpPage {
   goToTerms(){
   	window.open(window.location.origin+"/#/terms");
   	//this.navCtrl.setRoot(TermsPage,{},{animate:true, direction:"forward"});
+  }
+
+  stat(event){
+  	console.log(this);
   }
 /*
 	uploadFile(file) {

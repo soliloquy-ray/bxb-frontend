@@ -6,18 +6,18 @@
 		<h2 class="c-code">Company Code: 002</h2>
 
 		<ion-row>
-			<ion-col col-4>
+			<ion-col col-4 class="module">
 				<submodule [title]="'Total Amount of Active Employee Credit Portfolio'" [footerD]="deets">
 					<b style="font-size:24px;display:table;margin:auto;">₱ 37,000.00</b>
 				</submodule>
 			</ion-col>
-			<ion-col col-4>
+			<ion-col col-4 class="module">
 				<submodule [title]="'Total Times Credit Availed'" [footerD]="deets2">
 					<p style="text-align:center;margin:0 auto 1vh">2</p>
 					<p style="text-align:center;font-weight:bold;">Total number of credit availments since company was signed up</p>
 				</submodule>
 			</ion-col>
-			<ion-col col-4>
+			<ion-col col-4 class="module">
 				<submodule [title]="'Employee Summary'" [footerD]="deets3">
 					<p style="text-align:center;font-weight:bolder;margin:0 auto 1vh">Total</p>
 					<p style="text-align:center;margin:0 auto 1vh">4</p>
@@ -30,7 +30,7 @@
 		<ion-row>
 			<ion-col col-12>
 				<submodule [title]="'Employee Credit Availment Summary'">
-					<ion-row style="width:100%;">
+					<ion-row style="width:100%;" *ngIf="!isMobile">
 						<ion-row style="width:100%;">
 							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;" col-2>Transaction ID</ion-col>
 							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;" col-2>Date of Inception</ion-col>
@@ -44,6 +44,34 @@
 							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;" col-3>{{dt?.employeeName}}</ion-col>
 							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;" col-2>{{dt?.amt}}</ion-col>
 							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;" col-3>{{dt?.purpose}}</ion-col>
+						</ion-row>
+					</ion-row>
+					<ion-row style="width:100%;" *ngIf="isMobile">
+						<ion-row style="width:100%; box-shadow: 0 0 3px 0 #333" class="data" *ngFor = "let dt of credits; let i = index;">
+							<ion-row>
+								<ion-col>
+									<p class="label">Transaction ID</p>
+									{{dt?.transID}}
+								</ion-col>
+								<ion-col>
+									<p class="label">Date of Inception</p>
+									{{dt?.inceptionDate}}
+								</ion-col>
+								<ion-col col-5>
+									<p class="label">Employee Name</p>
+									{{dt?.employeeName}}
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col col-6>
+									<p class="label">Amount Availed</p>
+									{{dt?.amt}}
+								</ion-col>
+								<ion-col col-6>
+									<p class="label">Purpose</p>
+									{{dt?.purpose}}
+								</ion-col>
+							</ion-row>
 						</ion-row>
 					</ion-row>
 				</submodule>

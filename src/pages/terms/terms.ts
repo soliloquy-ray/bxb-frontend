@@ -8,6 +8,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
+declare var mobilecheck;
+
 @IonicPage()
 @Component({
   selector: 'page-terms',
@@ -15,6 +17,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class TermsPage {
 
+	isMobile: boolean = mobilecheck();
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 

@@ -13,7 +13,7 @@
 		<div class="main">
 			<ion-row>
 				<ion-col>
-					<input type="text" [(ngModel)] = "userData.loginInfo" name="login" placeholder="Email or Username" />
+					<input type="text" [(ngModel)] = "userData.username" name="login" placeholder="Email or Username" />
 				</ion-col>
 			</ion-row>
 			<ion-row>
@@ -23,7 +23,7 @@
 			</ion-row>
 			<ion-row>
 				<ion-col>
-					<button ion-button>Login</button>
+					<button ion-button (tap)="login()">Login</button>
 				</ion-col>
 			</ion-row>
 			<span class="links">

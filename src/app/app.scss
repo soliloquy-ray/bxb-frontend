@@ -93,3 +93,34 @@ ion-modal.whitemodal{
 		}
 	}
 }
+
+ion-toast{
+	&.success{
+		.toast-wrapper{
+			.toast-container{
+				background-color: darkgreen;
+			}
+		}
+
+	}
+
+	&.fail{
+		.toast-wrapper{
+			.toast-container{
+				background-color: crimson;
+			}
+		}
+
+	}
+
+	.toast-wrapper{
+		transform: translateY(25%) !important;
+		.toast-container{
+			background-color: steelblue;
+
+			.toast-message{
+
+			}
+		}
+	}
+}

@@ -1,11 +1,19 @@
 {
-  "name": "Ionic",
-  "short_name": "Ionic",
+  "name": "Brick by Brick",
+  "short_name": "BXB",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{
     "src": "assets/imgs/logo.png",
-    "sizes": "512x512",
+    "sizes": "360x360",
+    "type": "image/png"
+  },{
+    "src": "assets/imgs/logo.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  },{
+    "src": "assets/imgs/logo.png",
+    "sizes": "144x144",
     "type": "image/png"
   }],
   "background_color": "#4e8ef7",

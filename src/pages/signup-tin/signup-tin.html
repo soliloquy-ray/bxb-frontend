@@ -18,7 +18,7 @@
 	 				Tax Identification Number (TIN)
 	 			</p>
 	 			<span class="content" [ngClass] = "{'err':tinValid}">
-	 				<input (keyup)="ch($event)" type="text" name="tin" [(ngModel)] = "tin" pattern="([0-9]{3,4})(-[0-9]{3,4}){2,}" />
+	 				<input (keyup)="ch($event)" type="text" name="tin" [(ngModel)] = "tin" pattern="([0-9]{3,4})(-[0-9]{3,4}){2,}" placeholder="000-000-000" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>

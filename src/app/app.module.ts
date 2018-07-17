@@ -20,6 +20,9 @@ import { LoansPage } from '../pages/loans/loans';
 
 import { DisclosureStatementPage } from '../pages/disclosure-statement/disclosure-statement';
 
+import { HttpModule } from '@angular/http';
+
+
 var pages = [
   MyApp,
   HomePage,
@@ -39,6 +42,7 @@ var pages = [
   imports: [
     ComponentsModule,
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp, {}, {
       links: [
         { component: HomePage, name: 'Home', segment: 'home' },

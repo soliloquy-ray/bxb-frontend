@@ -14,6 +14,7 @@ export class SubmoduleComponent {
 
 	@Input('title') title: string;
 	@Input('footerD') footerDetails : any = false;
+	@Input('searchbar') searchbar: boolean = false;
   text: string;
 
   constructor() {

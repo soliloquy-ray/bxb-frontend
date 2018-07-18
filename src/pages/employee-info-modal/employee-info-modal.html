@@ -1,0 +1,48 @@
+<!--
+  Generated template for the EmployeeInfoModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title><ion-icon style="margin:0 1vw;" name="md-information-circle"></ion-icon>Employee Information
+  	<!--ion-icon (tap)="close()" name="ios-close" style="float:right;"></ion-icon--></ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<section class="main-content">
+		<p><b class="label">Member ID:</b> {{userData?.memberID}}</p>
+		<p><b class="label">Name:</b> {{userData?.name}}</p>
+		<p><b class="label">Gender:</b> {{userData?.gender}}</p>
+		<p><b class="label">Age:</b> {{userData?.age}}</p>
+		<p><b class="label">Date Hired:</b> {{userData?.dateHired}}</p>
+		<p><b class="label">Email:</b> {{userData?.email}}</p>
+		<p><b class="label">Mobile:</b> {{userData?.mobile}}</p>
+		<p><b class="label">Birthdate:</b> {{userData?.birthdate}}</p>
+		<p><b class="label">Position:</b> {{userData?.position}}</p>
+		<p><b class="label">Entity:</b> {{userData?.entity}}</p>
+		<p><b class="label">Type:</b> {{userData?.type}}</p>
+		<p><b class="label">Division:</b> {{userData?.division}}</p>
+		<p><b class="label">Payroll Acct:</b> {{userData?.payrollAccount}}</p>
+		<p><b class="label">Vl:</b> {{userData?.VL}}</p>
+		<p><b class="label">Sl:</b> {{userData?.SL}}</p>
+		<p><b class="label">Ml:</b> {{userData?.ML}}</p>
+		<p><b class="label">Pl:</b> {{userData?.PL}}</p>
+	</section>
+</ion-content>
+
+<ion-footer>
+	<button ion-button class="remove" (tap)="close()">
+		<ion-icon name="md-remove-circle"></ion-icon>
+		Remove
+	</button>
+	<button ion-button (tap)="close()">
+		<ion-icon name="ios-close-circle-outline"></ion-icon>
+		Close
+	</button>
+</ion-footer>

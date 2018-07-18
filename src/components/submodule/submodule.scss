@@ -62,6 +62,40 @@ submodule {
 			overflow:hidden;
 		}
 
+		div.search-container{
+			position:absolute;
+			top:5.5vh;
+			span.search{
+				display:inline-block;
+				border-radius:4px;
+				box-shadow: 0 0 1px 0px #333;
+				width:auto;
+				margin:auto;
+				padding:0.4vw;
+				position:relative;
+				background-color:#fff;
+				ion-icon{
+					position: absolute;
+				    top: 0;
+				    left: 0;
+				    display: block;
+				    height: 100%;
+				    width: 40px;
+				    font-size: 20px;
+				    text-align: center;
+				    padding: 7px;
+				    background-color: lightgray;
+				    color:#333;
+				}
+				input{
+					border:0;
+					margin-left:40px;
+					width:200px;
+					height: 25px;
+				}
+			}
+		}
+
 	}
 }
 
@@ -77,6 +111,20 @@ ion-content.content.mobile{
 				ion-segment-button{
 					font-size:3.5vw;
 				}
+			}
+		}
+
+		div.search-container{
+			position:relative;
+			top:0;
+			margin:2vh auto;
+			text-align:center;
+			span.search{
+				width:80%;
+				input{
+					height:25px;
+				}
+				padding:0.5rem;
 			}
 		}
 	}

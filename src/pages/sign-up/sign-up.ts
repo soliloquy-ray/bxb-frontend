@@ -23,38 +23,57 @@ declare var mobilecheck; //fn to check for screen type
   templateUrl: 'sign-up.html',
 })
 export class SignUpPage {
-	userData: user;
+	userData: user = {
+  		firstName:"",
+  		middleName:"",
+  		lastName:"",
+		userName: "",
+		email: "",
+		companyCode: "",
+		employeeId: "",
+		payrollAccount: "",
+		password: "",
+		mobile: ""	
+  	};
 	confirmPass: string = '';
 	prefixes = this.sanitizer.bypassSecurityTrustHtml(intlPrefixes);
 	isMobile : boolean = mobilecheck();
 	agreement:boolean = false;
 	@ViewChild('prev') prev: ElementRef;
+	dt;
+	prefix:string = '63';
+	ccode: string;
   constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer, private alert: AlertController) {
-  	this.initData();
+  	this.dt = this.navParams.get('data');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignUpPage');
   }
 
-  initData(){
+  initData(data :any ){
   	this.userData = {
-  		firstName:"Per",
-  		middleName:"Sohn",
-  		lastName:"McPherson",
-		userName: "beexby",
-		email: "user@email.com",
-		companyCode: "CC2",
-		employeeId: "BX17445Z",
-		payrollAccount: "ABC1294FAS-15-AF1125",
-		password: "Passerby",
-		mobile: "9189101112"	
+  		firstName:data.Name_First,
+  		middleName:data.Name_Middle,
+  		lastName:data.Name_Last,
+		userName: "",
+		email: "",
+		companyCode: data.Company.replace(/[^A-Za-z0-9]/g,''),
+		employeeId: data.CompanyID,
+		payrollAccount: data.Payroll_Account,
+		password: "",
+		mobile: ""	
   	};
+
+  	this.ccode = data.Company.replace(/[^A-Za-z0-9]/g,'');
   }
 
   ngAfterViewInit(){
-  	this.prev.nativeElement.src = "../../assets/imgs/tmp-img.png";	
-  	this.initData();
+  	let self = this;
+  	this.prev.nativeElement.src = "../../assets/imgs/tmp-img.png";
+  	setTimeout(()=>{
+  		if(self.dt) self.initData(this.dt);
+  	},1000);	
   }
 
   toHome(){

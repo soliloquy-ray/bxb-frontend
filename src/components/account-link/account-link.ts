@@ -33,7 +33,8 @@ export class AccountLinkComponent {
   logout(){
   	//let nav = this.content.na
   	this.viewCtrl.dismiss();
-  	this.nav.setRoot(LoginPage,{},{animate:true, direction:"forward"});
+  	//this.nav.setRoot(LoginPage,{},{animate:true, direction:"forward"});
+  	window.location.href = location.origin+"/#/login";
   }
 
 }

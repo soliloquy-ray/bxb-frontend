@@ -8,17 +8,24 @@ import { ComponentsModule } from '../components/components.module';
 
 import { AccountLinkComponent } from '../components/account-link/account-link';
 
+/* shared pages */
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { SignupTinPage } from '../pages/signup-tin/signup-tin';
 import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
-import { HrDashboardPage } from '../pages/hr-dashboard/hr-dashboard';
 import { TermsPage } from '../pages/terms/terms';
 import { LoansPage } from '../pages/loans/loans';
+import { AddEmployeePage } from '../pages/add-employee/add-employee';
 
+/* admin pages */
+import { EmployeesPage } from '../pages/employees/employees';
+import { HrDashboardPage } from '../pages/hr-dashboard/hr-dashboard';
+
+/* modals */
 import { DisclosureStatementPage } from '../pages/disclosure-statement/disclosure-statement';
+import { EmployeeInfoModalPage } from '../pages/employee-info-modal/employee-info-modal';
 
 import { HttpModule } from '@angular/http';
 
@@ -34,7 +41,10 @@ var pages = [
   AccountLinkComponent,
   LoansPage,
   SignupTinPage,
-  DisclosureStatementPage
+  DisclosureStatementPage,
+  EmployeesPage,
+  AddEmployeePage,
+  EmployeeInfoModalPage
 ];
 
 @NgModule({
@@ -54,6 +64,9 @@ var pages = [
         { component: LoansPage, name: 'LoansPage', segment: 'loans' },
         { component: SignupTinPage, name: 'SignupTinPage', segment: 'tin' },
         { component: DisclosureStatementPage, name: 'DisclosureStatementPage', segment: 'ds' },
+        { component: EmployeesPage, name: 'EmployeesPage', segment: 'employees' },
+        { component: AddEmployeePage, name: 'AddEmployeePage', segment: 'add-employee' },
+        { component: EmployeeInfoModalPage, name: 'EmployeeInfoModalPage', segment: 'modal-employee-info' },
       ]
     })
   ],

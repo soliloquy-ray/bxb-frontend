@@ -92,6 +92,13 @@ ion-modal.whitemodal{
 			left:0;
 		}
 	}
+
+	&.sm:not(.mobile){
+		div.modal-wrapper{
+			width:calc(650px);
+			left:calc(calc(100% - 650px) / 2);
+		}
+	}
 }
 
 ion-toast{

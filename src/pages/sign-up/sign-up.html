@@ -22,34 +22,10 @@
 	 		<p>Complete Information Below</p>
 	 		<ion-row>
 	 			<p class="label">
-	 				First Name
-	 			</p>
-	 			<span class="content">
-	 				<input type="text" name="firstName" [(ngModel)] = "userData.firstName" />
-	 			</span>
-	 		</ion-row>
-	 		<ion-row>
-	 			<p class="label">
-	 				Middle Name
-	 			</p>
-	 			<span class="content">
-	 				<input type="text" name="middleName" [(ngModel)] = "userData.middleName" />
-	 			</span>
-	 		</ion-row>
-	 		<ion-row>
-	 			<p class="label">
-	 				Last Name
-	 			</p>
-	 			<span class="content">
-	 				<input type="text" name="lastName" [(ngModel)] = "userData.lastName" />
-	 			</span>
-	 		</ion-row>
-	 		<ion-row>
-	 			<p class="label">
 	 				Username
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="userName" [(ngModel)] = "userData.userName" />
+	 				<input type="text" name="userName" [(ngModel)] = "userData.userName" [value] = "userData.userName" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -57,47 +33,7 @@
 	 				Email
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="email" [(ngModel)] = "userData.email" />
-	 			</span>
-	 		</ion-row>
-	 		<ion-row>
-	 			<p class="label">
-	 				Company Code
-	 			</p>
-	 			<span class="content">
-	 				<input type="text" name="companyCode" [(ngModel)] = "userData.companyCode" />
-	 			</span>
-	 		</ion-row>
-	 		<ion-row>
-	 			<p class="label">
-	 				Employee ID
-	 			</p>
-	 			<span class="content">
-	 				<input type="text" name="employeeId" [(ngModel)] = "userData.employeeId" />
-	 			</span>
-	 		</ion-row>
-	 		<ion-row>
-	 			<p class="label">
-	 				Payroll Account
-	 			</p>
-	 			<span class="content">
-	 				<input type="text" name="companyCode" [(ngModel)] = "userData.payrollAccount" />
-	 			</span>
-	 		</ion-row>
-	 		<ion-row>
-	 			<p class="label">
-	 				Password
-	 			</p>
-	 			<span class="content">
-	 				<input type="text" name="companyCode" [(ngModel)] = "userData.password" />
-	 			</span>
-	 		</ion-row>
-	 		<ion-row>
-	 			<p class="label">
-	 				Confirm Password
-	 			</p>
-	 			<span class="content">
-	 				<input type="text" name="companyCode" [(ngModel)] = "confirmPass" />
+	 				<input type="text" name="email" [(ngModel)] = "userData.email" [value] = "userData.email" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row class="bot">
@@ -105,9 +41,25 @@
 	 				Mobile
 	 			</p>
 	 			<span class="content">
-		 			<select [innerHTML] = "prefixes"></select>
-		 			<input class="short" type="text" name="mobile" [(ngModel)] = "userData.mobile" />
+		 			<select [innerHTML] = "prefixes" name="prefix" [(ngModel)]="prefix"></select>
+		 			<input class="short" type="text" name="mobile" [(ngModel)] = "userData.mobile" [value] = "userData.mobile" />
 		 		</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Password
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="companyCode" [(ngModel)] = "userData.password" [value] = "userData.password" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Confirm Password
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="companyCode" [value] = "confirmPass" />
+	 			</span>
 	 		</ion-row>
 	 		<ion-row class="center">
 	 			<span>
@@ -117,6 +69,54 @@
 	 		</ion-row>
 	 		<ion-row>
 	 			<button ion-button (tap)="submitReg()">Create Account</button>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				First Name
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="firstName" [(ngModel)] = "userData.firstName" [value] = "userData.firstName" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Middle Name
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="middleName" [(ngModel)] = "userData.middleName" [value] = "userData.middleName" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Last Name
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="lastName" [(ngModel)] = "userData.lastName" [value] = "userData.lastName" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Company Code
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="companyCode" [value] = "userData.companyCode" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Employee ID
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="employeeId" [(ngModel)] = "userData.employeeId" [value] = "userData.employeeId" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Payroll Account
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="companyCode" [(ngModel)] = "userData.payrollAccount" [value] = "userData.payrollAccount" />
+	 			</span>
 	 		</ion-row>
 	 	</form>
 

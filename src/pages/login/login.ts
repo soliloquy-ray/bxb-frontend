@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, ToastController, Toast } from 'ionic-angular';
 
 //import { SignUpPage } from '../sign-up/sign-up';
 import { SignupTinPage } from '../signup-tin/signup-tin';
+import { HrDashboardPage } from '../hr-dashboard/hr-dashboard';
 import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 
 import { Http, Headers, RequestOptions } from '@angular/http';
@@ -41,6 +42,7 @@ export class LoginPage {
   }
 
   login(){
+  	let self = this;
   	let uData = this.userData;
   	let hdr = new Headers;
   	hdr.append('Content-Type','application/json');
@@ -50,12 +52,19 @@ export class LoginPage {
   	this.http.post('http://localhost/bxb-test-php/api.php?q=login',uData, rq)
   			.toPromise()
   			.then(res=>{
-  				this.launchToast(res.text());
+  				let txt = res.text();
+  				let stat = txt == "Invalid login" ? "fail" : "success";
+  				let tst = this.launchToast(txt,stat);
+  				tst.onDidDismiss(t=>{
+  					if(stat == "success"){
+  						self.navCtrl.setRoot(HrDashboardPage,{},{animate:true, direction:"forward"});
+  					}
+  				});
   			})
   			.catch(console.warn);
   }
 
-  launchToast(msg:string, status: any = 1){
+  launchToast(msg:string, status: any = 1) : Toast{
 	  let toast = this.toast.create({
 	    message: msg,
 	    duration: 3000,
@@ -63,6 +72,7 @@ export class LoginPage {
 	    cssClass:`${status}`
 	  });
 	  toast.present();
+	  return toast;
   }
 
   toForget(){

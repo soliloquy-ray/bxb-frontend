@@ -1,8 +1,10 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController, Toast } from 'ionic-angular';
 
 import { LoginPage } from '../login/login';
 import { SignUpPage } from '../sign-up/sign-up';
+
+import { Http, Headers, RequestOptions } from '@angular/http';
 
 /**
  * Generated class for the ForgotPasswordPage page.
@@ -19,11 +21,12 @@ declare var mobilecheck; //fn to check for screen type
 })
 export class SignupTinPage {
 	tin: string;
+	bday: string = '1971-01-01';
 	isMobile : boolean = mobilecheck();
 	tinValid : boolean = true;
 	load: any;
 	@ViewChild('tin') input_tin: ElementRef;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private loader: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private loader: LoadingController, private http: Http, private toast: ToastController) {
   }
 
   ionViewDidLoad() {
@@ -39,9 +42,27 @@ export class SignupTinPage {
       dismissOnPageChange: true
     });
     this.load.present();
-    setTimeout(()=>{
-  		self.navCtrl.setRoot(SignUpPage,{},{animate:true, direction:"top"});
-    },1000);
+  		
+  	let uData = {tin:this.tin,birth:this.bday};
+  	console.log(uData);
+  	let hdr = new Headers;
+  	hdr.append('Content-Type','application/json');
+  	let rq = new RequestOptions;
+  	rq.headers = hdr;
+  	
+  	this.http.post('http://localhost/bxb-test-php/api.php?q=get_by_tin',uData, rq)
+  			.toPromise()
+  			.then(res=>{
+  				let rs = res.json();
+  				if(rs[0]){
+  					self.navCtrl.setRoot(SignUpPage,{data:rs[0]},{animate:true, direction:"top"});
+  				}
+  				self.load.dismiss();
+  			})
+  			.catch(err=>{
+  				self.load.dismiss();
+  				console.warn(err);
+  			});
   }
 
   ch(event){

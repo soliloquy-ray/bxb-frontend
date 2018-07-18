@@ -12,13 +12,21 @@
 		 	<span class="header" *ngIf = "isMobile">
 		 		<button ion-button (tap)="toHome()"></button>
 		 	</span>
-	 		<h2>Enter your TIN</h2>
+	 		<h2>Enter your Details</h2>
 	 		<ion-row>
 	 			<p class="label">
 	 				Tax Identification Number (TIN)
 	 			</p>
 	 			<span class="content" [ngClass] = "{'err':tinValid}">
-	 				<input (keyup)="ch($event)" type="text" name="tin" [(ngModel)] = "tin" pattern="([0-9]{3,4})(-[0-9]{3,4}){2,}" placeholder="000-000-000" />
+	 				<input (keyup)="ch($event)" type="number" name="tin" [(ngModel)] = "tin" pattern="[0-9]{9,}" placeholder="000000000" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Birthday
+	 			</p>
+	 			<span class="content" [ngClass] = "{'err':tinValid}">
+	 				<input (change)="ch($event)" type="date" name="bday" [(ngModel)] = "bday" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>

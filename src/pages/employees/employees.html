@@ -1,0 +1,284 @@
+<ion-content (window:resize)="reorient($event)" [ngClass]="{'mobile':isMobile}">
+	<top-bar></top-bar>
+	<side-bar *ngIf = "!isMobile" [highlights]="'employees'"></side-bar>
+
+	<section class="main-content">
+
+		<ion-row>
+			<ion-col col-12>
+				<p class="header-top">
+					Employees
+				</p>
+
+				<div class="nav">
+					<ion-row>
+						<ion-col col-6>
+							<span class="search">
+								<ion-icon name="ios-search"></ion-icon>
+								<input type="text" (keyup)="search($event)" placeholder="Search any fields"/>
+							</span>
+						</ion-col>
+						<ion-col col-6>
+							<button ion-button class="add-employee">
+								<ion-icon name="md-add-circle">
+								</ion-icon>
+								Add New
+							</button>
+						</ion-col>
+					</ion-row>
+				</div>
+
+			</ion-col>
+		</ion-row>
+
+		<ion-row>
+			<ion-col col-12>
+				<submodule [title]="'Active Members'" *ngIf="activeEmployees.length > 0">
+					<ion-row style="width:100%;" >
+						<table>
+						<tr style="width:100%;" class="header">
+							<td>
+								Company ID
+							</td>
+							<td>
+								First Name
+							</td>
+							<td>
+								Last Name
+							</td>
+							<td>
+								Used Credit
+							</td>
+							<td>
+								Unused Credit
+							</td>
+							<td>
+								Credit Line
+							</td>
+							<td>
+								Net Salary
+							</td>
+							<td>
+								Gross Salary
+							</td>
+							<td>
+								Action
+							</td>
+						</tr>
+						<tr style="width:100%;" class="data" *ngFor = "let emp of activeEmployees; let i = index">
+							<td>
+								{{emp?.companyID}}
+							</td>
+							<td>
+								{{emp?.firstName}}
+							</td>
+							<td>
+								{{emp?.lastName}}
+							</td>
+							<td>
+								{{emp?.usedCredit | currency:'PHP':'symbol-narrow':'1.2-2'}}
+							</td>
+							<td>
+								{{emp?.unusedCredit | currency:'PHP':'symbol-narrow':'1.2-2'}}
+							</td>
+							<td>
+								{{emp?.creditLine | currency:'PHP':'symbol-narrow':'1.2-2'}}
+							</td>
+							<td>
+								{{emp?.netSalary | currency:'PHP':'symbol-narrow':'1.2-2'}}
+							</td>
+							<td>
+								{{emp?.grossSalary | currency:'PHP':'symbol-narrow':'1.2-2'}}
+							</td>
+							<td style="text-align:center">
+								<ion-icon name="md-eye" (tap)="showModal(activeEmployees[i])"></ion-icon>
+								<ion-icon name="ios-create-outline"></ion-icon>
+								<ion-icon name="md-flag"></ion-icon>
+							</td>
+						</tr>
+						</table>
+					</ion-row>
+				</submodule>
+			</ion-col>
+		</ion-row>
+		<!-- end active members -->
+
+		<ion-row>
+			<ion-col col-12>
+				<submodule [title]="'Members'" [searchbar]="true" *ngIf="employees.length > 0">
+					<ion-row style="width:100%;" >
+						<table>
+						<tr style="width:100%;" class="header">
+							<td>
+								Company ID
+							</td>
+							<td>
+								First Name
+							</td>
+							<td>
+								Last Name
+							</td>
+							<td>
+								Email
+							</td>
+							<td>
+								Net Salary
+							</td>
+							<td>
+								Gross Salary
+							</td>
+							<td>
+								Action
+							</td>
+						</tr>
+						<tr style="width:100%;" class="data" *ngFor = "let emp of employees; let i = index">
+							<td>
+								{{emp?.companyID}}
+							</td>
+							<td>
+								{{emp?.firstName}}
+							</td>
+							<td>
+								{{emp?.lastName}}
+							</td>
+							<td>
+								{{emp?.email}}
+							</td>
+							<td>
+								{{emp?.netSalary | currency:'PHP':'symbol-narrow':'1.2-2'}}
+							</td>
+							<td>
+								{{emp?.grossSalary | currency:'PHP':'symbol-narrow':'1.2-2'}}
+							</td>
+							<td style="text-align:center">
+								<ion-icon name="md-eye" (tap)="showModal(employees[i])"></ion-icon>
+								<ion-icon name="ios-create-outline"></ion-icon>
+							</td>
+						</tr>
+						</table>
+					</ion-row>
+				</submodule>
+			</ion-col>
+		</ion-row> 
+		<!-- end members -->
+
+		<ion-row>
+			<ion-col col-12>
+				<submodule [title]="'Pending Member Registration'" [searchbar]="true" *ngIf="pendingMembers.length > 0">
+					<ion-row style="width:100%;" >
+						<table>
+						<tr style="width:100%;" class="header">
+							<td>
+								Company ID
+							</td>
+							<td>
+								First Name
+							</td>
+							<td>
+								Last Name
+							</td>
+							<td>
+								Email
+							</td>
+							<td>
+								Net Salary
+							</td>
+							<td>
+								Gross Salary
+							</td>
+							<td>
+								Action
+							</td>
+						</tr>
+						<tr style="width:100%;" class="data" *ngFor = "let emp of pendingMembers; let i = index">
+							<td>
+								{{emp?.companyID}}
+							</td>
+							<td>
+								{{emp?.firstName}}
+							</td>
+							<td>
+								{{emp?.lastName}}
+							</td>
+							<td>
+								{{emp?.email}}
+							</td>
+							<td>
+								{{emp?.netSalary | currency:'PHP':'symbol-narrow':'1.2-2'}}
+							</td>
+							<td>
+								{{emp?.grossSalary | currency:'PHP':'symbol-narrow':'1.2-2'}}
+							</td>
+							<td style="text-align:center">
+								<ion-icon name="md-eye" (tap)="showModal(pendingMembers[i])"></ion-icon>
+								<ion-icon name="ios-create-outline"></ion-icon>
+							</td>
+						</tr>
+						</table>
+					</ion-row>
+				</submodule>
+			</ion-col>
+		</ion-row> 
+		<!-- end pending members -->
+
+		<ion-row>
+			<ion-col col-12>
+				<submodule [title]="'Flagged Members'" [searchbar]="true" *ngIf="flaggedEmployees.length > 0">
+					<ion-row style="width:100%;" >
+						<table>
+						<tr style="width:100%;" class="header">
+							<td>
+								Company ID
+							</td>
+							<td>
+								First Name
+							</td>
+							<td>
+								Last Name
+							</td>
+							<td>
+								Email
+							</td>
+							<td>
+								Net Salary
+							</td>
+							<td>
+								Gross Salary
+							</td>
+							<td>
+								Action
+							</td>
+						</tr>
+						<tr style="width:100%;" class="data" *ngFor = "let emp of flaggedEmployees; let i = index">
+							<td>
+								{{emp?.companyID}}
+							</td>
+							<td>
+								{{emp?.firstName}}
+							</td>
+							<td>
+								{{emp?.lastName}}
+							</td>
+							<td>
+								{{emp?.email}}
+							</td>
+							<td>
+								{{emp?.netSalary | currency:'PHP':'symbol-narrow':'1.2-2'}}
+							</td>
+							<td>
+								{{emp?.grossSalary | currency:'PHP':'symbol-narrow':'1.2-2'}}
+							</td>
+							<td style="text-align:center">
+								<ion-icon name="md-eye" (tap)="showModal(flaggedEmployees[i])"></ion-icon>
+							</td>
+						</tr>
+						</table>
+					</ion-row>
+				</submodule>
+			</ion-col>
+		</ion-row> 
+		<!-- end flagged members -->
+
+	</section>
+
+</ion-content>

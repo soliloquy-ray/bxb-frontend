@@ -81,7 +81,7 @@
 	 				Payroll Account
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="companyCode" [(ngModel)] = "userData.payrollAccount" [value] = "userData.payrollAccount" />
+	 				<input type="text" name="payrollAccount" [(ngModel)] = "userData.payrollAccount" [value] = "userData.payrollAccount" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -89,7 +89,7 @@
 	 				Password
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="companyCode" [(ngModel)] = "userData.password" [value] = "userData.password" />
+	 				<input type="text" name="password" [(ngModel)] = "userData.password" [value] = "userData.password" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -97,7 +97,7 @@
 	 				Confirm Password
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="companyCode" [value] = "confirmPass" />
+	 				<input type="text" name="confirmPass" [value] = "confirmPass" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row class="bot">
@@ -106,7 +106,7 @@
 	 			</p>
 	 			<span class="content">
 		 			<select [innerHTML] = "prefixes" name="prefix" [(ngModel)]="prefix"></select>
-		 			<input class="short" type="text" name="mobile" [(ngModel)] = "userData.mobile" [value] = "userData.mobile" />
+		 			<input class="short" type="number" name="mobile" [(ngModel)] = "userData.mobile" [value] = "userData.mobile" />
 		 		</span>
 	 		</ion-row>
 	 		<ion-row class="center">

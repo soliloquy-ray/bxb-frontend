@@ -42,7 +42,7 @@
 	 			</p>
 	 			<span class="content">
 		 			<select [innerHTML] = "prefixes" name="prefix" [(ngModel)]="prefix"></select>
-		 			<input class="short" type="text" name="mobile" [(ngModel)] = "userData.mobile" [value] = "userData.mobile" />
+		 			<input class="short" type="number" name="mobile" [(ngModel)] = "userData.mobile" [value] = "userData.mobile" />
 		 		</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -50,7 +50,7 @@
 	 				Password
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="companyCode" [(ngModel)] = "userData.password" [value] = "userData.password" />
+	 				<input type="text" name="password" [(ngModel)] = "userData.password" [value] = "userData.password" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -58,7 +58,7 @@
 	 				Confirm Password
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="companyCode" [value] = "confirmPass" />
+	 				<input type="text" name="confirmPass" [value] = "confirmPass" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row class="center">
@@ -75,7 +75,7 @@
 	 				First Name
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="firstName" [(ngModel)] = "userData.firstName" [value] = "userData.firstName" />
+	 				<input type="text" name="firstName" [(ngModel)] = "userData.firstName" [value] = "userData.firstName" readonly="true" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -83,7 +83,7 @@
 	 				Middle Name
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="middleName" [(ngModel)] = "userData.middleName" [value] = "userData.middleName" />
+	 				<input type="text" name="middleName" [(ngModel)] = "userData.middleName" [value] = "userData.middleName"  readonly="true"/>
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -91,7 +91,7 @@
 	 				Last Name
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="lastName" [(ngModel)] = "userData.lastName" [value] = "userData.lastName" />
+	 				<input type="text" name="lastName" [(ngModel)] = "userData.lastName" [value] = "userData.lastName"  readonly="true"/>
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -99,7 +99,7 @@
 	 				Company Code
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="companyCode" [value] = "userData.companyCode" />
+	 				<input type="text" name="companyCode" [(ngModel)] = "userData.companyCode"  readonly="true"/>
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -107,7 +107,7 @@
 	 				Employee ID
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="employeeId" [(ngModel)] = "userData.employeeId" [value] = "userData.employeeId" />
+	 				<input type="text" name="employeeId" [(ngModel)] = "userData.employeeId" [value] = "userData.employeeId"  readonly="true"/>
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -115,7 +115,7 @@
 	 				Payroll Account
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="companyCode" [(ngModel)] = "userData.payrollAccount" [value] = "userData.payrollAccount" />
+	 				<input type="text" name="payrollAccount" [(ngModel)] = "userData.payrollAccount" [value] = "userData.payrollAccount" readonly="true" />
 	 			</span>
 	 		</ion-row>
 	 	</form>

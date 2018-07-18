@@ -35,8 +35,8 @@ a,span,div,b,p{
 	overflow:hidden;
 }
 
-input[type=date]{
-	-webkit-appearance:none;
+input[type=date], select{
+	-webkit-appearance:none !important;
 }
 
 ion-content section.main-content submodule ion-segment.segment{

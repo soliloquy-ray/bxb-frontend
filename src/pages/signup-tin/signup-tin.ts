@@ -21,12 +21,31 @@ declare var mobilecheck; //fn to check for screen type
 })
 export class SignupTinPage {
 	tin: string;
-	bday: string = '1971-01-01';
+	birth : {day,month,year} = {day:"01",month:"01",year:"1971"};
 	isMobile : boolean = mobilecheck();
 	tinValid : boolean = true;
 	load: any;
+
+	day : Array<string> = [];
+	month : Array<string> = [];
+	year : Array<string> = [];
+
+	months = {"01":"Jan","02":"Feb","03":"Mar","04":"Apr","05":"May","06":"Jun","07":"Jul","08":"Aug","09":"Sep","10":"Oct","11":"Nov","12":"Dec"};
 	@ViewChild('tin') input_tin: ElementRef;
   constructor(public navCtrl: NavController, public navParams: NavParams, private loader: LoadingController, private http: Http, private toast: ToastController) {
+
+  	for(let i = 1; i<=12; i++){
+  		let st = (i<10?"0"+i.toString():i.toString());
+  		this.month.push(st);
+  	}
+  	for(let i = 1; i<=31; i++){
+  		let st = (i<10?"0"+i.toString():i.toString());
+  		this.day.push(st);
+  	}
+  	for(let i = 1970; i<=parseInt(new Date().getFullYear().toString()); i++){
+  		let st = (i<10?"0"+i.toString():i.toString());
+  		this.year.push(st);
+  	}
   }
 
   ionViewDidLoad() {
@@ -42,8 +61,10 @@ export class SignupTinPage {
       dismissOnPageChange: true
     });
     this.load.present();
+
+    let brt = `${this.birth.year}-${this.birth.month}-${this.birth.day}`;
   		
-  	let uData = {tin:this.tin,birth:this.bday};
+  	let uData = {tin:this.tin,birth:brt};
   	console.log(uData);
   	let hdr = new Headers;
   	hdr.append('Content-Type','application/json');
@@ -77,6 +98,4 @@ export class SignupTinPage {
   reorient($event){
   	this.isMobile = mobilecheck();
   }
-
-
 }

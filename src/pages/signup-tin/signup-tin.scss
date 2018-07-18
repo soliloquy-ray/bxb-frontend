@@ -84,7 +84,20 @@ page-signup-tin {
 							box-shadow:1px 1px 5px 2px #b30505;
 						}
 
-						input{
+						&.day{
+							width:20%;
+							border-radius:0;
+						}
+						&.month{
+							width:20%;
+							border-radius:8px 0 0 8px;
+						}
+						&.year{
+							width:25%;
+							border-radius:0 8px 8px 0;
+						}
+
+						input, select{
 							display:inline-block;
 							width:100%;
 							height:100%;
@@ -167,6 +180,18 @@ page-signup-tin {
 
 						span.content{
 							width:100%;
+							&.day{
+								width:30%;
+								border-radius:0;
+							}
+							&.month{
+								width:30%;
+								border-radius:8px 0 0 8px;
+							}
+							&.year{
+								width:40%;
+								border-radius:0 8px 8px 0;
+							}
 						}
 
 						&.center span{

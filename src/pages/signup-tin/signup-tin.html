@@ -25,8 +25,20 @@
 	 			<p class="label">
 	 				Birthday
 	 			</p>
-	 			<span class="content" [ngClass] = "{'err':tinValid}">
-	 				<input (change)="ch($event)" type="date" name="bday" [(ngModel)] = "bday" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" />
+	 			<span class="content month">
+	 				<select name="month" [(ngModel)] = "birth.month">
+	 					<option *ngFor = "let m of month; let i=index" [value]="m">{{months[m]}}</option>
+	 				</select>
+	 			</span>
+	 			<span class="content day">
+	 				<select name="day" [(ngModel)] = "birth.day">
+	 					<option *ngFor = "let d of day; let i=index" [value]="d">{{d}}</option>
+	 				</select>
+	 			</span>
+	 			<span class="content year">
+	 				<select name="year" [(ngModel)] = "birth.year">
+	 					<option *ngFor = "let y of year; let i=index" [value]="y">{{y}}</option>
+	 				</select>
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>

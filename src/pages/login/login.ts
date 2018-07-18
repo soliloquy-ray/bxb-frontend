@@ -49,7 +49,7 @@ export class LoginPage {
   	let rq = new RequestOptions;
   	rq.headers = hdr;
   	
-  	this.http.post('http://localhost/bxb-test-php/api.php?q=login',uData, rq)
+  	this.http.post('https://bxb-backend-php.azurewebsites.net/api.php?q=login',uData, rq)
   			.toPromise()
   			.then(res=>{
   				let txt = res.text();

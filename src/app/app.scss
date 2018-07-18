@@ -35,6 +35,9 @@ a,span,div,b,p{
 	overflow:hidden;
 }
 
+input[type=date]{
+	-webkit-appearance:none;
+}
 
 ion-content section.main-content submodule ion-segment.segment{
 	.segment-button{

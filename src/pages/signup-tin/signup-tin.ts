@@ -50,7 +50,7 @@ export class SignupTinPage {
   	let rq = new RequestOptions;
   	rq.headers = hdr;
   	
-  	this.http.post('http://localhost/bxb-test-php/api.php?q=get_by_tin',uData, rq)
+  	this.http.post('https://bxb-backend-php.azurewebsites.net/api.php?q=get_by_tin',uData, rq)
   			.toPromise()
   			.then(res=>{
   				let rs = res.json();

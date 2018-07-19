@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, Modal, ModalController } from 'ionic-angular';
 
+import {TermsModalPage} from '../terms-modal/terms-modal';
 /**
  * Generated class for the DisclosureStatementPage page.
  *
@@ -20,7 +21,7 @@ export class DisclosureStatementPage {
 	isMobile : boolean = mobilecheck();
 	payments: any;
 	user: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private view: ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private view: ViewController, private modal: ModalController) {
   	this.loan = this.navParams.get('data');
   	this.payments = this.navParams.get('payments');
   	this.user = this.navParams.get('user');
@@ -37,6 +38,11 @@ export class DisclosureStatementPage {
 
   reorient($event){
   	this.isMobile = mobilecheck();
+  }
+
+  openTermsModal(){
+  	let mod = this.modal.create(TermsModalPage,{},{cssClass:"whitemodal"});
+  	mod.present();
   }
 
 }

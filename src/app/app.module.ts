@@ -26,6 +26,7 @@ import { HrDashboardPage } from '../pages/hr-dashboard/hr-dashboard';
 /* modals */
 import { DisclosureStatementPage } from '../pages/disclosure-statement/disclosure-statement';
 import { EmployeeInfoModalPage } from '../pages/employee-info-modal/employee-info-modal';
+import { TermsModalPage } from '../pages/terms-modal/terms-modal';
 
 import { HttpModule } from '@angular/http';
 
@@ -44,7 +45,8 @@ var pages = [
   DisclosureStatementPage,
   EmployeesPage,
   AddEmployeePage,
-  EmployeeInfoModalPage
+  EmployeeInfoModalPage,
+  TermsModalPage
 ];
 
 @NgModule({
@@ -67,6 +69,7 @@ var pages = [
         { component: EmployeesPage, name: 'EmployeesPage', segment: 'employees' },
         { component: AddEmployeePage, name: 'AddEmployeePage', segment: 'add-employee' },
         { component: EmployeeInfoModalPage, name: 'EmployeeInfoModalPage', segment: 'modal-employee-info' },
+        { component: TermsModalPage, name: 'TermsModalPage', segment: 'modal-terms' },
       ]
     })
   ],

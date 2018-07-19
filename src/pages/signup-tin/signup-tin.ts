@@ -6,6 +6,8 @@ import { SignUpPage } from '../sign-up/sign-up';
 
 import { Http, Headers, RequestOptions } from '@angular/http';
 
+import { config } from '../../ext/config';
+
 /**
  * Generated class for the ForgotPasswordPage page.
  *
@@ -31,6 +33,8 @@ export class SignupTinPage {
 	month : Array<string> = [];
 	year : Array<string> = [];
 
+	env = config[location.origin].backend;
+
 	months = {"01":"Jan","02":"Feb","03":"Mar","04":"Apr","05":"May","06":"Jun","07":"Jul","08":"Aug","09":"Sep","10":"Oct","11":"Nov","12":"Dec"};
 	@ViewChild('tin') input_tin: ElementRef;
   constructor(public navCtrl: NavController, public navParams: NavParams, private loader: LoadingController, private http: Http, private toast: ToastController) {
@@ -43,14 +47,14 @@ export class SignupTinPage {
   		let st = (i<10?"0"+i.toString():i.toString());
   		this.day.push(st);
   	}
-  	for(let i = 1970; i<=parseInt(new Date().getFullYear().toString()); i++){
+  	for(let i = 1920; i<=parseInt(new Date().getFullYear().toString()); i++){
   		let st = (i<10?"0"+i.toString():i.toString());
   		this.year.push(st);
   	}
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ForgotPasswordPage');
+    console.log(this.env, config);
   }
 
   verify(){
@@ -65,14 +69,15 @@ export class SignupTinPage {
 
     let brt = `${this.birth.year}-${this.birth.month}-${this.birth.day}`;
   		
-  	let uData = {tin:this.tin,ccode:this.ccode,birth:brt};
+  	//let uData = {tin:this.tin,ccode:this.ccode,birth:brt};
+  	let uData = {tin:this.tin,birth:brt};
   	console.log(uData);
   	let hdr = new Headers;
   	hdr.append('Content-Type','application/json');
   	let rq = new RequestOptions;
   	rq.headers = hdr;
   	
-  	this.http.post('https://bxb-backend-php.azurewebsites.net/api.php?q=get_by_tin',uData, rq)
+  	this.http.post(`${this.env}/api.php?q=get_by_tin`,uData, rq)
   			.toPromise()
   			.then(res=>{
   				let rs = res.json();

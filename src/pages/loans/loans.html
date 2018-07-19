@@ -28,8 +28,8 @@
 								<ion-icon name="ios-search"></ion-icon>
 								<input type="text" (keyup)="search($event)" placeholder="Search any fields"/>
 							</span>
-							<ion-grid class="table">
-								<ion-row  justify-content-center class="thead header">
+							<ion-grid class="table" *ngIf="!isMobile">
+								<ion-row justify-content-center class="thead header">
 									<ion-col >
 										First Name
 									</ion-col>
@@ -76,13 +76,49 @@
 									</ion-col>
 								</ion-row>
 							</ion-grid>
+							<ion-grid class="table" *ngIf="isMobile">
+								<ion-row style="width:100%;">
+									<ion-col col-12 style="width:100%; box-shadow: 0 0 3px 0 #333" class="data" *ngFor = "let rowData of searched?.pending; let i = index;">
+										<ion-row>
+											<ion-col col-6>
+												<p class="label">Name</p>
+												{{rowData?.firstName}} {{rowData?.lastName}}
+											</ion-col>
+											<ion-col col-6>
+												<p class="label">Transaction ID</p>
+												{{rowData?.transID}}
+											</ion-col>
+										</ion-row>
+										<ion-row>
+											<ion-col col-6>
+												<p class="label">Date of Inception</p>
+												{{rowData?.inceptionDate}}
+											</ion-col>
+											<ion-col col-6>
+												<p class="label">Term</p>
+												{{rowData?.term}}
+											</ion-col>
+										</ion-row>
+										<ion-row>
+											<ion-col col-6>
+												<p class="label">Amount</p>
+												{{rowData?.amt | currency:'PHP':'symbol-narrow':'1.2-2'}}
+											</ion-col>
+											<ion-col  col-6>
+												<p class="label">Purpose</p>
+												{{rowData?.purpose}}
+											</ion-col>
+										</ion-row>
+									</ion-col>
+								</ion-row>
+							</ion-grid>
 						</div>
 						<div *ngSwitchCase = "'approved'">
 							<span class="search">
 								<ion-icon name="ios-search"></ion-icon>
 								<input type="text" (ionInput)="search($event)" placeholder="Search any fields"/>
 							</span>
-							<ion-grid class="table">
+							<ion-grid class="table" *ngIf="!isMobile">
 								<ion-row  justify-content-center class="thead header">
 									<ion-col >
 										First Name
@@ -133,6 +169,45 @@
 									</ion-col>
 									<ion-col col-1>
 										<ion-icon (tap)="showModal(i)" style="color:#0067ff;font-size:2.3vw;" name="md-information-circle"></ion-icon>
+									</ion-col>
+								</ion-row>
+							</ion-grid>
+							<ion-grid class="table" *ngIf="isMobile">
+								<ion-row style="width:100%;">
+									<ion-col col-12 style="width:100%; box-shadow: 0 0 3px 0 #333" class="data" *ngFor = "let rowData of searched?.pending; let i = index;">
+										<ion-row>
+											<ion-col col-6>
+												<p class="label">Name</p>
+												{{rowData?.firstName}} {{rowData?.lastName}}
+											</ion-col>
+											<ion-col col-6>
+												<p class="label">Transaction ID</p>
+												{{rowData?.transID}}
+											</ion-col>
+										</ion-row>
+										<ion-row>
+											<ion-col col-6>
+												<p class="label">Date of Inception</p>
+												{{rowData?.inceptionDate}}
+											</ion-col>
+											<ion-col col-3>
+												<p class="label">Term</p>
+												{{rowData?.term}}
+											</ion-col>
+											<ion-col col-3 style=" text-align:right;">
+												<ion-icon (tap)="showModal(i)" style="font-size:5vh; color:#0067ff;" name="md-information-circle"></ion-icon>
+											</ion-col>
+										</ion-row>
+										<ion-row>
+											<ion-col col-6>
+												<p class="label">Amount</p>
+												{{rowData?.amt | currency:'PHP':'symbol-narrow':'1.2-2'}}
+											</ion-col>
+											<ion-col  col-6>
+												<p class="label">Purpose</p>
+												{{rowData?.purpose}}
+											</ion-col>
+										</ion-row>
 									</ion-col>
 								</ion-row>
 							</ion-grid>

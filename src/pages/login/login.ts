@@ -35,6 +35,7 @@ export class LoginPage {
 
   ionViewDidEnter() {
   	this.menu.close();
+  	localStorage.page = 'login';
   }
 
   toReg(){

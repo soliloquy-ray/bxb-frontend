@@ -1,3 +1,18 @@
 page-terms-modal {
 
+	ion-header{
+		ion-navbar{
+			ion-title{
+				&.title-ios.title{
+					padding:0 3vw;
+					div.toolbar-title.toolbar-title-ios{
+						text-align:left;
+						width:100%;
+					}
+				}
+
+			}
+		}
+	}
+
 }

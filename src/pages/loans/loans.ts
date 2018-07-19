@@ -106,6 +106,7 @@ export class LoansPage {
 
   ionViewDidEnter() {
   	this.menu.close();
+  	localStorage.page = 'creditsum';
   }
 
   ionViewWillLeave(){

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 
+import { LoansPage } from '../loans/loans';
 /**
  * Generated class for the HrDashboardPage page.
  *
@@ -24,7 +25,7 @@ interface creditSummary {
 })
 export class HrDashboardPage {
 
-	deets: string = `<a href='/#/credit-loan'>Details</a>&nbsp;&gt;`;
+	deets: string = `<a href='/#/loans'>Details&nbsp;&gt;</a>`;
 	deets2: string = `2018`;
 	deets3: string = `&nbsp;`;
 	isMobile : boolean = mobilecheck();
@@ -45,8 +46,8 @@ export class HrDashboardPage {
   }
 
   ionViewDidEnter() {
-    console.log('ionViewDidLoad HrDashboardPage');
   	this.menu.close();
+  	localStorage.page = 'dashboard';
   }
 
   ionViewWillLeave(){
@@ -54,6 +55,10 @@ export class HrDashboardPage {
 
   reorient($event){
   	this.isMobile = mobilecheck();
+  }
+
+  toCreditSummary(){
+  	this.navCtrl.setRoot(LoansPage,{},{animate:true, direction:"top"});
   }
 
 }

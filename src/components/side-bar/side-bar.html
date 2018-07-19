@@ -8,7 +8,7 @@
         	<b>My Profile</b>
     	</a>
   	</ion-item>
-  	<ion-item [ngClass]="{'selected':hl=='dashboard'}">
+  	<ion-item [ngClass]="{'selected':gethl()=='dashboard'}">
   		<a class="link" href='/#/hr-dashboard'>
   			<svg enable-background="new 0 0 433.5 433.5" version="1.1" viewBox="0 0 433.5 433.5" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
         		<path d="M153,382.5h127.5v-153H153V382.5z M0,382.5h127.5V51H0V382.5z M306,382.5h127.5v-153H306V382.5z M153,51v153h280.5V51H153    z"></path>
@@ -16,7 +16,7 @@
         	<b>Dashboard</b>
     	</a>
   	</ion-item>
-  	<ion-item [ngClass]="{'selected':hl=='creditsum'}">
+  	<ion-item [ngClass]="{'selected':gethl()=='creditsum'}">
   		<a class="link" href='/#/loans'>
   			<svg enable-background="new 0 0 433.5 433.5" version="1.1" viewBox="0 0 433.5 433.5" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
         		<path d="m0 255h51v-51h-51v51zm0 102h51v-51h-51v51zm0-204h51v-51h-51v51zm102 102h357v-51h-357v51zm0 102h357v-51h-357v51zm0-255v51h357v-51h-357z"></path>
@@ -24,7 +24,7 @@
         	<b>Credit Summary</b>
     	</a>
   	</ion-item>
-  	<ion-item [ngClass]="{'selected':hl=='employees'}">
+  	<ion-item [ngClass]="{'selected':gethl()=='employees'}">
   		<a class="link" href='/#/employees'>
   			<ion-icon name="md-person"></ion-icon>
         	<b>Employees</b>

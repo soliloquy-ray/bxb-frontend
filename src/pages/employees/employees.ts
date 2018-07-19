@@ -68,8 +68,8 @@ export class EmployeesPage {
   }
 
   ionViewDidEnter() {
-    console.log('ionViewDidLoad HrDashboardPage');
   	this.menu.close();
+  	localStorage.page = 'employees';
   }
 
   ionViewWillLeave(){

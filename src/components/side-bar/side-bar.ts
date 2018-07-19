@@ -23,4 +23,11 @@ export class SideBarComponent {
   ngAfterViewInit(){
   }
 
+  gethl():string{
+    if(typeof localStorage.page == "string" && localStorage.page.length > 0){
+    	this.hl = localStorage.page;
+    }
+    return this.hl;
+  }
+
 }

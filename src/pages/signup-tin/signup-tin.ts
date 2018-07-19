@@ -24,6 +24,7 @@ export class SignupTinPage {
 	birth : {day,month,year} = {day:"01",month:"01",year:"1971"};
 	isMobile : boolean = mobilecheck();
 	tinValid : boolean = true;
+	ccode: string = "";
 	load: any;
 
 	day : Array<string> = [];
@@ -64,7 +65,7 @@ export class SignupTinPage {
 
     let brt = `${this.birth.year}-${this.birth.month}-${this.birth.day}`;
   		
-  	let uData = {tin:this.tin,birth:brt};
+  	let uData = {tin:this.tin,ccode:this.ccode,birth:brt};
   	console.log(uData);
   	let hdr = new Headers;
   	hdr.append('Content-Type','application/json');
@@ -77,12 +78,29 @@ export class SignupTinPage {
   				let rs = res.json();
   				if(rs[0]){
   					self.navCtrl.setRoot(SignUpPage,{data:rs[0]},{animate:true, direction:"top"});
+  				}else{	
+	  				let tst = self.toast.create({
+	  					message:"Signup failed. Please check your credentials and try again.",
+	  					cssClass:"fail",
+	  					duration:3000,
+	  					dismissOnPageChange: true,
+	  					position:"top"
+	  				});
+	  				tst.present();
   				}
   				self.load.dismiss();
   			})
   			.catch(err=>{
   				self.load.dismiss();
   				console.warn(err);
+  				let tst = self.toast.create({
+  					message:"Signup failed. Please check your credentials and try again.",
+  					cssClass:"fail",
+  					duration:3000,
+  					dismissOnPageChange: true,
+  					position:"top"
+  				});
+  				tst.present();
   			});
   }
 

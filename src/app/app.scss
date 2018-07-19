@@ -117,7 +117,7 @@ ion-toast{
 	&.fail{
 		.toast-wrapper{
 			.toast-container{
-				background-color: crimson;
+				background-color: darkred;
 			}
 		}
 
@@ -129,7 +129,7 @@ ion-toast{
 			background-color: steelblue;
 
 			.toast-message{
-
+				text-align:center;
 			}
 		}
 	}

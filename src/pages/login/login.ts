@@ -53,7 +53,7 @@ export class LoginPage {
   			.toPromise()
   			.then(res=>{
   				let txt = res.text();
-  				let stat = txt == "Invalid login" ? "fail" : "success";
+  				let stat = (txt == "Invalid login" ? "fail" : "success");
   				let tst = this.launchToast(txt,stat);
   				tst.onDidDismiss(t=>{
   					if(stat == "success"){

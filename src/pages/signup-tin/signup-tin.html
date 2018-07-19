@@ -18,7 +18,7 @@
 	 				Tax Identification Number (TIN)
 	 			</p>
 	 			<span class="content" [ngClass] = "{'err':tinValid}">
-	 				<input (keyup)="ch($event)" type="number" name="tin" [(ngModel)] = "tin" pattern="[0-9]{9,}" placeholder="000000000" />
+	 				<input (keyup)="ch($event)" type="number" name="tin" [(ngModel)] = "tin" pattern="[0-9]{9,}" placeholder="000000000" min="0" minlength="9" required="true" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -39,6 +39,14 @@
 	 				<select name="year" [(ngModel)] = "birth.year">
 	 					<option *ngFor = "let y of year; let i=index" [value]="y">{{y}}</option>
 	 				</select>
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Company Code
+	 			</p>
+	 			<span class="content" [ngClass] = "{'err':(ccode.length < 1)}">
+	 				<input type="text" name="ccode" [(ngModel)] = "ccode" placeholder="abc123" required="true" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>

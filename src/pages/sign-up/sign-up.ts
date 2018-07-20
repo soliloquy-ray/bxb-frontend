@@ -1,10 +1,11 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Modal, ModalController } from 'ionic-angular';
 
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { LoginPage } from '../login/login';
 import { TermsPage } from '../terms/terms';
+import { DetailVerificationPage } from '../detail-verification/detail-verification';
 import { user } from '../../models/user';
 
 import { intlPrefixes } from '../../ext/mob_prefixes';
@@ -43,12 +44,20 @@ export class SignUpPage {
 	dt;
 	prefix:string = '63';
 	ccode: string;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer, private alert: AlertController) {
+	mdl : Modal;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer, private alert: AlertController, private modal: ModalController) {
   	this.dt = this.navParams.get('data');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignUpPage');
+  }
+
+  ionViewWillLeave(){
+  	if(this.mdl){
+  		this.mdl.dismiss();
+  	}
   }
 
   initData(data :any ){
@@ -58,19 +67,31 @@ export class SignUpPage {
   		lastName:data.Name_Last,
 		userName: "",
 		email: "",
-		companyCode: data.Company.replace(/[^A-Za-z0-9]/g,''),
-		employeeId: data.CompanyID,
+		companyCode: data.company_name,
+		employeeId: data.master_id,
 		payrollAccount: data.Payroll_Account,
 		password: "",
 		mobile: ""	
   	};
 
-  	this.ccode = data.Company.replace(/[^A-Za-z0-9]/g,'');
+  	this.ccode = data.company_name;
   }
 
   ngAfterViewInit(){
   	let self = this;
   	this.prev.nativeElement.src = "../../assets/imgs/tmp-img.png";
+  	this.mdl = this.modal.create(DetailVerificationPage,
+  		{
+  			data:{
+  				firstName:this.dt.Name_First,
+  				middleName:this.dt.Name_Middle,
+  				lastName:this.dt.Name_Last,
+  				companyCode: this.dt.company_name,
+  				employeeId:this.dt.master_id,
+  				payrollAccount:this.dt.Payroll_Account
+  			}
+  		},{cssClass:'whitemodal', enableBackdropDismiss:false});
+  	this.mdl.present();
   	setTimeout(()=>{
   		if(self.dt) self.initData(this.dt);
   	},1000);	

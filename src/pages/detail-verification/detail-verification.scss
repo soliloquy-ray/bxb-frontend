@@ -1,4 +1,4 @@
-page-signup-tin {
+page-detail-verification {
 
 	ion-content{
 
@@ -20,14 +20,14 @@ page-signup-tin {
 			position:relative;
 			display:inline-block;
 
-			form{
+			form[name=employee-data]{
 				display:block;
-				padding:20vh 10vw 25vh;
+				padding:15vh 10vw;
 				text-align:center;
 
-				h2{
-					text-align:left;
-					margin:3vh auto;
+				&>p{
+					font-weight:bolder;
+					font-size:4vh;
 				}
 
 				ion-row{
@@ -42,8 +42,22 @@ page-signup-tin {
 						width:100%;
 						text-align:center;
 						padding:0.5vh;
-					}
 
+						input[type=checkbox], ion-checkbox{
+							display:inline-table;
+							margin:0;
+							clear:both;
+							padding:1vh;
+							vertical-align:middle;
+							height:2.5vh;
+							width:2.5vh;
+							cursor:pointer;
+						}
+
+						a{
+							cursor:pointer;
+						}
+					}
 					p{
 						display: inline-table;
 						vertical-align:middle;
@@ -57,7 +71,7 @@ page-signup-tin {
 						}
 					}
 
-					button[ion-button]{
+					button[ion-button]:not([role=checkbox]){
 					    font-size: 13px;
 					    background: #0067ff;
 					    margin:auto;
@@ -80,24 +94,8 @@ page-signup-tin {
 						border:0;
 						box-shadow: 0 0 2px 0px #333;
 						padding:1vh 2vh;
-						&.err{
-							box-shadow:1px 1px 5px 2px #b30505;
-						}
 
-						&.day{
-							width:20%;
-							border-radius:0;
-						}
-						&.month{
-							width:20%;
-							border-radius:8px 0 0 8px;
-						}
-						&.year{
-							width:25%;
-							border-radius:0 8px 8px 0;
-						}
-
-						input, select{
+						input{
 							display:inline-block;
 							width:100%;
 							height:100%;
@@ -109,54 +107,25 @@ page-signup-tin {
 								box-shadow: 0 0 2px 0 #333;
 								border-radius:0px 8px 8px 0;
 								float:right;
-								text-indent:3vh;
+								text-indent:2vh;
 								background-color: #f7f7f7;
 							}
-						}
-
-						select{
-							width:auto;
-							min-width:50px;
 						}
 
 					}// end of content
 
-					&.bot{
-						span.content{
-							padding:0;
-							box-shadow:none;
-
-							select{
-								border:0;
-								display:inline-block;
-								width:25%;
-								font-size:11px;
-								text-align-last:center;
-								position:relative;
-								height:45px;
-								border-radius:8px 0px 0 8px;
-								box-shadow: 0 0 2px 0 #333;
-								float:left;
-								background-color: #f7f7f7;
-							}
-						}
+					p.notice{
+						text-align:left;
+						margin:2vh auto 4vh;
 					}
 
 				}// end of ion-row-
 
 			}// end of form
 
-
-			
-
 			&.mobile{
-				min-height:100vh;
 				form{
-					padding:5vh 5vh 15vh;
-
-					h2{
-						margin: 12vh auto 3vh;
-					}
+					padding:5vh ;
 
 					span.header{
 						display:inline-block;
@@ -185,18 +154,6 @@ page-signup-tin {
 
 						span.content{
 							width:100%;
-							&.day{
-								width:30%;
-								border-radius:0;
-							}
-							&.month{
-								width:30%;
-								border-radius:8px 0 0 8px;
-							}
-							&.year{
-								width:40%;
-								border-radius:0 8px 8px 0;
-							}
 						}
 
 						&.center span{

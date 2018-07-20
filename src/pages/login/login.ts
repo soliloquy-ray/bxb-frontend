@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, ToastController, Toast } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, ToastController, Toast, LoadingController } from 'ionic-angular';
 
 //import { SignUpPage } from '../sign-up/sign-up';
 import { SignupTinPage } from '../signup-tin/signup-tin';
@@ -29,7 +29,7 @@ export class LoginPage {
 
 	userData:login = {username:"", pass:""};
 	isMobile: boolean = mobilecheck();
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private http: Http, private toast: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private http: Http, private toast: ToastController, private loader: LoadingController) {
   	console.log(this.isMobile);
   }
 
@@ -50,19 +50,30 @@ export class LoginPage {
   	let rq = new RequestOptions;
   	rq.headers = hdr;
   	
+  	let load = this.loader.create({
+	      spinner: 'crescent',
+	      dismissOnPageChange: true,
+	      showBackdrop: true,
+	      content: `Please wait...`,
+	      enableBackdropDismiss:false});
+	load.present();
+
   	this.http.post('https://bxb-backend-php.azurewebsites.net/api.php?q=login',uData, rq)
   			.toPromise()
   			.then(res=>{
-  				let txt = res.text();
-  				let stat = (txt == "Invalid login" ? "fail" : "success");
-  				let tst = this.launchToast(txt,stat);
-  				tst.onDidDismiss(t=>{
-  					if(stat == "success"){
-  						self.navCtrl.setRoot(HrDashboardPage,{},{animate:true, direction:"forward"});
-  					}
-  				});
+  				load.dismiss();
+  				let txt = res.text().toLowerCase().replace(/[^A-Za-z]/g,'');
+  				let stat = (txt == "usersuccessfullyloggedin" ? "success" : "fail");
+  				if(stat == "success"){
+  					self.navCtrl.setRoot(HrDashboardPage,{},{animate:true, direction:"forward"});
+  				}else{
+  					this.launchToast(res.text(),stat);
+  				}  				
   			})
-  			.catch(console.warn);
+  			.catch(err=>{
+  				load.dismiss();
+  				console.warn(err);
+  			});
   }
 
   launchToast(msg:string, status: any = 1) : Toast{

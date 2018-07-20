@@ -13,64 +13,14 @@
 		 		<button ion-button (tap)="toHome()"></button>
 		 	</span>
 
-		 	<div class="uploader">
-				<input type="file" accept="image/*" (change)="takePic($event)">
-				<ion-avatar item-start>
-					<img #prev/>
-				</ion-avatar>
-		 	</div>
-	 		<p>Complete Information Below</p>
+	 		<p>Verify your Information</p>
+	 		
 	 		<ion-row>
-	 			<p class="label">
-	 				Username
-	 			</p>
-	 			<span class="content">
-	 				<input type="text" name="userName" [(ngModel)] = "userData.userName" [value] = "userData.userName" />
-	 			</span>
-	 		</ion-row>
+			 	<p class="notice">
+			 		Kindly notify your HR if the details shown in this form are incorrect. Otherwise, click the proceed button below.
+			 	</p>
+			 </ion-row>
 	 		<ion-row>
-	 			<p class="label">
-	 				Email
-	 			</p>
-	 			<span class="content">
-	 				<input type="text" name="email" [(ngModel)] = "userData.email" [value] = "userData.email" />
-	 			</span>
-	 		</ion-row>
-	 		<ion-row class="bot">
-	 			<p class="label">
-	 				Mobile
-	 			</p>
-	 			<span class="content">
-		 			<select [innerHTML] = "prefixes" name="prefix" [(ngModel)]="prefix"></select>
-		 			<input class="short" type="number" name="mobile" [(ngModel)] = "userData.mobile" [value] = "userData.mobile" />
-		 		</span>
-	 		</ion-row>
-	 		<ion-row>
-	 			<p class="label">
-	 				Password
-	 			</p>
-	 			<span class="content">
-	 				<input type="text" name="password" [(ngModel)] = "userData.password" [value] = "userData.password" />
-	 			</span>
-	 		</ion-row>
-	 		<ion-row>
-	 			<p class="label">
-	 				Confirm Password
-	 			</p>
-	 			<span class="content">
-	 				<input type="text" name="confirmPass" [value] = "confirmPass" />
-	 			</span>
-	 		</ion-row>
-	 		<ion-row class="center">
-	 			<span>
-	 				<ion-checkbox (ionChange)="stat($event)" name="agreeTerms" [(ngModel)]="agreement"></ion-checkbox>
-	 				<p>I have read and understood the <a class="link" (tap)="goToTerms()">terms and conditions</a>.</p>
-	 			</span>
-	 		</ion-row>
-	 		<ion-row>
-	 			<button ion-button (tap)="submitReg()">Create Account</button>
-	 		</ion-row>
-	 		<!--ion-row>
 	 			<p class="label">
 	 				First Name
 	 			</p>
@@ -117,10 +67,17 @@
 	 			<span class="content">
 	 				<input type="text" name="payrollAccount" [(ngModel)] = "userData.payrollAccount" [value] = "userData.payrollAccount" readonly="true" />
 	 			</span>
-	 		</ion-row-->
+	 		</ion-row>
+	 		<ion-row class="center">
+	 			<span>
+	 				<ion-checkbox name="valid" [(ngModel)]="valid"></ion-checkbox>
+	 				<p>The details shown above are correct</p>
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<button ion-button (tap)="close()" [disabled]="!valid">Proceed</button>
+	 		</ion-row>
 	 	</form>
-
-	 	<foot></foot>
 	 </section>
 
 </ion-content>

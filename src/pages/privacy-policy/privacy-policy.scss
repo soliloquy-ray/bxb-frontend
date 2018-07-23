@@ -1,13 +1,25 @@
-page-terms {
+page-privacy-policy {
 
 	ion-content{
-
 		section.content{
 			padding:15vh 10vw 10vh;
 			height:auto;
 			width:100%;
 			position:relative;
 			display:inline-block;
+
+			&>ol{
+				list-style-type:upper-roman;
+				&>li{
+					font-size:3vh;
+					ol{
+						padding:0 0 0 2vw;
+					}
+					p,li{
+						font-size:2vh;
+					}
+				}
+			}
 		}
 
 		&.mobile{

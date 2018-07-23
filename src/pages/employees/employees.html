@@ -34,7 +34,7 @@
 		<ion-row>
 			<ion-col col-12>
 				<submodule [title]="'Active Members'" *ngIf="activeEmployees.length > 0">
-					<ion-row style="width:100%;" >
+					<drag-scroll #ds1 class="table-container" >
 						<table>
 						<tr style="width:100%;" class="header">
 							<td>
@@ -97,7 +97,7 @@
 							</td>
 						</tr>
 						</table>
-					</ion-row>
+					</drag-scroll>
 				</submodule>
 			</ion-col>
 		</ion-row>
@@ -106,7 +106,7 @@
 		<ion-row>
 			<ion-col col-12>
 				<submodule [title]="'Members'" [searchbar]="true" *ngIf="employees.length > 0">
-					<ion-row style="width:100%;" >
+					<drag-scroll #ds2 class="table-container" >
 						<table>
 						<tr style="width:100%;" class="header">
 							<td>
@@ -156,7 +156,7 @@
 							</td>
 						</tr>
 						</table>
-					</ion-row>
+					</drag-scroll>
 				</submodule>
 			</ion-col>
 		</ion-row> 
@@ -165,7 +165,7 @@
 		<ion-row>
 			<ion-col col-12>
 				<submodule [title]="'Pending Member Registration'" [searchbar]="true" *ngIf="pendingMembers.length > 0">
-					<ion-row style="width:100%;" >
+					<drag-scroll #ds3 class="table-container" >
 						<table>
 						<tr style="width:100%;" class="header">
 							<td>
@@ -215,7 +215,7 @@
 							</td>
 						</tr>
 						</table>
-					</ion-row>
+					</drag-scroll>
 				</submodule>
 			</ion-col>
 		</ion-row> 
@@ -224,7 +224,7 @@
 		<ion-row>
 			<ion-col col-12>
 				<submodule [title]="'Flagged Members'" [searchbar]="true" *ngIf="flaggedEmployees.length > 0">
-					<ion-row style="width:100%;" >
+					<drag-scroll #ds4 class="table-container" >
 						<table>
 						<tr style="width:100%;" class="header">
 							<td>
@@ -273,7 +273,7 @@
 							</td>
 						</tr>
 						</table>
-					</ion-row>
+					</drag-scroll>
 				</submodule>
 			</ion-col>
 		</ion-row> 

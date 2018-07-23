@@ -1,75 +1,88 @@
 foot{
 	display:block;
 	width:100%;
-	padding:1vh 10vw;
 
-	span{
-		display:inline-block;
-		width:100%;
-		clear:both;
-		height:66px;
-		position:relative;
-		img{
-			margin:auto 0;
-			clear:both;
-			display:block;
-			position:absolute;
-			top:0;
-			left:0;
-			bottom:0;	
+	section.footer{
+		padding:1vh 10vw;
+
+		&.compact{
+			padding: 1vh 1vw;
+			span{
+				display: none;
+			}
 		}
-		border-right:solid #8c8c8c;
-	}
 
-	nav{
-		display:block;
-		clear:both;
-		width:100%;
-		text-align: right;
-		padding: 5vh 0 0.5vh;
-		p{
-			max-width:50%;
+		span{
 			display:inline-block;
-			white-space: nowrap;
-			&.link{
-				max-width:25%;
-				color:#05b9ff;
-				text-transform: uppercase;
-				font-size:14px;
-				width:auto;
-				padding-left:50px;
-				cursor:pointer;
-				a{
-					color:inherit;
-					text-decoration:none;
+			width:100%;
+			clear:both;
+			height:66px;
+			position:relative;
+			img{
+				margin:auto 0;
+				clear:both;
+				display:block;
+				position:absolute;
+				top:0;
+				left:0;
+				bottom:0;	
+			}
+			border-right:solid #8c8c8c;
+		}
+
+		nav{
+			display:block;
+			clear:both;
+			width:100%;
+			text-align: right;
+			padding: 5vh 0 0.5vh;
+			p{
+				max-width:50%;
+				display:inline-block;
+				white-space: nowrap;
+				&.link{
+					max-width:25%;
+					color:#05b9ff;
+					text-transform: uppercase;
+					font-size:14px;
+					width:auto;
+					padding-left:50px;
+					cursor:pointer;
+					a{
+						color:inherit;
+						text-decoration:none;
+					}
 				}
 			}
 		}
-	}
 
-	p.copyright{
-		float:left;
-		color:#4A4A4A;
-		text-align:left;
+		p.copyright{
+			float:left;
+			color:#4A4A4A;
+			text-align:left;
+		}
 	}
 }
 
 .mobile foot{
 
-	nav{
-		p{
-			max-width:100%;
-			width:100%;
-			text-align:center;
-			white-space:normal;
+	section.footer{
 
-			&.link{
+		nav{
+			p{
 				max-width:100%;
-				padding:0;
-			}
+				width:100%;
+				text-align:center;
+				white-space:normal;
 
-			&.copyright{
-				float:none;
+				&.link{
+					max-width:100%;
+					padding:0;
+				}
+
+				&.copyright{
+					float:none;
+				}
 			}
 		}
 	}

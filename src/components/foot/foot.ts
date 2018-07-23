@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 /**
  * Generated class for the FootComponent component.
@@ -12,11 +12,16 @@ import { Component } from '@angular/core';
 })
 export class FootComponent {
 
-  text: string;
-
+	@Input('compact') compact : boolean = true;
   constructor() {
-    console.log('Hello FootComponent Component');
-    this.text = 'Hello World';
+  }
+
+  ngAfterViewInit(){
+  	console.info(this.compact);
+  }
+
+  toHome(){
+  	window.location.href = "/";
   }
 
 }

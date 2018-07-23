@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChildren, QueryList } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, Modal, ModalController } from 'ionic-angular';
 
 import { EmployeeInfoModalPage } from '../employee-info-modal/employee-info-modal';
+
+import { DragScrollComponent } from 'ngx-drag-scroll';
 /**
  * Generated class for the HrDashboardPage page.
  *
@@ -13,7 +15,7 @@ declare var mobilecheck; //fn to check for screen type
 @IonicPage()
 @Component({
   selector: 'page-employees',
-  templateUrl: 'employees.html',
+  templateUrl: 'employees.html'
 })
 export class EmployeesPage {
 
@@ -63,6 +65,7 @@ export class EmployeesPage {
 	mod: Modal;
 	pendingMembers = [];
 	isMobile : boolean = mobilecheck();
+	@ViewChildren(DragScrollComponent) ds : QueryList<DragScrollComponent>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController) {
   }
@@ -82,6 +85,12 @@ export class EmployeesPage {
   showModal(i){
   	this.mod = this.modal.create(EmployeeInfoModalPage,{data:i},{cssClass:`whitemodal sm ${this.isMobile ? "mobile" : ""}`});
   	this.mod.present();
+  }
+
+  ngAfterViewInit(){
+  	this.ds.forEach(i=>{
+  		i.snapOffset = 85;
+  		i.scrollbarHidden = true;  	});
   }
 
 }

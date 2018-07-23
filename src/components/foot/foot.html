@@ -1,12 +1,12 @@
 <!-- Generated template for the FootComponent component -->
 
-<section class="footer">
+<section class="footer" [ngClass]="{'compact':compact}">
 	<span>
 		<img src="../../assets/imgs/bxb-logo-dark.png" (tap)="toHome()"/>
 	</span>
 	<nav class="links">
 		<p class="copyright">&copy; 2018 BRICK BY BRICK, ALL RIGHTS RESERVED</p>
 		<p class="link"><a href='/#/terms'>Terms &amp; Conditions</a></p>
-		<p class="link">Privacy Policy</p>
+		<p class="link"><a href='/#/privacy-policy'>Privacy Policy</a></p>
 	</nav>
 </section>

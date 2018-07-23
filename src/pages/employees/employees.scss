@@ -98,13 +98,20 @@ page-employees {
 			}
 
 			submodule div.container{
-				overflow:scroll;
 				display:block;
 				background-color:#fff;
+
 				table{
-					display:block;
+					display:table;
 					width:100%;
+					min-width:100%;
+					tbody{
+						min-width:100%;
+					}
+
 					tr{
+						position:relative;
+						width:100%;
 						&.header{
 							td{
 								background-color:#fff;
@@ -126,6 +133,7 @@ page-employees {
 						}
 
 						td{
+							position:relative;
 							min-width:85px;
 							padding:2vh 1.25vw;
 							white-space:nowrap;

@@ -41,6 +41,12 @@ export class HrDashboardPage {
 		employeeName: 'George Miguel Winternitz',
 		amt: '32,000.00',
 		purpose: 'Help a Person'
+	},{
+		transID:35,
+		inceptionDate: '2018-07-19',
+		employeeName: 'Blue Test 2 Second',
+		amt: '22,500.00',
+		purpose: 'Vacation'
 	}];
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController) {
   }

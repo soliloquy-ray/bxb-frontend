@@ -1,0 +1,196 @@
+<ion-content (window:resize)="reorient($event)" [ngClass]="{'mobile':isMobile}">
+	<top-bar></top-bar>
+	<side-bar *ngIf = "!isMobile" [highlights]="'dashboard'"></side-bar>
+
+	 <section class="main">
+	 	<form name="employee-data">
+	 		<h2>Edit Employee Account</h2>
+	 		<ion-row>
+	 			<p class="label">
+	 				First Name
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="firstName" [(ngModel)] = "userData.firstName" [value] = "userData.firstName" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Middle Name
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="middleName" [(ngModel)] = "userData.middleName" [value] = "userData.middleName" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Last Name
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="lastName" [(ngModel)] = "userData.lastName" [value] = "userData.lastName" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Employee ID
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="employeeId" [(ngModel)] = "userData.employeeId" [value] = "userData.employeeId" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Email
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="email" [(ngModel)] = "userData.email" [value] = "userData.email" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Password
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="password" [(ngModel)] = "userData.password" [value] = "userData.password" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row class="bot">
+	 			<p class="label">
+	 				Mobile
+	 			</p>
+	 			<span class="content">
+		 			<select [innerHTML] = "prefixes" name="prefix" [(ngModel)]="prefix"></select>
+		 			<input class="short" type="number" name="mobile" [(ngModel)] = "userData.mobile" [value] = "userData.mobile" />
+		 		</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Date Hired
+	 			</p>
+	 			<span class="content">
+	 				<input type="date" name="hiredDate" [(ngModel)] = "userData.hiredDate" [value] = "" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Gender
+	 			</p>
+	 			<span class="content">
+		 			<select name="gender" [(ngModel)]="userData.gender">
+		 				<option value="male">Male</option>
+		 				<option value="female">Female</option>
+		 			</select>
+		 		</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Birthdate
+	 			</p>
+	 			<span class="content">
+	 				<input type="date" name="birthday" [(ngModel)] = "userData.birthday" [value] = "" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Position
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="position" [(ngModel)] = "userData.position" [value] = "position" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Entity
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="entity" [(ngModel)] = "userData.entity" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Type
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="type" [(ngModel)] = "userData.type" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Division
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="division" [(ngModel)] = "userData.division" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Net Salary
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="netSalary" [(ngModel)] = "userData.netSalary" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Gross Salary
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="grossSalary" [(ngModel)] = "userData.grossSalary" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Payroll Account
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="payrollAccount" [(ngModel)] = "userData.payrollAccount" [value] = "userData.payrollAccount" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Bank Name
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="bankName" [(ngModel)] = "userData.bankName" [value] = "userData.bankName" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Vacation Leave
+	 			</p>
+	 			<span class="content">
+	 				<input type="number" name="vacationLeave" [(ngModel)] = "userData.vacationLeave" [value] = "userData.vacationLeave" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Sick Leave
+	 			</p>
+	 			<span class="content">
+	 				<input type="number" name="sickLeave" [(ngModel)] = "userData.sickLeave" [value] = "userData.sickLeave" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Maternity Leaves
+	 			</p>
+	 			<span class="content">
+	 				<input type="number" name="maternityLeave" [(ngModel)] = "userData.maternityLeave" [value] = "userData.maternityLeave" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Paternity Leaves
+	 			</p>
+	 			<span class="content">
+	 				<input type="number" name="paternityLeave" [(ngModel)] = "userData.paternityLeave" [value] = "userData.paternityLeave" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<button ion-button (tap)="submitReg()">Update Account</button>
+	 		</ion-row>
+	 	</form>
+
+	 </section>
+	 <foot></foot>
+
+</ion-content>

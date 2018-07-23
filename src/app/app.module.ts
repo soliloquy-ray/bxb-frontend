@@ -16,12 +16,14 @@ import { SignUpPage } from '../pages/sign-up/sign-up';
 import { SignupTinPage } from '../pages/signup-tin/signup-tin';
 import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
 import { TermsPage } from '../pages/terms/terms';
+import { PrivacyPolicyPage } from '../pages/privacy-policy/privacy-policy';
 import { LoansPage } from '../pages/loans/loans';
-import { AddEmployeePage } from '../pages/add-employee/add-employee';
 
 /* admin pages */
 import { EmployeesPage } from '../pages/employees/employees';
 import { HrDashboardPage } from '../pages/hr-dashboard/hr-dashboard';
+import { AddEmployeePage } from '../pages/add-employee/add-employee';
+import { EditEmployeePage } from '../pages/edit-employee/edit-employee';
 
 /* modals */
 import { DisclosureStatementPage } from '../pages/disclosure-statement/disclosure-statement';
@@ -30,7 +32,7 @@ import { TermsModalPage } from '../pages/terms-modal/terms-modal';
 import { DetailVerificationPage } from '../pages/detail-verification/detail-verification';
 
 import { HttpModule } from '@angular/http';
-
+import { DragScrollModule } from 'ngx-drag-scroll';
 
 var pages = [
   MyApp,
@@ -48,7 +50,9 @@ var pages = [
   AddEmployeePage,
   EmployeeInfoModalPage,
   TermsModalPage,
-  DetailVerificationPage
+  DetailVerificationPage,
+  PrivacyPolicyPage,
+  EditEmployeePage
 ];
 
 @NgModule({
@@ -57,6 +61,7 @@ var pages = [
     ComponentsModule,
     BrowserModule,
     HttpModule,
+    DragScrollModule,
     IonicModule.forRoot(MyApp, {}, {
       links: [
         { component: HomePage, name: 'Home', segment: 'home' },
@@ -73,6 +78,8 @@ var pages = [
         { component: EmployeeInfoModalPage, name: 'EmployeeInfoModalPage', segment: 'modal-employee-info' },
         { component: TermsModalPage, name: 'TermsModalPage', segment: 'modal-terms' },
         { component: DetailVerificationPage, name: 'DetailVerificationPage', segment: 'verify-info' },
+        { component: PrivacyPolicyPage, name: 'PrivacyPolicyPage', segment: 'privacy-policy' },
+        { component: EditEmployeePage, name: 'EditEmployeePage', segment: 'edit-employee' },
       ]
     })
   ],

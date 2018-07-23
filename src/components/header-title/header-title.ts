@@ -20,7 +20,7 @@ export class HeaderTitleComponent {
   }
 
   toHome(){
-  	window.location.href = '/';
+  	window.location.href = '/';	
   }
 
 }

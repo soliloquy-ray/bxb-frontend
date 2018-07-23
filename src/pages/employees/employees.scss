@@ -137,9 +137,12 @@ page-employees {
 							min-width:85px;
 							padding:2vh 1.25vw;
 							white-space:nowrap;
-							ion-icon:not(:first-of-type){
-								margin-left:0.5vw;
+							ion-icon{
+								font-size:3vh;
 								cursor:pointer;
+								&:not(:first-of-type){
+									margin-left:0.5vw;
+								}
 							}
 						}
 					}

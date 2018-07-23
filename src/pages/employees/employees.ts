@@ -2,6 +2,8 @@ import { Component, ViewChildren, QueryList } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, Modal, ModalController } from 'ionic-angular';
 
 import { EmployeeInfoModalPage } from '../employee-info-modal/employee-info-modal';
+import { EditEmployeePage } from '../edit-employee/edit-employee';
+import { AddEmployeePage } from '../add-employee/add-employee';
 
 import { DragScrollComponent } from 'ngx-drag-scroll';
 /**
@@ -90,7 +92,16 @@ export class EmployeesPage {
   ngAfterViewInit(){
   	this.ds.forEach(i=>{
   		i.snapOffset = 85;
-  		i.scrollbarHidden = true;  	});
+  		i.scrollbarHidden = true;
+  	});
+  }
+
+  editEmp(dt){
+  	this.navCtrl.setRoot(EditEmployeePage,{data:dt},{animate:true, direction:"top"});
+  }
+
+  addNew(){
+  	this.navCtrl.setRoot(AddEmployeePage,{},{animate:true, direction:"top"});
   }
 
 }

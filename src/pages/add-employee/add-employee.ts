@@ -38,8 +38,6 @@ export class AddEmployeePage {
 	confirmPass: string = '';
 	prefixes = this.sanitizer.bypassSecurityTrustHtml(intlPrefixes);
 	isMobile : boolean = mobilecheck();
-	agreement:boolean = false;
-	@ViewChild('prev') prev: ElementRef;
 	dt;
 	prefix:string = '63';
   constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer, private alert: AlertController) {
@@ -51,7 +49,6 @@ export class AddEmployeePage {
   }
 
   ngAfterViewInit(){
-  	this.prev.nativeElement.src = "../../assets/imgs/tmp-img.png";
   }
 
   toHome(){
@@ -60,17 +57,6 @@ export class AddEmployeePage {
 
   reorient($event){
   	this.isMobile = mobilecheck();
-  }
-
-  takePic($event){
-    let self = this;
-    if($event.target.files && $event.target.files[0]){
-    	//self.uploadFile($event.target.files[0]);
-    	console.log($event.target.files[0]);
-    	let nurl = URL.createObjectURL($event.target.files[0]);
-    	self.prev.nativeElement.src = nurl;
-    }
-
   }
 
   submitReg(){

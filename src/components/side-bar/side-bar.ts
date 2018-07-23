@@ -30,4 +30,8 @@ export class SideBarComponent {
     return this.hl;
   }
 
+  goToLink(lnk:string){
+      window.location.href = lnk;
+  }
+
 }

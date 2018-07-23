@@ -19,73 +19,17 @@ page-add-employee {
 			width:100%;
 			position:relative;
 			display:inline-block;
+			padding:1vh 5vw 1vh calc(220px + 1.5vw);
 
 			form{
 				display:block;
-				padding:15vh 10vw;
+				padding:5vh 0;
 				text-align:center;
-
-				div.uploader{
-					position:relative;
-					display:block;
-					clear:both;
-					margin: 0 auto 5vh;
-					height:125px;
-					width:125px;
-					border-radius:100%;
-					overflow:hidden;
-					box-shadow: 0 0 3px 4px #30b0ff;
-
-					input{
-						z-index:2;
-						position:absolute;
-						opacity:0;
-						height:100%;
-						width:100%;
-						top:0;
-						left:0;
-						right:0;
-						bottom:0;
-						cursor:pointer;
-					}
-
-					ion-avatar{
-						display:block;
-						position:relative;
-						z-index:1;
-						height:100%;
-						width:100%;
-
-						&::after{
-							content:"Upload photo";
-							display:block;
-							position:absolute;
-							background-color:rgba(50,50,50,0.4);
-							color:#fff;
-							bottom:0;
-							left:0;
-							right:0;
-							width:100%;
-							height:auto;
-							padding:12px 0 20px;
-							text-align:center;
-						}
-
-
-						img{
-							height:100%;
-							width:100%;
-							display:block;
-							object-fit:cover;
-							object-position:center;
-						}
-					}
-				}
 
 				ion-row{
 					width:60vw;
 					text-align:center;
-					margin:3vh auto;
+					margin:3vh 0;
 					padding:0.5vw;
 
 
@@ -147,7 +91,7 @@ page-add-employee {
 						box-shadow: 0 0 2px 0px #333;
 						padding:1vh 2vh;
 
-						input{
+						input,select[name=gender]{
 							display:inline-block;
 							width:100%;
 							height:100%;
@@ -191,7 +135,13 @@ page-add-employee {
 
 			}// end of form
 
-			&.mobile{
+
+		}// end of .main
+
+
+		&.mobile{
+			section.main{
+				padding:1vh;
 				form{
 					padding:5vh ;
 
@@ -241,9 +191,6 @@ page-add-employee {
 					}
 				}
 			}
-
-		}// end of .main
-
-
+		}
 	} //end of scroll-content
 }

@@ -19,7 +19,7 @@
 							</span>
 						</ion-col>
 						<ion-col col-6>
-							<button ion-button class="add-employee">
+							<button ion-button class="add-employee" (tap)="addNew()">
 								<ion-icon name="md-add-circle">
 								</ion-icon>
 								Add New
@@ -92,7 +92,7 @@
 							</td>
 							<td style="text-align:center">
 								<ion-icon name="md-eye" (tap)="showModal(activeEmployees[i])"></ion-icon>
-								<ion-icon name="ios-create-outline"></ion-icon>
+								<ion-icon name="ios-create-outline" (tap)="editEmp(activeEmployees[i])"></ion-icon>
 								<ion-icon name="md-flag"></ion-icon>
 							</td>
 						</tr>
@@ -152,7 +152,7 @@
 							</td>
 							<td style="text-align:center">
 								<ion-icon name="md-eye" (tap)="showModal(employees[i])"></ion-icon>
-								<ion-icon name="ios-create-outline"></ion-icon>
+								<ion-icon name="ios-create-outline" (tap)="editEmp(employees[i])"></ion-icon>
 							</td>
 						</tr>
 						</table>
@@ -211,7 +211,7 @@
 							</td>
 							<td style="text-align:center">
 								<ion-icon name="md-eye" (tap)="showModal(pendingMembers[i])"></ion-icon>
-								<ion-icon name="ios-create-outline"></ion-icon>
+								<ion-icon name="ios-create-outline" (tap)="editEmp(pendingMembers[i])"></ion-icon>
 							</td>
 						</tr>
 						</table>

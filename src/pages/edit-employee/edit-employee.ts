@@ -33,7 +33,9 @@ export class EditEmployeePage {
   	};
 	prefixes = this.sanitizer.bypassSecurityTrustHtml(intlPrefixes);
 	prefix:string = '63';
-  constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer:DomSanitizer) {
+  constructor(public navCtrl: NavController, private navParams: NavParams, private sanitizer:DomSanitizer) {
+  	console.log(this.navParams.data);
+    this.userData = this.navParams.get('data');
   }
 
   ionViewDidLoad() {

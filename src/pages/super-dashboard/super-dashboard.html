@@ -1,0 +1,79 @@
+<ion-content (window:resize)="reorient($event)" [ngClass]="{'mobile':isMobile}">
+	<top-bar></top-bar>
+	<side-bar *ngIf = "!isMobile" [highlights]="'dashboard'"></side-bar>
+
+	<section class="main-content">
+
+		<ion-row>
+			<ion-col col-6 class="module">
+				<submodule [title]="'Credit Availments for Approval'" [footerD]="deets">
+					<p style="font-size:24px;display:table;margin:auto;color:red">1 <b style="color:gray;">pending</b>
+					</p>
+				</submodule>
+			</ion-col>
+		</ion-row>
+		<br/>
+		<ion-row>
+			<ion-col col-12>
+				<submodule [title]="'Companies Summary'">
+					<ion-row style="width:100%;" *ngIf="!isMobile">
+						<ion-row style="width:100%;">
+							<ion-col col-2 style="text-align: center;font-weight:bold;padding:1.5rem;">Company Name</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">Company Code</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">Member Employees</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">Active Employees</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">Total Credit Availment</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">Total Principal Outstanding</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">Company Maximum Portfolio</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">Risk Ration</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">Years of Membership</ion-col>
+						</ion-row>
+						<ion-row style="width:100%;" class="data" *ngFor = "let c of companies; let i = index;">
+							<ion-col col-2 style="text-align: center;font-weight:bold;padding:1.5rem;">{{c?.companyName}}</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">{{c?.companyCode}}</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">{{c?.memberEmployees}}</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">{{c?.activeEmployees}}</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">{{c?.totalCreditAvailment}}</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">{{c?.principalOutstanding}}</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">{{c?.maxPortfolio}}</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">{{c?.riskRatio}}</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">{{c?.membershipYears}}</ion-col>
+						</ion-row>
+					</ion-row>
+				</submodule>
+			</ion-col>
+		</ion-row>
+		<br/>
+		<ion-row>
+			<ion-col col-12>
+				<submodule [title]="'BxB Credit Portfolio Summary'">
+					<ion-row style="width:100%;" *ngIf="!isMobile">
+						<ion-row style="width:100%;">
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">Total Number of Companies</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">TOTAL CREDIT AVAILMENT</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">COMPANIES BY INDUSTRY</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">COMPANIES BY EXPOSURE</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">ACTUAL COMPANY EXPOSURE</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">NPL RATIO</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">NPL</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">BORROWERS BY GENDER</ion-col>
+						</ion-row>
+						<ion-row style="width:100%; box-shadow: 0 0 3px 0 #333" class="data">
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">Total Number of Companies</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">TOTAL CREDIT AVAILMENT</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">COMPANIES BY INDUSTRY</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">COMPANIES BY EXPOSURE</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">ACTUAL COMPANY EXPOSURE</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">NPL RATIO</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">NPL</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">BORROWERS BY GENDER</ion-col>
+						</ion-row>
+					</ion-row>
+				</submodule>
+			</ion-col>
+		</ion-row>
+		
+	</section>
+	 <foot></foot>
+
+</ion-content>

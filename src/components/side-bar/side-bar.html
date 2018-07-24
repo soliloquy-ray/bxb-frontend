@@ -2,21 +2,27 @@
 <section class="content">
 	<img src="../assets/imgs/bxb-logo-circle.svg"/>
   <nav>
-  	<p class="title">Menu</p>
+  	<!--p class="title">Menu</p-->
   	<ion-item *ngIf="mob">
   		<a class="link">
         	<b>My Profile</b>
     	</a>
   	</ion-item>
   	<ion-item [ngClass]="{'selected':gethl()=='dashboard'}">
-  		<a class="link" href='/#/hr-dashboard'>
+  		<a class="link" href='/#/hr-dashboard' *ngIf="accountType == 'hr'">
+        <svg enable-background="new 0 0 433.5 433.5" version="1.1" viewBox="0 0 433.5 433.5" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+            <path d="M153,382.5h127.5v-153H153V382.5z M0,382.5h127.5V51H0V382.5z M306,382.5h127.5v-153H306V382.5z M153,51v153h280.5V51H153    z"></path>
+          </svg>
+          <b>Dashboard</b>
+      </a>
+      <a class="link" href='/#/super-dashboard' *ngIf="accountType == 'super'">
   			<svg enable-background="new 0 0 433.5 433.5" version="1.1" viewBox="0 0 433.5 433.5" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
         		<path d="M153,382.5h127.5v-153H153V382.5z M0,382.5h127.5V51H0V382.5z M306,382.5h127.5v-153H306V382.5z M153,51v153h280.5V51H153    z"></path>
         	</svg>
         	<b>Dashboard</b>
     	</a>
   	</ion-item>
-  	<ion-item [ngClass]="{'selected':gethl()=='creditsum'}">
+  	<ion-item [ngClass]="{'selected':gethl()=='creditsum'}" *ngIf="accountType != 'employee'">
   		<a class="link" href='/#/loans'>
   			<svg enable-background="new 0 0 433.5 433.5" version="1.1" viewBox="0 0 433.5 433.5" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
         		<path d="m0 255h51v-51h-51v51zm0 102h51v-51h-51v51zm0-204h51v-51h-51v51zm102 102h357v-51h-357v51zm0 102h357v-51h-357v51zm0-255v51h357v-51h-357z"></path>
@@ -24,32 +30,72 @@
         	<b>Credit Summary</b>
     	</a>
   	</ion-item>
-  	<ion-item [ngClass]="{'selected':gethl()=='employees'}">
+    <ion-item [ngClass]="{'selected':gethl()=='companies'}" *ngIf="accountType == 'super'">
+      <a class="link" href='/#/company'>
+        <ion-icon name="ios-clipboard-outline"></ion-icon>
+        <b>Companies</b>        
+      </a>
+    </ion-item>
+    <ion-item class="sub" *ngIf="accountType == 'super'">
+      <a class="link" (tap)="goToLink('/#/add-company')">
+        Add New
+      </a>
+    </ion-item>
+    <ion-item class="sub" *ngIf="accountType == 'super'">
+      <a class="link" (tap)="goToLink('/#/deleted-companies')">
+        Deleted
+      </a>
+    </ion-item>
+  	<ion-item [ngClass]="{'selected':gethl()=='employees'}" *ngIf="accountType == 'hr'">
   		<a class="link" href='/#/employees'>
   			<ion-icon name="md-person"></ion-icon>
         	<b>Employees</b>
     	</a>
   	</ion-item>
-  	<ion-item class="sub">
+  	<ion-item class="sub" *ngIf="accountType == 'hr'">
   		<a class="link">
   			All
   		</a>
   	</ion-item>
-  	<ion-item class="sub">
+  	<ion-item class="sub" *ngIf="accountType == 'hr'">
   		<a class="link" (tap)="goToLink('/#/add-employee')">
   			Add Employees
   		</a>
   	</ion-item>
-  	<ion-item [ngClass]="{'selected':hl=='account'}">
+    <ion-item [ngClass]="{'selected':hl=='account'}" *ngIf="accountType == 'hr'">
+      <a class="link">
+        <ion-icon name="md-desktop"></ion-icon>
+          <b>Statement of Account</b>
+      </a>
+    </ion-item>
+    <ion-item [ngClass]="{'selected':hl=='logs'}" *ngIf="accountType != 'employee'">
+      <a class="link">
+        <ion-icon name="ios-desktop"></ion-icon>
+          <b>Activity Log</b>
+      </a>
+    </ion-item>
+    <ion-item [ngClass]="{'selected':hl=='logs'}" *ngIf="accountType == 'super'">
+      <a class="link">
+        <ion-icon name="ios-list-box"></ion-icon>
+          <b>Super Controller</b>
+      </a>
+    </ion-item>
+    <ion-item [ngClass]="{'selected':hl=='account'}" *ngIf="accountType == 'super'">
+      <a class="link">
+        <ion-icon name="md-alert"></ion-icon>
+          <b>View Statements</b>
+      </a>
+    </ion-item>
+    <ion-item [ngClass]="{'selected':hl=='logs'}" *ngIf="accountType == 'super'">
+      <a class="link">
+        <ion-icon name="md-flag"></ion-icon>
+          <b>Flagging</b>
+      </a>
+    </ion-item>
+  	<ion-item [ngClass]="{'selected':hl=='logs'}" *ngIf="accountType == 'super'">
   		<a class="link">
-  			<ion-icon name="md-desktop"></ion-icon>
-        	<b>Statement of Account</b>
-    	</a>
-  	</ion-item>
-  	<ion-item [ngClass]="{'selected':hl=='logs'}">
-  		<a class="link">
-  			<ion-icon name="ios-list-box"></ion-icon>
-        	<b>Activity Log</b>
+  			<ion-icon name="md-card"></ion-icon>
+        	<b>Pretermination</b>
     	</a>
   	</ion-item>
   	<ion-item *ngIf="mob">

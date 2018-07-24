@@ -7,6 +7,7 @@ import { HrDashboardPage } from '../hr-dashboard/hr-dashboard';
 import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { config } from '../../ext/config';
 /**
  * Generated class for the LoginPage page.
  *
@@ -29,8 +30,9 @@ export class LoginPage {
 
 	userData:login = {username:"", pass:""};
 	isMobile: boolean = mobilecheck();
+  env = config[location.origin].backend;
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private http: Http, private toast: ToastController, private loader: LoadingController) {
-  	console.log(this.isMobile);
+  	console.log(this.env);
   }
 
   ionViewDidEnter() {
@@ -58,22 +60,28 @@ export class LoginPage {
 	      enableBackdropDismiss:false});
 	load.present();
 
-  	this.http.post('https://bxb-backend-php.azurewebsites.net/api.php?q=login',uData, rq)
+  	this.http.post(`${this.env}/api.php?q=login`,uData, rq)
   			.toPromise()
   			.then(res=>{
-  				load.dismiss();
+  				/*load.dismiss();
   				let txt = res.text().toLowerCase().replace(/[^A-Za-z]/g,'');
   				let stat = (txt == "usersuccessfullyloggedin" ? "success" : "fail");
   				if(stat == "success"){
   					self.navCtrl.setRoot(HrDashboardPage,{},{animate:true, direction:"forward"});
   				}else{
   					this.launchToast(res.text(),stat);
-  				}  				
+  				}  				*/
+          load.dismiss();
+          localStorage.userData = JSON.stringify(res.json());
+          self.navCtrl.setRoot(HrDashboardPage,{},{animate:true, direction:"forward"});
+          //id = id[0].master_id;
+          //this.http.post()
   			})
-  			.catch(err=>{
-  				load.dismiss();
-  				console.warn(err);
-  			});
+        .catch(err=>{
+          load.dismiss();
+          this.launchToast('Invalid login','fail');
+          console.warn(err);
+        })
   }
 
   launchToast(msg:string, status: any = 1) : Toast{

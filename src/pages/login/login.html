@@ -13,12 +13,12 @@
 		<div class="main">
 			<ion-row>
 				<ion-col>
-					<input type="text" [(ngModel)] = "userData.username" name="login" placeholder="Email or Username" />
+					<input type="text" [(ngModel)] = "userData.username" name="login" placeholder="Email or Username" (keyup.enter)="login()"/>
 				</ion-col>
 			</ion-row>
 			<ion-row>
 				<ion-col>
-					<input type="password" [(ngModel)] = "userData.pass" name="pass" placeholder="Password" />
+					<input type="password" [(ngModel)] = "userData.pass" name="pass" placeholder="Password"  (keyup.enter)="login()"/>
 				</ion-col>
 			</ion-row>
 			<ion-row>

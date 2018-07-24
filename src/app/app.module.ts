@@ -25,6 +25,9 @@ import { HrDashboardPage } from '../pages/hr-dashboard/hr-dashboard';
 import { AddEmployeePage } from '../pages/add-employee/add-employee';
 import { EditEmployeePage } from '../pages/edit-employee/edit-employee';
 
+/* superuser pages */
+import { SuperDashboardPage } from '../pages/super-dashboard/super-dashboard';
+
 /* modals */
 import { DisclosureStatementPage } from '../pages/disclosure-statement/disclosure-statement';
 import { EmployeeInfoModalPage } from '../pages/employee-info-modal/employee-info-modal';
@@ -52,7 +55,8 @@ var pages = [
   TermsModalPage,
   DetailVerificationPage,
   PrivacyPolicyPage,
-  EditEmployeePage
+  EditEmployeePage,
+  SuperDashboardPage
 ];
 
 @NgModule({
@@ -80,6 +84,7 @@ var pages = [
         { component: DetailVerificationPage, name: 'DetailVerificationPage', segment: 'verify-info' },
         { component: PrivacyPolicyPage, name: 'PrivacyPolicyPage', segment: 'privacy-policy' },
         { component: EditEmployeePage, name: 'EditEmployeePage', segment: 'edit-employee' },
+        { component: SuperDashboardPage, name: 'SuperDashboardPage', segment: 'super-dashboard' },
       ]
     })
   ],

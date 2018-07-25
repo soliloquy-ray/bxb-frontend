@@ -134,3 +134,47 @@ ion-toast{
 		}
 	}
 }
+
+/*
+ion-range.range{
+	padding:8px 0;
+	div.range-slider{
+		position:relative;
+		&>div.range-bar{
+			top:0;
+			position:relative;
+			height:100%;
+			&.range-bar-active{
+				position:absolute;
+			}
+		}
+
+		&>div.range-knob-handle{
+			top:0;
+			height:100%;
+			//position:absolute;
+			margin-top:0;
+			margin-left:-30px;
+			div.range-knob{
+				width:50%;
+				height:100%;
+				border-radius:0;
+				background-color:#fff;
+				transform:scale(0.9);
+				top:0;
+				box-shadow:0 0 3px 0 #888;
+			}
+		}
+
+	}
+}*/
+
+div.range-bar[role=presentation]{
+	top:16px !important;
+	height:12px !important;
+	border-radius:8px !important;
+}
+
+div.range-tick{
+	opacity:0 !important;
+}

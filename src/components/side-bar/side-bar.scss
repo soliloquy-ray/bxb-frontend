@@ -9,6 +9,9 @@ side-bar {
 		left:0;
 		width:220px;
 		background-color:transparent;
+		background-image:url('../assets/imgs/sidebar.png');
+		background-size:cover;
+		background-repeat:no-repeat;
 		z-index:5;
 
 		img{
@@ -17,7 +20,9 @@ side-bar {
 			object-fit:cover;
 			object-position:center;
 			display:block;
-			margin:1vh auto;
+			margin:1vh auto 3vh;
+			background-color:#fff;
+			border-radius:100%;
 		}
 
 		nav{
@@ -32,7 +37,7 @@ side-bar {
 				}
 
 				a.link{
-					color:#4f4f4f;
+					color:#fff;
 					font-size:14px;
 					text-decoration:none;
 
@@ -41,6 +46,7 @@ side-bar {
 					    width: 18px;
 					    display: inline-table;
 					    vertical-align: top;
+					    fill:#fff;
 
 					    path{
 					    	white-space:nowrap;
@@ -58,18 +64,19 @@ side-bar {
 				}
 
 				&.selected{
+						background-color:#fff;
+						border-radius:8px;
 					a.link{
-
 						svg{
-					    	fill:#0067ff;
+					    	fill:#333;
 						}
 
 						ion-icon{
-							color:#0067ff;
+							color:#333;
 						}
 
 						b{
-							color:#0067ff;
+							color:#333;
 						}
 					}
 				}

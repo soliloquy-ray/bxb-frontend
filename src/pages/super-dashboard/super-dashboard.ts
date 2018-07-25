@@ -83,6 +83,17 @@ export class SuperDashboardPage {
 		membershipYears:0
 	}];
 
+	bxbPortfolio = {
+		numberOfCompanies:6,
+		totalCreditAvailment:102000,
+		companiesByIndustry:0,
+		companiesByExposure:0,
+		actualCompanyExposure:240141.67,
+		nplRatio:0,
+		npl:0,
+		borrowersByGender:0
+	}
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController) {
   }
 

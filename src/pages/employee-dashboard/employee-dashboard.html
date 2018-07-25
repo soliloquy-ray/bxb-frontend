@@ -1,0 +1,126 @@
+<ion-content (window:resize)="reorient($event)" [ngClass]="{'mobile':isMobile}">
+	<top-bar></top-bar>
+	<side-bar *ngIf = "!isMobile" [highlights]="'dashboard'"></side-bar>
+
+	<section class="main-content">
+		<ion-row>
+			<ion-col col-6>
+				<div class="credit-box">
+					<span>
+						<p>Outstanding Credit</p>
+						<b class="outstanding">
+							{{outstandingCredit | currency:'PHP':'symbol-narrow':'1.2-2'}}
+						</b>
+					</span>
+					<span id="outstanding-bar" class="bar">
+						<div [style.width.%]="outstandingCredit*100/50000"></div>
+					</span>
+				</div>
+			</ion-col>
+
+			<ion-col col-6>
+				<div class="credit-box">
+					<span>
+						<p>Available Credit</p>
+						<b class="available">
+							{{availableCredit | currency:'PHP':'symbol-narrow':'1.2-2'}}
+						</b>
+					</span>
+					<span id="available-bar" class="bar">
+						<div [style.width.%]="availableCredit*100/50000"></div>
+					</span>
+				</div>
+			</ion-col>
+		</ion-row>
+
+		<h2>Use your Credit Line</h2>
+		<div class="slider-form">
+			<div class="credit-form">
+				<ion-row>
+					<ion-col col-9>
+						How much credit do you wish to use?
+					</ion-col>
+					<ion-col col-3>
+						<input type="number" min="1000" maxlength="6" [max]="availableCredit" step="500" [(ngModel)]="creditToUse"/>
+					</ion-col>
+				</ion-row>
+				<ion-row class="range-1">
+					<ion-col col-1>
+						<ion-icon name="ios-remove-circle-outline" (tap)="checkCredit(-500)" (mousedown)="contAdd(true,-500)"  (mouseup)="contAdd(false)"></ion-icon>
+					</ion-col>
+					<ion-col col-10>
+						<ion-item>
+						  <ion-range min="1000" [max]="availableCredit" step="500" snaps="true" [(ngModel)]="creditToUse">
+						  </ion-range>
+						</ion-item>
+					</ion-col>
+					<ion-col col-1>
+						<ion-icon name="ios-add-circle-outline" (tap)="checkCredit(500)" (mousedown)="contAdd(true,500)"  (mouseup)="contAdd(false)"></ion-icon>
+					</ion-col>
+				</ion-row>
+				<p class="small">Minimum of {{min | currency:'PHP':'symbol-narrow':'1.0'}}</p>
+			</div>
+		</div>
+		<br/>
+		<br/>
+		<div class="slider-form">
+			<div class="credit-form">
+				<ion-row>
+					<ion-col col-9>
+						Over how many paydays do you wish to repay the credit?
+					</ion-col>
+					<ion-col col-3>
+						<input type="number" min="1" maxlength="6" [max]="maxPaydays" step="1" [(ngModel)]="paydays"/>
+					</ion-col>
+				</ion-row>
+				<ion-row class="range-1">
+					<ion-col col-1>
+						<ion-icon name="ios-remove-circle-outline" (tap)="checkPaydays(-1)" (mousedown)="dayAdd(true,-1)"  (mouseup)="dayAdd(false)"></ion-icon>
+					</ion-col>
+					<ion-col col-10>
+						<ion-item>
+						  <ion-range min="1" [max]="maxPaydays" [(ngModel)]="paydays">
+						  </ion-range>
+						</ion-item>
+					</ion-col>
+					<ion-col col-1>
+						<ion-icon name="ios-add-circle-outline" (tap)="checkPaydays(1)" (mousedown)="dayAdd(true,1)"  (mouseup)="dayAdd(false)"></ion-icon>
+					</ion-col>
+				</ion-row>
+			</div>
+		</div>
+
+		<div class="usage">
+			<p>What will you use it for?</p>
+			<ion-row>
+				<ion-col col-4>
+					<select [(ngModel)]="purpose" name="purpose">
+						<option value="p" *ngFor="let p of purposeList;">{{p}}</option>
+					</select>
+				</ion-col>
+				<ion-col>
+					<p class="label">Amount Availed</p>
+					<span><b>Php {{creditToUse | number : '1.2-2'}}</b> <ion-icon name="md-add"></ion-icon></span>
+				</ion-col>
+				<ion-col>
+					<p class="label">Total Interest</p>
+					<span><b>Php {{paydays * interestRate * creditToUse | number : '1.2-2'}}</b> <img src="../assets/imgs/equal-icon.png"/></span>
+				</ion-col>
+				<ion-col>
+					<p class="label">Total Repayment</p>
+					<span><b>Php {{(paydays * interestRate * creditToUse) + creditToUse | number : '1.2-2'}}</b></span>
+				</ion-col>
+				<ion-col>
+					<p class="label">Deduction per payday</p>
+					<span><b>Php {{((paydays * interestRate * creditToUse) + creditToUse)/paydays | number : '1.2-2'}}</b></span>
+				</ion-col>
+				<ion-col col-1>
+					<ion-icon name="md-information-circle"></ion-icon>
+				</ion-col>
+			</ion-row>
+		</div>
+		<button ion-button>Confirm</button>
+		<foot></foot>
+	</section>
+
+</ion-content>

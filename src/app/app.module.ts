@@ -19,6 +19,9 @@ import { TermsPage } from '../pages/terms/terms';
 import { PrivacyPolicyPage } from '../pages/privacy-policy/privacy-policy';
 import { LoansPage } from '../pages/loans/loans';
 
+/* employee pages */
+import { EmployeeDashboardPage } from '../pages/employee-dashboard/employee-dashboard';
+
 /* admin pages */
 import { EmployeesPage } from '../pages/employees/employees';
 import { HrDashboardPage } from '../pages/hr-dashboard/hr-dashboard';
@@ -56,7 +59,8 @@ var pages = [
   DetailVerificationPage,
   PrivacyPolicyPage,
   EditEmployeePage,
-  SuperDashboardPage
+  SuperDashboardPage,
+  EmployeeDashboardPage
 ];
 
 @NgModule({
@@ -85,6 +89,7 @@ var pages = [
         { component: PrivacyPolicyPage, name: 'PrivacyPolicyPage', segment: 'privacy-policy' },
         { component: EditEmployeePage, name: 'EditEmployeePage', segment: 'edit-employee' },
         { component: SuperDashboardPage, name: 'SuperDashboardPage', segment: 'super-dashboard' },
+        { component: EmployeeDashboardPage, name: 'EmployeeDashboardPage', segment: 'employee-dashboard' },
       ]
     })
   ],

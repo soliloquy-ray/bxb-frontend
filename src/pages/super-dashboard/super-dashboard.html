@@ -49,7 +49,7 @@
 				<submodule [title]="'BxB Credit Portfolio Summary'">
 					<ion-row style="width:100%;" *ngIf="!isMobile">
 						<ion-row style="width:100%;">
-							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">Total Number of Companies</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">TOTAL NUMBER OF COMPANIES</ion-col>
 							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">TOTAL CREDIT AVAILMENT</ion-col>
 							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">COMPANIES BY INDUSTRY</ion-col>
 							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">COMPANIES BY EXPOSURE</ion-col>
@@ -59,14 +59,14 @@
 							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">BORROWERS BY GENDER</ion-col>
 						</ion-row>
 						<ion-row style="width:100%; box-shadow: 0 0 3px 0 #333" class="data">
-							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">Total Number of Companies</ion-col>
-							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">TOTAL CREDIT AVAILMENT</ion-col>
-							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">COMPANIES BY INDUSTRY</ion-col>
-							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">COMPANIES BY EXPOSURE</ion-col>
-							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">ACTUAL COMPANY EXPOSURE</ion-col>
-							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">NPL RATIO</ion-col>
-							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">NPL</ion-col>
-							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">BORROWERS BY GENDER</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">{{bxbPortfolio?.numberOfCompanies}}</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">{{bxbPortfolio?.totalCreditAvailment}}</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">{{bxbPortfolio?.companiesByIndustry}}</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">{{bxbPortfolio?.companiesByExposure}}</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">{{bxbPortfolio?.actualCompanyExposure}}</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">{{bxbPortfolio?.nplRatio}}</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">{{bxbPortfolio?.npl}}</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">{{bxbPortfolio?.borrowersByGender}}</ion-col>
 						</ion-row>
 					</ion-row>
 				</submodule>

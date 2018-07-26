@@ -33,6 +33,7 @@ import { SuperDashboardPage } from '../pages/super-dashboard/super-dashboard';
 
 /* modals */
 import { DisclosureStatementPage } from '../pages/disclosure-statement/disclosure-statement';
+import { EmpDisclosureStatementModalPage } from '../pages/emp-disclosure-statement-modal/emp-disclosure-statement-modal';
 import { EmployeeInfoModalPage } from '../pages/employee-info-modal/employee-info-modal';
 import { TermsModalPage } from '../pages/terms-modal/terms-modal';
 import { DetailVerificationPage } from '../pages/detail-verification/detail-verification';
@@ -60,7 +61,8 @@ var pages = [
   PrivacyPolicyPage,
   EditEmployeePage,
   SuperDashboardPage,
-  EmployeeDashboardPage
+  EmployeeDashboardPage,
+  EmpDisclosureStatementModalPage
 ];
 
 @NgModule({
@@ -90,6 +92,7 @@ var pages = [
         { component: EditEmployeePage, name: 'EditEmployeePage', segment: 'edit-employee' },
         { component: SuperDashboardPage, name: 'SuperDashboardPage', segment: 'super-dashboard' },
         { component: EmployeeDashboardPage, name: 'EmployeeDashboardPage', segment: 'employee-dashboard' },
+        { component: EmpDisclosureStatementModalPage, name: 'EmpDisclosureStatementModalPage', segment: 'eds' },
       ]
     })
   ],

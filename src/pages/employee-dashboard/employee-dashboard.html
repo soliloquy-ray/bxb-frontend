@@ -114,8 +114,9 @@
 					<p class="label">Deduction per payday</p>
 					<span><b>Php {{((paydays * interestRate * creditToUse) + creditToUse)/paydays | number : '1.2-2'}}</b></span>
 				</ion-col>
-				<ion-col col-1>
+				<ion-col col-1 (tap)="launchBreakdown()">
 					<ion-icon name="md-information-circle"></ion-icon>
+					<p *ngIf="isMobile">View Breakdown</p>
 				</ion-col>
 			</ion-row>
 		</div>

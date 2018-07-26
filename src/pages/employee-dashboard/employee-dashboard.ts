@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, ModalController } from 'ionic-angular';
 
 import { LoansPage } from '../loans/loans';
+import { EmpDisclosureStatementModalPage } from '../emp-disclosure-statement-modal/emp-disclosure-statement-modal';
 /**
  * Generated class for the HrDashboardPage page.
  *
@@ -9,6 +10,18 @@ import { LoansPage } from '../loans/loans';
  * Ionic pages and navigation.
  */
 declare var mobilecheck; //fn to check for screen type
+
+interface loanModel {
+    amt:number,
+    udi:number,
+    grossCashout:number,
+    processingFund:number,
+    collectionFund:number,
+    docFee:number,
+    totalDeductions:number,
+    netCashout:number,
+    totalPayment:number
+}
 
 @IonicPage()
 @Component({
@@ -27,13 +40,17 @@ export class EmployeeDashboardPage {
 
 	interestRate:number = 0.0125;
 	processingFeeRate: number = 0.035;
+	collectionFeeRate: number = 0.015;
+	docFeeRate: number = 0.0075;
 	deductionPerPayDay:number = 0;
 
 	intervalPress : any;
 
 	purposeList = ['', 'Debt Consolidation', 'Credit Card Payoff', 'Help a Person', 'Emergency Fund','Medical Expenses', 'Major Purchase', 'Vacation', 'Others'];
 	purpose: string = '';
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController) {
+
+	loan : loanModel;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController) {
   }
 
   ionViewDidEnter() {
@@ -86,6 +103,23 @@ export class EmployeeDashboardPage {
   	else{
   		clearInterval(this.intervalPress);
   	}
+  }
+
+  launchBreakdown(){
+  	this.loan = {
+  		amt:this.creditToUse,
+    	udi:this.paydays * this.interestRate * this.creditToUse,
+    	grossCashout:this.creditToUse,
+    	processingFund:this.creditToUse * this.processingFeeRate,
+    	collectionFund:this.creditToUse * this.collectionFeeRate,
+    	docFee:this.creditToUse * this.docFeeRate,
+    	totalDeductions:0,
+    	netCashout:0,
+    	totalPayment:(this.paydays * this.interestRate * this.creditToUse) + this.creditToUse
+  	};
+
+  	let md = this.modal.create(EmpDisclosureStatementModalPage,{data:this.loan},{'cssClass':'whitemodal'});
+  	md.present();
   }
 
 }

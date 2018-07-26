@@ -1,0 +1,154 @@
+<!--
+  Generated template for the DisclosureStatementPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title><ion-icon style="margin:0 1vw;" name="ios-information-circle-outline"></ion-icon>Disclosure Statement
+  	<ion-icon (tap)="close()" name="ios-close" style="float:right;"></ion-icon></ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding (window:resize)="reorient($event)">
+
+	<section class="content" [ngClass]="{'mobile':isMobile}">
+		<span class="header">
+			<div class="title">
+				<ion-icon name="md-information-circle"></ion-icon>
+				BXB Disclosure and Payment Schedule
+			</div>
+
+			<button class="print" ion-button>
+				<ion-icon name="md-print"></ion-icon>
+				Print
+			</button>
+		</span>
+
+		<div class="body">
+			<ion-row>
+				<ion-col class="bundle">
+					<ion-row>
+						<ion-col class="label">Principal</ion-col>
+						<ion-col class="data">{{loan?.amt | number:'1.2-2'}}</ion-col>
+					</ion-row>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col class="bundle">
+					<ion-row>
+						<ion-col class="label">Interest</ion-col>
+						<ion-col class="data">{{loan?.udi | number:'1.2-2'}}</ion-col>
+					</ion-row>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col class="bundle">
+					<ion-row>
+						<ion-col class="label">Gross Cash Out</ion-col>
+						<ion-col class="data">{{loan?.grossCashout | number:'1.2-2'}}</ion-col>
+					</ion-row>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col class="bundle">
+					<ion-row>
+						<ion-col style="font-weight:bolder" col-3>ADD</ion-col>
+						<ion-col style="font-weight:bolder" col-4>Less</ion-col>
+						<ion-col style="font-weight:bolder" col-2>&nbsp;</ion-col>
+						<ion-col style="font-weight:bolder" col-3>Reference</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col col-3>&nbsp;</ion-col>
+						<ion-col col-4>Processing Fund</ion-col>
+						<ion-col col-2>{{loan?.processingFund | number:'1.2-2'}}</ion-col>
+						<ion-col col-3>&nbsp;</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col col-3>&nbsp;</ion-col>
+						<ion-col col-4>Collection Fund</ion-col>
+						<ion-col col-2>{{loan?.collectionFund | number:'1.2-2'}}</ion-col>
+						<ion-col col-3>&nbsp;</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col col-3>&nbsp;</ion-col>
+						<ion-col col-4>Doc. Fee</ion-col>
+						<ion-col col-2>{{loan?.docFee | number:'1.2-2'}}</ion-col>
+						<ion-col col-3>&nbsp;</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col col-3>&nbsp;</ion-col>
+						<ion-col col-4>Total Deductions</ion-col>
+						<ion-col col-2>{{loan?.totalDeductions | number:'1.2-2'}}</ion-col>
+						<ion-col col-3>&nbsp;</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col col-12><b class="label">NET CASH OUT</b>{{loan?.netCashout | number:'1.2-2'}}</ion-col>
+					</ion-row>
+				</ion-col>
+			</ion-row>
+		</div>
+
+		<!-- TO DO: Additional computations -->
+
+		<span class="header">
+			<div class="title">
+				<ion-icon name="md-calendar"></ion-icon>
+				Schedule of Payment
+			</div>
+		</span>
+
+		<div class="body">
+			<ion-row>
+				<ion-col class="bundle">
+					<ion-row>
+						<ion-col class="label">TOTAL</ion-col>
+						<ion-col class="data">{{loan?.totalPayment | currency:'PHP':'symbol-narrow':'1.2-2'}}</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col col-3>
+							Date of Payment
+						</ion-col>
+						<ion-col col-3>
+							Number of Payment
+						</ion-col>
+						<ion-col col-3>
+							Amount
+						</ion-col>
+						<ion-col col-3>
+							Balance
+						</ion-col>
+					</ion-row>
+					<ion-row *ngFor = "let payment of payments; let i = index;">
+						<ion-col col-3>
+							{{payment?.paymentDate}}
+						</ion-col>
+						<ion-col col-3>
+							{{payment?.paymentNum}}
+						</ion-col>
+						<ion-col col-3>
+							{{payment?.amt | number : '1.2-2'}}
+						</ion-col>
+						<ion-col col-3>
+							{{payment?.bal | number : '1.2-2'}}
+						</ion-col>
+					</ion-row>
+				</ion-col>
+			</ion-row>
+		</div>
+
+		<p class="disclaimer">
+			To view the terms and conditions of this availment you may click <a class="link" (tap)="openTermsModal()">here</a>
+		</p>
+	</section>
+</ion-content>
+<!--ion-footer>
+	<button ion-button (tap)="close()">
+		<ion-icon name="ios-close-circle-outline"></ion-icon>
+		Close
+	</button>
+</ion-footer-->

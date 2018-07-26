@@ -14,7 +14,7 @@
 </ion-header>
 
 
-<ion-content padding (window:resize)="reorient($event)">
+<ion-content (window:resize)="reorient($event)">
 
 	<section class="content" [ngClass]="{'mobile':isMobile}">
 		<span class="header">
@@ -57,33 +57,36 @@
 			<ion-row>
 				<ion-col class="bundle">
 					<ion-row>
-						<ion-col style="font-weight:bolder" col-3>ADD</ion-col>
-						<ion-col style="font-weight:bolder" col-4>Less</ion-col>
-						<ion-col style="font-weight:bolder" col-2>&nbsp;</ion-col>
-						<ion-col style="font-weight:bolder" col-3>Reference</ion-col>
+						<ion-col style="font-weight:bolder" col-4>ADD</ion-col>
+						<ion-col style="font-weight:bolder" col-5>Less</ion-col>
+						<ion-col style="font-weight:bolder;white-space: nowrap;" col-3>Reference</ion-col>
 					</ion-row>
 					<ion-row>
-						<ion-col col-3>&nbsp;</ion-col>
-						<ion-col col-4>Processing Fund</ion-col>
-						<ion-col col-2>{{loan?.processingFund | number:'1.2-2'}}</ion-col>
-						<ion-col col-3>&nbsp;</ion-col>
-					</ion-row>
-					<ion-row>
-						<ion-col col-3>&nbsp;</ion-col>
-						<ion-col col-4>Collection Fund</ion-col>
-						<ion-col col-2>{{loan?.collectionFund | number:'1.2-2'}}</ion-col>
+						<ion-col col-4>&nbsp;</ion-col>
+						<ion-col col-5>Processing Fund
+							<p>{{loan?.processingFund | number:'1.2-2'}}</p>
+						</ion-col>
 						<ion-col col-3>&nbsp;</ion-col>
 					</ion-row>
 					<ion-row>
-						<ion-col col-3>&nbsp;</ion-col>
-						<ion-col col-4>Doc. Fee</ion-col>
-						<ion-col col-2>{{loan?.docFee | number:'1.2-2'}}</ion-col>
+						<ion-col col-4>&nbsp;</ion-col>
+						<ion-col col-5>Collection Fund
+							<p>{{loan?.collectionFund | number:'1.2-2'}}</p>
+						</ion-col>
 						<ion-col col-3>&nbsp;</ion-col>
 					</ion-row>
 					<ion-row>
+						<ion-col col-4>&nbsp;</ion-col>
+						<ion-col col-5>Doc. Fee
+							<p>{{loan?.docFee | number:'1.2-2'}}</p>
+						</ion-col>
 						<ion-col col-3>&nbsp;</ion-col>
-						<ion-col col-4>Total Deductions</ion-col>
-						<ion-col col-2>{{loan?.totalDeductions | number:'1.2-2'}}</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col col-4>&nbsp;</ion-col>
+						<ion-col col-5>Total Deductions
+							<p>{{loan?.totalDeductions | number:'1.2-2'}}</p>
+						</ion-col>
 						<ion-col col-3>&nbsp;</ion-col>
 					</ion-row>
 					<ion-row>

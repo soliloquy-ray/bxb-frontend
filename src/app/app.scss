@@ -81,10 +81,10 @@ ion-popover{
 ion-modal.whitemodal{
 
 	div.modal-wrapper{
-		height:calc(100% - 2vh);
-		width:calc(100% - 2vw);
-		top:1vh;
-		left:1vw;
+		height:100%;
+		width:100%;
+		top:0;
+		left:0;
 	}
 
 	&.mobile{

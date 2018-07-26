@@ -15,12 +15,12 @@ page-emp-disclosure-statement-modal {
 	}
 
 	ion-content{
-
 		section.content{
 			position:relative;
 			display:inline-block;
 			width:100%;
 			clear:both;
+			padding:1vh 3vw;
 
 			span.header{
 				width:100%;
@@ -82,6 +82,15 @@ page-emp-disclosure-statement-modal {
 									float:left;
 								}
 							}
+
+							[col-5]{
+								p{
+									text-align:right;
+									margin:1vh 0 0;
+									font-family:'Roboto',sans-serif;
+									font-weight:normal;
+								}
+							}
 						}
 
 						&.label{
@@ -96,6 +105,7 @@ page-emp-disclosure-statement-modal {
 			}
 
 			&.mobile{
+				padding:1vh 1vw;
 				div.body{
 					ion-row{
 

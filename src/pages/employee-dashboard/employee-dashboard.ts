@@ -42,7 +42,7 @@ export class EmployeeDashboardPage {
 	processingFeeRate: number = 0.035;
 	collectionFeeRate: number = 0.015;
 	docFeeRate: number = 0.0075;
-	deductionPerPayDay:number = 0;
+	deductionPerPayDay:number = ((this.paydays * this.interestRate * this.creditToUse) + this.creditToUse)/this.paydays;
 
 	intervalPress : any;
 
@@ -50,6 +50,7 @@ export class EmployeeDashboardPage {
 	purpose: string = '';
 
 	loan : loanModel;
+	dates : Array<{paymentDate,paymentNum,amt,bal}> = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController) {
   }
 
@@ -73,12 +74,15 @@ export class EmployeeDashboardPage {
   	this.creditToUse += val;
   	if(this.creditToUse	<= 0) this.creditToUse = 0;
   	if(this.creditToUse	>= this.availableCredit) this.creditToUse = this.availableCredit;
+  	this.deductionPerPayDay = ((this.paydays * this.interestRate * this.creditToUse) + this.creditToUse)/this.paydays;
+  	this.getDates();
   }
 
   checkPaydays(val){
   	this.paydays += val;
   	if(this.paydays	<= 1) this.paydays = 1;
   	if(this.paydays	>= this.maxPaydays) this.paydays = this.maxPaydays;
+  	this.getDates();
   }
 
   contAdd(b:boolean,val = 500){
@@ -106,6 +110,7 @@ export class EmployeeDashboardPage {
   }
 
   launchBreakdown(){
+  	this.checkCredit(0);
   	this.loan = {
   		amt:this.creditToUse,
     	udi:this.paydays * this.interestRate * this.creditToUse,
@@ -117,9 +122,54 @@ export class EmployeeDashboardPage {
     	netCashout:0,
     	totalPayment:(this.paydays * this.interestRate * this.creditToUse) + this.creditToUse
   	};
+  	this.getDates().then(dt=>{
 
-  	let md = this.modal.create(EmpDisclosureStatementModalPage,{data:this.loan},{'cssClass':'whitemodal'});
-  	md.present();
+	  	let md = this.modal.create(EmpDisclosureStatementModalPage,{data:this.loan, payments:dt},{'cssClass':'whitemodal'});
+	  	md.present();
+  	});
+
   }
+
+  getDates():Promise<any>{
+  	this.dates = [];
+  	let fd = new Date();
+  	let mn = fd.getMonth();
+  	let yr = fd.getFullYear();
+  	let initDay;
+  	if(fd.getDate() > 15){
+  		initDay = 15;
+  		mn+=2;
+  		if(mn >= 13){
+  			++yr;
+  			mn = 1;
+  		}
+  	}
+  	else{
+  		initDay = 30;
+  	}
+
+  	for(let i = 0; i<this.paydays; i++){
+  		let dt = `${yr}-${('0'+mn).slice(-2)}-${initDay}`;
+  		this.dates.push({paymentDate:dt, paymentNum:(i+1), amt:this.deductionPerPayDay, bal:((this.paydays * this.interestRate * this.creditToUse) + this.creditToUse) - (this.deductionPerPayDay * (i+1))});
+  		if(initDay == 30){
+  			initDay = 15;
+  			++mn;
+  			if(mn >= 13){
+  				++yr;
+  				mn=1;
+  			}
+  		}else{
+  			initDay = 30;
+  		}
+  	}
+  	console.log(this.dates);
+  	return Promise.resolve(this.dates);
+  }
+
+	addDays(date, days) {
+		var result = new Date(date);
+		result.setDate(result.getDate() + days);
+		return result;
+	}
 
 }

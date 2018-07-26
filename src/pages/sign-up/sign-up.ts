@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Modal, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Modal, ModalController, LoadingController } from 'ionic-angular';
 
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -9,6 +9,9 @@ import { DetailVerificationPage } from '../detail-verification/detail-verificati
 import { user } from '../../models/user';
 
 import { intlPrefixes } from '../../ext/mob_prefixes';
+import { config } from '../../ext/config';
+
+import { Http, Headers, RequestOptions } from '@angular/http';
 
 /**
  * Generated class for the SignUpPage page.
@@ -45,8 +48,9 @@ export class SignUpPage {
 	prefix:string = '63';
 	ccode: string;
 	mdl : Modal;
+	env = config[location.origin].backend;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer, private alert: AlertController, private modal: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer, private alert: AlertController, private modal: ModalController, private loader: LoadingController, private http: Http) {
   	this.dt = this.navParams.get('data');
   }
 
@@ -117,18 +121,37 @@ export class SignUpPage {
   }
 
   submitReg(){
-  	let alert = this.alert.create({
-  		enableBackdropDismiss: true,
-  		title: "No backend",
-  		message: "Coming soon",
-  		buttons:[
-  		{
-  			text:"Ok",
-  			role:'cancel'
-  		}]
+  	let load = this.loader.create({
+	    spinner: 'crescent',
+	    dismissOnPageChange: true,
+	    showBackdrop: true,
+	    content: `Please wait...`,
+	    enableBackdropDismiss:false
   	});
+  	load.present();
 
-  	alert.present();
+  	let hdr = new Headers;
+  	hdr.append('Content-Type','application/json');
+  	let rq = new RequestOptions;
+  	rq.headers = hdr;
+  	let uData = {
+  		login:this.userData.userName,
+  		password: this.userData.password,
+  		mobile: this.prefix + this.userData.mobile,
+  		email: this.userData.email,
+  		id:this.userData.employeeId
+  	};
+
+  	this.http.post(`${this.env}/api.php?q=signup`,uData, rq).toPromise()
+  			.then(res=>{
+  				load.dismiss();
+  				console.log(res.text());
+  				this.toHome();
+  			})
+  			.catch(err=>{
+  				load.dismiss();
+  				console.warn(err);
+  			});
   }
 
   goToTerms(){
@@ -137,7 +160,13 @@ export class SignUpPage {
   }
 
   stat(event){
-  	console.log(this);
+  	console.log(this.userData);
+  	if(this.userData.userName == '' || this.userData.email == '' || this.userData.mobile == '' || this.userData.password == '' || this.userData.password != this.confirmPass || !this.agreement){
+  		return true;
+  	}
+  	else{
+  		return false;
+  	}
   }
 /*
 	uploadFile(file) {

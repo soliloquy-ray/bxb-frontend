@@ -35,4 +35,10 @@ export class SideBarComponent {
       window.location.href = lnk;
   }
 
+  logout(){
+    localStorage.removeItem('accountType');
+    localStorage.removeItem('userData');
+    this.goToLink('/');
+  }
+
 }

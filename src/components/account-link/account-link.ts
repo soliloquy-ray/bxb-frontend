@@ -31,10 +31,11 @@ export class AccountLinkComponent {
   }
 
   logout(){
-  	//let nav = this.content.na
+    localStorage.removeItem('accountType');
+    localStorage.removeItem('userData');
   	this.viewCtrl.dismiss();
   	//this.nav.setRoot(LoginPage,{},{animate:true, direction:"forward"});
-  	window.location.href = location.origin+"/#/login";
+  	window.location.href = location.origin+"/";
   }
 
 }

@@ -4,6 +4,8 @@ import { IonicPage, NavController, NavParams, MenuController, ToastController, T
 //import { SignUpPage } from '../sign-up/sign-up';
 import { SignupTinPage } from '../signup-tin/signup-tin';
 import { HrDashboardPage } from '../hr-dashboard/hr-dashboard';
+import { EmployeeDashboardPage } from '../employee-dashboard/employee-dashboard';
+import { SuperDashboardPage } from '../super-dashboard/super-dashboard';
 import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 
 import { Http, Headers, RequestOptions } from '@angular/http';
@@ -38,6 +40,23 @@ export class LoginPage {
   ionViewDidEnter() {
   	this.menu.close();
   	localStorage.page = 'login';
+    if(typeof localStorage.accountType == "string" && typeof localStorage.userData == "string"){
+      switch (localStorage.accountType) {
+        case "employee":
+          this.navCtrl.setRoot(EmployeeDashboardPage,{},{animate:true, direction:"forward"});
+          // code...
+          break;
+        case "hr":
+          this.navCtrl.setRoot(HrDashboardPage,{},{animate:true, direction:"forward"});
+          // code...
+          break;
+        
+        default:
+          this.navCtrl.setRoot(SuperDashboardPage,{},{animate:true, direction:"forward"});
+          // code...
+          break;
+      }
+    }
   }
 
   toReg(){
@@ -73,7 +92,8 @@ export class LoginPage {
   				}  				*/
           load.dismiss();
           localStorage.userData = JSON.stringify(res.json());
-          self.navCtrl.setRoot(HrDashboardPage,{},{animate:true, direction:"forward"});
+          localStorage.accountType = 'employee';
+          self.navCtrl.setRoot(EmployeeDashboardPage,{},{animate:true, direction:"forward"});
           //id = id[0].master_id;
           //this.http.post()
   			})

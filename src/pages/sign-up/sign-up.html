@@ -25,7 +25,7 @@
 	 				Username
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="userName" [(ngModel)] = "userData.userName" [value] = "userData.userName" />
+	 				<input type="text" name="userName" [(ngModel)] = "userData.userName" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -33,7 +33,7 @@
 	 				Email
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="email" [(ngModel)] = "userData.email" [value] = "userData.email" />
+	 				<input type="text" name="email" [(ngModel)] = "userData.email" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row class="bot">
@@ -42,7 +42,7 @@
 	 			</p>
 	 			<span class="content">
 		 			<select [innerHTML] = "prefixes" name="prefix" [(ngModel)]="prefix"></select>
-		 			<input class="short" type="number" name="mobile" [(ngModel)] = "userData.mobile" [value] = "userData.mobile" />
+		 			<input class="short" type="number" name="mobile" [(ngModel)] = "userData.mobile" />
 		 		</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -50,7 +50,7 @@
 	 				Password
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="password" [(ngModel)] = "userData.password" [value] = "userData.password" />
+	 				<input type="text" name="password" [(ngModel)] = "userData.password" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -58,7 +58,7 @@
 	 				Confirm Password
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="confirmPass" [value] = "confirmPass" />
+	 				<input type="text" name="confirmPass" [(ngModel)] = "confirmPass" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row class="center">
@@ -68,7 +68,7 @@
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
-	 			<button ion-button (tap)="submitReg()">Create Account</button>
+	 			<button ion-button (tap)="submitReg()" [disabled]="stat(userData)">Create Account</button>
 	 		</ion-row>
 	 		<!--ion-row>
 	 			<p class="label">

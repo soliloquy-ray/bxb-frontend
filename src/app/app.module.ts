@@ -21,6 +21,7 @@ import { LoansPage } from '../pages/loans/loans';
 
 /* employee pages */
 import { EmployeeDashboardPage } from '../pages/employee-dashboard/employee-dashboard';
+import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 
 /* admin pages */
 import { EmployeesPage } from '../pages/employees/employees';
@@ -62,7 +63,8 @@ var pages = [
   EditEmployeePage,
   SuperDashboardPage,
   EmployeeDashboardPage,
-  EmpDisclosureStatementModalPage
+  EmpDisclosureStatementModalPage,
+  EditProfilePage
 ];
 
 @NgModule({
@@ -93,6 +95,7 @@ var pages = [
         { component: SuperDashboardPage, name: 'SuperDashboardPage', segment: 'super-dashboard' },
         { component: EmployeeDashboardPage, name: 'EmployeeDashboardPage', segment: 'employee-dashboard' },
         { component: EmpDisclosureStatementModalPage, name: 'EmpDisclosureStatementModalPage', segment: 'eds' },
+        { component: EditProfilePage, name: 'EditProfilePage', segment: 'edit-profile' },
       ]
     })
   ],

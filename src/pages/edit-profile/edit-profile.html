@@ -1,0 +1,65 @@
+<ion-content (window:resize)="reorient($event)" [ngClass]="{'mobile':isMobile}">
+	<top-bar></top-bar>
+	<side-bar *ngIf = "!isMobile" [highlights]="'dashboard'"></side-bar>
+
+	 <section class="main">
+	 	<form name="employee-data">
+	 		<h2>Edit Profile</h2>
+	 		<ion-row>
+	 			<p class="label">
+	 				First Name
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="firstName" [(ngModel)] = "userData.firstName" [value] = "userData.firstName" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Middle Name
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="middleName" [(ngModel)] = "userData.middleName" [value] = "userData.middleName" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Last Name
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="lastName" [(ngModel)] = "userData.lastName" [value] = "userData.lastName" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Email
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="email" [(ngModel)] = "userData.email" [value] = "userData.email" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Password
+	 			</p>
+	 			<span class="content">
+	 				<input type="password" name="password" [(ngModel)] = "userData.password" [value] = "userData.password" placeholder="Optional" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row class="bot">
+	 			<p class="label">
+	 				Mobile
+	 			</p>
+	 			<span class="content">
+		 			<select [innerHTML] = "prefixes" name="prefix" [(ngModel)]="prefix"></select>
+		 			<input class="short" type="number" name="mobile" [(ngModel)] = "userData.mobile" [value] = "userData.mobile" />
+		 		</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<button ion-button (tap)="submitReg()">Update Account</button>
+	 		</ion-row>
+	 	</form>
+		<foot></foot>
+
+	 </section>
+
+</ion-content>

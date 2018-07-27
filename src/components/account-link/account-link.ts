@@ -27,7 +27,7 @@ export class AccountLinkComponent {
   }
 
   goToProfile(){
-
+    window.location.href = location.origin + "/#/edit-profile";
   }
 
   logout(){

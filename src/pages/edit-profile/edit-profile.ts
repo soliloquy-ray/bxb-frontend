@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { intlPrefixes } from '../../ext/mob_prefixes';
 
 import { DomSanitizer } from '@angular/platform-browser';
@@ -34,10 +34,14 @@ export class EditProfilePage {
   	};
 	prefixes = this.sanitizer.bypassSecurityTrustHtml(intlPrefixes);
 	prefix:string = '63';
-  constructor(public navCtrl: NavController, private navParams: NavParams, private sanitizer:DomSanitizer) {
+  constructor(public navCtrl: NavController, private navParams: NavParams, private sanitizer:DomSanitizer, private menu: MenuController) {
   	
   }
 
+  ionViewDidEnter(){
+  	localStorage.page = '';
+	this.menu.close();
+  }
 
   ionViewDidLoad() {
     try{

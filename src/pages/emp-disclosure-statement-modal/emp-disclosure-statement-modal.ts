@@ -59,4 +59,8 @@ export class EmpDisclosureStatementModalPage {
   	mod.present();
   }
 
+  print(){
+  	window.print();
+  }
+
 }

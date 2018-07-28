@@ -1,5 +1,5 @@
-export var intlPrefixes = `<option data-countrycode="PH" value="63">PH (+63)</option>
-
+export var intlPrefixes = `<option data-countrycode="PH" value="63" selected>PH (+63)</option>`;
+/*
   <option disabled="disabled">Other Countries</option>
   <option data-countrycode="DZ" value="213">DZ (+213)</option>
   <option data-countrycode="AD" value="376">AD (+376)</option>
@@ -213,4 +213,4 @@ export var intlPrefixes = `<option data-countrycode="PH" value="63">PH (+63)</op
   <option data-countrycode="YE" value="969">YE (+969)</option>
   <option data-countrycode="YE" value="967">YE (+967)</option>
   <option data-countrycode="ZM" value="260">ZM (+260)</option>
-  <option data-countrycode="ZW" value="263">ZW (+263)</option>`;
+  <option data-countrycode="ZW" value="263">ZW (+263)</option>`; */

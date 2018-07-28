@@ -45,4 +45,8 @@ export class DisclosureStatementPage {
   	mod.present();
   }
 
+  print(){
+    window.print();
+  }
+
 }

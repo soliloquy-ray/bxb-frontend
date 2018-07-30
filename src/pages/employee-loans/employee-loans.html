@@ -1,18 +1,284 @@
-<!--
-  Generated template for the EmployeeLoansPage page.
+<ion-content (window:resize)="reorient($event)" [ngClass]="{'mobile':isMobile}">
+	<top-bar></top-bar>
+	<side-bar *ngIf = "!isMobile" [highlights]="'dashboard'"></side-bar>
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
+	<section class="main-content">
+		<ion-row>
+			<ion-col col-6>
+				<div class="credit-box">
+					<span>
+						<p>Outstanding Credit</p>
+						<b class="outstanding">
+							{{outstandingCredit | currency:'PHP':'symbol-narrow':'1.2-2'}}
+						</b>
+					</span>
+					<span id="outstanding-bar" class="bar">
+						<div [style.width.%]="outstandingCredit*100/50000"></div>
+					</span>
+				</div>
+			</ion-col>
 
-  <ion-navbar>
-    <ion-title>employeeLoans</ion-title>
-  </ion-navbar>
+			<ion-col col-6>
+				<div class="credit-box">
+					<span>
+						<p>Available Credit</p>
+						<b class="available">
+							{{availableCredit | currency:'PHP':'symbol-narrow':'1.2-2'}}
+						</b>
+					</span>
+					<span id="available-bar" class="bar">
+						<div [style.width.%]="availableCredit*100/50000"></div>
+					</span>
+				</div>
+			</ion-col>
+		</ion-row>
 
-</ion-header>
+		<!-- start of loans -->
+		<ion-row>
+			<ion-col col-12>
+				<submodule [title]="'Portfolio Loans/Loan Status'">
+					
+					<ion-segment [(ngModel)]="loanStatus" color="primary" (ionChange)="segmentChanged($event)">
+						<ion-segment-button value="pending">
+							Pending
+					    </ion-segment-button>
+					    <ion-segment-button value="approved">
+					    	Approved
+					    </ion-segment-button>
+						<ion-segment-button value="cancel">
+							Cancel
+					    </ion-segment-button>
+					    <ion-segment-button value="completed">
+					    	Completed
+					    </ion-segment-button>
+					</ion-segment>
 
-
-<ion-content padding>
+					<div [ngSwitch]="loanStatus" class='segmentable'>
+						<div *ngSwitchCase = "'pending'">
+							<span class="search">
+								<ion-icon name="ios-search"></ion-icon>
+								<input type="text" (keyup)="search($event)" placeholder="Search any fields"/>
+							</span>
+							<ion-grid class="table" *ngIf="!isMobile">
+								<ion-row justify-content-center class="thead header">
+									<ion-col>
+										Transaction ID
+									</ion-col>
+									<ion-col >
+										Date of Inception
+									</ion-col>
+									<ion-col >
+										Credit Availment Number
+									</ion-col>
+									<ion-col >
+										Rate
+									</ion-col>
+									<ion-col >
+										Term
+									</ion-col>
+									<ion-col >
+										Amount
+									</ion-col>
+									<ion-col>
+										Purpose
+									</ion-col>
+									<ion-col>
+										% Repaid
+									</ion-col>
+								</ion-row>
+								<ion-row justify-content-center class="data" *ngFor = "let rowData of searched?.pending; let i = index">
+									<ion-col>
+										{{rowData?.transID}}
+									</ion-col>
+									<ion-col >
+										{{rowData?.inceptionDate}}
+									</ion-col>
+									<ion-col >
+										{{rowData?.creditAvailNumber}}
+									</ion-col>
+									<ion-col >
+										{{(rowData?.rate * 100) | number:'1.1-2'}} %
+									</ion-col>
+									<ion-col >
+										{{rowData?.term}}
+									</ion-col>
+									<ion-col >
+										{{rowData?.amt | currency:'PHP':'symbol-narrow':'1.2-2'}}
+									</ion-col>
+									<ion-col>
+										{{rowData?.purpose}}
+									</ion-col>
+									<ion-col>
+										{{(rowData?.repaid * 100) | number:'1.1-2'}} %
+									</ion-col>
+								</ion-row>
+							</ion-grid>
+							<ion-grid class="table" *ngIf="isMobile">
+								<ion-row style="width:100%;">
+									<ion-col col-12 style="width:100%; box-shadow: 0 0 3px 0 #333" class="data" *ngFor = "let rowData of searched?.pending; let i = index;">
+										<ion-row>
+											<ion-col col-4>
+												<p class="label">Transaction ID</p>
+												{{rowData?.transID}}
+											</ion-col>
+											<ion-col col-4>
+												<p class="label">Date of Inception</p>
+												{{rowData?.inceptionDate}}
+											</ion-col>
+											<ion-col col-4>
+												<button ion-button (tap)="expand(i)">View Details</button>
+											</ion-col>
+										</ion-row>
+										<div class="expandable" [ngClass]="{'expanded':expanded == (i+1)}">
+											<span class="item">
+												<p class="title">Credit Availment Number</p>
+												{{rowData?.creditAvailNumber}}
+											</span>
+											<span class="item">
+												<p class="title">Rate</p>
+												{{(rowData?.rate * 100) | number:'1.1-2'}} %
+											</span>
+											<span class="item">
+												<p class="title">Term</p>
+												{{rowData?.term}}
+											</span>
+											<span class="item">
+												<p class="title">Amount</p>
+												{{rowData?.amt | currency:'PHP':'symbol-narrow':'1.2-2'}}
+											</span>
+											<span class="item">
+												<p class="title">Purpose</p>
+												{{rowData?.purpose}}
+											</span>
+											<span class="item">
+												<p class="title">Repaid</p>
+												{{(rowData?.repaid * 100) | number:'1.1-2'}} %
+											</span>
+										</div>
+									</ion-col>
+								</ion-row>
+							</ion-grid>
+						</div>
+						<div *ngSwitchCase = "'approved'">
+							<span class="search">
+								<ion-icon name="ios-search"></ion-icon>
+								<input type="text" (ionInput)="search($event)" placeholder="Search any fields"/>
+							</span>
+							<ion-grid class="table" *ngIf="!isMobile">
+								<ion-row  justify-content-center class="thead header">
+									<ion-col>
+										Transaction ID
+									</ion-col>
+									<ion-col >
+										Date of Inception
+									</ion-col>
+									<ion-col >
+										Credit Availment Number
+									</ion-col>
+									<ion-col >
+										Rate
+									</ion-col>
+									<ion-col >
+										Term
+									</ion-col>
+									<ion-col >
+										Amount
+									</ion-col>
+									<ion-col>
+										Purpose
+									</ion-col>
+									<ion-col>
+										% Repaid
+									</ion-col>
+									<ion-col col-1>
+									</ion-col>
+								</ion-row>
+								<ion-row justify-content-center class="data" *ngFor = "let rowData of loans?.pending; let i = index">
+									<ion-col>
+										{{rowData?.transID}}
+									</ion-col>
+									<ion-col >
+										{{rowData?.inceptionDate}}
+									</ion-col>
+									<ion-col >
+										{{rowData?.creditAvailNumber}}
+									</ion-col>
+									<ion-col >
+										{{(rowData?.rate * 100) | number:'1.1-2'}} %
+									</ion-col>
+									<ion-col >
+										{{rowData?.term}}
+									</ion-col>
+									<ion-col >
+										{{rowData?.amt | currency:'PHP':'symbol-narrow':'1.2-2'}}
+									</ion-col>
+									<ion-col>
+										{{rowData?.purpose}}
+									</ion-col>
+									<ion-col>
+										{{(rowData?.repaid * 100) | number:'1.1-2'}} %
+									</ion-col>
+									<ion-col col-1>
+										<ion-icon (tap)="showModal(i)" style="color:#0067ff;font-size:2.3vw;" name="md-information-circle"></ion-icon>
+									</ion-col>
+								</ion-row>
+							</ion-grid>
+							<ion-grid class="table" *ngIf="isMobile">
+								<ion-row style="width:100%;">
+									<ion-col col-12 style="width:100%; box-shadow: 0 0 3px 0 #333" class="data" *ngFor = "let rowData of searched?.pending; let i = index;">
+										<ion-row>
+											<ion-col col-4>
+												<p class="label">Transaction ID</p>
+												{{rowData?.transID}}
+											</ion-col>
+											<ion-col col-4>
+												<p class="label">Date of Inception</p>
+												{{rowData?.inceptionDate}}
+											</ion-col>
+											<ion-col col-4>
+												<button ion-button (tap)="expand(i)">View Details</button>
+											</ion-col>
+										</ion-row>
+										<div class="expandable" [ngClass]="{'expanded':expanded == (i+1)}">
+											<span class="item">
+												<p class="title">Credit Availment Number</p>
+												{{rowData?.creditAvailNumber}}
+											</span>
+											<span class="item">
+												<p class="title">Rate</p>
+												{{(rowData?.rate * 100) | number:'1.1-2'}} %
+											</span>
+											<span class="item">
+												<p class="title">Term</p>
+												{{rowData?.term}}
+											</span>
+											<span class="item">
+												<p class="title">Amount</p>
+												{{rowData?.amt | currency:'PHP':'symbol-narrow':'1.2-2'}}
+											</span>
+											<span class="item">
+												<p class="title">Purpose</p>
+												{{rowData?.purpose}}
+											</span>
+											<span class="item">
+												<p class="title">Repaid</p>
+												{{(rowData?.repaid * 100) | number:'1.1-2'}} %
+											</span>
+											<span class="item">
+												<ion-col col-3 style=" text-align:right;">
+													<ion-icon (tap)="showModal(i)" style="font-size:5vh; color:#0067ff;" name="md-information-circle"></ion-icon>
+												</ion-col>
+											</span>
+										</div>
+									</ion-col>
+								</ion-row>
+							</ion-grid>
+						</div>
+					</div>
+				</submodule>
+			</ion-col>
+		</ion-row>
+		<foot></foot>
+	</section>
 
 </ion-content>

@@ -9,19 +9,19 @@
     	</a>
   	</ion-item>
   	<ion-item [ngClass]="{'selected':gethl()=='dashboard'}">
-  		<a class="link" href='/#/hr-dashboard' *ngIf="accountType == 'hr'">
+  		<a class="link" href='/#/hr-dashboard' *ngIf="getAccountType() == 'hr'">
         <svg enable-background="new 0 0 433.5 433.5" version="1.1" viewBox="0 0 433.5 433.5" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
             <path d="M153,382.5h127.5v-153H153V382.5z M0,382.5h127.5V51H0V382.5z M306,382.5h127.5v-153H306V382.5z M153,51v153h280.5V51H153    z"></path>
           </svg>
           <b>Dashboard</b>
       </a>
-      <a class="link" href='/#/super-dashboard' *ngIf="accountType == 'super'">
+      <a class="link" href='/#/super-dashboard' *ngIf="getAccountType() == 'super'">
         <svg enable-background="new 0 0 433.5 433.5" version="1.1" viewBox="0 0 433.5 433.5" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
             <path d="M153,382.5h127.5v-153H153V382.5z M0,382.5h127.5V51H0V382.5z M306,382.5h127.5v-153H306V382.5z M153,51v153h280.5V51H153    z"></path>
           </svg>
           <b>Dashboard</b>
       </a>
-      <a class="link" href='/#/employee-dashboard' *ngIf="accountType == 'employee'">
+      <a class="link" href='/#/employee-dashboard' *ngIf="getAccountType() == 'employee'">
         <svg enable-background="new 0 0 433.5 433.5" version="1.1" viewBox="0 0 433.5 433.5" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
             <path d="M153,382.5h127.5v-153H153V382.5z M0,382.5h127.5V51H0V382.5z M306,382.5h127.5v-153H306V382.5z M153,51v153h280.5V51H153    z"></path>
           </svg>
@@ -35,7 +35,13 @@
     	</a>
   	</ion-item>
   	<ion-item [ngClass]="{'selected':gethl()=='creditsum'}">
-  		<a class="link" href='/#/loans'>
+      <a class="link" href='/#/loans' *ngIf="getAccountType() != 'employee'">
+        <svg enable-background="new 0 0 433.5 433.5" version="1.1" viewBox="0 0 433.5 433.5" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+            <path d="m0 255h51v-51h-51v51zm0 102h51v-51h-51v51zm0-204h51v-51h-51v51zm102 102h357v-51h-357v51zm0 102h357v-51h-357v51zm0-255v51h357v-51h-357z"></path>
+          </svg>
+          <b>Credit Summary</b>
+      </a>
+  		<a class="link" href='/#/loanstatus' *ngIf="getAccountType() == 'employee'">
   			<svg enable-background="new 0 0 433.5 433.5" version="1.1" viewBox="0 0 433.5 433.5" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
         		<path d="m0 255h51v-51h-51v51zm0 102h51v-51h-51v51zm0-204h51v-51h-51v51zm102 102h357v-51h-357v51zm0 102h357v-51h-357v51zm0-255v51h357v-51h-357z"></path>
         	</svg>

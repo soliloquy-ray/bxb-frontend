@@ -31,6 +31,13 @@ export class SideBarComponent {
     return this.hl;
   }
 
+  getAccountType():string{
+    if(typeof localStorage.accountType == "string" && localStorage.accountType.length > 0){
+      this.accountType = localStorage.accountType;
+    }
+    return this.accountType;
+  }
+
   goToLink(lnk:string){
       window.location.href = lnk;
   }

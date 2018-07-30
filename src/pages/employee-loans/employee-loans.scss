@@ -1,3 +1,251 @@
 page-employee-loans {
+	ion-content.content{
+		background-color:#f7f7f7;
+
+		side-bar{
+			section.content{
+				background-color: transparent;
+			}
+		}
+
+		&.mobile{
+
+			section.main-content{
+				padding: 1vh 1vw;
+				font-size:2.5vh;
+
+				p{
+					font-size:2.5vh;
+					&.title{
+						max-height:auto;
+						overflow:initial;
+						height:auto;
+						padding-bottom:2vh;
+					}
+				}
+
+				&>ion-row.row{
+					ion-col[col-6]{
+						flex:0 0 100%;
+						max-width:100%;
+						width:100%;
+					}
+				}
+
+				submodule{
+					padding:0;
+
+					ion-grid{
+						&>ion-row{
+							&>ion-col{
+								ion-row,ion-col{
+									padding:0;
+									font-size:2vh;
+									p.label{
+										white-space:nowrap;
+										font-size:3.3vw;
+										font-weight:bolder;
+									}
+									button[ion-button]{
+										width:auto;
+										max-width:100%;
+										padding:1vw;
+										color:#315A96;
+										background-color:transparent;
+										border:0;
+										-webkit-appearance:none;
+										box-shadow:none;
+									}
+								}
+
+								div.expandable{
+									max-height:0;
+									display:block;
+									overflow:hidden;
+									transition-property: all;
+									transition-duration: 1s;
+									&.expanded{
+										max-height:100vh;
+									}
+									span.item{
+										font-family:'Roboto',sans-serif;
+										font-size:2.2vh;
+										padding:1vw;
+										font-weight:100;
+										display:inline-block;
+										width:49%;
+										max-width:49%;
+										p{
+											margin:0;
+											padding:0;
+											font-size:3.4vw;
+											font-weight:bold;
+											width:100%;
+											white-space:nowrap;
+										}	
+									}
+								}
+
+							}
+
+						}
+					}
+				}
+
+
+			}
+		}
+
+		section.main-content{
+			display:block;
+			padding:1vh 5vw 1vh calc(220px + 1.5vw);
+			min-height:100vh;
+
+			&>ion-row{
+				padding-top:5vh;
+				&>ion-col[col-6]{
+					div.credit-box{
+						position:relative;
+						span:not(.bar){
+							position:relative;
+							display:block;
+							padding:2vh 4vh;
+							box-shadow: 0 0 6px 1px #888;
+							border-radius:12px 12px 0 0;
+							p{
+								font-size:2.3vh;
+								margin:1vh 0;
+								width:100%;
+							}
+
+							b{
+								font-family:'Roboto',sans-serif;
+								font-size:4vh;
+							}
+						}
+						span.bar{
+							width:100%;
+							display:inline-block;
+							margin:0;
+							clear:both;
+							height:7.5vh;
+							background-color:lightgray;
+							position:relative;
+							text-align:left;
+							border-radius: 0 0 12px 12px;
+							//box-shadow: 0 0 6px 1px #888;
+							overflow:hidden;
+							div{
+								display:inline-block;
+								height:100%;
+								position:relative;
+								background-color:#315A96;
+							}
+
+							&#outstanding-bar{
+
+							}
+
+							&#available-bar{
+
+							}
+						}
+					}
+				}
+
+			}//end of ion-row
+
+			submodule{
+				//padding:0;
+
+				div.container{
+					div.main-content{
+						padding:1vh;
+					}
+				}
+
+				p.title{
+					max-height:auto;
+					overflow:initial;
+					height:auto;
+					padding-bottom:2vh;
+				}
+
+				div.segmentable{
+					position:relative;
+					display:block;
+					clear:both;
+					width:100%;
+					height:auto;
+					padding-top:2vh;
+					box-shadow:none;
+					&>div{
+						height:100%;
+						box-shadow:none;
+						padding:1vw;
+						span.search{
+							display:inline-block;
+							border-radius:4px;
+							box-shadow: 0 0 1px 0px #333;
+							width:auto;
+							margin:1vh 1vh 3vh;
+							padding:0.5vw;
+							position:relative;
+							ion-icon{
+								position: absolute;
+							    top: 0;
+							    left: 0;
+							    display: block;
+							    height: 100%;
+							    width: 40px;
+							    font-size: 20px;
+							    text-align: center;
+							    padding: 7px;
+							    background-color: lightgray;
+							}
+							input{
+								border:0;
+								margin-left:40px;
+								width:200px;
+							}
+						}
+
+						.table{
+							box-shadow:none;
+							font-family: 'Roboto', sans-serif;
+							ion-row{
+								&.thead{
+									ion-col{
+										/*white-space:nowrap;
+										text-overflow:ellipsis;
+										overflow:hidden;*/
+										text-align:center;
+										text-transform:uppercase;
+										font-weight:bold;
+										letter-spacing:-0.1vh;
+										padding:2.5px;
+										word-wrap:normal;
+										margin:auto;
+									}
+								}
+								&.data{
+									ion-col{
+										text-align:center;
+										padding:2.5px;
+										margin:auto;
+									}
+								}
+							}
+
+						}
+					}
+				}
+
+			}//end of submodule
+
+		} // end of section.main-content	
+
+
+	}
 
 }

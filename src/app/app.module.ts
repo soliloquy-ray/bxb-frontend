@@ -32,6 +32,7 @@ import { EditEmployeePage } from '../pages/edit-employee/edit-employee';
 
 /* superuser pages */
 import { SuperDashboardPage } from '../pages/super-dashboard/super-dashboard';
+import { AdminCreditPage } from '../pages/admin-credit/admin-credit';
 
 /* modals */
 import { DisclosureStatementPage } from '../pages/disclosure-statement/disclosure-statement';
@@ -66,7 +67,8 @@ var pages = [
   EmployeeDashboardPage,
   EmpDisclosureStatementModalPage,
   EditProfilePage,
-  EmployeeLoansPage
+  EmployeeLoansPage,
+  AdminCreditPage
 ];
 
 @NgModule({
@@ -84,7 +86,7 @@ var pages = [
         { component: ForgotPasswordPage, name: 'ForgotPasswordPage', segment: 'forgot' },
         { component: HrDashboardPage, name: 'HrDashboardPage', segment: 'hr-dashboard' },
         { component: TermsPage, name: 'TermsPage', segment: 'terms' },
-        { component: LoansPage, name: 'LoansPage', segment: 'loans' },
+        { component: LoansPage, name: 'LoansPage', segment: 'hr/loans' },
         { component: SignupTinPage, name: 'SignupTinPage', segment: 'tin' },
         { component: DisclosureStatementPage, name: 'DisclosureStatementPage', segment: 'ds' },
         { component: EmployeesPage, name: 'EmployeesPage', segment: 'employees' },
@@ -94,11 +96,12 @@ var pages = [
         { component: DetailVerificationPage, name: 'DetailVerificationPage', segment: 'verify-info' },
         { component: PrivacyPolicyPage, name: 'PrivacyPolicyPage', segment: 'privacy-policy' },
         { component: EditEmployeePage, name: 'EditEmployeePage', segment: 'edit-employee' },
-        { component: SuperDashboardPage, name: 'SuperDashboardPage', segment: 'super-dashboard' },
+        { component: SuperDashboardPage, name: 'SuperDashboardPage', segment: 'management/dashboard' },
         { component: EmployeeDashboardPage, name: 'EmployeeDashboardPage', segment: 'employee-dashboard' },
         { component: EmpDisclosureStatementModalPage, name: 'EmpDisclosureStatementModalPage', segment: 'eds' },
         { component: EditProfilePage, name: 'EditProfilePage', segment: 'edit-profile' },
         { component: EmployeeLoansPage, name: 'EmployeeLoansPage', segment: 'loanstatus' },
+        { component: AdminCreditPage, name: 'AdminCreditPage', segment: 'management/loans' },
       ]
     })
   ],

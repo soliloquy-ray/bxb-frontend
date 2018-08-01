@@ -84,7 +84,7 @@ export class EmployeeLoansPage {
 		}
 	];
 
-  	userData = {
+  	userData = JSON.parse(localStorage.userData)[0];/*{
   		firstName:"Per",
   		middleName:"Sohn",
   		lastName:"McPherson",
@@ -95,7 +95,7 @@ export class EmployeeLoansPage {
 		payrollAccount: "ABC1294FAS-15-AF1125",
 		password: "Passerby",
 		mobile: "9189101112"	
-  	};
+  	};*/
 
 	searched : any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController) {
@@ -134,6 +134,9 @@ export class EmployeeLoansPage {
   }
 
   showModal(i){
+  	this.userData.firstName = this.userData.Name_First;
+  	this.userData.lastName = this.userData.Name_Last;
+  	this.userData.age = this._calculateAge(this.userData.Birthday);
   	this.mod = this.modal.create(DisclosureStatementPage,{data:this.loans.pending[i], payments:this.payments, user:this.userData},{cssClass:`whitemodal ${this.isMobile ? "mobile" : ""}`});
   	this.mod.present();
   }
@@ -150,6 +153,17 @@ export class EmployeeLoansPage {
   	}else{
   		this.expanded = i+1;
   	}
+  }
+
+  _calculateAge(birthday):number{
+    let today = new Date();
+    let birthDate = new Date(birthday);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
   }
 
 }

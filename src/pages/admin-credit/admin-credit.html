@@ -1,0 +1,328 @@
+<ion-content (window:resize)="reorient($event)" [ngClass]="{'mobile':isMobile}">
+	<top-bar></top-bar>
+	<side-bar *ngIf = "!isMobile" [highlights]="'employees'"></side-bar>
+
+	<section class="main-content">
+
+
+		<ion-row>
+			<ion-col col-12>
+				<submodule [title]="'Pending Applications'" [searchbar]="true">
+					<drag-scroll #ds1 class="table-container" >
+						<table>
+						<tr style="width:100%;" class="header">
+							<td>
+								First Name
+							</td>
+							<td>
+								Last Name
+							</td>
+							<td>
+								Loan Identification
+							</td>
+							<td>
+								Company
+							</td>
+							<td>
+								Terms
+							</td>
+							<td>
+								Net
+							</td>
+							<td>
+								Amount
+							</td>
+							<td>
+								Payroll Acct
+							</td>
+							<td>
+								Bank
+							</td>
+							<td>
+								Purpose
+							</td>
+							<td>
+								&nbsp;
+							</td>
+						</tr>
+						<tr style="width:100%" class="dne" *ngIf="pendingLoans.length <= 0">
+							<td>
+								No Pending Loans
+							</td>
+						</tr>
+						<tr style="width:100%;" class="data" *ngFor = "let pl of pendingLoans; let i = index">
+							<td>
+								{{pl?.firstName}}
+							</td>
+							<td>
+								{{pl?.lastName}}
+							</td>
+							<td>
+								{{pl?.loanID}}
+							</td>
+							<td>
+								{{pl?.company}}
+							</td>
+							<td>
+								{{pl?.terms}}
+							</td>
+							<td>
+								{{pl?.net}}
+							</td>
+							<td>
+								{{pl?.amt}}
+							</td>
+							<td>
+								{{pl?.payroll}}
+							</td>
+							<td>
+								{{pl?.bank}}
+							</td>
+							<td>
+								{{pl?.purpose}}
+							</td>
+							<td style="text-align:center">
+								<ion-icon name="md-eye" (tap)="showModal(pendingLoans[i])"></ion-icon>
+							</td>
+						</tr>
+						</table>
+					</drag-scroll>
+				</submodule>
+			</ion-col>
+		</ion-row>
+		<!-- end active members -->
+
+		<ion-row>
+			<ion-col col-12>
+				<submodule [title]="'Active Applications'" [searchbar]="true">
+					<drag-scroll #ds2 class="table-container" >
+						<table>
+						<tr style="width:100%;" class="header">
+							<td>
+								First Name
+							</td>
+							<td>
+								Last Name
+							</td>
+							<td>
+								Loan Identification
+							</td>
+							<td>
+								Company
+							</td>
+							<td>
+								Terms
+							</td>
+							<td>
+								Net
+							</td>
+							<td>
+								Amount
+							</td>
+							<td>
+								Payroll Acct
+							</td>
+							<td>
+								Bank
+							</td>
+							<td>
+								Purpose
+							</td>
+							<td>
+								Ref No.
+							</td>
+							<td>
+								&nbsp;
+							</td>
+						</tr>
+						<tr style="width:100%;" class="dne" *ngIf="activeLoans.length <= 0">
+							<td>
+								No Active Loans
+							</td>
+						</tr>
+						<tr style="width:100%;" class="data" *ngFor = "let al of activeLoans; let i = index">							
+							<td>
+								{{al?.firstName}}
+							</td>
+							<td>
+								{{al?.lastName}}
+							</td>
+							<td>
+								{{al?.loanID}}
+							</td>
+							<td>
+								{{al?.company}}
+							</td>
+							<td>
+								{{al?.terms}}
+							</td>
+							<td>
+								{{al?.net}}
+							</td>
+							<td>
+								{{al?.amt}}
+							</td>
+							<td>
+								{{al?.payroll}}
+							</td>
+							<td>
+								{{al?.bank}}
+							</td>
+							<td>
+								{{al?.purpose}}
+							</td>
+							<td>
+								{{al?.refNum}}
+							</td>
+							<td style="text-align:center">
+								<ion-icon name="md-eye" (tap)="showModal(activeLoans[i])"></ion-icon>
+							</td>
+						</tr>
+						</table>
+					</drag-scroll>
+				</submodule>
+			</ion-col>
+		</ion-row> 
+		<!-- end members -->
+
+		<ion-row>
+			<ion-col col-12>
+				<submodule [title]="'Completed Availments'" [searchbar]="true">
+					<drag-scroll #ds3 class="table-container" >
+						<table>
+						<tr style="width:100%;" class="header">
+							<td>
+								First Name
+							</td>
+							<td>
+								Last Name
+							</td>
+							<td>
+								Loan Identification
+							</td>
+							<td>
+								Company
+							</td>
+							<td>
+								Terms
+							</td>
+							<td>
+								Net
+							</td>
+							<td>
+								Amount
+							</td>
+							<td>
+								Payroll Acct
+							</td>
+							<td>
+								Bank
+							</td>
+							<td>
+								Purpose
+							</td>
+							<td>
+								Ref No.
+							</td>
+							<td>
+								&nbsp;
+							</td>
+						</tr>
+						<tr style="width:100%;" class="dne"  *ngIf="completedLoans.length <= 0">
+							<td>
+								No Completed Loans
+							</td>
+						</tr>
+						<tr style="width:100%;" class="data" *ngFor = "let cl of completedLoans; let i = index">
+							<td>
+								{{cl?.firstName}}
+							</td>
+							<td>
+								{{cl?.lastName}}
+							</td>
+							<td>
+								{{cl?.loanID}}
+							</td>
+							<td>
+								{{cl?.company}}
+							</td>
+							<td>
+								{{cl?.terms}}
+							</td>
+							<td>
+								{{cl?.net}}
+							</td>
+							<td>
+								{{cl?.amt}}
+							</td>
+							<td>
+								{{cl?.payroll}}
+							</td>
+							<td>
+								{{cl?.bank}}
+							</td>
+							<td>
+								{{cl?.purpose}}
+							</td>
+							<td>
+								{{cl?.refNum}}
+							</td>
+							<td style="text-align:center">
+								<ion-icon name="md-eye" (tap)="showModal(completedLoans[i])"></ion-icon>
+							</td>
+						</tr>
+						</table>
+					</drag-scroll>
+				</submodule>
+			</ion-col>
+		</ion-row> 
+		<!-- end pending members -->
+
+		<ion-row>
+			<ion-col col-12>
+				<submodule [title]="'Non-Performing Loan'" [searchbar]="true">
+					<drag-scroll #ds4 class="table-container" >
+						<table>
+						<tr style="width:100%;" class="header">
+							<td>
+								Company
+							</td>
+							<td>
+								Total Credit Availment
+							</td>
+							<td>
+								Amount
+							</td>
+							<td>
+								&nbsp;
+							</td>
+						</tr>
+						<tr style="width:100%;" class="dne" *ngIf="npLoans.length <= 0">
+							<td>
+								No Non-Performing Loans
+							</td>
+						</tr>
+						<tr style="width:100%;" class="data" *ngFor = "let npl of npLoans; let i = index">
+							<td>
+								{{npl?.company}}
+							</td>
+							<td>
+								{{npl?.totalCreditAvailment}}
+							</td>
+							<td>
+								{{npl?.amt}}
+							</td>
+							<td style="text-align:center">
+								<a class="link" (tap)="showModal(npLoans[i])">Details</a>
+							</td>
+						</tr>
+						</table>
+					</drag-scroll>
+				</submodule>
+			</ion-col>
+		</ion-row> 
+		<!-- end flagged members -->
+
+	</section>
+
+</ion-content>

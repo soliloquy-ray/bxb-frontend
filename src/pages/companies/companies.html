@@ -1,0 +1,70 @@
+<ion-content (window:resize)="reorient($event)" [ngClass]="{'mobile':isMobile}">
+	<top-bar></top-bar>
+	<side-bar *ngIf = "!isMobile" [highlights]="'companies'"></side-bar>
+
+	<section class="main-content">
+
+		<ion-row>
+			<ion-col col-12>
+				<submodule [title]="'Companies'" [searchbar]="true">
+					<drag-scroll #ds1 class="table-container" [drag-scroll-y-disabled]="true" >
+						<table>
+						<tr style="width:100%;" class="header">
+							<td>
+								Company Name
+							</td>
+							<td>
+								Company Code
+							</td>
+							<td>
+								Total Number Employees Members
+							</td>
+							<td>
+								Active Availments
+							</td>
+							<td>
+								&nbsp;
+							</td>
+						</tr>
+						<tr style="width:100%" class="dne" *ngIf="cmpny.length <= 0">
+							<td>
+								No Companies Listed
+							</td>
+						</tr>
+						<tr style="width:100%;" class="data" *ngFor = "let c of cmpny; let i = index">
+							<td>
+								{{c?.companyName}}
+							</td>
+							<td>
+								{{c?.companyCode}}
+							</td>
+							<td>
+								{{c?.totalEmployees}}
+							</td>
+							<td>
+								{{c?.activeAvailments | number:'1.0-2'}}
+							</td>
+							<td class="actions">
+								<a class="link">View SOA</a>
+								<a class="link">Employees</a>
+								<a class="link">Edit</a>
+								<a class="link">Add HR</a>
+								<a class="link">Hold</a>
+								<a class="link">Delete</a>
+							</td>
+						</tr>
+						</table>
+					</drag-scroll>
+				</submodule>
+				<button ion-button class="add-company" (tap)="addNew()">
+					<ion-icon name="md-add-circle">
+					</ion-icon>
+					Add New
+				</button>
+			</ion-col>
+		</ion-row>
+		<!-- end active members -->
+
+	</section>
+
+</ion-content>

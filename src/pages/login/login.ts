@@ -69,12 +69,12 @@ export class LoginPage {
     if(this.userData.username == "super" && this.userData.pass == "pass"){
           localStorage.userData = [];
           localStorage.accountType = 'super';
-          this.navCtrl.setRoot(EmployeeDashboardPage,{},{animate:true, direction:"forward"});
+          this.navCtrl.setRoot(SuperDashboardPage,{},{animate:true, direction:"forward"});
           return ;
     }else if(this.userData.username == "hr" && this.userData.pass == "pass"){
           localStorage.userData = [];
           localStorage.accountType = 'hr';
-          this.navCtrl.setRoot(EmployeeDashboardPage,{},{animate:true, direction:"forward"});
+          this.navCtrl.setRoot(HrDashboardPage,{},{animate:true, direction:"forward"});
           return ;
     }
 
@@ -105,9 +105,14 @@ export class LoginPage {
   					this.launchToast(res.text(),stat);
   				}  				*/
           load.dismiss();
-          localStorage.userData = JSON.stringify(res.json());
-          localStorage.accountType = 'employee';
-          self.navCtrl.setRoot(EmployeeDashboardPage,{},{animate:true, direction:"forward"});
+          let uDt = res.json();
+          if(!uDt[0]){
+            this.launchToast('Invalid login','fail');
+          }else{
+            localStorage.userData = JSON.stringify(uDt);
+            localStorage.accountType = 'employee';
+            self.navCtrl.setRoot(EmployeeDashboardPage,{},{animate:true, direction:"forward"});
+          }
           //id = id[0].master_id;
           //this.http.post()
   			})

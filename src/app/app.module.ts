@@ -33,6 +33,7 @@ import { EditEmployeePage } from '../pages/edit-employee/edit-employee';
 /* superuser pages */
 import { SuperDashboardPage } from '../pages/super-dashboard/super-dashboard';
 import { AdminCreditPage } from '../pages/admin-credit/admin-credit';
+import { CompaniesPage } from '../pages/companies/companies';
 
 /* modals */
 import { DisclosureStatementPage } from '../pages/disclosure-statement/disclosure-statement';
@@ -68,7 +69,8 @@ var pages = [
   EmpDisclosureStatementModalPage,
   EditProfilePage,
   EmployeeLoansPage,
-  AdminCreditPage
+  AdminCreditPage,
+  CompaniesPage
 ];
 
 @NgModule({
@@ -102,6 +104,7 @@ var pages = [
         { component: EditProfilePage, name: 'EditProfilePage', segment: 'edit-profile' },
         { component: EmployeeLoansPage, name: 'EmployeeLoansPage', segment: 'loanstatus' },
         { component: AdminCreditPage, name: 'AdminCreditPage', segment: 'management/loans' },
+        { component: CompaniesPage, name: 'CompaniesPage', segment: 'management/companies' },
       ]
     })
   ],

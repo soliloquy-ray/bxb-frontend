@@ -1,0 +1,183 @@
+page-companies {
+
+	ion-content.content{
+		background-color:#f7f7f7;
+
+		side-bar{
+			section.content{
+				background-color: transparent;
+			}
+		}
+
+		&.mobile{
+
+			section.main-content{
+				padding: 1vh 2.5vw;
+				font-size:2.5vh;
+
+				div.nav{
+					ion-row{
+						ion-col[col-6]{
+							flex:none;
+							display:block;
+							width:100%;
+							clear:both;
+							max-width:100%;
+							text-align:center;
+
+							span.search{
+								width:80%;
+								input{
+									height:25px;
+								}
+								padding:0.5rem;
+							}
+
+							button[ion-button]{
+								font-size:24px;
+								width:70%;
+								ion-icon{
+									margin-right:1.5rem;
+								}
+							}
+						}
+					}
+				}
+
+				p{
+					font-size:2.5vh;
+					&.title{
+						max-height:auto;
+						overflow:initial;
+						height:auto;
+						padding-bottom:2vh;
+					}
+				}
+
+				submodule{
+					padding:0.5vh;
+				}
+
+				ion-row.row{
+					ion-col.module{
+						width:100%;
+						max-width:100%;
+						flex:none;
+					}
+					&.data{
+						ion-row{
+							width:100%;
+						}
+						ion-col{
+							font-size:2vh;
+							padding:1vh;
+							font-weight:normal;
+							text-align:left;
+							p{
+								font-size:1.8vh;
+								display:block;
+								width:100%;
+								clear:both;
+								font-weight:bolder;
+								font-family:'Roboto',sans-serif;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		section.main-content{
+			display:block;
+			padding:1vh 5vw 1vh calc(220px + 1.5vw);
+			position:relative;
+
+			p.header-top{
+				font-size:24px;
+				font-weight: 700;
+			}
+
+			submodule div.container{
+				display:block;
+				background-color:#fff;
+
+				table{
+					display:table;
+					width:100%;
+					min-width:100%;
+					tbody{
+						min-width:100%;
+					}
+
+					tr{
+						position:relative;
+						width:100%;
+						&.header{
+							td{
+								background-color:#fff;
+								font-weight:bolder;
+     							font-weight: 700;
+    							color: #c4c4c4;
+    							text-transform:uppercase;
+								font-family:'Raleway',Arial, sans-serif;
+							}
+						}
+
+						&.data{
+							background-color:#f7f7f7;
+							border-bottom:1px solid #ddd;
+							td{
+								font-family:'HelveticaNeue',Arial, sans-serif;
+							}
+
+						}
+
+						td{
+							position:relative;
+							min-width:85px;
+							padding:2vh 1.25vw;
+								white-space:normal;
+							ion-icon{
+								font-size:3vh;
+								cursor:pointer;
+								&:not(:first-of-type){
+									margin-left:0.5vw;
+								}
+							}
+
+							&.actions{
+
+								a.link{
+									text-transform:uppercase;
+									cursor:pointer;
+									font-size:1.9vh;
+									padding:0 0.3vw;
+									&:not(:first-of-type){
+										border-left:2px solid #333;
+									}
+								}
+							}
+						}
+					}
+				}
+			}			
+
+			button[ion-button].add-company{
+				height: 40px;
+			    background: #0067ff;
+			    margin-bottom: 17px;
+			    border-radius: 50px;
+				ion-icon{
+					margin-right:1vw;
+				}
+				*{
+					font-size:19px;
+					text-transform: capitalize;
+				}
+			}
+		}
+
+
+	}
+
+}

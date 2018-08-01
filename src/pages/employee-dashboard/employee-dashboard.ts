@@ -146,6 +146,11 @@ export class EmployeeDashboardPage {
   	}
   	else{
   		initDay = 30;
+  		++mn;
+  		if(mn >= 13){
+  			++yr;
+  			mn = 1;
+  		}
   	}
 
   	for(let i = 0; i<this.paydays; i++){
@@ -160,6 +165,11 @@ export class EmployeeDashboardPage {
   			}
   		}else{
   			initDay = 30;
+  			++mn;
+	  		if(mn >= 13){
+	  			++yr;
+	  			mn = 1;
+	  		}
   		}
   	}
   	console.log(this.dates);

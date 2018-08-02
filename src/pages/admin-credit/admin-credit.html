@@ -1,6 +1,6 @@
 <ion-content (window:resize)="reorient($event)" [ngClass]="{'mobile':isMobile}">
 	<top-bar></top-bar>
-	<side-bar *ngIf = "!isMobile" [highlights]="'employees'"></side-bar>
+	<side-bar *ngIf = "!isMobile" [highlights]="'creditsum'"></side-bar>
 
 	<section class="main-content">
 
@@ -8,7 +8,7 @@
 		<ion-row>
 			<ion-col col-12>
 				<submodule [title]="'Pending Applications'" [searchbar]="true">
-					<drag-scroll #ds1 class="table-container" >
+					<!--drag-scroll #ds1 class="table-container" -->
 						<table>
 						<tr style="width:100%;" class="header">
 							<td>
@@ -86,7 +86,7 @@
 							</td>
 						</tr>
 						</table>
-					</drag-scroll>
+					<!--/drag-scroll-->
 				</submodule>
 			</ion-col>
 		</ion-row>
@@ -95,7 +95,7 @@
 		<ion-row>
 			<ion-col col-12>
 				<submodule [title]="'Active Applications'" [searchbar]="true">
-					<drag-scroll #ds2 class="table-container" >
+					<!--drag-scroll #ds2 class="table-container" -->
 						<table>
 						<tr style="width:100%;" class="header">
 							<td>
@@ -179,7 +179,7 @@
 							</td>
 						</tr>
 						</table>
-					</drag-scroll>
+					<!--/drag-scroll-->
 				</submodule>
 			</ion-col>
 		</ion-row> 
@@ -188,7 +188,7 @@
 		<ion-row>
 			<ion-col col-12>
 				<submodule [title]="'Completed Availments'" [searchbar]="true">
-					<drag-scroll #ds3 class="table-container" >
+					<!--drag-scroll #ds3 class="table-container" -->
 						<table>
 						<tr style="width:100%;" class="header">
 							<td>
@@ -272,7 +272,7 @@
 							</td>
 						</tr>
 						</table>
-					</drag-scroll>
+					<!--/drag-scroll-->
 				</submodule>
 			</ion-col>
 		</ion-row> 
@@ -281,7 +281,7 @@
 		<ion-row>
 			<ion-col col-12>
 				<submodule [title]="'Non-Performing Loan'" [searchbar]="true">
-					<drag-scroll #ds4 class="table-container" >
+					<!--drag-scroll #ds4 class="table-container" -->
 						<table>
 						<tr style="width:100%;" class="header">
 							<td>
@@ -317,7 +317,7 @@
 							</td>
 						</tr>
 						</table>
-					</drag-scroll>
+					<!--/drag-scroll-->
 				</submodule>
 			</ion-col>
 		</ion-row> 

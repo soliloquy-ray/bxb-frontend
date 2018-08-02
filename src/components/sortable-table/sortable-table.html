@@ -1,0 +1,113 @@
+<ion-grid class="table" *ngIf="!isMobile">
+	<ion-row justify-content-center class="thead header">
+		<ion-col *ngFor="let hd of hdr; let i = index;" (tap)="sorter(data,hd)" [ngClass]="{'sorting':(sorting==hd),'asc':sort_type}">
+			{{hdrTitles[hd]}}
+			<ion-icon class="dropdown" name="md-arrow-dropdown"></ion-icon>
+			<ion-icon class="dropup" name="md-arrow-dropup"></ion-icon>
+		</ion-col>
+		<!--ion-col (tap)="sorter(searched?.pending,'transID',false)">
+			Transaction ID
+		</ion-col>
+		<ion-col (tap)="sorter(searched?.pending,'inceptionDate',false)">
+			Date of Inception
+		</ion-col>
+		<ion-col (tap)="sorter(searched?.pending,'creditAvailNumber',false)">
+			Credit Availment Number
+		</ion-col>
+		<ion-col (tap)="sorter(searched?.pending,'rate',false)">
+			Rate
+		</ion-col>
+		<ion-col (tap)="sorter(searched?.pending,'term',false)">
+			Term
+		</ion-col>
+		<ion-col (tap)="sorter(searched?.pending,'amt',false)">
+			Amount
+		</ion-col>
+		<ion-col (tap)="sorter(searched?.pending,'purpose',false)">
+			Purpose
+		</ion-col>
+		<ion-col (tap)="sorter(searched?.pending,'repaid',false)">
+			% Repaid
+		</ion-col-->
+	</ion-row>
+	<ion-row justify-content-center class="data" *ngFor = "let rowData of data;">
+		<ion-col *ngFor = "let dt of hdr; let i = index">
+			<div *ngIf="frm[dt]=='number'">{{rowData[dt] | number:'1.0-2'}}</div>
+			<div *ngIf="frm[dt]=='currency'">{{rowData[dt] | currency:'PHP':'symbol-narrow':'1.2-2'}}</div>
+			<div *ngIf="frm[dt]=='percent'">{{(rowData[dt] * 100) | number:'1.1-2'}} %</div>
+			<div *ngIf="!frm[dt]">{{rowData[dt]}}</div>
+		</ion-col>
+		<!--ion-col >
+			{{rowData?.transID}}
+		</ion-col>
+		<ion-col >
+			{{rowData?.inceptionDate}}
+		</ion-col>
+		<ion-col >
+			{{rowData?.creditAvailNumber}}
+		</ion-col>
+		<ion-col >
+			{{(rowData?.rate * 100) | number:'1.1-2'}} %
+		</ion-col>
+		<ion-col >
+			{{rowData?.term}}
+		</ion-col>
+		<ion-col >
+			{{rowData?.amt | currency:'PHP':'symbol-narrow':'1.2-2'}}
+		</ion-col>
+		<ion-col>
+			{{rowData?.purpose}}
+		</ion-col>
+		<ion-col>
+			{{(rowData?.repaid * 100) | number:'1.1-2'}} %
+		</ion-col-->
+	</ion-row>
+</ion-grid>
+<ion-grid class="table" *ngIf="isMobile">
+	<ion-row style="width:100%;">
+		<ion-col col-12 style="width:100%; box-shadow: 0 0 3px 0 #333" class="data" *ngFor = "let rowData of data; let i = index;">
+			<ion-row>
+				<ion-col>
+					<p class="label">{{hdrTitles[hdr[0]]}}</p>
+					{{rowData[hdr[0]]}}
+				</ion-col>
+				<ion-col>
+					<p class="label">{{hdrTitles[hdr[1]]}}</p>
+					{{rowData[hdr[1]]}}
+				</ion-col>
+				<ion-col col-2>
+					<button ion-button (tap)="expand(i)">View</button>
+				</ion-col>
+			</ion-row>
+			<div class="expandable" [ngClass]="{'expanded':expanded == (i+1)}">
+				<span class="item" *ngFor="let ind of h_ctr">
+					<p class="title">{{hdrTitles[hdr[ind]]}}</p>
+					<div *ngIf="frm[hdr[ind]]=='number'">{{rowData[hdr[ind]] | number:'1.0-2'}}</div>
+					<div *ngIf="frm[hdr[ind]]=='currency'">{{rowData[hdr[ind]] | currency:'PHP':'symbol-narrow':'1.2-2'}}</div>
+					<div *ngIf="frm[hdr[ind]]=='percent'">{{(rowData[hdr[ind]] * 100) | number:'1.1-2'}} %</div>
+					<div *ngIf="!frm[hdr[ind]]">{{rowData[hdr[ind]]}}</div>
+				</span>
+				<!--span class="item">
+					<p class="title">Rate</p>
+					{{(rowData?.rate * 100) | number:'1.1-2'}} %
+				</span>
+				<span class="item">
+					<p class="title">Term</p>
+					{{rowData?.term}}
+				</span>
+				<span class="item">
+					<p class="title">Amount</p>
+					{{rowData?.amt | currency:'PHP':'symbol-narrow':'1.2-2'}}
+				</span>
+				<span class="item">
+					<p class="title">Purpose</p>
+					{{rowData?.purpose}}
+				</span>
+				<span class="item">
+					<p class="title">Repaid</p>
+					{{(rowData?.repaid * 100) | number:'1.1-2'}} %
+				</span-->
+			</div>
+		</ion-col>
+	</ion-row>
+</ion-grid>

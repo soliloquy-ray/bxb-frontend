@@ -4,6 +4,7 @@ import { TopBarComponentModule } from './top-bar/top-bar.module';
 import { FootComponentModule } from './foot/foot.module';
 import { SubmoduleComponentModule } from './submodule/submodule.module';
 import { HeaderTitleComponentModule } from './header-title/header-title.module';
+import { SortableTableComponentModule } from './sortable-table/sortable-table.module';
 @NgModule({
 	declarations: [],
 	imports: [],
@@ -11,6 +12,7 @@ import { HeaderTitleComponentModule } from './header-title/header-title.module';
     SideBarComponentModule,
     FootComponentModule,
     SubmoduleComponentModule,
-    HeaderTitleComponentModule]
+    HeaderTitleComponentModule,
+    SortableTableComponentModule]
 })
 export class ComponentsModule {}

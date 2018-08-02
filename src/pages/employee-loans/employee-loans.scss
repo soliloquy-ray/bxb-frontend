@@ -98,7 +98,8 @@ page-employee-loans {
 
 		section.main-content{
 			display:block;
-			padding:1vh 5vw 1vh calc(220px + 1.5vw);
+			padding:1vh 2vw 1vh;
+			padding-left:$side-bar-width;
 			min-height:100vh;
 
 			&>ion-row{

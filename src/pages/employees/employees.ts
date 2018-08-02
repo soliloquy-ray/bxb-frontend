@@ -42,6 +42,23 @@ export class EmployeesPage {
 			"grossSalary":70000
 		}
 	];
+	hdrTitlesA = {
+		'companyID':'Company ID',
+		'firstName':'First Name',
+		'lastName':'Last Name',
+		'usedCredit':'Used Credit',
+		'unusedCredit':'Unused Credit',
+		'creditLine':'Credit Line',
+		'netSalary':'Net Salary',
+		'grossSalary':'Gross Salary'
+	};
+	sampKeysA = Object.keys(this.activeEmployees[0]);
+	formatsA = {
+		'unusedCredit':'currency',
+		'creditLine':'currency',
+		'netSalary':'currency',
+		'grossSalary':'currency'
+	};
 
 	employees = [
 		{

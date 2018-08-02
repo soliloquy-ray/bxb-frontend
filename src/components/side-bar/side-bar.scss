@@ -2,12 +2,12 @@ side-bar {
 	section.content{
 		display:block;
 		margin:0;
-		padding:0.5vw 2vw 2vw;
+		padding:$side-bar-padding;
 		min-height:100vh;
 		position:fixed;
 		top:0;
 		left:0;
-		width:220px;
+		width:$side-bar-width;
 		background-color:transparent;
 		background-image:url('../assets/imgs/sidebar.png');
 		background-size:cover;

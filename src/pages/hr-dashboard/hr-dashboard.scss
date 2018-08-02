@@ -14,6 +14,13 @@ page-hr-dashboard {
 				padding: 1vh 5vw;
 				font-size:2.5vh;
 
+				submodule{
+					padding:0;
+					div.main-content{
+						padding:0;
+					}
+				}
+
 				p{
 					font-size:2.5vh;
 					&.title{
@@ -55,7 +62,8 @@ page-hr-dashboard {
 
 		section.main-content{
 			display:block;
-			padding:1vh 5vw 1vh calc(220px + 1.5vw);
+			padding:1vh 2vw 1vh;
+			padding-left:$side-bar-width;
 
 			h2.c-code{
 				color: #fff !important;

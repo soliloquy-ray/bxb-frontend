@@ -83,6 +83,24 @@ export class SuperDashboardPage {
 		membershipYears:0
 	}];
 
+	hdrTitlesC = {
+		companyName:"Company Name",
+		companyCode:"Company Code",
+		memberEmployees:"Member Employees",
+		activeEmployees:"Active Employees",
+		totalCreditAvailment:"Total Credit Availment",
+		principalOutstanding:"Total Principal Outstanding",
+		maxPortfolio:"Company Maximum Portfolio",
+		riskRatio:"Risk Ratio",
+		membershipYears:"Years of Membership"
+	};
+	sampKeysC = Object.keys(this.companies[0]);
+	formatsC = {
+		'principalOutstanding':'number',
+		'maxPortfolio':'number',
+		'riskRatio':'number'
+	};
+
 	bxbPortfolio = {
 		numberOfCompanies:6,
 		totalCreditAvailment:102000,

@@ -89,7 +89,8 @@ page-admin-credit {
 
 		section.main-content{
 			display:block;
-			padding:1vh 5vw 1vh calc(220px + 1.5vw);
+			padding:1vh 2vw 1vh;
+			padding-left:$side-bar-width;
 			position:relative;
 
 			p.header-top{
@@ -101,10 +102,15 @@ page-admin-credit {
 				display:block;
 				background-color:#fff;
 
+				div.main-content{
+					padding:2vh 0.5vw;
+					overflow-x:scroll;
+					overflow-y:auto;
+				}
 				table{
 					display:table;
 					width:100%;
-					min-width:100%;
+					max-width:100%;
 					tbody{
 						min-width:100%;
 					}
@@ -134,9 +140,10 @@ page-admin-credit {
 
 						td{
 							position:relative;
-							min-width:85px;
-							padding:2vh 1.25vw;
-							white-space:nowrap;
+							//min-width:85px;
+							padding:2vh 0.5vw;
+							//white-space:nowrap;
+							font-size:1.7vh;
 							ion-icon{
 								font-size:3vh;
 								cursor:pointer;

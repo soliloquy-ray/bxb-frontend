@@ -14,7 +14,7 @@ interface creditSummary {
 	transID : number,
 	inceptionDate: string,
 	employeeName: string,
-	amt: string,
+	amt: number,
 	purpose: string
 };
 
@@ -33,21 +33,33 @@ export class HrDashboardPage {
 		transID:2,
 		inceptionDate: '2018-04-15',
 		employeeName: 'George Miguel Winternitz',
-		amt: '5,000.00',
+		amt: 5000,
 		purpose: 'Help a Person'
 	},{
 		transID:5,
 		inceptionDate: '2018-04-27',
 		employeeName: 'George Miguel Winternitz',
-		amt: '32,000.00',
+		amt: 32000,
 		purpose: 'Help a Person'
 	},{
 		transID:35,
 		inceptionDate: '2018-07-19',
 		employeeName: 'Blue Test 2 Second',
-		amt: '22,500.00',
+		amt: 22500,
 		purpose: 'Vacation'
 	}];
+
+	hdrTitles = {
+		'transID':'Transaction ID',
+		'inceptionDate':'Date of Inception',
+		'employeeName':'Employee Name',
+		'amt':'Amount',
+		'purpose':'Purpose',
+	};
+	sampKeys = Object.keys(this.credits[0]);
+	formats = {
+		'amt':'currency'
+	};
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController) {
   }
 

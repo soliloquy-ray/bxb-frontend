@@ -16,7 +16,9 @@
 		<ion-row>
 			<ion-col col-12>
 				<submodule [title]="'Companies Summary'">
-					<ion-row style="width:100%;" *ngIf="!isMobile">
+
+					<sortable-table [data]="companies" [headers]="sampKeysC" [formats]="formatsC" [header_titles]="hdrTitlesC"></sortable-table>
+					<!--ion-row style="width:100%;" *ngIf="!isMobile">
 						<ion-row style="width:100%;">
 							<ion-col col-2 style="text-align: center;font-weight:bold;padding:1.5rem;">Company Name</ion-col>
 							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">Company Code</ion-col>
@@ -25,7 +27,7 @@
 							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">Total Credit Availment</ion-col>
 							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">Total Principal Outstanding</ion-col>
 							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">Company Maximum Portfolio</ion-col>
-							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">Risk Ration</ion-col>
+							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">Risk Ratio</ion-col>
 							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">Years of Membership</ion-col>
 						</ion-row>
 						<ion-row style="width:100%;" class="data" *ngFor = "let c of companies; let i = index;">
@@ -39,7 +41,7 @@
 							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">{{c?.riskRatio}}</ion-col>
 							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;">{{c?.membershipYears}}</ion-col>
 						</ion-row>
-					</ion-row>
+					</ion-row-->
 				</submodule>
 			</ion-col>
 		</ion-row>

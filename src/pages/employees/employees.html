@@ -34,7 +34,8 @@
 		<ion-row>
 			<ion-col col-12>
 				<submodule [title]="'Active Members'" *ngIf="activeEmployees.length > 0">
-					<drag-scroll #ds1 class="table-container" >
+					<sortable-table [data]="activeEmployees" [headers]="sampKeysA" [formats]="formatsA" [header_titles]="hdrTitlesA"></sortable-table>
+					<!--drag-scroll #ds1 class="table-container" >
 						<table>
 						<tr style="width:100%;" class="header">
 							<td>
@@ -97,7 +98,7 @@
 							</td>
 						</tr>
 						</table>
-					</drag-scroll>
+					</drag-scroll-->
 				</submodule>
 			</ion-col>
 		</ion-row>

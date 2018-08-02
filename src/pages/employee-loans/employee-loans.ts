@@ -54,7 +54,34 @@ export class EmployeeLoansPage {
 			'amt':30000,
 			'purpose':'Help out a friend',
 			'repaid':0.3
+		},
+		{
+			'transID':'2',
+			'inceptionDate':'08-01-2018',
+			'creditAvailNumber':'47',
+			'rate':0.025,
+			'term':8,
+			'amt':50000,
+			'purpose':'Emergency Fund',
+			'repaid':0.5
 		}]
+	};
+	hdrTitles = {
+		'transID':'Transaction ID',
+		'inceptionDate':'Date of Inception',
+		'creditAvailNumber':'Credit Availment Number',
+		'rate':'Rate',
+		'term':'Term',
+		'amt':'Amount',
+		'purpose':'Purpose',
+		'repaid':'% Repaid'
+	};
+	sampKeys = Object.keys(this.loans.pending[0]);
+	formats = {
+		'amt':'currency',
+		'rate':'percent',
+		'term':'number',
+		'repaid':'percent'
 	};
 
 	payments = [
@@ -164,6 +191,22 @@ export class EmployeeLoansPage {
         age--;
     }
     return age;
+  }
+
+  sorter(a:Array<any>,e,t:boolean):Array<any>{
+  	if(t){
+  		return a.sort((a,b)=>{
+	  		if(a[e] < b[e]) return -1;
+	  		if(a[e] > b[e]) return 1;
+	  		return 0;
+	  	});
+	}else{
+  		return a.sort((a,b)=>{
+	  		if(a[e] < b[e]) return 1;
+	  		if(a[e] > b[e]) return -1;
+	  		return 0;
+	  	});
+	}
   }
 
 }

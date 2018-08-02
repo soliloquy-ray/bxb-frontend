@@ -55,7 +55,9 @@ page-super-dashboard {
 
 		section.main-content{
 			display:block;
-			padding:1vh 5vw 1vh calc(220px + 1.5vw);
+			//padding:1vh 2vw 1vh calc($side-bar-width + 1.5vw);
+			padding:1vh 2vw 1vh;
+			padding-left:$side-bar-width;
 
 			h2.c-code{
 				color: #fff !important;

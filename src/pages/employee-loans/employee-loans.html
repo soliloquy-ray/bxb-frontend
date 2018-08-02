@@ -61,28 +61,28 @@
 							</span>
 							<ion-grid class="table" *ngIf="!isMobile">
 								<ion-row justify-content-center class="thead header">
-									<ion-col>
+									<ion-col (tap)="sorter(searched?.pending,'transID',false)">
 										Transaction ID
 									</ion-col>
-									<ion-col >
+									<ion-col (tap)="sorter(searched?.pending,'inceptionDate',false)">
 										Date of Inception
 									</ion-col>
-									<ion-col >
+									<ion-col (tap)="sorter(searched?.pending,'creditAvailNumber',false)">
 										Credit Availment Number
 									</ion-col>
-									<ion-col >
+									<ion-col (tap)="sorter(searched?.pending,'rate',false)">
 										Rate
 									</ion-col>
-									<ion-col >
+									<ion-col (tap)="sorter(searched?.pending,'term',false)">
 										Term
 									</ion-col>
-									<ion-col >
+									<ion-col (tap)="sorter(searched?.pending,'amt',false)">
 										Amount
 									</ion-col>
-									<ion-col>
+									<ion-col (tap)="sorter(searched?.pending,'purpose',false)">
 										Purpose
 									</ion-col>
-									<ion-col>
+									<ion-col (tap)="sorter(searched?.pending,'repaid',false)">
 										% Repaid
 									</ion-col>
 								</ion-row>
@@ -273,6 +273,26 @@
 									</ion-col>
 								</ion-row>
 							</ion-grid>
+						</div>
+
+						<!-- end of approved -->
+
+						<div *ngSwitchCase = "'cancel'">
+							<span class="search">
+								<ion-icon name="ios-search"></ion-icon>
+								<input type="text" (ionInput)="search($event)" placeholder="Search any fields"/>
+							</span>
+							<sortable-table [data]="loans?.pending" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles"></sortable-table>
+						</div>
+
+						<!-- end of approved -->
+
+						<div *ngSwitchCase = "'completed'">
+							<span class="search">
+								<ion-icon name="ios-search"></ion-icon>
+								<input type="text" (ionInput)="search($event)" placeholder="Search any fields"/>
+							</span>
+							<sortable-table [data]="loans?.pending" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles"></sortable-table>
 						</div>
 					</div>
 				</submodule>

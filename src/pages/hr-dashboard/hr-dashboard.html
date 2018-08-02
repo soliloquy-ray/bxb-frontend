@@ -30,7 +30,8 @@
 		<ion-row>
 			<ion-col col-12>
 				<submodule [title]="'Employee Credit Availment Summary'">
-					<ion-row style="width:100%;" *ngIf="!isMobile">
+					<sortable-table [data]="credits" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles"></sortable-table>
+					<!--ion-row style="width:100%;" *ngIf="!isMobile">
 						<ion-row style="width:100%;">
 							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;" col-2>Transaction ID</ion-col>
 							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;" col-2>Date of Inception</ion-col>
@@ -73,7 +74,7 @@
 								</ion-col>
 							</ion-row>
 						</ion-row>
-					</ion-row>
+					</ion-row-->
 				</submodule>
 			</ion-col>
 		</ion-row>

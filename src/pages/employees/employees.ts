@@ -54,6 +54,7 @@ export class EmployeesPage {
 	};
 	sampKeysA = Object.keys(this.activeEmployees[0]);
 	formatsA = {
+		'usedCredit':'currency',
 		'unusedCredit':'currency',
 		'creditLine':'currency',
 		'netSalary':'currency',
@@ -68,8 +69,45 @@ export class EmployeesPage {
 			"email":"na@na",
 			"netSalary":250000,
 			"grossSalary":250000
+		},
+		{
+			"companyID":"18-006",
+			"firstName":"Ray",
+			"lastName":"Santos",
+			"email":"aa@na",
+			"netSalary":30000,
+			"grossSalary":80000
+		},
+		{
+			"companyID":"18-010",
+			"firstName":"Winter",
+			"lastName":"Nitz",
+			"email":"wn@na",
+			"netSalary":40000,
+			"grossSalary":50000
+		},
+		{
+			"companyID":"11-123-2",
+			"firstName":"Blue Test 2",
+			"lastName":"Second",
+			"email":"blue.endaya@gmail.com",
+			"netSalary":50000,
+			"grossSalary":70000
 		}
 	];
+	hdrTitlesE = {
+		'companyID':'Company ID',
+		'firstName':'First Name',
+		'lastName':'Last Name',
+		'email':'Email',
+		'netSalary':'Net Salary',
+		'grossSalary':'Gross Salary'
+	};
+	sampKeysE = Object.keys(this.employees[0]);
+	formatsE = {
+		'netSalary':'currency',
+		'grossSalary':'currency'
+	};
 
 	flaggedEmployees = [
 		{
@@ -81,6 +119,19 @@ export class EmployeesPage {
 			"grossSalary":70000
 		}
 	];
+	hdrTitlesF = {
+		'companyID':'Company ID',
+		'firstName':'First Name',
+		'lastName':'Last Name',
+		'email':'Email',
+		'netSalary':'Net Salary',
+		'grossSalary':'Gross Salary'
+	};
+	sampKeysF = Object.keys(this.flaggedEmployees[0]);
+	formatsF = {
+		'netSalary':'currency',
+		'grossSalary':'currency'
+	};
 	mod: Modal;
 	pendingMembers = [];
 	isMobile : boolean = mobilecheck();

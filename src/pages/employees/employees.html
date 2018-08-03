@@ -106,7 +106,7 @@
 
 		<ion-row>
 			<ion-col col-12>
-				<submodule [title]="'Members'" [searchbar]="true" *ngIf="employees.length > 0">
+				<submodule [title]="'Members'"  *ngIf="employees.length > 0">
 					<sortable-table [data]="employees" [headers]="sampKeysE" [formats]="formatsE" [header_titles]="hdrTitlesE"></sortable-table>
 					<!--drag-scroll #ds2 class="table-container" >
 						<table>
@@ -166,7 +166,7 @@
 
 		<ion-row>
 			<ion-col col-12>
-				<submodule [title]="'Pending Member Registration'" [searchbar]="true" *ngIf="pendingMembers.length > 0">
+				<submodule [title]="'Pending Member Registration'" *ngIf="pendingMembers.length > 0">
 					<sortable-table [data]="pendingMembers" [headers]="sampKeysP" [formats]="formatsP" [header_titles]="hdrTitlesP"></sortable-table>
 					<!--drag-scroll #ds3 class="table-container" >
 						<table>
@@ -226,7 +226,7 @@
 
 		<ion-row>
 			<ion-col col-12>
-				<submodule [title]="'Flagged Members'" [searchbar]="true" *ngIf="flaggedEmployees.length > 0">
+				<submodule [title]="'Flagged Members'" *ngIf="flaggedEmployees.length > 0">
 					<sortable-table [data]="flaggedEmployees" [headers]="sampKeysF" [formats]="formatsF" [header_titles]="hdrTitlesF"></sortable-table>
 					<!--drag-scroll #ds4 class="table-container" >
 						<table>

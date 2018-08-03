@@ -3,6 +3,10 @@ import { IonicPage, NavController, NavParams, MenuController, ModalController } 
 
 import { LoansPage } from '../loans/loans';
 import { EmpDisclosureStatementModalPage } from '../emp-disclosure-statement-modal/emp-disclosure-statement-modal';
+
+import { Http, Headers, RequestOptions } from '@angular/http';
+import { config } from '../../ext/config';
+
 /**
  * Generated class for the HrDashboardPage page.
  *
@@ -51,7 +55,9 @@ export class EmployeeDashboardPage {
 
 	loan : loanModel;
 	dates : Array<{paymentDate,paymentNum,amt,bal}> = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController) {
+  	env = config[location.origin].backend;
+  	userData = JSON.parse(localStorage.userData)[0];
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private http: Http) {
   }
 
   ionViewDidEnter() {
@@ -109,7 +115,7 @@ export class EmployeeDashboardPage {
   	}
   }
 
-  launchBreakdown(){
+  launchBreakdown(noDisplay:boolean = false){
   	this.checkCredit(0);
   	this.loan = {
   		amt:this.creditToUse,
@@ -123,9 +129,10 @@ export class EmployeeDashboardPage {
     	totalPayment:(this.paydays * this.interestRate * this.creditToUse) + this.creditToUse
   	};
   	this.getDates().then(dt=>{
-
-	  	let md = this.modal.create(EmpDisclosureStatementModalPage,{data:this.loan, payments:dt},{'cssClass':'whitemodal'});
-	  	md.present();
+  		if(!noDisplay){
+		  	let md = this.modal.create(EmpDisclosureStatementModalPage,{data:this.loan, payments:dt},{'cssClass':'whitemodal'});
+		  	md.present();
+		}
   	});
 
   }
@@ -180,6 +187,40 @@ export class EmployeeDashboardPage {
 		var result = new Date(date);
 		result.setDate(result.getDate() + days);
 		return result;
+	}
+
+/**
+@master_id int,
+@principal float,
+@interest float,
+@paydays int,
+@purpose varchar(1000),
+@applicationDate datetime,
+@processFund float,
+@collectionFund float,
+@documentFee float **/
+	addLoan(){
+		this.launchBreakdown(true);
+	  	let hdr = new Headers;
+	  	hdr.append('Content-Type','application/json');
+	  	let rq = new RequestOptions;
+	  	rq.headers = hdr;
+	  	
+	  	let uData = {
+	  		id:this.userData.master_id,
+	  		principal: this.loan.amt,
+	  		interest: this.loan.udi,
+	  		paydays: this.paydays,
+	  		purpose: this.purpose,
+	  		processFund: this.loan.processingFund,
+	  		collectionFund: this.loan.collectionFund,
+	  		documentFee: this.loan.docFee
+	  	};
+
+	  	this.http.post(`${this.env}/api.php?q=applyloan`,{loan:uData}, rq)
+	  			.toPromise()
+	  			.then(console.info)
+	  			.catch(console.warn)
 	}
 
 }

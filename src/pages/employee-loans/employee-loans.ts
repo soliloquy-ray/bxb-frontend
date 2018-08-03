@@ -124,9 +124,7 @@ export class EmployeeLoansPage {
 		mobile: "9189101112"	
   	};*/
 
-	searched : any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController) {
-  	this.searched = this.loans;
   }
 
   ionViewDidLoad() {
@@ -140,20 +138,6 @@ export class EmployeeLoansPage {
 
   reorient($event){
   	this.isMobile = mobilecheck();
-  }
-
-  search($event){
-  	this.expanded = 0;
-  	let val = $event.target.value.toLowerCase();
-  	if(val.trim() == ""){
-  		this.searched = this.loans;
-  	}
-  	else{
-  		let lns = this.loans.pending.filter(a=>{if(a.amt.toString().toLowerCase().indexOf(val) > -1 || a.creditAvailNumber.indexOf(val) > -1 || a.inceptionDate.toLowerCase().indexOf(val) > -1 || a.rate.toString().indexOf(val) > -1 || a.purpose.toLowerCase().indexOf(val) > -1 || a.term.toString().toLowerCase().indexOf(val) > -1 || a.transID.toLowerCase().indexOf(val) > -1 || a.repaid.toString().indexOf(val) > -1) return a;});
-  		console.log(lns);
-  		this.searched = {'pending':lns};
-  	}
-
   }
 
   segmentChanged($event){

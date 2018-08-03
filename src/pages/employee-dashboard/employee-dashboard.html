@@ -95,7 +95,7 @@
 			<ion-row>
 				<ion-col col-4>
 					<select [(ngModel)]="purpose" name="purpose">
-						<option value="p" *ngFor="let p of purposeList;">{{p}}</option>
+						<option [value]="p" *ngFor="let p of purposeList;">{{p}}</option>
 					</select>
 				</ion-col>
 				<ion-col>
@@ -120,7 +120,7 @@
 				</ion-col>
 			</ion-row>
 		</div>
-		<button ion-button>Confirm</button>
+		<button ion-button (tap)="addLoan()" [disabled]="purpose.trim() == ''">Confirm</button>
 		<foot></foot>
 	</section>
 

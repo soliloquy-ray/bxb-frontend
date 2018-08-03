@@ -1,6 +1,10 @@
+<span class="search">
+	<ion-icon name="ios-search"></ion-icon>
+	<input type="text" (keyup)="search($event)" placeholder="Search any fields"/>
+</span>
 <ion-grid class="table" *ngIf="!isMobile">
 	<ion-row justify-content-center class="thead header">
-		<ion-col *ngFor="let hd of hdr; let i = index;" (tap)="sorter(data,hd)" [ngClass]="{'sorting':(sorting==hd),'asc':sort_type}">
+		<ion-col *ngFor="let hd of hdr; let i = index;" (tap)="sorter(searched,hd)" [ngClass]="{'sorting':(sorting==hd),'asc':sort_type}">
 			{{hdrTitles[hd]}}
 			<ion-icon class="dropdown" name="md-arrow-dropdown"></ion-icon>
 			<ion-icon class="dropup" name="md-arrow-dropup"></ion-icon>
@@ -30,7 +34,7 @@
 			% Repaid
 		</ion-col-->
 	</ion-row>
-	<ion-row justify-content-center class="data" *ngFor = "let rowData of data;">
+	<ion-row justify-content-center class="data" *ngFor = "let rowData of searched;">
 		<ion-col *ngFor = "let dt of hdr; let i = index">
 			<div *ngIf="frm[dt]=='number'">{{rowData[dt] | number:'1.0-2'}}</div>
 			<div *ngIf="frm[dt]=='currency'">{{rowData[dt] | currency:'PHP':'symbol-narrow':'1.2-2'}}</div>
@@ -65,7 +69,7 @@
 </ion-grid>
 <ion-grid class="table" *ngIf="isMobile">
 	<ion-row style="width:100%;">
-		<ion-col col-12 style="width:100%; box-shadow: 0 0 3px 0 #333" class="data" *ngFor = "let rowData of data; let i = index;">
+		<ion-col col-12 style="width:100%; box-shadow: 0 0 3px 0 #333" class="data" *ngFor = "let rowData of searched; let i = index;">
 			<ion-row>
 				<ion-col>
 					<p class="label">{{hdrTitles[hdr[0]]}}</p>

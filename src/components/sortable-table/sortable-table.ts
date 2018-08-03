@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 
 /**
  * Generated class for the SortableTableComponent component.
@@ -23,16 +23,41 @@ export class SortableTableComponent {
   sort_type:boolean = false;
   isMobile: boolean = mobilecheck();
   expanded = 0;
-  constructor() {
+  searched: Array<any> = [];
+  constructor(private cdr: ChangeDetectorRef) {
     console.log('Hello SortableTableComponent Component');
   }
 
   ngAfterViewInit(){
   	console.log(this);
   	let self = this;
+  	this.searched = this.data;
+  	this.cdr.detectChanges();
   	this.hdr.forEach((i,g)=>{
   		if(parseInt(g.toString()) > 1) self.h_ctr.push(g);
   	});
+  }
+
+
+  search($event){
+  	this.expanded = 0;
+  	let val = $event.target.value.toLowerCase();
+  	if(val.trim() == ""){
+  		this.searched = this.data;
+  	}
+  	else{
+  		let lns = this.data.filter(a=>{
+  			let cc = this.hdr.some((e,ind)=>{
+  				if(a[e].toString().toLowerCase().indexOf(val) > -1){
+  					return true;
+  				}
+  			});
+  			if(cc) return a;
+  		});
+  		console.log(lns);
+  		this.searched = lns;
+  	}
+
   }
 
   sorter(a:Array<any>,e):Array<any>{

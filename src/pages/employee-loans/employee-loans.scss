@@ -220,7 +220,7 @@ page-employee-loans {
 										/*white-space:nowrap;
 										text-overflow:ellipsis;
 										overflow:hidden;*/
-										text-align:center;
+										text-align:left;
 										text-transform:uppercase;
 										font-weight:bold;
 										letter-spacing:-0.1vh;
@@ -231,7 +231,7 @@ page-employee-loans {
 								}
 								&.data{
 									ion-col{
-										text-align:center;
+										text-align:left;
 										padding:2.5px;
 										margin:auto;
 									}

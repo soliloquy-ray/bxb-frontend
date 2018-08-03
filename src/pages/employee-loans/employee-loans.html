@@ -55,11 +55,8 @@
 
 					<div [ngSwitch]="loanStatus" class='segmentable'>
 						<div *ngSwitchCase = "'pending'">
-							<span class="search">
-								<ion-icon name="ios-search"></ion-icon>
-								<input type="text" (keyup)="search($event)" placeholder="Search any fields"/>
-							</span>
-							<ion-grid class="table" *ngIf="!isMobile">
+							<sortable-table [data]="loans?.pending" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles"></sortable-table>
+							<!--ion-grid class="table" *ngIf="!isMobile">
 								<ion-row justify-content-center class="thead header">
 									<ion-col (tap)="sorter(searched?.pending,'transID',false)">
 										Transaction ID
@@ -157,14 +154,15 @@
 										</div>
 									</ion-col>
 								</ion-row>
-							</ion-grid>
+							</ion-grid-->
 						</div>
 						<div *ngSwitchCase = "'approved'">
-							<span class="search">
+							<!--span class="search">
 								<ion-icon name="ios-search"></ion-icon>
 								<input type="text" (ionInput)="search($event)" placeholder="Search any fields"/>
-							</span>
-							<ion-grid class="table" *ngIf="!isMobile">
+							</span-->
+							<sortable-table [data]="loans?.pending" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles"></sortable-table>
+							<!--ion-grid class="table" *ngIf="!isMobile">
 								<ion-row  justify-content-center class="thead header">
 									<ion-col>
 										Transaction ID
@@ -272,26 +270,26 @@
 										</div>
 									</ion-col>
 								</ion-row>
-							</ion-grid>
+							</ion-grid-->
 						</div>
 
 						<!-- end of approved -->
 
 						<div *ngSwitchCase = "'cancel'">
-							<span class="search">
+							<!--span class="search">
 								<ion-icon name="ios-search"></ion-icon>
 								<input type="text" (ionInput)="search($event)" placeholder="Search any fields"/>
-							</span>
+							</span-->
 							<sortable-table [data]="loans?.pending" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles"></sortable-table>
 						</div>
 
 						<!-- end of approved -->
 
 						<div *ngSwitchCase = "'completed'">
-							<span class="search">
+							<!--span class="search">
 								<ion-icon name="ios-search"></ion-icon>
 								<input type="text" (ionInput)="search($event)" placeholder="Search any fields"/>
-							</span>
+							</span-->
 							<sortable-table [data]="loans?.pending" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles"></sortable-table>
 						</div>
 					</div>

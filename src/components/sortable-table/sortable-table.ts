@@ -18,7 +18,7 @@ export class SortableTableComponent {
   @Input('formats') frm : Array<any>;
   @Input('fn') fn : Array<any>;
   @Input('header_titles') hdrTitles : any;
-  @Input('actions') acts: Array<any>;
+  @Input('actions') acts: Array<any> = [];
   h_ctr = [];
   sorting:string = '';
   sort_type:boolean = false;

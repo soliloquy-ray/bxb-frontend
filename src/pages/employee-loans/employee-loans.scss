@@ -184,61 +184,6 @@ page-employee-loans {
 						height:100%;
 						box-shadow:none;
 						padding:1vw;
-						span.search{
-							display:inline-block;
-							border-radius:4px;
-							box-shadow: 0 0 1px 0px #333;
-							width:auto;
-							margin:1vh 1vh 3vh;
-							padding:0.5vw;
-							position:relative;
-							ion-icon{
-								position: absolute;
-							    top: 0;
-							    left: 0;
-							    display: block;
-							    height: 100%;
-							    width: 40px;
-							    font-size: 20px;
-							    text-align: center;
-							    padding: 7px;
-							    background-color: lightgray;
-							}
-							input{
-								border:0;
-								margin-left:40px;
-								width:200px;
-							}
-						}
-
-						.table{
-							box-shadow:none;
-							font-family: 'Roboto', sans-serif;
-							ion-row{
-								&.thead{
-									ion-col{
-										/*white-space:nowrap;
-										text-overflow:ellipsis;
-										overflow:hidden;*/
-										text-align:left;
-										text-transform:uppercase;
-										font-weight:bold;
-										letter-spacing:-0.1vh;
-										padding:2.5px;
-										word-wrap:normal;
-										margin:auto;
-									}
-								}
-								&.data{
-									ion-col{
-										text-align:left;
-										padding:2.5px;
-										margin:auto;
-									}
-								}
-							}
-
-						}
 					}
 				}
 

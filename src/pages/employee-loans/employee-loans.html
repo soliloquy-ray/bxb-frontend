@@ -55,7 +55,10 @@
 
 					<div [ngSwitch]="loanStatus" class='segmentable'>
 						<div *ngSwitchCase = "'pending'">
-							<sortable-table [data]="loans?.pending" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles"></sortable-table>
+							<sortable-table *ngIf="loans.pending.length > 0" [data]="loans?.pending" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles"></sortable-table>
+							<p class="no-data" *ngIf="loans.pending.length == 0">
+								No data
+							</p>
 							<!--ion-grid class="table" *ngIf="!isMobile">
 								<ion-row justify-content-center class="thead header">
 									<ion-col (tap)="sorter(searched?.pending,'transID',false)">
@@ -161,116 +164,11 @@
 								<ion-icon name="ios-search"></ion-icon>
 								<input type="text" (ionInput)="search($event)" placeholder="Search any fields"/>
 							</span-->
-							<sortable-table [data]="loans?.pending" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles"></sortable-table>
-							<!--ion-grid class="table" *ngIf="!isMobile">
-								<ion-row  justify-content-center class="thead header">
-									<ion-col>
-										Transaction ID
-									</ion-col>
-									<ion-col >
-										Date of Inception
-									</ion-col>
-									<ion-col >
-										Credit Availment Number
-									</ion-col>
-									<ion-col >
-										Rate
-									</ion-col>
-									<ion-col >
-										Term
-									</ion-col>
-									<ion-col >
-										Amount
-									</ion-col>
-									<ion-col>
-										Purpose
-									</ion-col>
-									<ion-col>
-										% Repaid
-									</ion-col>
-									<ion-col col-1>
-									</ion-col>
-								</ion-row>
-								<ion-row justify-content-center class="data" *ngFor = "let rowData of loans?.pending; let i = index">
-									<ion-col>
-										{{rowData?.transID}}
-									</ion-col>
-									<ion-col >
-										{{rowData?.inceptionDate}}
-									</ion-col>
-									<ion-col >
-										{{rowData?.creditAvailNumber}}
-									</ion-col>
-									<ion-col >
-										{{(rowData?.rate * 100) | number:'1.1-2'}} %
-									</ion-col>
-									<ion-col >
-										{{rowData?.term}}
-									</ion-col>
-									<ion-col >
-										{{rowData?.amt | currency:'PHP':'symbol-narrow':'1.2-2'}}
-									</ion-col>
-									<ion-col>
-										{{rowData?.purpose}}
-									</ion-col>
-									<ion-col>
-										{{(rowData?.repaid * 100) | number:'1.1-2'}} %
-									</ion-col>
-									<ion-col col-1>
-										<ion-icon (tap)="showModal(i)" style="color:#0067ff;font-size:2.3vw;" name="md-information-circle"></ion-icon>
-									</ion-col>
-								</ion-row>
-							</ion-grid>
-							<ion-grid class="table" *ngIf="isMobile">
-								<ion-row style="width:100%;">
-									<ion-col col-12 style="width:100%; box-shadow: 0 0 3px 0 #333" class="data" *ngFor = "let rowData of searched?.pending; let i = index;">
-										<ion-row>
-											<ion-col col-4>
-												<p class="label">Transaction ID</p>
-												{{rowData?.transID}}
-											</ion-col>
-											<ion-col col-4>
-												<p class="label">Date of Inception</p>
-												{{rowData?.inceptionDate}}
-											</ion-col>
-											<ion-col col-4>
-												<button ion-button (tap)="expand(i)">View Details</button>
-											</ion-col>
-										</ion-row>
-										<div class="expandable" [ngClass]="{'expanded':expanded == (i+1)}">
-											<span class="item">
-												<p class="title">Credit Availment Number</p>
-												{{rowData?.creditAvailNumber}}
-											</span>
-											<span class="item">
-												<p class="title">Rate</p>
-												{{(rowData?.rate * 100) | number:'1.1-2'}} %
-											</span>
-											<span class="item">
-												<p class="title">Term</p>
-												{{rowData?.term}}
-											</span>
-											<span class="item">
-												<p class="title">Amount</p>
-												{{rowData?.amt | currency:'PHP':'symbol-narrow':'1.2-2'}}
-											</span>
-											<span class="item">
-												<p class="title">Purpose</p>
-												{{rowData?.purpose}}
-											</span>
-											<span class="item">
-												<p class="title">Repaid</p>
-												{{(rowData?.repaid * 100) | number:'1.1-2'}} %
-											</span>
-											<span class="item">
-												<ion-col col-3 style=" text-align:right;">
-													<ion-icon (tap)="showModal(i)" style="font-size:5vh; color:#0067ff;" name="md-information-circle"></ion-icon>
-												</ion-col>
-											</span>
-										</div>
-									</ion-col>
-								</ion-row>
-							</ion-grid-->
+							<sortable-table *ngIf="loans.approved.length > 0" [data]="loans?.approved" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles"></sortable-table>
+							<p class="no-data" *ngIf="loans.approved.length == 0">
+								No data
+							</p>
+							
 						</div>
 
 						<!-- end of approved -->
@@ -280,7 +178,10 @@
 								<ion-icon name="ios-search"></ion-icon>
 								<input type="text" (ionInput)="search($event)" placeholder="Search any fields"/>
 							</span-->
-							<sortable-table [data]="loans?.pending" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles"></sortable-table>
+							<sortable-table *ngIf="loans.cancel.length > 0"[data]="loans?.cancel" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles"></sortable-table>
+							<p class="no-data" *ngIf="loans.cancel.length == 0">
+								No data
+							</p>
 						</div>
 
 						<!-- end of approved -->
@@ -290,7 +191,10 @@
 								<ion-icon name="ios-search"></ion-icon>
 								<input type="text" (ionInput)="search($event)" placeholder="Search any fields"/>
 							</span-->
-							<sortable-table [data]="loans?.pending" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles"></sortable-table>
+							<sortable-table *ngIf="loans.completed.length > 0" [data]="loans?.completed" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles"></sortable-table>
+							<p class="no-data" *ngIf="loans.completed.length == 0">
+								No data
+							</p>
 						</div>
 					</div>
 				</submodule>

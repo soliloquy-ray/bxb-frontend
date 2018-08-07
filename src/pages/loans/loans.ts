@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, ModalController, Modal } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, ModalController, Modal, LoadingController } from 'ionic-angular';
 
 import { DisclosureStatementPage } from '../disclosure-statement/disclosure-statement';
+import { Http, Headers, RequestOptions } from '@angular/http';
+import { config } from '../../ext/config';
 /**
  * Generated class for the LoansPage page.
  *
@@ -30,9 +32,10 @@ export class LoansPage {
 	isMobile : boolean = mobilecheck();
 	loanStatus = 'pending';
 	mod:Modal;
+  	env = config[location.origin].backend;
 	loans = {
 		'pending':[
-		{
+		/*{
 			'firstName':'George Miguel',
 			'lastName':'Winternitz',
 			'transID':'2',
@@ -56,10 +59,37 @@ export class LoansPage {
 			'term':14,
 			'amt':'12500',
 			'purpose':'Emergency Fund'
-		},
-		]
+		},*/
+		],
+		'approved':[],
+		'cancel':[],
+		'completed':[]
+
 	};
 
+	hdrTitles = {
+		'userData.Name_First':'First Name',
+		'userData.Name_Last':'Last Name',
+		'LoanID':'Transaction ID',
+		'applicationDate':'Date of Inception',
+		'term':'Term',
+		'principal':'Amount',
+		'purpose':'Purpose'
+	};
+	sampKeys = ['userData.Name_First','userData.Name_Last','LoanID','applicationDate','term','principal','purpose'];
+	formats = {
+		'principal':'currency',
+		'interest':'percent',
+		'term':'number',
+		'userData.Name_First':'nested',
+		'userData.Name_Last':'nested'
+	};
+	actions = [
+		{
+			"icon":"md-information-circle",
+			"class":"display-disclosure"
+		}
+	];
 	payments = [
 		{
 			"paymentDate":"06-15-2018",
@@ -100,13 +130,51 @@ export class LoansPage {
 		mobile: "9189101112"	
   	};
 	searched : any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private http: Http, private loader: LoadingController) {
   	this.searched = this.loans;
   }
 
   ionViewDidEnter() {
   	this.menu.close();
   	localStorage.page = 'creditsum';
+  	this.getLoansByStatus(1).then(rs=>{ this.loans.pending = rs }).then(()=>{
+  		this.addFn()
+  	});
+  }
+
+  addFn(){
+  	let x = document.querySelectorAll("[id^=display-disclosure-]");
+  	console.log(x);
+  }
+
+  getLoansByStatus(stat):Promise<any>{
+	let load = this.loader.create({
+	  spinner: 'crescent',
+	  dismissOnPageChange: true,
+	  showBackdrop: true,
+	  content: `Processing...`,
+	  enableBackdropDismiss:false
+	});
+	load.present();
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+
+	return (
+		this.http.post(`${this.env}/api.php?q=hr_get_loan_by_status`,{status:stat}, rq)
+			.toPromise()
+			.then(res=>{
+				load.dismiss();
+				console.log(res.json());
+				return res.json();
+			})
+			.catch(err=>{
+				load.dismiss();
+				console.warn(err);
+				return {};
+			})
+	);
   }
 
   ionViewWillLeave(){

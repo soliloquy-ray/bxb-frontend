@@ -106,7 +106,7 @@ export class LoginPage {
   				}  				*/
           load.dismiss();
           let uDt = res.json();
-          if(!uDt[0]){
+          if(!uDt){
             this.launchToast('Invalid login','fail');
           }else{
             localStorage.userData = JSON.stringify(uDt);

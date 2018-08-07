@@ -26,8 +26,12 @@ submodule {
 				background: #fff;
 				padding: 2vh 2vw;
 				min-height:25vh;
-				display:block;
+				display:flex;
 				box-shadow:none;
+			    flex-basis: auto;
+			    justify-content: center;
+			    align-content: center;
+			    flex-direction: column;
 				p{
 					margin:0 auto;
 				}

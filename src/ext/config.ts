@@ -4,6 +4,9 @@ export var config = {
 	},
 	"https://bxb-app.azurewebsites.net":{
 		"backend":"https://bxb-backend-php.azurewebsites.net"
+	},
+	"https://test.bxbesc.com/":{
+		"backend":"https://bxb-backend-php.azurewebsites.net"
 	}
 	
 };

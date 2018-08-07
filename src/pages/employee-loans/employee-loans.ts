@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Modal, ModalController, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Modal, ModalController, MenuController, LoadingController } from 'ionic-angular';
 
 import { DisclosureStatementPage } from '../disclosure-statement/disclosure-statement';
+
+import { Http, Headers, RequestOptions } from '@angular/http';
+import { config } from '../../ext/config';
 /**
  * Generated class for the EmployeeLoansPage page.
  *
@@ -10,17 +13,6 @@ import { DisclosureStatementPage } from '../disclosure-statement/disclosure-stat
  */
 declare var mobilecheck; //fn to check for screen type
 
-interface pendingLoan {
-	transID,
-	inceptionDate,
-	creditAvailNumber,
-	rate,
-	term,
-	amt,
-	purpose,
-	repaid
-};
-
 @IonicPage()
 @Component({
   selector: 'page-employee-loans',
@@ -28,13 +20,21 @@ interface pendingLoan {
 })
 export class EmployeeLoansPage {
 
+  	env = config[location.origin].backend;
 	outstandingCredit:number = 0;
 	availableCredit: number = 50000;isMobile : boolean = mobilecheck();
 	loanStatus = 'pending';
 	mod:Modal;
 	expanded = 0;
+	load = this.loader.create({
+	  spinner: 'crescent',
+	  dismissOnPageChange: true,
+	  showBackdrop: true,
+	  content: `Processing...`,
+	  enableBackdropDismiss:false
+	});
 	loans = {
-		'pending':[
+		'pending':[/*
 		{
 			'transID':'0',
 			'inceptionDate':'07-30-2018',
@@ -64,22 +64,25 @@ export class EmployeeLoansPage {
 			'amt':50000,
 			'purpose':'Emergency Fund',
 			'repaid':0.5
-		}]
+		}*/],
+		'approved':[],
+		'cancel':[],
+		'completed':[]
 	};
 	hdrTitles = {
-		'transID':'Transaction ID',
-		'inceptionDate':'Date of Inception',
-		'creditAvailNumber':'Credit Availment Number',
-		'rate':'Rate',
+		'LoanID':'Transaction ID',
+		'applicationDate':'Date of Inception',
+		'master_id':'Credit Availment Number',
+		'interest':'Rate',
 		'term':'Term',
-		'amt':'Amount',
+		'principal':'Amount',
 		'purpose':'Purpose',
 		'repaid':'% Repaid'
 	};
-	sampKeys = Object.keys(this.loans.pending[0]);
+	sampKeys = ['LoanID','applicationDate','master_id','interest','term','principal','purpose','repaid'];
 	formats = {
-		'amt':'currency',
-		'rate':'percent',
+		'principal':'currency',
+		'interest':'percent',
 		'term':'number',
 		'repaid':'percent'
 	};
@@ -111,7 +114,7 @@ export class EmployeeLoansPage {
 		}
 	];
 
-  	userData = JSON.parse(localStorage.userData)[0];/*{
+  	userData = JSON.parse(localStorage.userData);/*{
   		firstName:"Per",
   		middleName:"Sohn",
   		lastName:"McPherson",
@@ -124,11 +127,55 @@ export class EmployeeLoansPage {
 		mobile: "9189101112"	
   	};*/
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private http: Http, private loader: LoadingController) {
   }
 
   ionViewDidLoad() {
+  	let self = this;
     console.log('ionViewDidLoad EmployeeLoansPage');
+    this.load.present();
+    let pr1 = this.getLoansByStatus(1).then(rs=>{
+    	self.loans.pending = rs;
+    	return rs;
+    });
+   
+
+    let pr2 = this.getLoansByStatus(2).then(rs=>{
+    	self.loans.approved = rs;
+    	return rs;
+    });
+
+    let pr3 = this.getLoansByStatus(4).then(rs=>{
+    	self.loans.cancel = rs;
+    	return rs;
+    });
+
+    Promise.all([pr1,pr2,pr3]).then(()=>{
+    	this.load.dismiss();
+    });
+
+  }
+
+  getLoansByStatus(stat):Promise<any>{
+
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+	let masterId = this.userData.master_id;
+
+	return (
+		this.http.post(`${this.env}/api.php?q=get_loan_by_status`,{status:stat,id:masterId}, rq)
+			.toPromise()
+			.then(res=>{
+				console.log(res.json());
+				return res.json();
+			})
+			.catch(err=>{
+				console.warn(err);
+				return {};
+			})
+	);
   }
 
   ionViewDidEnter() {

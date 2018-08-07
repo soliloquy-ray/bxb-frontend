@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, LoadingController } from 'ionic-angular';
 
 import { LoansPage } from '../loans/loans';
+
+import { Http, Headers, RequestOptions } from '@angular/http';
+import { config } from '../../ext/config';
 /**
  * Generated class for the HrDashboardPage page.
  *
@@ -9,14 +12,6 @@ import { LoansPage } from '../loans/loans';
  * Ionic pages and navigation.
  */
 declare var mobilecheck; //fn to check for screen type
-
-interface creditSummary {
-	transID : number,
-	inceptionDate: string,
-	employeeName: string,
-	amt: number,
-	purpose: string
-};
 
 @IonicPage()
 @Component({
@@ -29,43 +24,61 @@ export class HrDashboardPage {
 	deets2: string = `2018`;
 	deets3: string = `&nbsp;`;
 	isMobile : boolean = mobilecheck();
-	credits: creditSummary[] = [{
-		transID:2,
-		inceptionDate: '2018-04-15',
-		employeeName: 'George Miguel Winternitz',
-		amt: 5000,
-		purpose: 'Help a Person'
-	},{
-		transID:5,
-		inceptionDate: '2018-04-27',
-		employeeName: 'George Miguel Winternitz',
-		amt: 32000,
-		purpose: 'Help a Person'
-	},{
-		transID:35,
-		inceptionDate: '2018-07-19',
-		employeeName: 'Blue Test 2 Second',
-		amt: 22500,
-		purpose: 'Vacation'
-	}];
+  	env = config[location.origin].backend;
+	credits = [];
 
 	hdrTitles = {
-		'transID':'Transaction ID',
-		'inceptionDate':'Date of Inception',
+		'LoanID':'Transaction ID',
+		'applicationDate':'Date of Inception',
 		'employeeName':'Employee Name',
-		'amt':'Amount',
+		'principal':'Amount',
 		'purpose':'Purpose',
 	};
-	sampKeys = Object.keys(this.credits[0]);
+	sampKeys = ["LoanID","applicationDate","employeeName","principal","purpose"];
 	formats = {
-		'amt':'currency'
+		'principal':'currency'
 	};
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private http: Http, private loader: LoadingController) {
   }
 
   ionViewDidEnter() {
+  	let self = this;
   	this.menu.close();
   	localStorage.page = 'dashboard';
+
+  	this.getLoansByStatus(1).then(res=>{
+  		self.credits = res;
+  	});
+  }
+
+  getLoansByStatus(stat):Promise<any>{
+	let load = this.loader.create({
+	  spinner: 'crescent',
+	  dismissOnPageChange: true,
+	  showBackdrop: true,
+	  content: `Processing...`,
+	  enableBackdropDismiss:false
+	});
+	load.present();
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+
+	return (
+		this.http.post(`${this.env}/api.php?q=hr_get_loan_by_status`,{status:stat}, rq)
+			.toPromise()
+			.then(res=>{
+				load.dismiss();
+				console.log(res.json());
+				return res.json();
+			})
+			.catch(err=>{
+				load.dismiss();
+				console.warn(err);
+				return {};
+			})
+	);
   }
 
   ionViewWillLeave(){

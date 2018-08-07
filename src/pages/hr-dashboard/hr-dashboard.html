@@ -30,7 +30,10 @@
 		<ion-row>
 			<ion-col col-12>
 				<submodule [title]="'Employee Credit Availment Summary'">
-					<sortable-table [data]="credits" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles"></sortable-table>
+					<sortable-table *ngIf="credits.length > 0" [data]="credits" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles"></sortable-table>
+					<p class="no-data" *ngIf="credits.length == 0">
+						No data
+					</p>
 					<!--ion-row style="width:100%;" *ngIf="!isMobile">
 						<ion-row style="width:100%;">
 							<ion-col style="text-align: center;font-weight:bold;padding:1.5rem;" col-2>Transaction ID</ion-col>

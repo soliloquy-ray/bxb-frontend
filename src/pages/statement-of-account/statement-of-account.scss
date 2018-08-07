@@ -1,0 +1,54 @@
+page-statement-of-account {
+	ion-header{
+		ion-navbar{
+			ion-title{
+				&.title-ios.title{
+					padding:0 3vw;
+					div.toolbar-title.toolbar-title-ios{
+						text-align:left;
+						width:100%;
+					}
+				}
+
+			}
+		}
+	}
+
+	ion-content{
+		section.main-content{
+			
+			span.header{
+				img{
+					max-height:15vh;
+				}
+			}
+
+			div.body{
+				
+			}
+
+			&.mobile{
+			}//section.mobile
+
+		} // section.content
+	} //end of ion-content
+
+	ion-footer{
+		text-align:right;
+		button[ion-button]{
+			background-color:inherit;
+			border-radius:8px;
+			border:0;
+			box-shadow:0 0 2px 1px #888;
+			color:#333;
+			display:inline-table;
+			padding:0 2vh;
+
+			ion-icon{
+				margin-right:1vw;
+				font-size:20px;
+			}
+		}
+	}
+
+}

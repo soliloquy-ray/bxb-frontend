@@ -34,6 +34,7 @@ import { EditEmployeePage } from '../pages/edit-employee/edit-employee';
 import { SuperDashboardPage } from '../pages/super-dashboard/super-dashboard';
 import { AdminCreditPage } from '../pages/admin-credit/admin-credit';
 import { CompaniesPage } from '../pages/companies/companies';
+import { StatementOfAccountPage } from '../pages/statement-of-account/statement-of-account';
 
 /* modals */
 import { DisclosureStatementPage } from '../pages/disclosure-statement/disclosure-statement';
@@ -70,7 +71,8 @@ var pages = [
   EditProfilePage,
   EmployeeLoansPage,
   AdminCreditPage,
-  CompaniesPage
+  CompaniesPage,
+  StatementOfAccountPage
 ];
 
 @NgModule({
@@ -105,6 +107,7 @@ var pages = [
         { component: EmployeeLoansPage, name: 'EmployeeLoansPage', segment: 'loanstatus' },
         { component: AdminCreditPage, name: 'AdminCreditPage', segment: 'management/loans' },
         { component: CompaniesPage, name: 'CompaniesPage', segment: 'management/companies' },
+        { component: StatementOfAccountPage, name: 'StatementOfAccountPage', segment: 'modal-soa' },
       ]
     })
   ],

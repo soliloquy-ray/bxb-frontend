@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, ModalController, AlertController, LoadingController } from 'ionic-angular';
 
 import { LoansPage } from '../loans/loans';
 import { EmpDisclosureStatementModalPage } from '../emp-disclosure-statement-modal/emp-disclosure-statement-modal';
@@ -42,7 +42,7 @@ export class EmployeeDashboardPage {
 	paydays:number = 1;
 	maxPaydays:number = 24;
 
-	interestRate:number = 0.0125;
+	interestRate:number = 0.025;
 	processingFeeRate: number = 0.035;
 	collectionFeeRate: number = 0.015;
 	docFeeRate: number = 0.0075;
@@ -56,8 +56,8 @@ export class EmployeeDashboardPage {
 	loan : loanModel;
 	dates : Array<{paymentDate,paymentNum,amt,bal}> = [];
   	env = config[location.origin].backend;
-  	userData = JSON.parse(localStorage.userData)[0];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private http: Http) {
+  	userData = JSON.parse(localStorage.userData);
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private http: Http, private alert: AlertController, private loader: LoadingController) {
   }
 
   ionViewDidEnter() {
@@ -200,6 +200,38 @@ export class EmployeeDashboardPage {
 @collectionFund float,
 @documentFee float **/
 	addLoan(){
+		let self = this;
+		let al = this.alert.create({
+			enableBackdropDismiss:false,
+			title:'Loan Confirmation',
+			message:`Are you sure you want to apply for this loan?`,
+			buttons:[
+				{
+					text:'Yes',
+					handler: ()=>{
+						self.createNewLoan();
+					}
+				},
+				{
+					text:'No',
+					handler: ()=>{
+
+					}
+				}
+			]
+		});
+		al.present();
+	}
+
+	createNewLoan(){
+		let load = this.loader.create({
+	      spinner: 'crescent',
+	      dismissOnPageChange: true,
+	      showBackdrop: true,
+	      content: `Processing...`,
+	      enableBackdropDismiss:false
+		});
+		load.present();
 		this.launchBreakdown(true);
 	  	let hdr = new Headers;
 	  	hdr.append('Content-Type','application/json');
@@ -209,7 +241,7 @@ export class EmployeeDashboardPage {
 	  	let uData = {
 	  		id:this.userData.master_id,
 	  		principal: this.loan.amt,
-	  		interest: this.loan.udi,
+	  		interest: this.interestRate,
 	  		paydays: this.paydays,
 	  		purpose: this.purpose,
 	  		processFund: this.loan.processingFund,
@@ -219,8 +251,14 @@ export class EmployeeDashboardPage {
 
 	  	this.http.post(`${this.env}/api.php?q=applyloan`,{loan:uData}, rq)
 	  			.toPromise()
-	  			.then(console.info)
-	  			.catch(console.warn)
+	  			.then(res=>{
+	  				load.dismiss();
+	  				console.info(res);
+	  			})
+	  			.catch(err=>{
+	  				load.dismiss();
+	  				console.warn(err);
+	  			})
 	}
 
 }

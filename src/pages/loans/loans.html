@@ -24,7 +24,11 @@
 
 					<div [ngSwitch]="loanStatus" class='segmentable'>
 						<div *ngSwitchCase = "'pending'">
-							<span class="search">
+							<sortable-table *ngIf="loans.pending.length > 0" [data]="loans?.pending" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles" [actions]="actions"></sortable-table>
+							<p class="no-data" *ngIf="loans.pending.length == 0">
+								No data
+							</p>
+							<!--span class="search">
 								<ion-icon name="ios-search"></ion-icon>
 								<input type="text" (keyup)="search($event)" placeholder="Search any fields"/>
 							</span>
@@ -111,7 +115,7 @@
 										</ion-row>
 									</ion-col>
 								</ion-row>
-							</ion-grid>
+							</ion-grid-->
 						</div>
 						<div *ngSwitchCase = "'approved'">
 							<span class="search">

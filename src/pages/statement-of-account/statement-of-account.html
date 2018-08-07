@@ -1,0 +1,95 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>
+  	<ion-icon (tap)="close()" name="ios-close" style="float:right;"></ion-icon></ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<section class="main-content">
+		<span class="header">
+			<img src="../assets/imgs/logo.png"/>
+		</span>
+		<ion-row>
+			<ion-col class="head" col-7>
+				STATEMENT OF ACCOUNT
+			</ion-col>
+			<ion-col class="head" col-2>
+				Company Code
+			</ion-col>
+			<ion-col col-3>
+				001
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col col-7>
+				SOA Ref# 2018835
+			</ion-col>
+			<ion-col col-2>
+				Billing Period
+			</ion-col>
+			<ion-col col-3>
+				07-15-2018 to 07-30-2018
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col col-7>
+				6805 Ayala Avenue Condominium Corporation	
+			</ion-col>
+			<ion-col col-2>
+				Due Date	
+			</ion-col>
+			<ion-col col-3>
+				07-30-2018
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col col-7>
+				6805 Ayala Avenue, Multinational Bancorp Building, Makati City Metro Manila	
+			</ion-col>
+			<ion-col col-2>
+				Amount Due	
+			</ion-col>
+			<ion-col col-3>
+				14,929.16
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col col-7>
+				&nbsp;
+			</ion-col>
+			<ion-col col-2>
+				Previous Balance
+			</ion-col>
+			<ion-col col-3>
+				0.00
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col col-7>
+				&nbsp;
+			</ion-col>
+			<ion-col col-2>
+				Total Amount Due
+			</ion-col>
+			<ion-col col-3>
+				14,929.16
+			</ion-col>
+		</ion-row>
+		<hr class="blocker">
+	</section>
+</ion-content>
+
+<ion-footer>
+	<button class="print" ion-button (tap)="print()">
+		<ion-icon name="md-print"></ion-icon>
+		Print
+	</button>
+	<button ion-button (tap)="close()">
+		<ion-icon name="ios-close-circle-outline"></ion-icon>
+		Close
+	</button>
+</ion-footer>

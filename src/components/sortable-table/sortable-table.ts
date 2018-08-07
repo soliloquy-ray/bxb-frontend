@@ -18,6 +18,7 @@ export class SortableTableComponent {
   @Input('formats') frm : Array<any>;
   @Input('fn') fn : Array<any>;
   @Input('header_titles') hdrTitles : any;
+  @Input('actions') acts: Array<any>;
   h_ctr = [];
   sorting:string = '';
   sort_type:boolean = false;
@@ -48,6 +49,7 @@ export class SortableTableComponent {
   	else{
   		let lns = this.data.filter(a=>{
   			let cc = this.hdr.some((e,ind)=>{
+  				if(!a.hasOwnProperty(e)) return false;
   				if(a[e].toString().toLowerCase().indexOf(val) > -1){
   					return true;
   				}
@@ -106,6 +108,11 @@ export class SortableTableComponent {
   	}else{
   		this.expanded = i+1;
   	}
+  }
+
+  nesting(data,nested:string){
+  	let dt = nested.split(".");
+  	return data[dt[0]][dt[1]];
   }
 
 

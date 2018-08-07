@@ -9,6 +9,9 @@
 			<ion-icon class="dropdown" name="md-arrow-dropdown"></ion-icon>
 			<ion-icon class="dropup" name="md-arrow-dropup"></ion-icon>
 		</ion-col>
+		<ion-col *ngIf="acts.length > 0">
+			&nbsp;
+		</ion-col>
 		<!--ion-col (tap)="sorter(searched?.pending,'transID',false)">
 			Transaction ID
 		</ion-col>
@@ -34,12 +37,16 @@
 			% Repaid
 		</ion-col-->
 	</ion-row>
-	<ion-row justify-content-center class="data" *ngFor = "let rowData of searched;">
-		<ion-col *ngFor = "let dt of hdr; let i = index">
+	<ion-row justify-content-center class="data" *ngFor = "let rowData of searched; let i = index">
+		<ion-col *ngFor = "let dt of hdr;">
 			<div *ngIf="frm[dt]=='number'">{{rowData[dt] | number:'1.0-2'}}</div>
 			<div *ngIf="frm[dt]=='currency'">{{rowData[dt] | currency:'PHP':'symbol-narrow':'1.2-2'}}</div>
 			<div *ngIf="frm[dt]=='percent'">{{(rowData[dt] * 100) | number:'1.1-2'}} %</div>
+			<div *ngIf="frm[dt]=='nested'">{{nesting(rowData,dt)}}</div>
 			<div *ngIf="!frm[dt]">{{rowData[dt]}}</div>
+		</ion-col>
+		<ion-col *ngIf="acts.length > 0">
+			<ion-icon *ngFor = "let a of acts;" id="{{a?.class}}-{{i}}" name="{{a?.icon}}"></ion-icon>
 		</ion-col>
 		<!--ion-col >
 			{{rowData?.transID}}

@@ -45,7 +45,7 @@ export class EditProfilePage {
 
   ionViewDidLoad() {
     try{
-    	this.locData = JSON.parse(localStorage.userData)[0];
+    	this.locData = JSON.parse(localStorage.userData);
     	this.userData.firstName = this.locData.Name_First;
     	this.userData.middleName = this.locData.Name_Middle;
     	this.userData.lastName = this.locData.Name_Last;

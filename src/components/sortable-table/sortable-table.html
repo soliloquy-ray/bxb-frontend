@@ -80,11 +80,11 @@
 			<ion-row>
 				<ion-col>
 					<p class="label">{{hdrTitles[hdr[0]]}}</p>
-					{{rowData[hdr[0]]}}
+					{{ (frm[hdr[0]]=='nested' ? nesting(rowData,hdr[0]) : rowData[hdr[0]]) }}
 				</ion-col>
 				<ion-col>
 					<p class="label">{{hdrTitles[hdr[1]]}}</p>
-					{{rowData[hdr[1]]}}
+					{{ (frm[hdr[1]]=='nested' ? nesting(rowData,hdr[1]) : rowData[hdr[1]]) }}
 				</ion-col>
 				<ion-col col-2>
 					<button ion-button (tap)="expand(i)">View</button>
@@ -96,7 +96,11 @@
 					<div *ngIf="frm[hdr[ind]]=='number'">{{rowData[hdr[ind]] | number:'1.0-2'}}</div>
 					<div *ngIf="frm[hdr[ind]]=='currency'">{{rowData[hdr[ind]] | currency:'PHP':'symbol-narrow':'1.2-2'}}</div>
 					<div *ngIf="frm[hdr[ind]]=='percent'">{{(rowData[hdr[ind]] * 100) | number:'1.1-2'}} %</div>
+					<div *ngIf="frm[hdr[ind]]=='nested'">{{nesting(rowData,hdr[ind])}}</div>
 					<div *ngIf="!frm[hdr[ind]]">{{rowData[hdr[ind]]}}</div>
+				</span>
+				<span class="item" *ngIf="acts.length > 0">
+					<ion-icon *ngFor = "let a of acts;let nd = index;" id="{{a?.class}}-{{i}}" name="{{a?.icon}}" (tap)="emitter(nd,toJson(rowData))"></ion-icon>
 				</span>
 				<!--span class="item">
 					<p class="title">Rate</p>

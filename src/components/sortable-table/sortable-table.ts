@@ -113,6 +113,7 @@ export class SortableTableComponent {
 
   nesting(data,nested:string){
   	let dt = nested.split(".");
+  	console.log(data[dt[0]][dt[1]]);
   	return data[dt[0]][dt[1]];
   }
 

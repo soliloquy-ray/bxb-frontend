@@ -7,8 +7,13 @@
 
 		<ion-row>
 			<ion-col col-12>
-				<submodule [title]="'Pending Applications'" [searchbar]="true">
-					<!--drag-scroll #ds1 class="table-container" -->
+				<submodule [title]="'Pending Applications'">
+					<sortable-table *ngIf="loans?.pending.length > 0" [data]="loans?.pending" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles" [actions]="actions" (t)="doAction($event)"></sortable-table>
+					<p class="no-data" *ngIf="loans.pending.length == 0">
+						No data
+					</p>
+					<!--drag-scroll #ds1 class="table-container" >
+
 						<table>
 						<tr style="width:100%;" class="header">
 							<td>
@@ -86,7 +91,7 @@
 							</td>
 						</tr>
 						</table>
-					<!--/drag-scroll-->
+					<--/drag-scroll-->
 				</submodule>
 			</ion-col>
 		</ion-row>
@@ -94,8 +99,12 @@
 
 		<ion-row>
 			<ion-col col-12>
-				<submodule [title]="'Active Applications'" [searchbar]="true">
-					<!--drag-scroll #ds2 class="table-container" -->
+				<submodule [title]="'Active Applications'">
+					<sortable-table *ngIf="loans?.activeLoans.length > 0" [data]="loans?.activeLoans" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles" [actions]="actions" (t)="doAction($event)"></sortable-table>
+					<p class="no-data" *ngIf="loans.activeLoans.length == 0">
+						No data
+					</p>
+					<!--drag-scroll #ds2 class="table-container" --
 						<table>
 						<tr style="width:100%;" class="header">
 							<td>
@@ -135,12 +144,12 @@
 								&nbsp;
 							</td>
 						</tr>
-						<tr style="width:100%;" class="dne" *ngIf="activeLoans.length <= 0">
+						<tr style="width:100%;" class="dne" *ngIf="loans?.activeLoans.length <= 0">
 							<td>
 								No Active Loans
 							</td>
 						</tr>
-						<tr style="width:100%;" class="data" *ngFor = "let al of activeLoans; let i = index">							
+						<tr style="width:100%;" class="data" *ngFor = "let al of loans?.activeLoans; let i = index">							
 							<td>
 								{{al?.firstName}}
 							</td>
@@ -179,7 +188,7 @@
 							</td>
 						</tr>
 						</table>
-					<!--/drag-scroll-->
+					<--/drag-scroll-->
 				</submodule>
 			</ion-col>
 		</ion-row> 
@@ -187,8 +196,12 @@
 
 		<ion-row>
 			<ion-col col-12>
-				<submodule [title]="'Completed Availments'" [searchbar]="true">
-					<!--drag-scroll #ds3 class="table-container" -->
+				<submodule [title]="'Completed Availments'">
+					<sortable-table *ngIf="loans?.completedLoans.length > 0" [data]="loans?.completedLoans" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles" [actions]="actions" (t)="doAction($event)"></sortable-table>
+					<p class="no-data" *ngIf="loans.completedLoans.length == 0">
+						No data
+					</p>
+					<!--drag-scroll #ds3 class="table-container" --
 						<table>
 						<tr style="width:100%;" class="header">
 							<td>
@@ -228,12 +241,12 @@
 								&nbsp;
 							</td>
 						</tr>
-						<tr style="width:100%;" class="dne"  *ngIf="completedLoans.length <= 0">
+						<tr style="width:100%;" class="dne"  *ngIf="loans?.completedLoans.length <= 0">
 							<td>
 								No Completed Loans
 							</td>
 						</tr>
-						<tr style="width:100%;" class="data" *ngFor = "let cl of completedLoans; let i = index">
+						<tr style="width:100%;" class="data" *ngFor = "let cl of loans?.completedLoans; let i = index">
 							<td>
 								{{cl?.firstName}}
 							</td>
@@ -272,7 +285,7 @@
 							</td>
 						</tr>
 						</table>
-					<!--/drag-scroll-->
+					<--/drag-scroll-->
 				</submodule>
 			</ion-col>
 		</ion-row> 
@@ -297,12 +310,12 @@
 								&nbsp;
 							</td>
 						</tr>
-						<tr style="width:100%;" class="dne" *ngIf="npLoans.length <= 0">
+						<tr style="width:100%;" class="dne" *ngIf="loans?.npLoans.length <= 0">
 							<td>
 								No Non-Performing Loans
 							</td>
 						</tr>
-						<tr style="width:100%;" class="data" *ngFor = "let npl of npLoans; let i = index">
+						<tr style="width:100%;" class="data" *ngFor = "let npl of loans?.npLoans; let i = index">
 							<td>
 								{{npl?.company}}
 							</td>

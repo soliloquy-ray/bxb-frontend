@@ -24,8 +24,8 @@ export class DisclosureStatementPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private view: ViewController, private modal: ModalController) {
   	this.loan = this.navParams.get('data');
   	this.payments = this.navParams.get('payments');
-  	this.user = this.navParams.get('user');
-  	console.log(this.loan);
+  	this.user = this.loan.userData;
+  	console.log(this.navParams.data);
   }
 
   ionViewDidLoad() {
@@ -47,6 +47,17 @@ export class DisclosureStatementPage {
 
   print(){
     window.print();
+  }
+
+  _calculateAge(birthday):number{
+    let today = new Date();
+    let birthDate = new Date(birthday);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
   }
 
 }

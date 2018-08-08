@@ -46,7 +46,7 @@
 			<div *ngIf="!frm[dt]">{{rowData[dt]}}</div>
 		</ion-col>
 		<ion-col *ngIf="acts.length > 0">
-			<ion-icon *ngFor = "let a of acts;" id="{{a?.class}}-{{i}}" name="{{a?.icon}}"></ion-icon>
+			<ion-icon *ngFor = "let a of acts;let nd = index;" id="{{a?.class}}-{{i}}" name="{{a?.icon}}" (tap)="emitter(nd,toJson(rowData))"></ion-icon>
 		</ion-col>
 		<!--ion-col >
 			{{rowData?.transID}}

@@ -19,6 +19,7 @@ export class SortableTableComponent {
   @Input('fn') fn : Array<any>;
   @Input('header_titles') hdrTitles : any;
   @Input('actions') acts: Array<any> = [];
+  @Output('t') t = new EventEmitter;
   h_ctr = [];
   sorting:string = '';
   sort_type:boolean = false;
@@ -115,5 +116,12 @@ export class SortableTableComponent {
   	return data[dt[0]][dt[1]];
   }
 
+  toJson(data){
+  	return JSON.stringify(data);
+  }
+
+  emitter(i,e){
+  	this.t.emit({index:i,val:e});
+  }
 
 }

@@ -34,7 +34,7 @@
 				<ion-col class="bundle">
 					<ion-row>
 						<ion-col class="label">Principal</ion-col>
-						<ion-col class="data">{{loan?.amt | currency:'PHP':'symbol-narrow':'1.2-2'}}</ion-col>
+						<ion-col class="data">{{loan?.principal | currency:'PHP':'symbol-narrow':'1.2-2'}}</ion-col>
 					</ion-row>
 				</ion-col>
 			</ion-row>
@@ -42,7 +42,7 @@
 				<ion-col class="bundle">
 					<ion-row>
 						<ion-col class="label">UDI</ion-col>
-						<ion-col class="data">{{loan?.amt / 20 | currency:'PHP':'symbol-narrow':'1.2-2'}}</ion-col>
+						<ion-col class="data">{{loan?.principal * loan?.interest | currency:'PHP':'symbol-narrow':'1.2-2'}}</ion-col>
 					</ion-row>
 				</ion-col>
 			</ion-row>
@@ -50,7 +50,7 @@
 				<ion-col class="bundle">
 					<ion-row>
 						<ion-col class="label">Gross Cash Out</ion-col>
-						<ion-col class="data">{{loan?.amt | currency:'PHP':'symbol-narrow':'1.2-2'}}</ion-col>
+						<ion-col class="data">{{loan?.principal | currency:'PHP':'symbol-narrow':'1.2-2'}}</ion-col>
 					</ion-row>
 				</ion-col>
 			</ion-row>
@@ -58,11 +58,11 @@
 				<ion-col class="bundle">
 					<ion-row>
 						<ion-col class="label">First Name</ion-col>
-						<ion-col class="data">{{user?.firstName}}</ion-col>
+						<ion-col class="data">{{user?.Name_First}}</ion-col>
 					</ion-row>
 					<ion-row>
 						<ion-col class="label">Date</ion-col>
-						<ion-col class="data">{{loan?.inceptionDate}}</ion-col>
+						<ion-col class="data">{{loan?.applicationDate}}</ion-col>
 					</ion-row>
 					<ion-row>
 						<ion-col class="label">Birthday</ion-col>
@@ -82,21 +82,21 @@
 					</ion-row>
 					<ion-row>
 						<ion-col class="label">Transaction No.</ion-col>
-						<ion-col class="data">{{loan?.transID}}</ion-col>
+						<ion-col class="data">{{loan?.LoanID}}</ion-col>
 					</ion-row>
 				</ion-col>
 				<ion-col class="bundle">
 					<ion-row>
 						<ion-col class="label">Last Name</ion-col>
-						<ion-col class="data">{{user?.lastName}}</ion-col>
+						<ion-col class="data">{{user?.Name_Last}}</ion-col>
 					</ion-row>
 					<ion-row>
 						<ion-col class="label">Company ID</ion-col>
-						<ion-col class="data">{{user?.CompanyID}}</ion-col>
+						<ion-col class="data">{{user?.master_id}}</ion-col>
 					</ion-row>
 					<ion-row>
 						<ion-col class="label">Age</ion-col>
-						<ion-col class="data">{{user?.age}}</ion-col>
+						<ion-col class="data">{{_calculateAge(user?.Birthday)}}</ion-col>
 					</ion-row>
 					<ion-row>
 						<ion-col class="label">Bank</ion-col>
@@ -104,11 +104,11 @@
 					</ion-row>
 					<ion-row>
 						<ion-col class="label">Type</ion-col>
-						<ion-col class="data">4 Paydays</ion-col>
+						<ion-col class="data">{{loan?.term}} Paydays</ion-col>
 					</ion-row>
 					<ion-row>
 						<ion-col class="label">Rate</ion-col>
-						<ion-col class="data">2.5%</ion-col>
+						<ion-col class="data">{{loan?.interest}}</ion-col>
 					</ion-row>
 					<ion-row>
 						<ion-col class="label">Member ID</ion-col>

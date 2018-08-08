@@ -116,46 +116,49 @@ export class LoansPage {
 			"bal":0
 		}
 	];
-
-  	userData = {
-  		firstName:"Per",
-  		middleName:"Sohn",
-  		lastName:"McPherson",
-		userName: "beexby",
-		email: "user@email.com",
-		companyCode: "CC2",
-		employeeId: "BX17445Z",
-		payrollAccount: "ABC1294FAS-15-AF1125",
-		password: "Passerby",
-		mobile: "9189101112"	
-  	};
-	searched : any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private http: Http, private loader: LoadingController) {
-  	this.searched = this.loans;
-  }
-
-  ionViewDidEnter() {
-  	this.menu.close();
-  	localStorage.page = 'creditsum';
-  	this.getLoansByStatus(1).then(rs=>{ this.loans.pending = rs }).then(()=>{
-  		this.addFn()
-  	});
-  }
-
-  addFn(){
-  	let x = document.querySelectorAll("[id^=display-disclosure-]");
-  	console.log(x);
-  }
-
-  getLoansByStatus(stat):Promise<any>{
-	let load = this.loader.create({
+	load = this.loader.create({
 	  spinner: 'crescent',
 	  dismissOnPageChange: true,
 	  showBackdrop: true,
 	  content: `Processing...`,
 	  enableBackdropDismiss:false
 	});
-	load.present();
+	searched : any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private http: Http, private loader: LoadingController) {
+  	this.searched = this.loans;
+  }
+
+  ionViewDidEnter() {
+  	let self = this;
+  	this.menu.close();
+  	localStorage.page = 'creditsum';
+	this.load.present();
+  	let pr1 = this.getLoansByStatus(1).then(rs=>{
+    	self.loans.pending = rs;
+    	return rs;
+    });
+   
+
+    let pr2 = this.getLoansByStatus(2).then(rs=>{
+    	self.loans.approved = rs;
+    	return rs;
+    });
+
+    let pr3 = this.getLoansByStatus(4).then(rs=>{
+    	self.loans.cancel = rs;
+    	return rs;
+    });
+
+    Promise.all([pr1,pr2,pr3]).then(()=>{
+    	this.load.dismiss();
+    });
+  }
+
+  test(e:{index:number,val:any}){
+  	this.showModal(e);
+  }
+
+  getLoansByStatus(stat):Promise<any>{
 	let hdr = new Headers;
 	hdr.append('Content-Type','application/json');
 	let rq = new RequestOptions;
@@ -165,12 +168,10 @@ export class LoansPage {
 		this.http.post(`${this.env}/api.php?q=hr_get_loan_by_status`,{status:stat}, rq)
 			.toPromise()
 			.then(res=>{
-				load.dismiss();
 				console.log(res.json());
 				return res.json();
 			})
 			.catch(err=>{
-				load.dismiss();
 				console.warn(err);
 				return {};
 			})
@@ -206,8 +207,8 @@ export class LoansPage {
 
   }
 
-  showModal(i){
-  	this.mod = this.modal.create(DisclosureStatementPage,{data:this.loans.pending[i], payments:this.payments, user:this.userData},{cssClass:`whitemodal ${this.isMobile ? "mobile" : ""}`});
+  showModal(i:{index:number,val:any}){
+  	this.mod = this.modal.create(DisclosureStatementPage,{data:this.loans.pending[i.index], payments:this.payments, user:i.val.userData},{cssClass:`whitemodal ${this.isMobile ? "mobile" : ""}`});
   	this.mod.present();
   }
 

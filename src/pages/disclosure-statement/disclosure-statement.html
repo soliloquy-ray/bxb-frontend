@@ -108,7 +108,7 @@
 					</ion-row>
 					<ion-row>
 						<ion-col class="label">Rate</ion-col>
-						<ion-col class="data">{{loan?.interest}}</ion-col>
+						<ion-col class="data">{{loan?.interest*100 | number:'1.0-2'}} %</ion-col>
 					</ion-row>
 					<ion-row>
 						<ion-col class="label">Member ID</ion-col>

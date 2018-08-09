@@ -100,7 +100,7 @@
 		<ion-row>
 			<ion-col col-12>
 				<submodule [title]="'Active Applications'">
-					<sortable-table *ngIf="loans?.activeLoans.length > 0" [data]="loans?.activeLoans" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles" [actions]="actions" (t)="doAction($event)"></sortable-table>
+					<sortable-table *ngIf="loans?.activeLoans.length > 0" [data]="loans?.activeLoans" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles" [actions]="act_actions" (t)="doActiveAction($event)"></sortable-table>
 					<p class="no-data" *ngIf="loans.activeLoans.length == 0">
 						No data
 					</p>

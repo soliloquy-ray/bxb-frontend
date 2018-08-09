@@ -42,7 +42,7 @@ export class EmployeeDashboardPage {
 	paydays:number = 1;
 	maxPaydays:number = 24;
 
-	interestRate:number = 0.025;
+	interestRate:number = 0.0125;
 	processingFeeRate: number = 0.035;
 	collectionFeeRate: number = 0.015;
 	docFeeRate: number = 0.0075;

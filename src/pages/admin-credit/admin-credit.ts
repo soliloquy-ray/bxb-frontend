@@ -25,6 +25,13 @@ export class AdminCreditPage {
 	isMobile : boolean = mobilecheck();
 	@ViewChildren(DragScrollComponent) ds : QueryList<DragScrollComponent>;
 	;
+	load:any = this.loader.create({
+		      spinner: 'crescent',
+		      dismissOnPageChange: true,
+		      showBackdrop: true,
+		      content: `Processing...`,
+		      enableBackdropDismiss:false
+			});
 	loans = {
 
 		"pending":[],
@@ -68,7 +75,7 @@ export class AdminCreditPage {
 	sampKeys = ['userData.Name_First','userData.Name_Last','LoanID','userData.Company','term','processFund','principal','userData.Payroll_Account','userData.Bank_Name','purpose'];
 	formats = {
 		'principal':'currency',
-		'processFUnd':'currency',
+		'processFund':'currency',
 		'term':'number',
 		'userData.Name_First':'nested',
 		'userData.Name_Last':'nested',
@@ -84,6 +91,16 @@ export class AdminCreditPage {
 		{
 			"icon":"md-checkmark-circle-outline",
 			"class":"approve-loan"
+		}
+	];
+	act_actions = [
+		{
+			"icon":"md-information-circle",
+			"class":"display-disclosure"
+		},
+		{
+			"icon":"ios-close-circle",
+			"class":"npl"
 		}
 	];
 	payments = [
@@ -125,13 +142,20 @@ export class AdminCreditPage {
   initLoans(){
   	let self = this;
 
+	this.load.present();
   	let pr1 = this.db.getLoansByStatus(1).then(rs=>{
     	self.loans.pending = rs;
     	return rs;
     });
-  	let pr2 = this.db.getLoansByStatus(2).then(rs=>{
+   
+
+    let pr2 = this.db.getLoansByStatus(2).then(rs=>{
     	self.loans.activeLoans = rs;
     	return rs;
+    });
+
+    Promise.all([pr1,pr2]).then(()=>{
+    	self.load.dismiss();
     });
   }
   
@@ -157,6 +181,14 @@ export class AdminCreditPage {
   		this.showDisclosureModal(JSON.parse(i.val));
   	}else if(i.index == 1){
   		this.showApproveAlert(JSON.parse(i.val)['LoanID']);
+  	}
+  }
+
+  doActiveAction(i:{index:number,val:any}){
+  	if(i.index == 0){
+  		this.showDisclosureModal(JSON.parse(i.val));
+  	}else if(i.index == 1){
+  		this.showNPLAlert(JSON.parse(i.val)['LoanID']);
   	}
   }
 
@@ -208,6 +240,59 @@ export class AdminCreditPage {
             }).catch(err=>{
             	let toast = this.toast.create({
 				  message: 'Loan Approval Failed',
+				  duration: 3000,
+				  position: 'top',
+				  cssClass:`fail`
+				});
+				toast.present();
+            	ld.dismiss();
+            	self.initLoans();
+            	console.warn(err);
+            });
+          }
+        }
+      ]
+    });
+    conf.present();
+  }
+
+  showNPLAlert(id){
+  	let self = this;
+  	console.log(id);
+  	let conf = this.alert.create({
+      title: 'Non Performing Loan',
+      message: 'Are you sure?',
+      buttons: [
+        {
+          text: 'Close',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Proceed',
+          handler: data => {
+          	let ld = self.loader.create({
+		      spinner: 'crescent',
+		      dismissOnPageChange: true,
+		      showBackdrop: true,
+		      content: `Processing...`,
+		      enableBackdropDismiss:false
+			});
+			ld.present();
+            self.db.updateLoanStatus(4,id).then(res=>{
+            	let toast = this.toast.create({
+				  message: 'Loan Cancelled',
+				  duration: 3000,
+				  position: 'top'
+				});
+				toast.present();
+            	ld.dismiss();
+            	self.initLoans();
+            	console.log(res);
+            }).catch(err=>{
+            	let toast = this.toast.create({
+				  message: 'Loan Cancellation Failed',
 				  duration: 3000,
 				  position: 'top',
 				  cssClass:`fail`

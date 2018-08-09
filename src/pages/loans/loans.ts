@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, ModalController, Modal, LoadingController } from 'ionic-angular';
 
 import { DisclosureStatementPage } from '../disclosure-statement/disclosure-statement';
-import { Http, Headers, RequestOptions } from '@angular/http';
-import { config } from '../../ext/config';
+
+import { DbProvider } from '../../providers/db/db';
 /**
  * Generated class for the LoansPage page.
  *
@@ -32,7 +32,6 @@ export class LoansPage {
 	isMobile : boolean = mobilecheck();
 	loanStatus = 'pending';
 	mod:Modal;
-  	env = config[location.origin].backend;
 	loans = {
 		'pending':[
 		/*{
@@ -124,7 +123,7 @@ export class LoansPage {
 	  enableBackdropDismiss:false
 	});
 	searched : any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private http: Http, private loader: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private db: DbProvider, private loader: LoadingController) {
   	this.searched = this.loans;
   }
 
@@ -133,18 +132,18 @@ export class LoansPage {
   	this.menu.close();
   	localStorage.page = 'creditsum';
 	this.load.present();
-  	let pr1 = this.getLoansByStatus(1).then(rs=>{
+  	let pr1 = this.db.getLoansByStatus(1).then(rs=>{
     	self.loans.pending = rs;
     	return rs;
     });
    
 
-    let pr2 = this.getLoansByStatus(2).then(rs=>{
+    let pr2 = this.db.getLoansByStatus(2).then(rs=>{
     	self.loans.approved = rs;
     	return rs;
     });
 
-    let pr3 = this.getLoansByStatus(4).then(rs=>{
+    let pr3 = this.db.getLoansByStatus(4).then(rs=>{
     	self.loans.cancel = rs;
     	return rs;
     });
@@ -158,7 +157,7 @@ export class LoansPage {
   	this.showModal(e);
   }
 
-  getLoansByStatus(stat):Promise<any>{
+  /*getLoansByStatus(stat):Promise<any>{
 	let hdr = new Headers;
 	hdr.append('Content-Type','application/json');
 	let rq = new RequestOptions;
@@ -176,7 +175,7 @@ export class LoansPage {
 				return {};
 			})
 	);
-  }
+  }*/
 
   ionViewWillLeave(){
   	try{
@@ -208,7 +207,8 @@ export class LoansPage {
   }
 
   showModal(i:{index:number,val:any}){
-  	this.mod = this.modal.create(DisclosureStatementPage,{data:this.loans.pending[i.index], payments:this.payments, user:i.val.userData},{cssClass:`whitemodal ${this.isMobile ? "mobile" : ""}`});
+  	let ind = JSON.parse(i.val);
+  	this.mod = this.modal.create(DisclosureStatementPage,{data:ind, payments:this.payments, user:ind.userData},{cssClass:`whitemodal ${this.isMobile ? "mobile" : ""}`});
   	this.mod.present();
   }
 

@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Modal, ModalController, MenuController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Modal, ModalController, MenuController, LoadingController, Loading } from 'ionic-angular';
 
 import { DisclosureStatementPage } from '../disclosure-statement/disclosure-statement';
 
-import { Http, Headers, RequestOptions } from '@angular/http';
-import { config } from '../../ext/config';
+import { DbProvider } from '../../providers/db/db';
 /**
  * Generated class for the EmployeeLoansPage page.
  *
@@ -17,22 +16,16 @@ declare var mobilecheck; //fn to check for screen type
 @Component({
   selector: 'page-employee-loans',
   templateUrl: 'employee-loans.html',
+  providers:[DbProvider]
 })
 export class EmployeeLoansPage {
 
-  	env = config[location.origin].backend;
 	outstandingCredit:number = 0;
 	availableCredit: number = 50000;isMobile : boolean = mobilecheck();
 	loanStatus = 'pending';
 	mod:Modal;
 	expanded = 0;
-	load = this.loader.create({
-	  spinner: 'crescent',
-	  dismissOnPageChange: true,
-	  showBackdrop: true,
-	  content: `Processing...`,
-	  enableBackdropDismiss:false
-	});
+	load : Loading;
 	loans = {
 		'pending':[/*
 		{
@@ -127,55 +120,39 @@ export class EmployeeLoansPage {
 		mobile: "9189101112"	
   	};*/
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private http: Http, private loader: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private db: DbProvider, private loader: LoadingController) {
   }
 
   ionViewDidLoad() {
   	let self = this;
-    console.log('ionViewDidLoad EmployeeLoansPage');
+  	this.load = this.loader.create({
+	  spinner: 'crescent',
+	  dismissOnPageChange: true,
+	  showBackdrop: true,
+	  content: `Processing...`,
+	  enableBackdropDismiss:false
+	});
     this.load.present();
-    let pr1 = this.getLoansByStatus(1).then(rs=>{
+    let pr1 = this.db.getEmpLoansByStatus(1).then(rs=>{
     	self.loans.pending = rs;
     	return rs;
     });
    
 
-    let pr2 = this.getLoansByStatus(2).then(rs=>{
+    let pr2 = this.db.getEmpLoansByStatus(2).then(rs=>{
     	self.loans.approved = rs;
     	return rs;
     });
 
-    let pr3 = this.getLoansByStatus(4).then(rs=>{
+    let pr3 = this.db.getEmpLoansByStatus(4).then(rs=>{
     	self.loans.cancel = rs;
     	return rs;
     });
 
     Promise.all([pr1,pr2,pr3]).then(()=>{
-    	this.load.dismiss();
+    	this.load.dismiss().catch(()=>{});
     });
 
-  }
-
-  getLoansByStatus(stat):Promise<any>{
-
-	let hdr = new Headers;
-	hdr.append('Content-Type','application/json');
-	let rq = new RequestOptions;
-	rq.headers = hdr;
-	let masterId = this.userData.master_id;
-
-	return (
-		this.http.post(`${this.env}/api.php?q=get_loan_by_status`,{status:stat,id:masterId}, rq)
-			.toPromise()
-			.then(res=>{
-				console.log(res.json());
-				return res.json();
-			})
-			.catch(err=>{
-				console.warn(err);
-				return {};
-			})
-	);
   }
 
   ionViewDidEnter() {

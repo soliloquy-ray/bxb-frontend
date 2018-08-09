@@ -81,7 +81,7 @@ export class CompaniesPage {
 
   ionViewDidEnter() {
   	this.menu.close();
-  	localStorage.page = 'loans';
+  	localStorage.page = 'companies';
   }
 
   ionViewWillLeave(){

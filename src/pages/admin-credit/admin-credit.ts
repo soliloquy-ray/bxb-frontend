@@ -1,5 +1,5 @@
 import { Component, ViewChildren, QueryList } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, Modal, ModalController, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, Modal, ModalController, LoadingController, AlertController, ToastController } from 'ionic-angular';
 
 import { EmployeeInfoModalPage } from '../employee-info-modal/employee-info-modal';
 import { EditEmployeePage } from '../edit-employee/edit-employee';
@@ -7,27 +7,22 @@ import { AddEmployeePage } from '../add-employee/add-employee';
 
 import { DragScrollComponent } from 'ngx-drag-scroll';
 import { DisclosureStatementPage } from '../disclosure-statement/disclosure-statement';
-import { Http, Headers, RequestOptions } from '@angular/http';
-import { config } from '../../ext/config';
-/**
- * Generated class for the AdminCreditPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
+import { DbProvider } from '../../providers/db/db';
+
 declare var mobilecheck; //fn to check for screen type
 
 @IonicPage()
 @Component({
   selector: 'page-admin-credit',
   templateUrl: 'admin-credit.html',
+  providers: [DbProvider]
 })
 export class AdminCreditPage {
 
 	mod: Modal;
 	pendingMembers = [];
 	isMobile : boolean = mobilecheck();
-  	env = config[location.origin].backend;
 	@ViewChildren(DragScrollComponent) ds : QueryList<DragScrollComponent>;
 	;
 	loans = {
@@ -117,39 +112,29 @@ export class AdminCreditPage {
 			"bal":0
 		}
 	];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private http: Http, private loader: LoadingController, private alert: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private db: DbProvider, private loader: LoadingController, private alert: AlertController, private toast: ToastController) {
   }
 
   ionViewDidEnter() {
   	let self = this;
   	this.menu.close();
-  	localStorage.page = 'loans';
-  	let pr1 = this.getLoansByStatus(1).then(rs=>{
+  	localStorage.page = 'creditsum';
+  	this.initLoans();
+  }
+
+  initLoans(){
+  	let self = this;
+
+  	let pr1 = this.db.getLoansByStatus(1).then(rs=>{
     	self.loans.pending = rs;
     	return rs;
     });
+  	let pr2 = this.db.getLoansByStatus(2).then(rs=>{
+    	self.loans.activeLoans = rs;
+    	return rs;
+    });
   }
-
   
-  getLoansByStatus(stat):Promise<any>{
-	let hdr = new Headers;
-	hdr.append('Content-Type','application/json');
-	let rq = new RequestOptions;
-	rq.headers = hdr;
-
-	return (
-		this.http.post(`${this.env}/api.php?q=hr_get_loan_by_status`,{status:stat}, rq)
-			.toPromise()
-			.then(res=>{
-				console.log(res.json());
-				return res.json();
-			})
-			.catch(err=>{
-				console.warn(err);
-				return {};
-			})
-	);
-  }
 
   reorient($event){
   	this.isMobile = mobilecheck();
@@ -169,18 +154,20 @@ export class AdminCreditPage {
 
   doAction(i:{index:number,val:any}){
   	if(i.index == 0){
-  		this.showDisclosureModal(i);
+  		this.showDisclosureModal(JSON.parse(i.val));
   	}else if(i.index == 1){
-  		this.showApproveAlert();
+  		this.showApproveAlert(JSON.parse(i.val)['LoanID']);
   	}
   }
 
-  showDisclosureModal(i:{index:number,val:any}){
-  	this.mod = this.modal.create(DisclosureStatementPage,{data:this.loans.pending[i.index], payments:this.payments, user:i.val.userData},{cssClass:`whitemodal ${this.isMobile ? "mobile" : ""}`});
+  showDisclosureModal(i){
+  	this.mod = this.modal.create(DisclosureStatementPage,{data:i, payments:this.payments, user:i['userData']},{cssClass:`whitemodal ${this.isMobile ? "mobile" : ""}`});
   	this.mod.present();
   }
 
-  showApproveAlert(){
+  showApproveAlert(id){
+  	let self = this;
+  	console.log(id);
   	let conf = this.alert.create({
       title: 'Reference No.',
       inputs: [
@@ -199,7 +186,37 @@ export class AdminCreditPage {
         {
           text: 'Proceed',
           handler: data => {
-            console.log('Saved clicked');
+          	let ld = self.loader.create({
+		      spinner: 'crescent',
+		      dismissOnPageChange: true,
+		      showBackdrop: true,
+		      content: `Processing...`,
+		      enableBackdropDismiss:false
+			});
+			ld.present();
+            self.db.updateLoanStatus(2,id).then(res=>{
+            	let toast = this.toast.create({
+				  message: 'Loan Approved',
+				  duration: 3000,
+				  position: 'top',
+				  cssClass:`success`
+				});
+				toast.present();
+            	ld.dismiss();
+            	self.initLoans();
+            	console.log(res);
+            }).catch(err=>{
+            	let toast = this.toast.create({
+				  message: 'Loan Approval Failed',
+				  duration: 3000,
+				  position: 'top',
+				  cssClass:`fail`
+				});
+				toast.present();
+            	ld.dismiss();
+            	self.initLoans();
+            	console.warn(err);
+            });
           }
         }
       ]

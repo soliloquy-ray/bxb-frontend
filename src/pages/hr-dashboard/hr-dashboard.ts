@@ -3,8 +3,7 @@ import { IonicPage, NavController, NavParams, MenuController, LoadingController 
 
 import { LoansPage } from '../loans/loans';
 
-import { Http, Headers, RequestOptions } from '@angular/http';
-import { config } from '../../ext/config';
+import { DbProvider } from '../../providers/db/db';
 /**
  * Generated class for the HrDashboardPage page.
  *
@@ -17,6 +16,7 @@ declare var mobilecheck; //fn to check for screen type
 @Component({
   selector: 'page-hr-dashboard',
   templateUrl: 'hr-dashboard.html',
+  providers: [DbProvider]
 })
 export class HrDashboardPage {
 
@@ -24,7 +24,6 @@ export class HrDashboardPage {
 	deets2: string = `2018`;
 	deets3: string = `&nbsp;`;
 	isMobile : boolean = mobilecheck();
-  	env = config[location.origin].backend;
 	credits = [];
 
 	hdrTitles = {
@@ -38,20 +37,32 @@ export class HrDashboardPage {
 	formats = {
 		'principal':'currency'
 	};
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private http: Http, private loader: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private db: DbProvider, private loader: LoadingController) {
   }
 
   ionViewDidEnter() {
   	let self = this;
   	this.menu.close();
   	localStorage.page = 'dashboard';
-
-  	this.getLoansByStatus(1).then(res=>{
-  		self.credits = res;
+	let load = this.loader.create({
+	  spinner: 'crescent',
+	  dismissOnPageChange: true,
+	  showBackdrop: true,
+	  content: `Processing...`,
+	  enableBackdropDismiss:false
+	});
+	load.present();
+  	this.db.getLoansByStatus(1).then(res=>{
+  		return res;
+  	}).then(r=>{
+  		self.db.getLoansByStatus(2).then(rs=>{
+  			self.credits = r.concat(rs);
+  			load.dismiss().catch(()=>{});
+  		})
   	});
   }
 
-  getLoansByStatus(stat):Promise<any>{
+  /*getLoansByStatus(stat):Promise<any>{
 	let load = this.loader.create({
 	  spinner: 'crescent',
 	  dismissOnPageChange: true,
@@ -79,7 +90,7 @@ export class HrDashboardPage {
 				return {};
 			})
 	);
-  }
+  }*/
 
   ionViewWillLeave(){
   }

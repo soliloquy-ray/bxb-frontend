@@ -27,11 +27,9 @@ export class SortableTableComponent {
   expanded = 0;
   searched: Array<any> = [];
   constructor(private cdr: ChangeDetectorRef) {
-    console.log('Hello SortableTableComponent Component');
   }
 
   ngAfterViewInit(){
-  	console.log(this);
   	let self = this;
   	this.searched = this.data;
   	this.cdr.detectChanges();
@@ -57,7 +55,6 @@ export class SortableTableComponent {
   			});
   			if(cc) return a;
   		});
-  		console.log(lns);
   		this.searched = lns;
   	}
 
@@ -113,7 +110,6 @@ export class SortableTableComponent {
 
   nesting(data,nested:string){
   	let dt = nested.split(".");
-  	console.log(data[dt[0]][dt[1]]);
   	return data[dt[0]][dt[1]];
   }
 

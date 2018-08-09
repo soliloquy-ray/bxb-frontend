@@ -106,7 +106,7 @@ export class LoginPage {
   				}  				*/
           load.dismiss();
           let uDt = res.json();
-          if(!uDt){
+          if(!uDt.hasOwnProperty('master_id')){
             this.launchToast('Invalid login','fail');
           }else{
             localStorage.userData = JSON.stringify(uDt);

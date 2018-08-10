@@ -1,14 +1,16 @@
-import { Component, ViewChildren, QueryList } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, Modal, ModalController, LoadingController, AlertController, ToastController } from 'ionic-angular';
 
 import { EmployeeInfoModalPage } from '../employee-info-modal/employee-info-modal';
 import { EditEmployeePage } from '../edit-employee/edit-employee';
 import { AddEmployeePage } from '../add-employee/add-employee';
 
-import { DragScrollComponent } from 'ngx-drag-scroll';
+//import { DragScrollComponent } from 'ngx-drag-scroll';
 import { DisclosureStatementPage } from '../disclosure-statement/disclosure-statement';
 
 import { DbProvider } from '../../providers/db/db';
+
+import { LoanComponent } from '../../components/loan/loan';
 
 @IonicPage()
 @Component({
@@ -20,8 +22,8 @@ export class AdminCreditPage {
 
 	mod: Modal;
 	pendingMembers = [];
-	@ViewChildren(DragScrollComponent) ds : QueryList<DragScrollComponent>;
-	;
+	//@ViewChildren(DragScrollComponent) ds : QueryList<DragScrollComponent>;
+	@ViewChild('p_loan') p_loan: LoanComponent;
 	loans = {
 
 		"pending":[],
@@ -167,10 +169,10 @@ export class AdminCreditPage {
   }
 
   ngAfterViewInit(){
-  	this.ds.forEach(i=>{
+  /*	this.ds.forEach(i=>{
   		i.snapOffset = 85;
   		i.scrollbarHidden = true;
-  	});
+  	});*/
   }
 
   doAction(i:{index:number,val:any}){
@@ -190,6 +192,10 @@ export class AdminCreditPage {
   }
 
   showDisclosureModal(i){
+  	this.p_loan.p = i.principal;
+  	this.p_loan.t = i.term;
+  	let dtt = this.p_loan.getDates();
+  	console.log(this.p_loan);
   	this.mod = this.modal.create(DisclosureStatementPage,{data:i, payments:this.payments, user:i['userData']},{cssClass:`whitemodal ${this.isMobile() ? "mobile" : ""}`});
   	this.mod.present();
   }

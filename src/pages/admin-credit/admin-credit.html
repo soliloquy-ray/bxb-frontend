@@ -9,6 +9,7 @@
 			<ion-col col-12>
 				<submodule [title]="'Pending Applications'">
 					<sortable-table *ngIf="loans?.pending.length > 0" [data]="loans?.pending" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles" [actions]="actions" (t)="doAction($event)"></sortable-table>
+					<loan #p_loan></loan>
 					<p class="no-data" *ngIf="loans.pending.length == 0">
 						No data
 					</p>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, ModalController, AlertController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, ModalController, AlertController, LoadingController, ToastController } from 'ionic-angular';
 
 import { LoansPage } from '../loans/loans';
 import { EmpDisclosureStatementModalPage } from '../emp-disclosure-statement-modal/emp-disclosure-statement-modal';
@@ -13,7 +13,6 @@ import { config } from '../../ext/config';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-declare var mobilecheck; //fn to check for screen type
 
 interface loanModel {
     amt:number,
@@ -37,7 +36,6 @@ export class EmployeeDashboardPage {
 	outstandingCredit:number = 0;
 	availableCredit: number = 50000;
 	creditToUse:number = 1000;
-	isMobile : boolean = mobilecheck();
 	min: number = 1000;
 	paydays:number = 1;
 	maxPaydays:number = 24;
@@ -57,7 +55,7 @@ export class EmployeeDashboardPage {
 	dates : Array<{paymentDate,paymentNum,amt,bal}> = [];
   	env = config[location.origin].backend;
   	userData = JSON.parse(localStorage.userData);
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private http: Http, private alert: AlertController, private loader: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private http: Http, private alert: AlertController, private loader: LoadingController, private toast:ToastController) {
   }
 
   ionViewDidEnter() {
@@ -68,8 +66,8 @@ export class EmployeeDashboardPage {
   ionViewWillLeave(){
   }
 
-  reorient($event){
-  	this.isMobile = mobilecheck();
+  isMobile(){
+  	return localStorage.view == "mobile";
   }
 
   toCreditSummary(){
@@ -172,11 +170,6 @@ export class EmployeeDashboardPage {
   			}
   		}else{
   			initDay = 30;
-  			++mn;
-	  		if(mn >= 13){
-	  			++yr;
-	  			mn = 1;
-	  		}
   		}
   	}
   	console.log(this.dates);
@@ -224,6 +217,7 @@ export class EmployeeDashboardPage {
 	}
 
 	createNewLoan(){
+    let self = this;
 		let load = this.loader.create({
 	      spinner: 'crescent',
 	      dismissOnPageChange: true,
@@ -241,7 +235,7 @@ export class EmployeeDashboardPage {
 	  	let uData = {
 	  		id:this.userData.master_id,
 	  		principal: this.loan.amt,
-	  		interest: this.interestRate,
+	  		interest: this.interestRate*2,
 	  		paydays: this.paydays,
 	  		purpose: this.purpose,
 	  		processFund: this.loan.processingFund,
@@ -253,10 +247,24 @@ export class EmployeeDashboardPage {
 	  			.toPromise()
 	  			.then(res=>{
 	  				load.dismiss();
+            let tst = self.toast.create({
+              message: 'Loan has been submitted for approval.',
+              duration: 3000,
+              position: 'top',
+              cssClass:`success`
+            });
+            tst.present();
 	  				console.info(res);
 	  			})
 	  			.catch(err=>{
 	  				load.dismiss();
+            let tst = self.toast.create({
+              message: 'An error occurred.',
+              duration: 3000,
+              position: 'top',
+              cssClass:`fail`
+            });
+            tst.present();
 	  				console.warn(err);
 	  			})
 	}

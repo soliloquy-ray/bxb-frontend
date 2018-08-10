@@ -5,6 +5,7 @@ import { FootComponentModule } from './foot/foot.module';
 import { SubmoduleComponentModule } from './submodule/submodule.module';
 import { HeaderTitleComponentModule } from './header-title/header-title.module';
 import { SortableTableComponentModule } from './sortable-table/sortable-table.module';
+import { LoanComponentModule } from './loan/loan.module';
 @NgModule({
 	declarations: [],
 	imports: [],
@@ -13,6 +14,7 @@ import { SortableTableComponentModule } from './sortable-table/sortable-table.mo
     FootComponentModule,
     SubmoduleComponentModule,
     HeaderTitleComponentModule,
-    SortableTableComponentModule]
+    SortableTableComponentModule,
+    LoanComponentModule]
 })
 export class ComponentsModule {}

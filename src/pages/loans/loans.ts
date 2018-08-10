@@ -10,7 +10,6 @@ import { DbProvider } from '../../providers/db/db';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-declare var mobilecheck; //fn to check for screen type
 
 interface pendingLoan {
 	firstName,
@@ -29,7 +28,6 @@ interface pendingLoan {
 })
 export class LoansPage {
 
-	isMobile : boolean = mobilecheck();
 	loanStatus = 'pending';
 	mod:Modal;
 	loans = {
@@ -185,8 +183,8 @@ export class LoansPage {
   	}
   }
   
-  reorient($event){
-  	this.isMobile = mobilecheck();
+  isMobile(){
+  	return localStorage.view == "mobile";
   }
 
   segmentChanged($event){
@@ -208,7 +206,7 @@ export class LoansPage {
 
   showModal(i:{index:number,val:any}){
   	let ind = JSON.parse(i.val);
-  	this.mod = this.modal.create(DisclosureStatementPage,{data:ind, payments:this.payments, user:ind.userData},{cssClass:`whitemodal ${this.isMobile ? "mobile" : ""}`});
+  	this.mod = this.modal.create(DisclosureStatementPage,{data:ind, payments:this.payments, user:ind.userData},{cssClass:`whitemodal ${this.isMobile() ? "mobile" : ""}`});
   	this.mod.present();
   }
 

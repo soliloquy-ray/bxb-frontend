@@ -10,7 +10,6 @@ import { DbProvider } from '../../providers/db/db';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-declare var mobilecheck; //fn to check for screen type
 
 @IonicPage()
 @Component({
@@ -23,7 +22,6 @@ export class HrDashboardPage {
 	deets: string = `<a href='/#/loans'>Details&nbsp;&gt;</a>`;
 	deets2: string = `2018`;
 	deets3: string = `&nbsp;`;
-	isMobile : boolean = mobilecheck();
 	credits = [];
 
 	hdrTitles = {
@@ -62,41 +60,12 @@ export class HrDashboardPage {
   	});
   }
 
-  /*getLoansByStatus(stat):Promise<any>{
-	let load = this.loader.create({
-	  spinner: 'crescent',
-	  dismissOnPageChange: true,
-	  showBackdrop: true,
-	  content: `Processing...`,
-	  enableBackdropDismiss:false
-	});
-	load.present();
-	let hdr = new Headers;
-	hdr.append('Content-Type','application/json');
-	let rq = new RequestOptions;
-	rq.headers = hdr;
-
-	return (
-		this.http.post(`${this.env}/api.php?q=hr_get_loan_by_status`,{status:stat}, rq)
-			.toPromise()
-			.then(res=>{
-				load.dismiss();
-				console.log(res.json());
-				return res.json();
-			})
-			.catch(err=>{
-				load.dismiss();
-				console.warn(err);
-				return {};
-			})
-	);
-  }*/
 
   ionViewWillLeave(){
   }
 
-  reorient($event){
-  	this.isMobile = mobilecheck();
+  isMobile(){
+  	return localStorage.view == "mobile";
   }
 
   toCreditSummary(){

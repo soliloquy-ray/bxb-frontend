@@ -9,7 +9,6 @@ import { AccountLinkComponent } from '../account-link/account-link';
  * See https://angular.io/api/core/Component for more info on Angular
  * Components.
  */
- declare var mobilecheck;
 
 @Component({
   selector: 'top-bar',
@@ -18,15 +17,14 @@ import { AccountLinkComponent } from '../account-link/account-link';
 export class TopBarComponent {
   @ViewChild('pic') pic: ElementRef;
   text: string;
-  isMobile: boolean = mobilecheck();
 
   constructor(private pop:PopoverController, private menu: MenuController) {
     console.log('Hello TopBarComponent Component');
     this.text = 'Hello World';
   }
 
-  reorient($event){
-  	this.isMobile = mobilecheck();
+  isMobile(){
+    return localStorage.view == "mobile";
   }
 
   ngAfterViewInit(){
@@ -35,7 +33,7 @@ export class TopBarComponent {
 
   presentMyAcc(event){
 
-  	if(this.isMobile){
+  	if(this.isMobile()){
 
 	  	this.menu.open(); 	
   	}else{
@@ -49,7 +47,7 @@ export class TopBarComponent {
 
   presentNotifs(event){
 
-  	let popover = this.pop.create(AccountLinkComponent,{},{cssClass:(this.isMobile ? 'mobile':'top-45')});
+  	let popover = this.pop.create(AccountLinkComponent,{},{cssClass:(this.isMobile() ? 'mobile':'top-45')});
   	popover.present({
   		ev:event
   	});

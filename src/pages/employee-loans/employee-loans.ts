@@ -10,7 +10,6 @@ import { DbProvider } from '../../providers/db/db';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-declare var mobilecheck; //fn to check for screen type
 
 @IonicPage()
 @Component({
@@ -21,7 +20,7 @@ declare var mobilecheck; //fn to check for screen type
 export class EmployeeLoansPage {
 
 	outstandingCredit:number = 0;
-	availableCredit: number = 50000;isMobile : boolean = mobilecheck();
+	availableCredit: number = 50000;
 	loanStatus = 'pending';
 	mod:Modal;
 	expanded = 0;
@@ -160,8 +159,8 @@ export class EmployeeLoansPage {
   	localStorage.page = 'creditsum';
   }
 
-  reorient($event){
-  	this.isMobile = mobilecheck();
+  isMobile(){
+  	return localStorage.view == "mobile";
   }
 
   segmentChanged($event){
@@ -172,7 +171,7 @@ export class EmployeeLoansPage {
   	this.userData.firstName = this.userData.Name_First;
   	this.userData.lastName = this.userData.Name_Last;
   	this.userData.age = this._calculateAge(this.userData.Birthday);
-  	this.mod = this.modal.create(DisclosureStatementPage,{data:this.loans.pending[i], payments:this.payments, user:this.userData},{cssClass:`whitemodal ${this.isMobile ? "mobile" : ""}`});
+  	this.mod = this.modal.create(DisclosureStatementPage,{data:this.loans.pending[i], payments:this.payments, user:this.userData},{cssClass:`whitemodal ${this.isMobile() ? "mobile" : ""}`});
   	this.mod.present();
   }
 

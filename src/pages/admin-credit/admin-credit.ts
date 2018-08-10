@@ -10,8 +10,6 @@ import { DisclosureStatementPage } from '../disclosure-statement/disclosure-stat
 
 import { DbProvider } from '../../providers/db/db';
 
-declare var mobilecheck; //fn to check for screen type
-
 @IonicPage()
 @Component({
   selector: 'page-admin-credit',
@@ -22,16 +20,8 @@ export class AdminCreditPage {
 
 	mod: Modal;
 	pendingMembers = [];
-	isMobile : boolean = mobilecheck();
 	@ViewChildren(DragScrollComponent) ds : QueryList<DragScrollComponent>;
 	;
-	load:any = this.loader.create({
-		      spinner: 'crescent',
-		      dismissOnPageChange: true,
-		      showBackdrop: true,
-		      content: `Processing...`,
-		      enableBackdropDismiss:false
-			});
 	loans = {
 
 		"pending":[],
@@ -141,31 +131,38 @@ export class AdminCreditPage {
 
   initLoans(){
   	let self = this;
-
-	this.load.present();
+  	let load = this.loader.create({
+		      spinner: 'crescent',
+		      dismissOnPageChange: true,
+		      showBackdrop: true,
+		      content: `Processing...`,
+		      enableBackdropDismiss:false
+			});
+	load.present();
   	let pr1 = this.db.getLoansByStatus(1).then(rs=>{
     	self.loans.pending = rs;
+    	console.log(self.loans.pending);
     	return rs;
     });
    
 
     let pr2 = this.db.getLoansByStatus(2).then(rs=>{
     	self.loans.activeLoans = rs;
+    	console.log(self.loans.activeLoans);
     	return rs;
     });
 
     Promise.all([pr1,pr2]).then(()=>{
-    	self.load.dismiss();
+    	load.dismiss().catch(()=>{});
     });
   }
   
-
-  reorient($event){
-  	this.isMobile = mobilecheck();
+  isMobile(){
+  	return localStorage.view == "mobile";
   }
 
   showModal(i){
-  	this.mod = this.modal.create(EmployeeInfoModalPage,{data:i},{cssClass:`whitemodal sm ${this.isMobile ? "mobile" : ""}`});
+  	this.mod = this.modal.create(EmployeeInfoModalPage,{data:i},{cssClass:`whitemodal sm ${this.isMobile() ? "mobile" : ""}`});
   	this.mod.present();
   }
 
@@ -193,7 +190,7 @@ export class AdminCreditPage {
   }
 
   showDisclosureModal(i){
-  	this.mod = this.modal.create(DisclosureStatementPage,{data:i, payments:this.payments, user:i['userData']},{cssClass:`whitemodal ${this.isMobile ? "mobile" : ""}`});
+  	this.mod = this.modal.create(DisclosureStatementPage,{data:i, payments:this.payments, user:i['userData']},{cssClass:`whitemodal ${this.isMobile() ? "mobile" : ""}`});
   	this.mod.present();
   }
 
@@ -234,7 +231,7 @@ export class AdminCreditPage {
 				  cssClass:`success`
 				});
 				toast.present();
-            	ld.dismiss();
+            	ld.dismiss().catch(()=>{});
             	self.initLoans();
             	console.log(res);
             }).catch(err=>{
@@ -245,7 +242,7 @@ export class AdminCreditPage {
 				  cssClass:`fail`
 				});
 				toast.present();
-            	ld.dismiss();
+            	ld.dismiss().catch(()=>{});
             	self.initLoans();
             	console.warn(err);
             });
@@ -260,8 +257,8 @@ export class AdminCreditPage {
   	let self = this;
   	console.log(id);
   	let conf = this.alert.create({
-      title: 'Non Performing Loan',
-      message: 'Are you sure?',
+      title: 'Flag Loan',
+      message: 'Are you sure you want to flag this loan?',
       buttons: [
         {
           text: 'Close',
@@ -287,7 +284,7 @@ export class AdminCreditPage {
 				  position: 'top'
 				});
 				toast.present();
-            	ld.dismiss();
+            	ld.dismiss().catch(()=>{});
             	self.initLoans();
             	console.log(res);
             }).catch(err=>{
@@ -298,7 +295,7 @@ export class AdminCreditPage {
 				  cssClass:`fail`
 				});
 				toast.present();
-            	ld.dismiss();
+            	ld.dismiss().catch(()=>{});
             	self.initLoans();
             	console.warn(err);
             });

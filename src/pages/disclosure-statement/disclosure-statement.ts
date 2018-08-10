@@ -8,7 +8,6 @@ import {TermsModalPage} from '../terms-modal/terms-modal';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-declare var mobilecheck; //fn to check for screen type
 
 @IonicPage()
 @Component({
@@ -18,7 +17,6 @@ declare var mobilecheck; //fn to check for screen type
 export class DisclosureStatementPage {
 
 	loan: any;
-	isMobile : boolean = mobilecheck();
 	payments: any;
 	user: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private view: ViewController, private modal: ModalController) {
@@ -36,8 +34,8 @@ export class DisclosureStatementPage {
   	this.view.dismiss();
   }
 
-  reorient($event){
-  	this.isMobile = mobilecheck();
+  isMobile(){
+    return localStorage.view == "mobile";
   }
 
   openTermsModal(){

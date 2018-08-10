@@ -1,6 +1,6 @@
-<ion-content (window:resize)="reorient($event)" [ngClass]="{'mobile':isMobile}">
+<ion-content [ngClass]="{'mobile':isMobile()}">
 	<top-bar></top-bar>
-	<side-bar *ngIf = "!isMobile" [highlights]="'dashboard'"></side-bar>
+	<side-bar *ngIf = "!isMobile()" [highlights]="'dashboard'"></side-bar>
 
 	<section class="main-content">
 		<ion-row>
@@ -41,7 +41,7 @@
 						How much credit do you wish to use?
 					</ion-col>
 					<ion-col col-3>
-						<input type="number" min="1000" maxlength="6" [max]="availableCredit" step="500" [(ngModel)]="creditToUse" [disabled]="isMobile" (change)="checkCredit(0)" />
+						<input type="number" min="1000" maxlength="6" [max]="availableCredit" step="500" [(ngModel)]="creditToUse" [disabled]="isMobile()" (change)="checkCredit(0)" />
 					</ion-col>
 				</ion-row>
 				<ion-row class="range-1">
@@ -70,7 +70,7 @@
 						Over how many paydays do you wish to repay the credit?
 					</ion-col>
 					<ion-col col-3>
-						<input type="number" min="1" maxlength="6" [max]="maxPaydays" step="1" [(ngModel)]="paydays" [disabled]="isMobile" (change)="getDates()"/>
+						<input type="number" min="1" maxlength="6" [max]="maxPaydays" step="1" [(ngModel)]="paydays" [disabled]="isMobile()" (change)="getDates()"/>
 					</ion-col>
 				</ion-row>
 				<ion-row class="range-1">
@@ -116,7 +116,7 @@
 				</ion-col>
 				<ion-col col-1 (tap)="launchBreakdown()">
 					<ion-icon name="md-information-circle"></ion-icon>
-					<p *ngIf="isMobile">View Breakdown</p>
+					<p *ngIf="isMobile()">View Breakdown</p>
 				</ion-col>
 			</ion-row>
 		</div>

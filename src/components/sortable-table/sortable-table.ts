@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 
 /**
  * Generated class for the SortableTableComponent component.
@@ -6,10 +6,10 @@ import { Component, Input, Output, EventEmitter, ChangeDetectorRef } from '@angu
  * See https://angular.io/api/core/Component for more info on Angular
  * Components.
  */
-declare var mobilecheck; //fn to check for screen type
 @Component({
   selector: 'sortable-table',
-  templateUrl: 'sortable-table.html'
+  templateUrl: 'sortable-table.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SortableTableComponent {
 
@@ -23,7 +23,6 @@ export class SortableTableComponent {
   h_ctr = [];
   sorting:string = '';
   sort_type:boolean = false;
-  isMobile: boolean = mobilecheck();
   expanded = 0;
   searched: Array<any> = [];
   constructor(private cdr: ChangeDetectorRef) {
@@ -38,6 +37,11 @@ export class SortableTableComponent {
   	});
   }
 
+	ngOnChanges(...args: any[]) {
+        console.log('changing', args);
+        console.log(this.data);
+        this.searched = this.data;
+    }
 
   search($event){
   	this.expanded = 0;
@@ -119,6 +123,10 @@ export class SortableTableComponent {
 
   emitter(i,e){
   	this.t.emit({index:i,val:e});
+  }
+
+  isMobile(){
+  	return localStorage.view == "mobile";
   }
 
 }

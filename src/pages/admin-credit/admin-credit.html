@@ -1,6 +1,6 @@
-<ion-content (window:resize)="reorient($event)" [ngClass]="{'mobile':isMobile}">
+<ion-content [ngClass]="{'mobile':isMobile()}">
 	<top-bar></top-bar>
-	<side-bar *ngIf = "!isMobile" [highlights]="'creditsum'"></side-bar>
+	<side-bar *ngIf = "!isMobile()" [highlights]="'creditsum'"></side-bar>
 
 	<section class="main-content">
 

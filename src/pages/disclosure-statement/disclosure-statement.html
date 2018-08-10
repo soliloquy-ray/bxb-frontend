@@ -14,9 +14,9 @@
 </ion-header>
 
 
-<ion-content padding (window:resize)="reorient($event)">
+<ion-content padding>
 
-	<section class="content" [ngClass]="{'mobile':isMobile}">
+	<section class="content" [ngClass]="{'mobile':isMobile()}">
 		<span class="header">
 			<div class="title">
 				<ion-icon name="md-information-circle"></ion-icon>

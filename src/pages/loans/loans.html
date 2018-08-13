@@ -5,6 +5,7 @@
 	<section class="main-content">
 		<ion-row>
 			<ion-col col-12>
+				<loan #p_loan></loan>
 				<submodule [title]="'Portfolio Loans/Loan Status'">
 					
 					<ion-segment [(ngModel)]="loanStatus" color="primary" (ionChange)="segmentChanged($event)">

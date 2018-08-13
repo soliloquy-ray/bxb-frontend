@@ -42,7 +42,7 @@
 				<ion-col class="bundle">
 					<ion-row>
 						<ion-col class="label">UDI</ion-col>
-						<ion-col class="data">{{loan?.principal * loan?.interest | currency:'PHP':'symbol-narrow':'1.2-2'}}</ion-col>
+						<ion-col class="data">{{loan?.loan.udi | currency:'PHP':'symbol-narrow':'1.2-2'}}</ion-col>
 					</ion-row>
 				</ion-col>
 			</ion-row>
@@ -132,7 +132,7 @@
 				<ion-col class="bundle">
 					<ion-row>
 						<ion-col class="label">TOTAL</ion-col>
-						<ion-col class="data">33,600.00</ion-col>
+						<ion-col class="data">{{loan?.loan.totalPayment | currency:'PHP':'symbol-narrow':'1.2-2' }}</ion-col>
 					</ion-row>
 					<ion-row>
 						<ion-col col-3>

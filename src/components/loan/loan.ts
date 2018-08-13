@@ -20,6 +20,7 @@ export class LoanComponent {
 	@Input('collectionFeeRate') collectionFeeRate: number = 0.015;
 	@Input('docFeeRate') docFeeRate : number = 0.0075;
 	dates : Array<{paymentDate,paymentNum,amt,bal}> = [];
+	@Input('sdate') sdate :any = Date.now();
 
 	deductionPerPayDay:number = ((this.t * this.r * this.p) + this.p)/this.t;
 	loan;
@@ -27,28 +28,34 @@ export class LoanComponent {
   }
 
   getLoan(noDisplay:boolean = false){
+  	let r = this.r/2;
   	this.loan = {
-  		amt:this.p,
-    	udi:this.t * this.r * this.p,
-    	grossCashout:this.p,
+  		amt:Math.round(this.p),
+    	udi:this.t * r * this.p,
+    	grossCashout:Math.round(this.p),
     	processingFund:this.p * this.processingFeeRate,
     	collectionFund:this.p * this.collectionFeeRate,
     	docFee:this.p * this.docFeeRate,
-    	totalDeductions:0,
-    	netCashout:0,
-    	totalPayment:(this.t * this.r * this.p) + this.p
+    	totalDeductions:this.p * this.processingFeeRate + this.p * this.collectionFeeRate + this.p * this.docFeeRate,
+    	netCashout:Math.round(this.p) - (this.p * this.processingFeeRate + this.p * this.collectionFeeRate + this.p * this.docFeeRate),
+    	totalPayment:(this.t * r * this.p) + Math.round(this.p)
   	};
-  	this.deductionPerPayDay = ((this.t * this.r * this.p) + this.p)/this.t;
+  	let intRate = Math.round(this.t) * r * Math.round(this.p);
+  	let deductible = intRate + Math.round(this.p);
+  	this.deductionPerPayDay = deductible/this.t;
   	return this.loan;
   }
 
   getDates():Promise<any>{
   	this.getLoan();
   	this.dates = [];
-  	let fd = new Date();
+  	let fd = new Date(this.sdate);
   	let mn = fd.getMonth();
   	let yr = fd.getFullYear();
   	let initDay;
+  	let r = this.r/2;
+  	let p = Math.round(this.p);
+  	let dppd = this.deductionPerPayDay * 1;
   	if(fd.getDate() > 15){
   		initDay = 15;
   		mn+=2;
@@ -68,7 +75,7 @@ export class LoanComponent {
 
   	for(let i = 0; i<this.t; i++){
   		let dt = `${yr}-${('0'+mn).slice(-2)}-${initDay}`;
-  		this.dates.push({paymentDate:dt, paymentNum:(i+1), amt:this.deductionPerPayDay, bal:((this.t * this.r * this.p) + this.p) - (this.deductionPerPayDay * (i+1))});
+  		this.dates.push({paymentDate:dt, paymentNum:(i+1), amt:dppd, bal:((this.t * r * p) + p) - (dppd * (i+1))});
   		if(initDay == 30){
   			initDay = 15;
   			++mn;

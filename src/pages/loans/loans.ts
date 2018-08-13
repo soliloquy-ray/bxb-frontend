@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, ModalController, Modal, LoadingController } from 'ionic-angular';
 
 import { DisclosureStatementPage } from '../disclosure-statement/disclosure-statement';
 
 import { DbProvider } from '../../providers/db/db';
+
+import { LoanComponent } from '../../components/loan/loan';
 /**
  * Generated class for the LoansPage page.
  *
@@ -29,6 +31,7 @@ interface pendingLoan {
 export class LoansPage {
 
 	loanStatus = 'pending';
+	@ViewChild('p_loan') ln: LoanComponent;
 	mod:Modal;
 	loans = {
 		'pending':[
@@ -152,6 +155,13 @@ export class LoansPage {
   }
 
   test(e:{index:number,val:any}){
+  	//this.ln.p = e.val.
+  	console.log(e.val);
+  	let ev = JSON.parse(e.val);
+  	this.ln.p = ev.principal;
+  	this.ln.t = ev.numberPaydays;
+  	this.ln.sdate = ev.createDate;
+  	this.ln.getLoan();
   	this.showModal(e);
   }
 
@@ -206,8 +216,14 @@ export class LoansPage {
 
   showModal(i:{index:number,val:any}){
   	let ind = JSON.parse(i.val);
-  	this.mod = this.modal.create(DisclosureStatementPage,{data:ind, payments:this.payments, user:ind.userData},{cssClass:`whitemodal ${this.isMobile() ? "mobile" : ""}`});
-  	this.mod.present();
+  	let self = this;
+  	let lndta = this.ln.getLoan();
+  	console.log(lndta);
+  	ind.loan = lndta;
+  	this.ln.getDates().then(dt=>{
+	  	self.mod = this.modal.create(DisclosureStatementPage,{data:ind, payments:dt, user:ind.userData},{cssClass:`whitemodal ${self.isMobile() ? "mobile" : ""}`});
+	  	self.mod.present();
+  	});
   }
 
 }

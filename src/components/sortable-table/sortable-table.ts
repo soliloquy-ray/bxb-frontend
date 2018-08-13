@@ -70,19 +70,38 @@ export class SortableTableComponent {
   	}else{
   		this.sort_type = false;
   	}
-  	this.sorting = e;
+  	this.sorting = e;  	
 
-  	if(typeof a[0][e] == "number"){
-	  	if(this.sort_type){
+  	if(this.frm.hasOwnProperty(e) && this.frm[e] == "nested"){
+  		if(this.sort_type){
 	  		return a.sort((a,b)=>{
-		  		if(a[e] < b[e]) return -1;
-		  		if(a[e] > b[e]) return 1;
+		  		if(this.nesting(a,e).toString().toLowerCase() < this.nesting(b,e).toString().toLowerCase()) return -1;
+		  		if(this.nesting(a,e).toString().toLowerCase() > this.nesting(b,e).toString().toLowerCase()) return 1;
 		  		return 0;
 		  	});
 		}else{
 	  		return a.sort((a,b)=>{
-		  		if(a[e] < b[e]) return 1;
-		  		if(a[e] > b[e]) return -1;
+		  		if(this.nesting(a,e).toString().toLowerCase() < this.nesting(b,e).toString().toLowerCase()) return 1;
+		  		if(this.nesting(a,e).toString().toLowerCase() > this.nesting(b,e).toString().toLowerCase()) return -1;
+		  		return 0;
+		  	});
+		}
+  	}
+  	else if(!isNaN(a[0][e]*1)){
+	  	if(this.sort_type){
+	  		return a.sort((a,b)=>{
+		  		let ax = a[e]*1;
+		  		let bx = b[e]*1;
+		  		if(ax < bx) return -1;
+		  		if(ax > bx) return 1;
+		  		return 0;
+		  	});
+		}else{
+	  		return a.sort((a,b)=>{
+		  		let ax = a[e]*1;
+		  		let bx = b[e]*1;
+		  		if(ax < bx) return 1;
+		  		if(ax > bx) return -1;
 		  		return 0;
 		  	});
 		}

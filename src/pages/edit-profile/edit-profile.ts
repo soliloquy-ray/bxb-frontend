@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { intlPrefixes } from '../../ext/mob_prefixes';
 
@@ -9,7 +9,6 @@ import { DomSanitizer } from '@angular/platform-browser';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-declare var mobilecheck; //fn to check for screen type
 
 @IonicPage()
 @Component({
@@ -18,7 +17,6 @@ declare var mobilecheck; //fn to check for screen type
 })
 export class EditProfilePage {
 
-	isMobile : boolean = mobilecheck();
 	locData : any;
   	userData = {
   		firstName:"",
@@ -34,6 +32,7 @@ export class EditProfilePage {
   	};
 	prefixes = this.sanitizer.bypassSecurityTrustHtml(intlPrefixes);
 	prefix:string = '63';
+  @ViewChild('prev') prev: ElementRef;
   constructor(public navCtrl: NavController, private navParams: NavParams, private sanitizer:DomSanitizer, private menu: MenuController) {
   	
   }
@@ -57,8 +56,23 @@ export class EditProfilePage {
     }
   }
 
-  reorient($event){
-  	this.isMobile = mobilecheck();
+  isMobile():boolean{
+  	return localStorage.view == "mobile";
+  }
+
+  ngAfterViewInit(){
+    this.prev.nativeElement.src = "../../assets/imgs/tmp-img.png";
+  }
+
+  takePic($event){
+    let self = this;
+    if($event.target.files && $event.target.files[0]){
+      //self.uploadFile($event.target.files[0]);
+      console.log($event.target.files[0]);
+      let nurl = URL.createObjectURL($event.target.files[0]);
+      self.prev.nativeElement.src = nurl;
+    }
+
   }
 
 }

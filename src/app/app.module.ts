@@ -46,6 +46,8 @@ import { DetailVerificationPage } from '../pages/detail-verification/detail-veri
 import { HttpModule } from '@angular/http';
 import { DragScrollModule } from 'ngx-drag-scroll';
 import { DbProvider } from '../providers/db/db';
+import { AppProvider } from '../providers/app/app';
+import { CookieService } from 'ngx-cookie-service';
 
 var pages = [
   MyApp,
@@ -118,7 +120,9 @@ var pages = [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DbProvider
+    CookieService,
+    DbProvider,
+    AppProvider
   ]
 })
 export class AppModule {}

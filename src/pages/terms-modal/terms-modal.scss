@@ -15,4 +15,25 @@ page-terms-modal {
 		}
 	}
 
+	ion-footer{
+		background-color:#fff;
+		text-align:right;
+		button{
+			color:#488aff;
+			background-color:#fff;
+			border:0;
+			box-shadow:none;
+			-webkit-highlight-color:#fff;
+			display:inline-block;
+			padding:1.5vh;
+			text-transform:uppercase;
+			font-size:2.5vh;
+			margin:0 0 0 2vh;
+
+			&:hover{
+				background-color:transparent;
+			}
+		}
+	}
+
 }

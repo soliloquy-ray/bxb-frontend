@@ -15,15 +15,21 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 })
 export class TermsModalPage {
 
+  interactive: boolean = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, private view: ViewController) {
+    this.interactive = this.navParams.get('int');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TermsModalPage');
   }
 
-  close(){
-  	this.view.dismiss();
+  cancel(){
+    this.view.dismiss('cancel');
+  }
+
+  proceed(){
+  	this.view.dismiss('proceed');
   }
 
 }

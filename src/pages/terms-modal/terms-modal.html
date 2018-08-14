@@ -9,7 +9,7 @@
   <ion-navbar>
     <ion-title>
     	BXB EMPLOYEE CREDIT FACILITY
-    	<ion-icon (tap)="close()" name="ios-close" style="float:right;"></ion-icon>
+    	<ion-icon (tap)="cancel()" name="ios-close" style="float:right;"></ion-icon>
     </ion-title>
   </ion-navbar>
 
@@ -113,3 +113,7 @@
 		</li>
 </ol>
 </ion-content>
+<ion-footer *ngIf="interactive">
+	<button class="ok" (tap)="proceed()">Proceed</button>
+	<button class="cancel" (tap)="cancel()">Cancel</button>
+</ion-footer>

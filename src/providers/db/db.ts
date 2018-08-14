@@ -16,6 +16,16 @@ export class DbProvider {
     console.log('Hello DbProvider Provider');
   }
 
+  createNewLoan(uData):Promise<any>{
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+	
+  	return (
+  		this.http.post(`${this.env}/api.php?q=applyloan`,{loan:uData}, rq).toPromise()
+  	);
+  }
 
   getLoansByStatus(stat):Promise<any>{
 	let hdr = new Headers;

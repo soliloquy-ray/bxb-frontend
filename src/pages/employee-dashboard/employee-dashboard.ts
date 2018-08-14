@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, ModalController, AlertController, LoadingController, ToastController } from 'ionic-angular';
 
-import { LoansPage } from '../loans/loans';
+import { EmployeeLoansPage } from '../employee-loans/employee-loans';
+import { TermsModalPage } from '../terms-modal/terms-modal';
 import { EmpDisclosureStatementModalPage } from '../emp-disclosure-statement-modal/emp-disclosure-statement-modal';
 
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { DbProvider } from '../../providers/db/db';
+import { AppProvider } from '../../providers/app/app';
 import { config } from '../../ext/config';
+
+import { CookieService } from 'ngx-cookie-service';
 
 /**
  * Generated class for the HrDashboardPage page.
@@ -55,7 +59,7 @@ export class EmployeeDashboardPage {
 	dates : Array<{paymentDate,paymentNum,amt,bal}> = [];
   	env = config[location.origin].backend;
   	userData = JSON.parse(localStorage.userData);
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private http: Http, private alert: AlertController, private loader: LoadingController, private toast:ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private db: DbProvider, private alert: AlertController, private loader: LoadingController, private toast:ToastController, private appProvider: AppProvider, private cookie: CookieService) {
   }
 
   ionViewDidEnter() {
@@ -71,7 +75,7 @@ export class EmployeeDashboardPage {
   }
 
   toCreditSummary(){
-  	this.navCtrl.setRoot(LoansPage,{},{animate:true, direction:"top"});
+  	this.navCtrl.setRoot(EmployeeLoansPage,{},{animate:true, direction:"top"});
   }
 
   checkCredit(val){
@@ -192,29 +196,68 @@ export class EmployeeDashboardPage {
 @processFund float,
 @collectionFund float,
 @documentFee float **/
-	addLoan(){
+
+  viewTerms(){
+    let trms = this.modal.create(TermsModalPage,{int:true});
+    let self = this;
+    trms.onDidDismiss(trip=>{
+      if(trip=="proceed"){
+
+        let otp = self.appProvider.generateOTP();
+        self.appProvider.sendOTPmsg(otp,9988560026).then(res=>{
+          console.log(res);
+          self.addLoan();
+        }).catch(console.warn);
+      }
+    });
+    trms.present();
+  }
+
+	addLoan(iv:boolean = false){
 		let self = this;
 		let al = this.alert.create({
 			enableBackdropDismiss:false,
-			title:'Loan Confirmation',
-			message:`Are you sure you want to apply for this loan?`,
+			title:'Confirmation',
+			inputs:[
+        {
+          type:'text',
+          placeholder:"Enter OTP",
+          name:"otp"
+        }
+      ],
 			buttons:[
 				{
-					text:'Yes',
-					handler: ()=>{
-						self.createNewLoan();
+					text:'Proceed',
+					handler: data=>{
+						if(self.checkOtp(data.otp)){
+              self.createNewLoan();
+            }else{
+              self.addLoan(true);
+            }
 					}
 				},
 				{
-					text:'No',
-					handler: ()=>{
-
-					}
+					text:'Cancel',
+					role:'cancel'
 				}
 			]
 		});
+    if(iv){
+      al.setTitle("Invalid OTP code!")
+    }
 		al.present();
 	}
+
+/*
+let otp = self.appProvider.generateOTP();
+self.appProvider.sendOTPmsg(otp,9988560026).then(res=>{
+  console.log(res);
+}).catch(console.warn);
+*/
+
+  checkOtp(otp:string):boolean{
+    return otp == this.cookie.get('bxb-otp');
+  }
 
 	createNewLoan(){
     let self = this;
@@ -227,10 +270,6 @@ export class EmployeeDashboardPage {
 		});
 		load.present();
 		this.launchBreakdown(true);
-	  	let hdr = new Headers;
-	  	hdr.append('Content-Type','application/json');
-	  	let rq = new RequestOptions;
-	  	rq.headers = hdr;
 	  	
 	  	let uData = {
 	  		id:this.userData.master_id,
@@ -243,8 +282,7 @@ export class EmployeeDashboardPage {
 	  		documentFee: this.loan.docFee
 	  	};
 
-	  	this.http.post(`${this.env}/api.php?q=applyloan`,{loan:uData}, rq)
-	  			.toPromise()
+	  	this.db.createNewLoan(uData)
 	  			.then(res=>{
 	  				load.dismiss();
             let tst = self.toast.create({
@@ -252,6 +290,9 @@ export class EmployeeDashboardPage {
               duration: 3000,
               position: 'top',
               cssClass:`success`
+            });
+            tst.onDidDismiss(data=>{
+              self.toCreditSummary();
             });
             tst.present();
 	  				console.info(res);
@@ -264,9 +305,14 @@ export class EmployeeDashboardPage {
               position: 'top',
               cssClass:`fail`
             });
+            tst.onDidDismiss(data=>{
+              self.toCreditSummary();
+            });
             tst.present();
 	  				console.warn(err);
 	  			})
 	}
+
+
 
 }

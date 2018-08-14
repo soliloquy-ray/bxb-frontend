@@ -118,6 +118,7 @@ export class EmployeeDashboardPage {
   }
 
   launchBreakdown(noDisplay:boolean = false){
+    this.appProvider.generateOTP();
   	this.checkCredit(0);
   	this.loan = {
   		amt:this.creditToUse,
@@ -204,7 +205,7 @@ export class EmployeeDashboardPage {
       if(trip=="proceed"){
 
         let otp = self.appProvider.generateOTP();
-        self.appProvider.sendOTPmsg(otp,9988560026).then(res=>{
+        self.appProvider.sendOTPmsg(otp,this.userData.mobile.slice(-10)).then(res=>{
           console.log(res);
           self.addLoan();
         }).catch(console.warn);
@@ -256,7 +257,7 @@ self.appProvider.sendOTPmsg(otp,9988560026).then(res=>{
 */
 
   checkOtp(otp:string):boolean{
-    return otp == this.cookie.get('bxb-otp');
+    return otp == this.appProvider.decrypter(this.cookie.get('bxo'));
   }
 
 	createNewLoan(){

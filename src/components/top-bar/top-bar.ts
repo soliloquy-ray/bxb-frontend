@@ -16,11 +16,8 @@ import { AccountLinkComponent } from '../account-link/account-link';
 })
 export class TopBarComponent {
   @ViewChild('pic') pic: ElementRef;
-  text: string;
 
   constructor(private pop:PopoverController, private menu: MenuController) {
-    console.log('Hello TopBarComponent Component');
-    this.text = 'Hello World';
   }
 
   isMobile(){

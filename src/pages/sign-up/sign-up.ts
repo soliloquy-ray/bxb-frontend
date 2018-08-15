@@ -4,7 +4,6 @@ import { IonicPage, NavController, NavParams, AlertController, Modal, ModalContr
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { LoginPage } from '../login/login';
-import { TermsPage } from '../terms/terms';
 import { DetailVerificationPage } from '../detail-verification/detail-verification';
 import { user } from '../../models/user';
 
@@ -50,7 +49,7 @@ export class SignUpPage {
 	mdl : Modal;
 	env = config[location.origin].backend;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer, private alert: AlertController, private modal: ModalController, private loader: LoadingController, private http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer,  private modal: ModalController, private loader: LoadingController, private http: Http) {
   	this.dt = this.navParams.get('data');
   }
 

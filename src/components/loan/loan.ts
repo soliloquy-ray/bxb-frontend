@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 /**
  * Generated class for the LoanComponent component.
@@ -46,10 +46,10 @@ export class LoanComponent {
   	return this.loan;
   }
 
-  getDates():Promise<any>{
+  getDates(sdt):Promise<any>{
   	this.getLoan();
   	this.dates = [];
-  	let fd = new Date(this.sdate);
+  	let fd = new Date(sdt);
   	let mn = fd.getMonth();
   	let yr = fd.getFullYear();
   	let initDay;

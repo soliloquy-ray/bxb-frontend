@@ -18,8 +18,6 @@ export class SubmoduleComponent {
   text: string;
 
   constructor() {
-    console.log('Hello SubmoduleComponent Component');
-    this.text = 'Hello World';
   }
 
   ngAfterViewInit(){

@@ -13,7 +13,7 @@ import { LoanComponent } from '../../components/loan/loan';
  * Ionic pages and navigation.
  */
 
-interface pendingLoan {
+/*interface pendingLoan {
 	firstName,
 	lastName,
 	transID,
@@ -21,7 +21,7 @@ interface pendingLoan {
 	term,
 	amt,
 	purpose
-};
+};*/
 
 @IonicPage()
 @Component({
@@ -221,7 +221,7 @@ export class LoansPage {
   	let lndta = this.ln.getLoan();
   	console.log(lndta);
   	ind.loan = lndta;
-  	this.ln.getDates().then(dt=>{
+  	this.ln.getDates(ind.applicationDate).then(dt=>{
 	  	self.mod = this.modal.create(DisclosureStatementPage,{data:ind, payments:dt, user:ind.userData},{cssClass:`whitemodal ${self.isMobile() ? "mobile" : ""}`});
 	  	self.mod.present();
   	});

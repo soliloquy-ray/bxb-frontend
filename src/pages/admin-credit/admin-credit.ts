@@ -2,8 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, Modal, ModalController, LoadingController, AlertController, ToastController } from 'ionic-angular';
 
 import { EmployeeInfoModalPage } from '../employee-info-modal/employee-info-modal';
-import { EditEmployeePage } from '../edit-employee/edit-employee';
-import { AddEmployeePage } from '../add-employee/add-employee';
 
 //import { DragScrollComponent } from 'ngx-drag-scroll';
 import { DisclosureStatementPage } from '../disclosure-statement/disclosure-statement';
@@ -125,7 +123,6 @@ export class AdminCreditPage {
   }
 
   ionViewDidEnter() {
-  	let self = this;
   	this.menu.close();
   	localStorage.page = 'creditsum';
   	this.initLoans();
@@ -209,7 +206,7 @@ export class AdminCreditPage {
   	this.p_loan.sdate = ind.applicationDate;
   	let lndta = this.p_loan.getLoan();
   	ind.loan = lndta;
-  	this.p_loan.getDates().then(dt=>{
+  	this.p_loan.getDates(ind.applicationDate).then(dt=>{
 	  	self.mod = this.modal.create(DisclosureStatementPage,{data:ind, payments:dt, user:ind.userData},{cssClass:`whitemodal ${self.isMobile() ? "mobile" : ""}`});
 	  	self.mod.present();
   	});

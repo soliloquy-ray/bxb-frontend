@@ -13,7 +13,6 @@ export class DbProvider {
 
   	env = config[location.origin].backend;
   constructor(public http: Http) {
-    console.log('Hello DbProvider Provider');
   }
 
   createNewLoan(uData):Promise<any>{

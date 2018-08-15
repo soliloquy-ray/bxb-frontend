@@ -13,12 +13,9 @@ import { Component, Input } from '@angular/core';
 export class SideBarComponent {
 	@Input('highlights') hl : string = 'dashboard';
 	@Input('mobile') mob: boolean = false;
-  text: string;
   accountType:string = localStorage.accountType;
 
   constructor() {
-    console.log('Hello SideBarComponent Component');
-    this.text = 'Hello World';
   }
 
   ngAfterViewInit(){

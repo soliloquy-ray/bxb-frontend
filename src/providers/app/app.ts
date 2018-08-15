@@ -58,7 +58,6 @@ export class AppProvider {
   		if(i%inder == 0){
   			for(let j=0;j<i;j++){
   				let ins = Math.ceil(Math.random()*9).toString();
-  				console.log(val,inder,i,j,ins);
   				val.splice(i*j,0,ins);
   			}
   		}

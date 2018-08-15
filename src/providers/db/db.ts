@@ -21,7 +21,7 @@ export class DbProvider {
 	hdr.append('Content-Type','application/json');
 	let rq = new RequestOptions;
 	rq.headers = hdr;
-	
+
   	return (
   		this.http.post(`${this.env}/api.php?q=applyloan`,{loan:uData}, rq).toPromise()
   	);
@@ -37,7 +37,7 @@ export class DbProvider {
 		this.http.post(`${this.env}/api.php?q=hr_get_loan_by_status`,{status:stat}, rq)
 			.toPromise()
 			.then(res=>{
-				console.log(res.json());
+				//console.log(res.json());
 				return res.json();
 			})
 			.catch(err=>{
@@ -60,7 +60,7 @@ export class DbProvider {
 		this.http.post(`${this.env}/api.php?q=get_loan_by_status`,{status:stat,id:masterId}, rq)
 			.toPromise()
 			.then(res=>{
-				console.log(res.json());
+				//console.log(res.json());
 				return res.json();
 			})
 			.catch(err=>{
@@ -81,7 +81,7 @@ export class DbProvider {
 		this.http.post(`${this.env}/api.php?q=update_loan_status`,{status:stat,id:id}, rq)
 			.toPromise()
 			.then(res=>{
-				console.log(res.text());
+				//console.log(res.text());
 				return res.text();
 			})
 			.catch(err=>{

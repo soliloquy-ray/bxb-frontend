@@ -38,8 +38,6 @@ export class SortableTableComponent {
   }
 
 	ngOnChanges(...args: any[]) {
-        console.log('changing', args);
-        console.log(this.data);
         this.searched = this.data;
     }
 

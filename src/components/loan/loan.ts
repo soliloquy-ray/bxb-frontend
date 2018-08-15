@@ -49,7 +49,7 @@ export class LoanComponent {
   getDates():Promise<any>{
   	this.getLoan();
   	this.dates = [];
-  	let fd = new Date(this.sdate);
+  	let fd = new Date(this.sdate.split(/[-T.]/).slice(0,3).join("-"));
   	let mn = fd.getMonth();
   	let yr = fd.getFullYear();
   	let initDay;

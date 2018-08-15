@@ -202,11 +202,20 @@ export class EmployeeDashboardPage {
     let trms = this.modal.create(TermsModalPage,{int:true});
     let self = this;
     trms.onDidDismiss(trip=>{
+      let load = this.loader.create({
+          spinner: 'crescent',
+          dismissOnPageChange: true,
+          showBackdrop: true,
+          content: `Processing...`,
+          enableBackdropDismiss:false
+      });
+      load.present();
       if(trip=="proceed"){
 
         let otp = self.appProvider.generateOTP();
         self.appProvider.sendOTPmsg(otp,this.userData.mobile.slice(-10)).then(res=>{
           console.log(res);
+          load.dismiss();
           self.addLoan();
         }).catch(console.warn);
       }

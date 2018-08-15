@@ -116,13 +116,7 @@ export class LoansPage {
 			"bal":0
 		}
 	];
-	load = this.loader.create({
-	  spinner: 'crescent',
-	  dismissOnPageChange: true,
-	  showBackdrop: true,
-	  content: `Processing...`,
-	  enableBackdropDismiss:false
-	});
+	
 	searched : any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private db: DbProvider, private loader: LoadingController) {
   	this.searched = this.loans;
@@ -132,7 +126,14 @@ export class LoansPage {
   	let self = this;
   	this.menu.close();
   	localStorage.page = 'creditsum';
-	this.load.present();
+  	let load = this.loader.create({
+	  spinner: 'crescent',
+	  dismissOnPageChange: true,
+	  showBackdrop: true,
+	  content: `Loading Data...`,
+	  enableBackdropDismiss:false
+	});
+	load.present();
   	let pr1 = this.db.getLoansByStatus(1).then(rs=>{
     	self.loans.pending = rs;
     	return rs;
@@ -150,7 +151,7 @@ export class LoansPage {
     });
 
     Promise.all([pr1,pr2,pr3]).then(()=>{
-    	this.load.dismiss();
+    	load.dismiss();
     });
   }
 

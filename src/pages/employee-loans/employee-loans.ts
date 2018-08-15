@@ -128,7 +128,7 @@ export class EmployeeLoansPage {
 	  spinner: 'crescent',
 	  dismissOnPageChange: true,
 	  showBackdrop: true,
-	  content: `Processing...`,
+	  content: `Loading Data...`,
 	  enableBackdropDismiss:false
 	});
     this.load.present();

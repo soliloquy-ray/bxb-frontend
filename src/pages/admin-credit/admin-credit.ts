@@ -191,13 +191,28 @@ export class AdminCreditPage {
   	}
   }
 
-  showDisclosureModal(i){
+  /*showDisclosureModal(i){
   	this.p_loan.p = i.principal;
   	this.p_loan.t = i.term;
   	let dtt = this.p_loan.getDates();
   	console.log(this.p_loan);
   	this.mod = this.modal.create(DisclosureStatementPage,{data:i, payments:this.payments, user:i['userData']},{cssClass:`whitemodal ${this.isMobile() ? "mobile" : ""}`});
   	this.mod.present();
+  }*/
+
+  showDisclosureModal(i){
+  	console.log(i);
+  	let ind = i;
+  	let self = this;
+  	this.p_loan.p = ind.principal;
+  	this.p_loan.t = ind.numberPaydays;
+  	this.p_loan.sdate = ind.createDate;
+  	let lndta = this.p_loan.getLoan();
+  	ind.loan = lndta;
+  	this.p_loan.getDates().then(dt=>{
+	  	self.mod = this.modal.create(DisclosureStatementPage,{data:ind, payments:dt, user:ind.userData},{cssClass:`whitemodal ${self.isMobile() ? "mobile" : ""}`});
+	  	self.mod.present();
+  	});
   }
 
   showApproveAlert(id){

@@ -19,7 +19,7 @@ import { DbProvider } from '../../providers/db/db';
 })
 export class HrDashboardPage {
 
-	deets: string = `<a href='/#/loans'>Details&nbsp;&gt;</a>`;
+	deets: string = `<a href='/#/hr/loans'>Details&nbsp;&gt;</a>`;
 	deets2: string = `2018`;
 	deets3: string = `&nbsp;`;
 	credits = [];
@@ -46,7 +46,7 @@ export class HrDashboardPage {
 	  spinner: 'crescent',
 	  dismissOnPageChange: true,
 	  showBackdrop: true,
-	  content: `Processing...`,
+	  content: `Loadinng Data...`,
 	  enableBackdropDismiss:false
 	});
 	load.present();

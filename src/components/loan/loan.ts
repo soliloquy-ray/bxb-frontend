@@ -49,16 +49,16 @@ export class LoanComponent {
   getDates(sdt):Promise<any>{
   	this.getLoan();
   	this.dates = [];
-  	let fd = new Date(sdt);
-  	let mn = fd.getMonth();
-  	let yr = fd.getFullYear();
+  	let fd = sdt.split(/[^0-9]/g);//new Date(sdt);
+  	let mn = fd[0];//fd.getMonth();
+  	let yr = fd[2];//fd.getFullYear();
   	let initDay;
   	let r = this.r/2;
   	let p = Math.round(this.p);
   	let dppd = this.deductionPerPayDay * 1;
-  	if(fd.getDate() > 15){
+  	if(fd[1]/*fd.getDate()*/ > 15){
   		initDay = 15;
-  		mn+=2;
+  		++mn;
   		if(mn >= 13){
   			++yr;
   			mn = 1;
@@ -66,11 +66,11 @@ export class LoanComponent {
   	}
   	else{
   		initDay = 30;
-  		++mn;
+  		/*++mn;
   		if(mn >= 13){
   			++yr;
   			mn = 1;
-  		}
+  		}*/
   	}
 
   	for(let i = 0; i<this.t; i++){

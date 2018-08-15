@@ -3,7 +3,7 @@
 	<img src="../assets/imgs/bxb-logo-circle.svg"/>
   <nav>
   	<!--p class="title">Menu</p-->
-  	<ion-item *ngIf="mob">
+  	<ion-item [ngClass]="{'selected':gethl()=='myprofile'}" *ngIf="mob">
   		<a class="link" href="/#/edit-profile">
         	<b>My Profile</b>
     	</a>
@@ -110,14 +110,14 @@
           <b>View Statements</b>
       </a>
     </ion-item>
-    <ion-item [ngClass]="{'selected':hl=='logs'}" *ngIf="accountType == 'super'">
-      <a class="link">
+    <ion-item [ngClass]="{'selected':hl=='flagging'}" *ngIf="accountType == 'super'">
+      <a class="link" href='/#/management/flagging'>
         <ion-icon name="md-flag"></ion-icon>
           <b>Flagging</b>
       </a>
     </ion-item>
-  	<ion-item [ngClass]="{'selected':hl=='logs'}" *ngIf="accountType == 'super'">
-  		<a class="link">
+  	<ion-item [ngClass]="{'selected':hl=='preterm'}" *ngIf="accountType == 'super'">
+  		<a class="link" href='/#/management/preterm'>
   			<ion-icon name="md-card"></ion-icon>
         	<b>Pretermination</b>
     	</a>

@@ -24,7 +24,7 @@ import { EmployeeDashboardPage } from '../pages/employee-dashboard/employee-dash
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { EmployeeLoansPage } from '../pages/employee-loans/employee-loans';
 
-/* admin pages */
+/* hr pages */
 import { EmployeesPage } from '../pages/employees/employees';
 import { HrDashboardPage } from '../pages/hr-dashboard/hr-dashboard';
 import { AddEmployeePage } from '../pages/add-employee/add-employee';
@@ -35,6 +35,8 @@ import { SuperDashboardPage } from '../pages/super-dashboard/super-dashboard';
 import { AdminCreditPage } from '../pages/admin-credit/admin-credit';
 import { CompaniesPage } from '../pages/companies/companies';
 import { StatementOfAccountPage } from '../pages/statement-of-account/statement-of-account';
+import { FlaggingPage } from '../pages/flagging/flagging';
+import { PretermPage } from '../pages/preterm/preterm';
 
 /* modals */
 import { DisclosureStatementPage } from '../pages/disclosure-statement/disclosure-statement';
@@ -75,7 +77,9 @@ var pages = [
   EmployeeLoansPage,
   AdminCreditPage,
   CompaniesPage,
-  StatementOfAccountPage
+  StatementOfAccountPage,
+  FlaggingPage,
+  PretermPage
 ];
 
 @NgModule({
@@ -111,6 +115,8 @@ var pages = [
         { component: AdminCreditPage, name: 'AdminCreditPage', segment: 'management/loans' },
         { component: CompaniesPage, name: 'CompaniesPage', segment: 'management/companies' },
         { component: StatementOfAccountPage, name: 'StatementOfAccountPage', segment: 'modal-soa' },
+        { component: FlaggingPage, name: 'FlaggingPage', segment: 'management/flagging' },
+        { component: PretermPage, name: 'PretermPage', segment: 'management/preterm' },
       ]
     })
   ],

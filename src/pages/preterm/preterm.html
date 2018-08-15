@@ -1,0 +1,21 @@
+<ion-content [ngClass]="{'mobile':isMobile()}">
+	<top-bar></top-bar>
+	<side-bar *ngIf = "!isMobile()" [highlights]="'preterm'"></side-bar>
+
+	<section class="main-content">
+		<ion-row>
+			<ion-col col-12>
+				<submodule [title]="'Flagged Employees'">
+					<sortable-table *ngIf="preterm.length > 0" [data]="preterm" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles"></sortable-table>
+					<p class="no-data" *ngIf="preterm.length == 0">
+						No data
+					</p>
+					
+				</submodule>
+			</ion-col>
+		</ion-row>
+		<foot></foot>
+		
+	</section>
+
+</ion-content>

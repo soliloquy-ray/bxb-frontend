@@ -161,7 +161,7 @@ export class LoansPage {
   	let ev = JSON.parse(e.val);
   	this.ln.p = ev.principal;
   	this.ln.t = ev.numberPaydays;
-  	this.ln.sdate = ev.createDate;
+  	this.ln.sdate = ev.applicationDate;
   	this.ln.getLoan();
   	this.showModal(e);
   }

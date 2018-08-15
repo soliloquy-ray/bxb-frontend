@@ -193,10 +193,16 @@ div.range-tick{
 ion-menu{
 	div.menu-inner{
 		side-bar{
+			position:relative;
+			display:block;
+			height:100%;
+			overflow:scroll;
 			section.content{
+				/*position:relative;
 				display: block;
 			    max-height: 100%;
-			    overflow: scroll;
+			    overflow: scroll;*/
+			    position:relative;
 			}
 		}
 	}

@@ -20,7 +20,7 @@ export class LoanComponent {
 	@Input('collectionFeeRate') collectionFeeRate: number = 0.015;
 	@Input('docFeeRate') docFeeRate : number = 0.0075;
 	dates : Array<{paymentDate,paymentNum,amt,bal}> = [];
-	@Input('sdate') sdate :any = new Date();
+	@Input('sdate') sdate :any = Date.now();
 
 	deductionPerPayDay:number = ((this.t * this.r * this.p) + this.p)/this.t;
 	loan;
@@ -49,7 +49,7 @@ export class LoanComponent {
   getDates():Promise<any>{
   	this.getLoan();
   	this.dates = [];
-  	let fd = new Date(this.sdate.split(/[-T.]/).slice(0,3).join("-"));
+  	let fd = new Date(this.sdate);
   	let mn = fd.getMonth();
   	let yr = fd.getFullYear();
   	let initDay;

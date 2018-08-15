@@ -206,7 +206,7 @@ export class AdminCreditPage {
   	let self = this;
   	this.p_loan.p = ind.principal;
   	this.p_loan.t = ind.numberPaydays;
-  	this.p_loan.sdate = ind.createDate;
+  	this.p_loan.sdate = ind.applicationDate;
   	let lndta = this.p_loan.getLoan();
   	ind.loan = lndta;
   	this.p_loan.getDates().then(dt=>{

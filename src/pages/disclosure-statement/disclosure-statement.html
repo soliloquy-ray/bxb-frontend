@@ -150,7 +150,7 @@
 					</ion-row>
 					<ion-row *ngFor = "let payment of payments; let i = index;">
 						<ion-col col-3>
-							{{payment?.paymentDate.toISOString().split("T")[0]}}
+							{{payment?.paymentDate}}
 						</ion-col>
 						<ion-col col-3>
 							{{payment?.paymentNum}}

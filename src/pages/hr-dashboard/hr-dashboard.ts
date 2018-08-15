@@ -46,7 +46,7 @@ export class HrDashboardPage {
 	  spinner: 'crescent',
 	  dismissOnPageChange: true,
 	  showBackdrop: true,
-	  content: `Loadinng Data...`,
+	  content: `Loading Data...`,
 	  enableBackdropDismiss:false
 	});
 	load.present();

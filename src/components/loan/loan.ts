@@ -74,7 +74,7 @@ export class LoanComponent {
   	}
 
   	for(let i = 0; i<this.t; i++){
-  		let dt = `${yr}-${('0'+mn).slice(-2)}-${initDay}`;
+  		let dt = new Date(`${yr}-${('0'+mn).slice(-2)}-${initDay}T12:00:00`);
   		this.dates.push({paymentDate:dt, paymentNum:(i+1), amt:dppd, bal:((this.t * r * p) + p) - (dppd * (i+1))});
   		if(initDay == 30){
   			initDay = 15;

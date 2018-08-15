@@ -164,7 +164,7 @@ export class EmployeeDashboardPage {
   	}
 
   	for(let i = 0; i<this.paydays; i++){
-  		let dt = `${yr}-${('0'+mn).slice(-2)}-${initDay}`;
+  		let dt = new Date(`${yr}-${('0'+mn).slice(-2)}-${initDay}T00:00:00`);
   		this.dates.push({paymentDate:dt, paymentNum:(i+1), amt:this.deductionPerPayDay, bal:((this.paydays * this.interestRate * this.creditToUse) + this.creditToUse) - (this.deductionPerPayDay * (i+1))});
   		if(initDay == 30){
   			initDay = 15;

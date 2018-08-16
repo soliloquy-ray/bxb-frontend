@@ -173,3 +173,20 @@ sortable-table {
 		}
 	}
 }
+
+#srt-desktop{
+		display:block;
+}
+
+#srt-mobile{
+	display:none;
+}
+
+body.mobile-view{
+	#srt-desktop{
+		display:none;
+	}
+	#srt-mobile{
+		display:block;
+	}
+}

@@ -1,4 +1,4 @@
-<ion-content [ngClass]="{'mobile':isMobile()}">
+<ion-content [ngClass]="{'mobile':isMobile()}" (window:resize)="resize($event)">
 	<top-bar></top-bar>
 	<side-bar *ngIf = "!isMobile()" [highlights]="'creditsum'"></side-bar>
 

@@ -2,7 +2,7 @@
 	<ion-icon name="ios-search"></ion-icon>
 	<input type="text" (keyup)="search($event)" placeholder="Search any fields"/>
 </span>
-<ion-grid class="table" *ngIf="!isMobile()">
+<ion-grid class="table" id="srt-desktop">
 	<ion-row justify-content-center class="thead header">
 		<ion-col *ngFor="let hd of hdr; let i = index;" (tap)="sorter(searched,hd)" [ngClass]="{'sorting':(sorting==hd),'asc':sort_type}">
 			{{hdrTitles[hd]}}
@@ -74,7 +74,7 @@
 		</ion-col-->
 	</ion-row>
 </ion-grid>
-<ion-grid class="table" *ngIf="isMobile()">
+<ion-grid class="table" id="srt-mobile">
 	<ion-row style="width:100%;">
 		<ion-col col-12 style="width:100%; box-shadow: 0 0 3px 0 #333" class="data" *ngFor = "let rowData of searched; let i = index;">
 			<ion-row>

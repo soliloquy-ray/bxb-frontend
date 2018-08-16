@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ViewChildren } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, Modal, ModalController, LoadingController, AlertController, ToastController } from 'ionic-angular';
 
 import { EmployeeInfoModalPage } from '../employee-info-modal/employee-info-modal';
@@ -9,6 +9,7 @@ import { DisclosureStatementPage } from '../disclosure-statement/disclosure-stat
 import { DbProvider } from '../../providers/db/db';
 
 import { LoanComponent } from '../../components/loan/loan';
+import { SortableTableComponent } from '../../components/sortable-table/sortable-table';
 
 @IonicPage()
 @Component({
@@ -22,6 +23,7 @@ export class AdminCreditPage {
 	pendingMembers = [];
 	//@ViewChildren(DragScrollComponent) ds : QueryList<DragScrollComponent>;
 	@ViewChild('p_loan') p_loan: LoanComponent;
+	@ViewChildren(SortableTableComponent) srt: Array<SortableTableComponent>;
 	loans = {
 
 		"pending":[],
@@ -171,6 +173,12 @@ export class AdminCreditPage {
   		i.scrollbarHidden = true;
   	});*/
   }
+	resize(e) {
+        console.log(e);
+        this.srt.forEach((v,i)=>{
+	  		v.isMobile();
+	  	});
+    }
 
   doAction(i:{index:number,val:any}){
   	if(i.index == 0){

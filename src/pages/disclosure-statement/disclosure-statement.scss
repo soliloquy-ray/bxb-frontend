@@ -118,13 +118,14 @@ page-disclosure-statement {
 	ion-footer{
 		text-align:right;
 		button[ion-button]{
-			background-color:inherit;
+			background-color:#488aff;
 			border-radius:8px;
 			border:0;
-			box-shadow:0 0 2px 1px #888;
 			color:#333;
 			display:inline-table;
 			padding:0 2vh;
+			color:#fff;
+			height:35px;
 
 			ion-icon{
 				margin-right:1vw;

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewController, NavController } from 'ionic-angular';
+import { ViewController } from 'ionic-angular';
 
 import { LoginPage } from '../../pages/login/login';
 
@@ -15,11 +15,8 @@ import { LoginPage } from '../../pages/login/login';
 })
 export class AccountLinkComponent {
 
-  text: string;
 
-  constructor(private viewCtrl : ViewController, private nav: NavController) {
-    console.log('Hello AccountLinkComponent Component');
-    this.text = 'Hello World';
+  constructor(private viewCtrl : ViewController) {
   }
 
   close(){

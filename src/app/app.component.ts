@@ -14,7 +14,7 @@ declare var mobilecheck; //fn to check for screen type
 export class MyApp {
   rootPage:any = LoginPage;
   isMobile : boolean = mobilecheck();
-  node = document.querySelector('ion-app');
+  node = document.querySelector('body');
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, menu: MenuController) {
     let self = this;
@@ -37,8 +37,10 @@ export class MyApp {
   mcheck(){
    if(mobilecheck()){
      localStorage.view = 'mobile';
+     this.node.className += " mobile-view";
    }else{
      localStorage.view = 'desktop';
+     this.node.className = this.node.className.replace(/[\s]mobile-view/g,"");
    }
   }
 

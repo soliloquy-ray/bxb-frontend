@@ -23,8 +23,33 @@ page-statement-of-account {
 				}
 			}
 
-			div.body{
-				
+			p{
+				&.title{
+					width:100%;
+					text-align:center;
+				}
+				&.strong{
+					font-family:'Roboto';
+					padding-top:2vh;
+					font-weight:bolder;
+					font-size:2.5vh;
+				}
+			}
+
+			hr.blocker{
+				height:0.8vh;
+				background-color:#222;
+			}
+
+			ion-row{
+
+
+				ion-col{
+					font-family:'Roboto';
+					&.head{
+						font-weight:bolder;
+					}
+				}
 			}
 
 			&.mobile{

@@ -1,0 +1,307 @@
+<ion-content (window:resize)="reorient($event)" [ngClass]="{'mobile':isMobile}">
+	<top-bar></top-bar>
+	<side-bar *ngIf = "!isMobile" [highlights]="'dashboard'"></side-bar>
+
+	 <section class="main">
+	 	<form name="company-data">
+	 		<h2>Add New Company</h2>
+		 	<div class="uploader">
+				<input type="file" accept="image/*" (change)="takePic($event)">
+				<ion-avatar item-start>
+					<img #prev/>
+				</ion-avatar>
+		 	</div>
+
+		 	<span class="header">General Information</span>
+	 		<ion-row>
+	 			<p class="label">
+	 				Company Code
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="companyCode" [(ngModel)] = "companyData.companyCode"/>
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Company Name
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="companyName" [(ngModel)] = "companyData.companyName" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Business / Trade Names
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="tradeName" [(ngModel)] = "companyData.tradeName"/>
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Principal Address
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="address" [(ngModel)] = "companyData.address"/>
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				SEC Registration No.
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="SECnum" [(ngModel)] = "companyData.SECnum"/>
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				TIN Number
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="tin" [(ngModel)] = "companyData.tin" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Company Type
+	 			</p>
+	 			<span class="content">
+	 				<ion-select name="type" [(ngModel)] = "companyData.type">
+	 					<ion-option value="corporation">Corporation</ion-option>
+	 					<ion-option value="limitedLiability">Limited Liability</ion-option>
+	 					<ion-option value="partnership">Partnership</ion-option>
+	 				</ion-select>
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Industry
+	 			</p>
+	 			<span class="content">
+	 				<ion-select name="industry" [(ngModel)] = "companyData.industry">
+                    	<ion-option value="Manufacturing">Manufacturing</ion-option>
+                    	<ion-option value="Retail">Retail</ion-option>
+                    	<ion-option value="Finance">Finance</ion-option>
+                    	<ion-option value="Public utility">Public utility</ion-option>
+                    	<ion-option value="Healthcare">Healthcare</ion-option>
+                    	<ion-option value="Energy">Energy</ion-option>
+                    	<ion-option value="Education">Education</ion-option>
+                    	<ion-option value="Media">Media</ion-option>
+                    	<ion-option value="Logistics">Logistics</ion-option>
+                    	<ion-option value="BPO">BPO</ion-option>
+                    	<ion-option value="Transport">Transport</ion-option>
+                    	<ion-option value="Shared services">Shared services</ion-option>
+                    	<ion-option value="Transportation">Transportation</ion-option>
+                    	<ion-option value="Telecomunication">Telecomunication</ion-option>    
+                    	<ion-option value="Construction">Construction</ion-option>    
+                    	<ion-option value="Real estate">Real estate</ion-option>    
+                    	<ion-option value="Mining">Mining</ion-option>    
+                    	<ion-option value="Information technology">Information technology</ion-option>    
+                    	<ion-option value="Food and beverage">Food &amp; beverage</ion-option>    
+                    	<ion-option value="Hospitality">Hospitality</ion-option>    
+                    	<ion-option value="Insurance">Insurance</ion-option>    
+                    	<ion-option value="Telecomunication">Telecomunication</ion-option>    
+                    	<ion-option value="Others">Others</ion-option>    
+                    </ion-select>
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Minumum Year
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="minYear" [(ngModel)] = "companyData.minYear" />
+	 			</span>
+	 		</ion-row>
+		 	<span class="header">Authorized Representative</span>
+	 		<ion-row>
+	 			<p class="label">
+	 				First Name
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="firstName" [(ngModel)] = "companyRep.firstName" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Last Name
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="firstName" [(ngModel)] = "companyRep.firstName"/>
+	 			</span>
+	 		</ion-row>
+
+		 	<span class="header">Contact Information</span>
+	 		<ion-row class="bot">
+	 			<p class="label">
+	 				Mobile
+	 			</p>
+	 			<span class="content">
+		 			<select [innerHTML] = "prefixes" name="prefix" [(ngModel)]="prefix"></select>
+		 			<input class="short" type="number" name="mobile" [(ngModel)] = "companyRep.mobile"/>
+		 		</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Landline
+	 			</p>
+	 			<span class="content">
+	 				<input type="number" name="landline" [(ngModel)] = "companyRep.landline" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Email
+	 			</p>
+	 			<span class="content">
+	 				<input type="email" name="email" [(ngModel)] = "companyRep.email" />
+	 			</span>
+	 		</ion-row>
+
+		 	<span class="header">Bank Account Details</span>
+	 		<ion-row>
+	 			<p class="label">
+	 				Bank Name
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="bankName" [(ngModel)] = "bankDetails.bankName" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Bank Branch
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="bankBranch" [(ngModel)] = "bankDetails.bankBranch" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Bank Address
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="bankAddress" [(ngModel)] = "bankDetails.bankAddress" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Account Number
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="accountNumber" [(ngModel)] = "bankDetails.accountNumber" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Swift Code
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="swiftCode" [(ngModel)] = "bankDetails.swiftCode" />
+	 			</span>
+	 		</ion-row>
+
+		 	<span class="header">Company Control Panel</span>
+	 		<ion-row>
+	 			<p class="label">
+	 				Salary Cutoff 1
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="salaryCutoff1" [(ngModel)] = "controlPanel.salaryCutoff1" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Salary Cutoff 2
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="salaryCutoff2" [(ngModel)] = "controlPanel.salaryCutoff2" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Statement of Account Date 1
+	 			</p>
+	 			<span class="content">
+	 				<input type="number" name="soaDate1" [(ngModel)] = "controlPanel.soaDate1"/>
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Statement of Account Date 2
+	 			</p>
+	 			<span class="content">
+	 				<input type="number" name="soaDate2" [(ngModel)] = "controlPanel.soaDate2"/>
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Company Username
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="companyUsername" [(ngModel)] = "controlPanel.username"/>
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Company Password
+	 			</p>
+	 			<span class="content">
+	 				<input type="password" name="companyPassword" [(ngModel)] = "controlPanel.password"/>
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Status
+	 			</p>
+	 			<span class="content">
+	 				<ion-select name="companyStatus" [(ngModel)] = "controlPanel.status">
+	 					<ion-option value="active">Active</ion-option>
+	 					<ion-option value="inactive">Inactive</ion-option>
+	 					<ion-option value="probation">Probation</ion-option>
+	 				</ion-select>
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Net Salary Rule
+	 			</p>
+	 			<span class="content">
+	 				<input type="number" name="netSalaryRule" [(ngModel)] = "controlPanel.netSalaryRule" />
+	 			</span>
+	 		</ion-row>
+
+		 	<span class="header">For BXB Only</span>
+	 		<ion-row>
+	 			<p class="label">
+	 				Intermediary ID No.
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="idNumber" [(ngModel)] = "bxbForm.idNumber" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Documentation Submitted
+	 			</p>
+	 			<span class="content nobg">
+					<ion-toggle [checked]="bxbForm.docSubmitted"></ion-toggle>
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Notes
+	 			</p>
+	 			<span class="content">
+	 				<textarea name="notes" [(ngModel)] = "bxbForm.notes">
+	 				</textarea>
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<button ion-button (tap)="submitReg()">Create Account</button>
+	 		</ion-row>
+	 	</form>
+	 
+	 	<foot></foot>
+	 </section>
+
+</ion-content>

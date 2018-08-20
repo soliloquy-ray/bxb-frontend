@@ -9,7 +9,7 @@
 
 
 <ion-content padding>
-	<section class="main-content">
+	<section class="main-content" id="printarea">
 		<span class="header">
 			<img src="../assets/imgs/logo.png"/>
 		</span>
@@ -82,6 +82,141 @@
 		<hr class="blocker">
 		<p class="title">
 			CURRENT BALANCE
+		</p>
+
+		<ion-row>
+			<ion-col class="head">
+				Transaction Date
+			</ion-col>
+			<ion-col class="head">
+				Credit Availment Number
+			</ion-col>
+			<ion-col class="head">
+				Member ID
+			</ion-col>
+			<ion-col class="head">
+				First Name
+			</ion-col>
+			<ion-col class="head">
+				Last Name
+			</ion-col>
+			<ion-col class="head">
+				Seqno
+			</ion-col>
+			<ion-col class="head">
+				Employee ID
+			</ion-col>
+			<ion-col class="head">
+				Transaction Type
+			</ion-col>
+			<ion-col class="head">
+				Repayment Amount
+			</ion-col>
+			<ion-col class="head">
+				Status
+			</ion-col>
+		</ion-row>
+
+		<ion-row *ngFor = "let cb of currentBalance; let i = index">
+			<ion-col>
+				{{cb?.transDate}}
+			</ion-col>
+			<ion-col>
+				{{cb?.creditAvailmentNumber}}
+			</ion-col>
+			<ion-col>
+				{{cb?.memberID}}
+			</ion-col>
+			<ion-col>
+				{{cb?.firstName}}
+			</ion-col>
+			<ion-col>
+				{{cb?.lastName}}
+			</ion-col>
+			<ion-col>
+				{{cb?.seqNo}}
+			</ion-col>
+			<ion-col>
+				{{cb?.empID}}
+			</ion-col>
+			<ion-col>
+				{{cb?.transType}}
+			</ion-col>
+			<ion-col>
+				{{cb?.repaymentAmt}}
+			</ion-col>
+			<ion-col>
+				{{cb?.status}}
+			</ion-col>
+		</ion-row>
+
+
+		<hr class="blocker">
+		<p class="title">
+			PREVIOUS BALANCE
+		</p>
+
+		<ion-row>
+			<ion-col class="head">
+				Transaction Date
+			</ion-col>
+			<ion-col class="head">
+				Credit Availment Number
+			</ion-col>
+			<ion-col class="head">
+				First Name
+			</ion-col>
+			<ion-col class="head">
+				Last Name
+			</ion-col>
+			<ion-col class="head">
+				Seqno
+			</ion-col>
+			<ion-col class="head">
+				Employee ID
+			</ion-col>
+			<ion-col class="head">
+				Transaction Type
+			</ion-col>
+			<ion-col class="head">
+				Repayment Amount
+			</ion-col>
+			<ion-col class="head">
+				Status
+			</ion-col>
+		</ion-row>
+
+		<ion-row *ngFor = "let pb of prevBalance; let i = index">
+			<ion-col>
+				{{pb?.transDate}}
+			</ion-col>
+			<ion-col>
+				{{pb?.creditAvailmentNumber}}
+			</ion-col>
+			<ion-col>
+				{{pb?.firstName}}
+			</ion-col>
+			<ion-col>
+				{{pb?.lastName}}
+			</ion-col>
+			<ion-col>
+				{{pb?.seqNo}}
+			</ion-col>
+			<ion-col>
+				{{pb?.empID}}
+			</ion-col>
+			<ion-col>
+				{{pb?.transType}}
+			</ion-col>
+			<ion-col>
+				{{pb?.repaymentAmt}}
+			</ion-col>
+			<ion-col>
+				{{pb?.status}}
+			</ion-col>
+		</ion-row>
+		<p class="title strong">
+			END OF STATEMENT
 		</p>
 	</section>
 </ion-content>

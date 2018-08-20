@@ -37,6 +37,7 @@ import { CompaniesPage } from '../pages/companies/companies';
 import { StatementOfAccountPage } from '../pages/statement-of-account/statement-of-account';
 import { FlaggingPage } from '../pages/flagging/flagging';
 import { PretermPage } from '../pages/preterm/preterm';
+import { AddCompanyPage } from '../pages/add-company/add-company';
 
 /* modals */
 import { DisclosureStatementPage } from '../pages/disclosure-statement/disclosure-statement';
@@ -79,7 +80,8 @@ var pages = [
   CompaniesPage,
   StatementOfAccountPage,
   FlaggingPage,
-  PretermPage
+  PretermPage,
+  AddCompanyPage
 ];
 
 @NgModule({
@@ -117,6 +119,7 @@ var pages = [
         { component: StatementOfAccountPage, name: 'StatementOfAccountPage', segment: 'modal-soa' },
         { component: FlaggingPage, name: 'FlaggingPage', segment: 'management/flagging' },
         { component: PretermPage, name: 'PretermPage', segment: 'management/preterm' },
+        { component: AddCompanyPage, name: 'AddCompanyPage', segment: 'add-company' },
       ]
     })
   ],

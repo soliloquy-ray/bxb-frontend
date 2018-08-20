@@ -6,6 +6,8 @@ import { EditEmployeePage } from '../edit-employee/edit-employee';
 import { AddEmployeePage } from '../add-employee/add-employee';
 
 import { DragScrollComponent } from 'ngx-drag-scroll';
+
+import { StatementOfAccountPage } from '../statement-of-account/statement-of-account';
 /**
  * Generated class for the AdminCreditPage page.
  *
@@ -93,6 +95,11 @@ export class CompaniesPage {
 
   showModal(i){
   	this.mod = this.modal.create(EmployeeInfoModalPage,{data:i},{cssClass:`whitemodal sm ${this.isMobile ? "mobile" : ""}`});
+  	this.mod.present();
+  }
+
+  showSOA(i){
+  	this.mod = this.modal.create(StatementOfAccountPage,{data:i},{cssClass:`whitemodal  ${this.isMobile ? "mobile" : ""}`});
   	this.mod.present();
   }
 

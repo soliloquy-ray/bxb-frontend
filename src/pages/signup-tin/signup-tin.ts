@@ -23,7 +23,9 @@ declare var mobilecheck; //fn to check for screen type
 })
 export class SignupTinPage {
 	tin: string;
-	birth : {day,month,year} = {day:"01",month:"01",year:"1971"};
+  //birth : {day,month,year} = {day:1,month:1,year:1971};
+	birth : String = new Date("1971-01-01").toISOString();
+  birthday: any;
 	isMobile : boolean = mobilecheck();
 	tinValid : boolean = true;
 	ccode: string = "";
@@ -67,7 +69,7 @@ export class SignupTinPage {
     });
     this.load.present();
 
-    let brt = `${this.birth.year}-${this.birth.month}-${this.birth.day}`;
+    let brt = `${this.birthday.year}-${("0"+this.birthday.month).slice(-2)}-${("0"+this.birthday.day).slice(-2)}`;
   		
   	//let uData = {tin:this.tin,ccode:this.ccode,birth:brt};
   	let uData = {tin:this.tin,birth:brt};
@@ -120,5 +122,9 @@ export class SignupTinPage {
 
   reorient($event){
   	this.isMobile = mobilecheck();
+  }
+
+  ev(e){
+    this.birthday = e;
   }
 }

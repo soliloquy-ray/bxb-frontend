@@ -26,19 +26,22 @@
 	 				Birthday
 	 			</p>
 	 			<span class="content month">
-	 				<select name="month" [(ngModel)] = "birth.month">
+	 				<ion-datetime name="month" (ionChange)="ev($event)" pickerFormat="MMM" displayFormat="MMM" [(ngModel)] = "birth"></ion-datetime>
+	 				<!--select name="month" [(ngModel)] = "birth.month">
 	 					<option *ngFor = "let m of month; let i=index" [value]="m">{{months[m]}}</option>
-	 				</select>
+	 				</select-->
 	 			</span>
 	 			<span class="content day">
-	 				<select name="day" [(ngModel)] = "birth.day">
+	 				<ion-datetime name="day" (ionChange)="ev($event)" pickerFormat="DD" displayFormat="DD" [(ngModel)] = "birth"></ion-datetime>
+	 				<!--select name="day" [(ngModel)] = "birth.day">
 	 					<option *ngFor = "let d of day; let i=index" [value]="d">{{d}}</option>
-	 				</select>
+	 				</select-->
 	 			</span>
 	 			<span class="content year">
-	 				<select name="year" [(ngModel)] = "birth.year">
+	 				<ion-datetime name="year" pickerFormat="YYYY" displayFormat="YYYY" [(ngModel)] = "birth"></ion-datetime>
+	 				<!--select name="year" [(ngModel)] = "birth.year">
 	 					<option *ngFor = "let y of year; let i=index" [value]="y">{{y}}</option>
-	 				</select>
+	 				</select-->
 	 			</span>
 	 		</ion-row>
 	 		<!--ion-row>

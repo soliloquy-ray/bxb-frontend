@@ -29,6 +29,7 @@ import { EmployeesPage } from '../pages/employees/employees';
 import { HrDashboardPage } from '../pages/hr-dashboard/hr-dashboard';
 import { AddEmployeePage } from '../pages/add-employee/add-employee';
 import { EditEmployeePage } from '../pages/edit-employee/edit-employee';
+import { SoaPage } from '../pages/soa/soa';
 
 /* superuser pages */
 import { SuperDashboardPage } from '../pages/super-dashboard/super-dashboard';
@@ -38,6 +39,7 @@ import { StatementOfAccountPage } from '../pages/statement-of-account/statement-
 import { FlaggingPage } from '../pages/flagging/flagging';
 import { PretermPage } from '../pages/preterm/preterm';
 import { AddCompanyPage } from '../pages/add-company/add-company';
+import { StatementsPage } from '../pages/statements/statements';
 
 /* modals */
 import { DisclosureStatementPage } from '../pages/disclosure-statement/disclosure-statement';
@@ -81,7 +83,9 @@ var pages = [
   StatementOfAccountPage,
   FlaggingPage,
   PretermPage,
-  AddCompanyPage
+  AddCompanyPage,
+  StatementsPage,
+  SoaPage
 ];
 
 @NgModule({
@@ -120,6 +124,8 @@ var pages = [
         { component: FlaggingPage, name: 'FlaggingPage', segment: 'management/flagging' },
         { component: PretermPage, name: 'PretermPage', segment: 'management/preterm' },
         { component: AddCompanyPage, name: 'AddCompanyPage', segment: 'add-company' },
+        { component: StatementsPage, name: 'StatementsPage', segment: 'management/soa' },
+        { component: SoaPage, name: 'SoaPage', segment: 'statement-of-account' },
       ]
     })
   ],

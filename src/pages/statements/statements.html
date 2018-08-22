@@ -1,0 +1,20 @@
+<ion-content [ngClass]="{'mobile':isMobile()}">
+	<top-bar></top-bar>
+	<side-bar *ngIf = "!isMobile()" [highlights]="'soa'"></side-bar>
+
+	<section class="main-content">
+		<ion-row>
+			<ion-col col-12>
+				<submodule [title]="'Statement of Account'">
+					<sortable-table *ngIf="soas.length > 0" [data]="soas" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles" [actions]="actions" (t)="doAction($event)"></sortable-table>
+					<p class="no-data" *ngIf="soas.length == 0">
+						No data
+					</p>					
+				</submodule>
+			</ion-col>
+		</ion-row>
+		<foot></foot>
+		
+	</section>
+
+</ion-content>

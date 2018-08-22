@@ -86,8 +86,8 @@
   			Add Employees
   		</a>
   	</ion-item>
-    <ion-item [ngClass]="{'selected':hl=='account'}" *ngIf="accountType == 'hr'">
-      <a class="link">
+    <ion-item [ngClass]="{'selected':hl=='soa'}" *ngIf="accountType == 'hr'">
+      <a class="link" href='/#/statement-of-account'>
         <ion-icon name="md-desktop"></ion-icon>
           <b>Statement of Account</b>
       </a>
@@ -104,8 +104,8 @@
           <b>Super Controller</b>
       </a>
     </ion-item>
-    <ion-item [ngClass]="{'selected':hl=='account'}" *ngIf="accountType == 'super'">
-      <a class="link">
+    <ion-item [ngClass]="{'selected':hl=='soa'}" *ngIf="accountType == 'super'">
+      <a class="link" href='/#/management/soa'>
         <ion-icon name="md-alert"></ion-icon>
           <b>View Statements</b>
       </a>

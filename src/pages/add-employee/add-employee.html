@@ -5,6 +5,12 @@
 	 <section class="main">
 	 	<form name="employee-data">
 	 		<h2>Add New Account</h2>
+		 	<div class="uploader">
+				<input type="file" accept="image/*" (change)="takePic($event)">
+				<ion-avatar item-start>
+					<img #prev/>
+				</ion-avatar>
+		 	</div>
 	 		<ion-row>
 	 			<p class="label">
 	 				First Name
@@ -189,8 +195,8 @@
 	 			<button ion-button (tap)="submitReg()">Update Account</button>
 	 		</ion-row>
 	 	</form>
-
+	 
+	 	<foot></foot>
 	 </section>
-	 <foot></foot>
 
 </ion-content>

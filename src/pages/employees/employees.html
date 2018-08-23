@@ -35,70 +35,7 @@
 			<ion-col col-12>
 				<submodule [title]="'Active Members'" *ngIf="activeEmployees.length > 0">
 					<sortable-table [data]="activeEmployees" [headers]="sampKeysA" [formats]="formatsA" [header_titles]="hdrTitlesA"></sortable-table>
-					<!--drag-scroll #ds1 class="table-container" >
-						<table>
-						<tr style="width:100%;" class="header">
-							<td>
-								Company ID
-							</td>
-							<td>
-								First Name
-							</td>
-							<td>
-								Last Name
-							</td>
-							<td>
-								Used Credit
-							</td>
-							<td>
-								Unused Credit
-							</td>
-							<td>
-								Credit Line
-							</td>
-							<td>
-								Net Salary
-							</td>
-							<td>
-								Gross Salary
-							</td>
-							<td>
-								Action
-							</td>
-						</tr>
-						<tr style="width:100%;" class="data" *ngFor = "let emp of activeEmployees; let i = index">
-							<td>
-								{{emp?.companyID}}
-							</td>
-							<td>
-								{{emp?.firstName}}
-							</td>
-							<td>
-								{{emp?.lastName}}
-							</td>
-							<td>
-								{{emp?.usedCredit | currency:'PHP':'symbol-narrow':'1.2-2'}}
-							</td>
-							<td>
-								{{emp?.unusedCredit | currency:'PHP':'symbol-narrow':'1.2-2'}}
-							</td>
-							<td>
-								{{emp?.creditLine | currency:'PHP':'symbol-narrow':'1.2-2'}}
-							</td>
-							<td>
-								{{emp?.netSalary | currency:'PHP':'symbol-narrow':'1.2-2'}}
-							</td>
-							<td>
-								{{emp?.grossSalary | currency:'PHP':'symbol-narrow':'1.2-2'}}
-							</td>
-							<td style="text-align:center">
-								<ion-icon name="md-eye" (tap)="showModal(activeEmployees[i])"></ion-icon>
-								<ion-icon name="ios-create-outline" (tap)="editEmp(activeEmployees[i])"></ion-icon>
-								<ion-icon name="md-flag"></ion-icon>
-							</td>
-						</tr>
-						</table>
-					</drag-scroll-->
+					
 				</submodule>
 			</ion-col>
 		</ion-row>
@@ -108,57 +45,7 @@
 			<ion-col col-12>
 				<submodule [title]="'Members'"  *ngIf="employees.length > 0">
 					<sortable-table [data]="employees" [headers]="sampKeysE" [formats]="formatsE" [header_titles]="hdrTitlesE"></sortable-table>
-					<!--drag-scroll #ds2 class="table-container" >
-						<table>
-						<tr style="width:100%;" class="header">
-							<td>
-								Company ID
-							</td>
-							<td>
-								First Name
-							</td>
-							<td>
-								Last Name
-							</td>
-							<td>
-								Email
-							</td>
-							<td>
-								Net Salary
-							</td>
-							<td>
-								Gross Salary
-							</td>
-							<td>
-								Action
-							</td>
-						</tr>
-						<tr style="width:100%;" class="data" *ngFor = "let emp of employees; let i = index">
-							<td>
-								{{emp?.companyID}}
-							</td>
-							<td>
-								{{emp?.firstName}}
-							</td>
-							<td>
-								{{emp?.lastName}}
-							</td>
-							<td>
-								{{emp?.email}}
-							</td>
-							<td>
-								{{emp?.netSalary | currency:'PHP':'symbol-narrow':'1.2-2'}}
-							</td>
-							<td>
-								{{emp?.grossSalary | currency:'PHP':'symbol-narrow':'1.2-2'}}
-							</td>
-							<td style="text-align:center">
-								<ion-icon name="md-eye" (tap)="showModal(employees[i])"></ion-icon>
-								<ion-icon name="ios-create-outline" (tap)="editEmp(employees[i])"></ion-icon>
-							</td>
-						</tr>
-						</table>
-					</drag-scroll-->
+					
 				</submodule>
 			</ion-col>
 		</ion-row> 
@@ -168,57 +55,7 @@
 			<ion-col col-12>
 				<submodule [title]="'Pending Member Registration'" *ngIf="pendingMembers.length > 0">
 					<sortable-table [data]="pendingMembers" [headers]="sampKeysP" [formats]="formatsP" [header_titles]="hdrTitlesP"></sortable-table>
-					<!--drag-scroll #ds3 class="table-container" >
-						<table>
-						<tr style="width:100%;" class="header">
-							<td>
-								Company ID
-							</td>
-							<td>
-								First Name
-							</td>
-							<td>
-								Last Name
-							</td>
-							<td>
-								Email
-							</td>
-							<td>
-								Net Salary
-							</td>
-							<td>
-								Gross Salary
-							</td>
-							<td>
-								Action
-							</td>
-						</tr>
-						<tr style="width:100%;" class="data" *ngFor = "let emp of pendingMembers; let i = index">
-							<td>
-								{{emp?.companyID}}
-							</td>
-							<td>
-								{{emp?.firstName}}
-							</td>
-							<td>
-								{{emp?.lastName}}
-							</td>
-							<td>
-								{{emp?.email}}
-							</td>
-							<td>
-								{{emp?.netSalary | currency:'PHP':'symbol-narrow':'1.2-2'}}
-							</td>
-							<td>
-								{{emp?.grossSalary | currency:'PHP':'symbol-narrow':'1.2-2'}}
-							</td>
-							<td style="text-align:center">
-								<ion-icon name="md-eye" (tap)="showModal(pendingMembers[i])"></ion-icon>
-								<ion-icon name="ios-create-outline" (tap)="editEmp(pendingMembers[i])"></ion-icon>
-							</td>
-						</tr>
-						</table>
-					</drag-scroll-->
+					
 				</submodule>
 			</ion-col>
 		</ion-row> 
@@ -228,61 +65,12 @@
 			<ion-col col-12>
 				<submodule [title]="'Flagged Members'" *ngIf="flaggedEmployees.length > 0">
 					<sortable-table [data]="flaggedEmployees" [headers]="sampKeysF" [formats]="formatsF" [header_titles]="hdrTitlesF"></sortable-table>
-					<!--drag-scroll #ds4 class="table-container" >
-						<table>
-						<tr style="width:100%;" class="header">
-							<td>
-								Company ID
-							</td>
-							<td>
-								First Name
-							</td>
-							<td>
-								Last Name
-							</td>
-							<td>
-								Email
-							</td>
-							<td>
-								Net Salary
-							</td>
-							<td>
-								Gross Salary
-							</td>
-							<td>
-								Action
-							</td>
-						</tr>
-						<tr style="width:100%;" class="data" *ngFor = "let emp of flaggedEmployees; let i = index">
-							<td>
-								{{emp?.companyID}}
-							</td>
-							<td>
-								{{emp?.firstName}}
-							</td>
-							<td>
-								{{emp?.lastName}}
-							</td>
-							<td>
-								{{emp?.email}}
-							</td>
-							<td>
-								{{emp?.netSalary | currency:'PHP':'symbol-narrow':'1.2-2'}}
-							</td>
-							<td>
-								{{emp?.grossSalary | currency:'PHP':'symbol-narrow':'1.2-2'}}
-							</td>
-							<td style="text-align:center">
-								<ion-icon name="md-eye" (tap)="showModal(flaggedEmployees[i])"></ion-icon>
-							</td>
-						</tr>
-						</table>
-					</drag-scroll-->
+					
 				</submodule>
 			</ion-col>
 		</ion-row> 
 		<!-- end flagged members -->
-
+		<foot></foot>
 	</section>
 
 </ion-content>

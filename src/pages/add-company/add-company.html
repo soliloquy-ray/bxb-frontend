@@ -279,14 +279,14 @@
 	 				<input type="text" name="idNumber" [(ngModel)] = "bxbForm.idNumber" />
 	 			</span>
 	 		</ion-row>
-	 		<ion-row>
+	 		<!--ion-row>
 	 			<p class="label">
 	 				Documentation Submitted
 	 			</p>
 	 			<span class="content nobg">
 					<ion-toggle [checked]="bxbForm.docSubmitted"></ion-toggle>
 	 			</span>
-	 		</ion-row>
+	 		</ion-row-->
 	 		<ion-row>
 	 			<p class="label">
 	 				Notes
@@ -294,6 +294,12 @@
 	 			<span class="content">
 	 				<textarea name="notes" [(ngModel)] = "bxbForm.notes">
 	 				</textarea>
+	 			</span>
+	 		</ion-row>
+	 		<ion-row class="center">
+	 			<span>
+	 				<ion-checkbox name="docSubmitted" [(ngModel)]="bxbForm.docSubmitted"></ion-checkbox>
+	 				<p>Documentation Submitted</p>
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>

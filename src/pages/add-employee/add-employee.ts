@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, MenuController } from 'ionic-angular';
 
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -41,12 +41,13 @@ export class AddEmployeePage {
 	dt;
 	prefix:string = '63';
   @ViewChild('prev') prev: ElementRef;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer, private alert: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer, private alert: AlertController, private menu: MenuController) {
   	
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SignUpPage');
+    this.menu.close();
+    localStorage.page = 'employees';
   }
 
   ngAfterViewInit(){
@@ -84,7 +85,7 @@ export class AddEmployeePage {
   stat(event){
   	console.log(this);
   }
-  
+
   takePic($event){
     let self = this;
     if($event.target.files && $event.target.files[0]){

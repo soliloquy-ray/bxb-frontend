@@ -44,21 +44,23 @@ page-employees {
 					}
 				}
 
-				p{
-					font-size:2.5vh;
-					&.title{
-						max-height:auto;
-						overflow:initial;
-						height:auto;
-						padding-bottom:2vh;
-					}
-				}
 
 				submodule{
 					padding:0.5vh;
 				}
 
 				ion-row.row{
+
+					p{
+						font-size:2.5vh;
+						&.title{
+							max-height:auto;
+							overflow:initial;
+							height:auto;
+							padding-bottom:2vh;
+						}
+					}
+					
 					ion-col.module{
 						width:100%;
 						max-width:100%;

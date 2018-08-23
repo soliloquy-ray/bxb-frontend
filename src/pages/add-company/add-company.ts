@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, MenuController } from 'ionic-angular';
 
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -67,11 +67,13 @@ export class AddCompanyPage {
 	dt;
 	prefix:string = '63';
   @ViewChild('prev') prev: ElementRef;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer, private alert: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer, private alert: AlertController, private menu: MenuController) {
   	
   }
 
   ionViewDidLoad() {
+  	this.menu.close();
+  	localStorage.page = 'companies';
   }
 
   ngAfterViewInit(){

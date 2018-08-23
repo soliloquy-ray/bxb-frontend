@@ -44,7 +44,7 @@ foot{
 					max-width:25%;
 					color:#05b9ff;
 					text-transform: uppercase;
-					font-size:14px;
+					font-size:2vh;
 					width:auto;
 					padding-left:50px;
 					cursor:pointer;
@@ -52,6 +52,10 @@ foot{
 						color:inherit;
 						text-decoration:none;
 					}
+				}
+
+				&.copyright{
+					font-size:2.3vh;
 				}
 			}
 		}

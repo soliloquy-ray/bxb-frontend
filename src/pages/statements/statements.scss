@@ -21,17 +21,18 @@ page-statements {
 					}
 				}
 
-				p{
-					font-size:2.5vh;
-					&.title{
-						max-height:auto;
-						overflow:initial;
-						height:auto;
-						padding-bottom:2vh;
-					}
-				}
-
 				ion-row.row{
+
+					p{
+						font-size:2.5vh;
+						&.title{
+							max-height:auto;
+							overflow:initial;
+							height:auto;
+							padding-bottom:2vh;
+						}
+					}
+
 					ion-col.module{
 						width:100%;
 						max-width:100%;
@@ -64,6 +65,24 @@ page-statements {
 			display:block;
 			padding:1vh 2vw 1vh;
 			padding-left:$side-bar-width;
+
+			ion-row{
+				ion-col{
+
+					sortable-table{
+						.table-grid{
+							ion-row{
+								ion-col{
+									div{
+
+									}
+								}
+							}
+						}
+					}
+
+				}
+			}
 
 
 		}

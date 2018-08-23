@@ -14,17 +14,18 @@ page-employee-dashboard {
 				padding: 1vh 5vw;
 				font-size:2.5vh;
 
-				p{
-					font-size:2.5vh;
-					&.title{
-						max-height:auto;
-						overflow:initial;
-						height:auto;
-						padding-bottom:2vh;
-					}
-				}
-
 				&>ion-row.row{
+
+					p{
+						font-size:2.5vh;
+						&.title{
+							max-height:auto;
+							overflow:initial;
+							height:auto;
+							padding-bottom:2vh;
+						}
+					}
+					
 					ion-col[col-6]{
 						flex:0 0 100%;
 						max-width:100%;

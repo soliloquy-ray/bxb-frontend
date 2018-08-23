@@ -52,11 +52,10 @@ export class PretermPage {
 		'terms':'number',
 		'amt':'currency'
 	};
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private db: DbProvider, private loader: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController/*, private db: DbProvider, private loader: LoadingController*/) {
   }
 
   ionViewDidEnter() {
-  	let self = this;
   	this.menu.close();
   	localStorage.page = 'preterm';
 

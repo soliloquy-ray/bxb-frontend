@@ -4,7 +4,6 @@ import { IonicPage, NavController, NavParams, AlertController, MenuController } 
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { LoginPage } from '../login/login';
-import { TermsPage } from '../terms/terms';
 
 import { intlPrefixes } from '../../ext/mob_prefixes';
 

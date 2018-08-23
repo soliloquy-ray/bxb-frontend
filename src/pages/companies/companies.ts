@@ -2,8 +2,6 @@ import { Component, ViewChildren, QueryList } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, Modal, ModalController } from 'ionic-angular';
 
 import { EmployeeInfoModalPage } from '../employee-info-modal/employee-info-modal';
-import { EditEmployeePage } from '../edit-employee/edit-employee';
-import { AddEmployeePage } from '../add-employee/add-employee';
 
 import { DragScrollComponent } from 'ngx-drag-scroll';
 

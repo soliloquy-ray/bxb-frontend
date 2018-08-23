@@ -33,7 +33,7 @@ export class EditProfilePage {
 	prefixes = this.sanitizer.bypassSecurityTrustHtml(intlPrefixes);
 	prefix:string = '63';
   @ViewChild('prev') prev: ElementRef;
-  constructor(public navCtrl: NavController, private navParams: NavParams, private sanitizer:DomSanitizer, private menu: MenuController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer:DomSanitizer, private menu: MenuController) {
   	
   }
 

@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { ViewController } from 'ionic-angular';
 
-import { LoginPage } from '../../pages/login/login';
-
 /**
  * Generated class for the AccountLinkComponent component.
  *

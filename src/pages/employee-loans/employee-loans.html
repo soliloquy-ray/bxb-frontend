@@ -59,105 +59,7 @@
 							<p class="no-data" *ngIf="loans.pending.length == 0">
 								No data
 							</p>
-							<!--ion-grid class="table" *ngIf="!isMobile">
-								<ion-row justify-content-center class="thead header">
-									<ion-col (tap)="sorter(searched?.pending,'transID',false)">
-										Transaction ID
-									</ion-col>
-									<ion-col (tap)="sorter(searched?.pending,'inceptionDate',false)">
-										Date of Inception
-									</ion-col>
-									<ion-col (tap)="sorter(searched?.pending,'creditAvailNumber',false)">
-										Credit Availment Number
-									</ion-col>
-									<ion-col (tap)="sorter(searched?.pending,'rate',false)">
-										Rate
-									</ion-col>
-									<ion-col (tap)="sorter(searched?.pending,'term',false)">
-										Term
-									</ion-col>
-									<ion-col (tap)="sorter(searched?.pending,'amt',false)">
-										Amount
-									</ion-col>
-									<ion-col (tap)="sorter(searched?.pending,'purpose',false)">
-										Purpose
-									</ion-col>
-									<ion-col (tap)="sorter(searched?.pending,'repaid',false)">
-										% Repaid
-									</ion-col>
-								</ion-row>
-								<ion-row justify-content-center class="data" *ngFor = "let rowData of searched?.pending; let i = index">
-									<ion-col>
-										{{rowData?.transID}}
-									</ion-col>
-									<ion-col >
-										{{rowData?.inceptionDate}}
-									</ion-col>
-									<ion-col >
-										{{rowData?.creditAvailNumber}}
-									</ion-col>
-									<ion-col >
-										{{(rowData?.rate * 100) | number:'1.1-2'}} %
-									</ion-col>
-									<ion-col >
-										{{rowData?.term}}
-									</ion-col>
-									<ion-col >
-										{{rowData?.amt | currency:'PHP':'symbol-narrow':'1.2-2'}}
-									</ion-col>
-									<ion-col>
-										{{rowData?.purpose}}
-									</ion-col>
-									<ion-col>
-										{{(rowData?.repaid * 100) | number:'1.1-2'}} %
-									</ion-col>
-								</ion-row>
-							</ion-grid>
-							<ion-grid class="table" *ngIf="isMobile">
-								<ion-row style="width:100%;">
-									<ion-col col-12 style="width:100%; box-shadow: 0 0 3px 0 #333" class="data" *ngFor = "let rowData of searched?.pending; let i = index;">
-										<ion-row>
-											<ion-col col-4>
-												<p class="label">Transaction ID</p>
-												{{rowData?.transID}}
-											</ion-col>
-											<ion-col col-4>
-												<p class="label">Date of Inception</p>
-												{{rowData?.inceptionDate}}
-											</ion-col>
-											<ion-col col-4>
-												<button ion-button (tap)="expand(i)">View Details</button>
-											</ion-col>
-										</ion-row>
-										<div class="expandable" [ngClass]="{'expanded':expanded == (i+1)}">
-											<span class="item">
-												<p class="title">Credit Availment Number</p>
-												{{rowData?.creditAvailNumber}}
-											</span>
-											<span class="item">
-												<p class="title">Rate</p>
-												{{(rowData?.rate * 100) | number:'1.1-2'}} %
-											</span>
-											<span class="item">
-												<p class="title">Term</p>
-												{{rowData?.term}}
-											</span>
-											<span class="item">
-												<p class="title">Amount</p>
-												{{rowData?.amt | currency:'PHP':'symbol-narrow':'1.2-2'}}
-											</span>
-											<span class="item">
-												<p class="title">Purpose</p>
-												{{rowData?.purpose}}
-											</span>
-											<span class="item">
-												<p class="title">Repaid</p>
-												{{(rowData?.repaid * 100) | number:'1.1-2'}} %
-											</span>
-										</div>
-									</ion-col>
-								</ion-row>
-							</ion-grid-->
+							
 						</div>
 						<div *ngSwitchCase = "'approved'">
 							<!--span class="search">
@@ -200,6 +102,10 @@
 				</submodule>
 			</ion-col>
 		</ion-row>
+
+		<video class="ifrproportion w-100" controls="" autoplay="">
+        	<source src="https://d2mls9zgtvu807.cloudfront.net/videos/brickbybrick_intro.mp4?Expires=1534990294&Signature=fNEyoiGBpnD2JcCj-AYz2LDdl3dKXWo47rQlay54DhNOHxHqxIkkmCXaH0y~ssy3P6YfNB6kuZfd0KLNicEzbIQffV4uA-ds9uww63oiKNzKDt3biDCoauPOkzQxHJ6RuDHn5apiYE7bB8abEtTNysLZiunKeUzfzAYug-Jrvgjgd2GptY6Bh~vBfa7rBiGj-Sn5nIF~NiSEkdIahRXJ79v4MhrQwbJcAhU6jQtTxW4lRq70rK-3xmxaR-hC1xGVZKIdokR~Y4W~gAkZBPzxNp0oZZe67lpugzLjtA0GbNuBsnnVIsZr9BRvcXv-cHvt0pZVJR3dxWqcaU624Vgw3w__&Key-Pair-Id=APKAIR235UJVCMWQ3CUQ" type="video/mp4">
+        </video>
 		<foot></foot>
 	</section>
 

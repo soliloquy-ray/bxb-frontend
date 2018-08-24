@@ -85,4 +85,8 @@ export class AppProvider {
   	return str;
   }
 
+  checkOtp(otp:string):boolean{
+    return otp == this.decrypter(this.cookie.get('bxo'));
+  }
+
 }

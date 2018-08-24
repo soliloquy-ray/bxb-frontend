@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, LoadingController, Modal } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, LoadingController, Modal, AlertController } from 'ionic-angular';
 
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -11,6 +11,7 @@ import { intlPrefixes } from '../../ext/mob_prefixes';
 import { config } from '../../ext/config';
 
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { AppProvider } from '../../providers/app/app';
 
 /**
  * Generated class for the SignUpPage page.
@@ -49,7 +50,7 @@ export class SignUpPage {
 	mdl : Modal;
 	env = config[location.origin].backend;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer,  private modal: ModalController, private loader: LoadingController, private http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer,  private modal: ModalController, private loader: LoadingController, private http: Http, private appProvider: AppProvider, private alert:AlertController) {
   	this.dt = this.navParams.get('data');
   }
 
@@ -119,6 +120,59 @@ export class SignUpPage {
 
   }
 
+  startReg(){
+    let self = this;
+    let load = this.loader.create({
+        spinner: 'crescent',
+        dismissOnPageChange: true,
+        showBackdrop: true,
+        content: `Processing...`,
+        enableBackdropDismiss:false
+    });
+    load.present();
+    let otp = self.appProvider.generateOTP();
+    self.appProvider.sendOTPmsg(otp,parseInt(self.userData.mobile.toString().slice(-10))).then(res=>{
+      console.log(res);
+      load.dismiss();
+      self.otpValidate();
+    }).catch(console.warn);
+  }
+
+  otpValidate(iv:boolean = false){
+    let self = this;
+    let al = this.alert.create({
+      enableBackdropDismiss:false,
+      title:'Confirmation',
+      inputs:[
+        {
+          type:'text',
+          placeholder:"Enter OTP",
+          name:"otp"
+        }
+      ],
+      buttons:[
+        {
+          text:'Proceed',
+          handler: data=>{
+            if(self.appProvider.checkOtp(data.otp)){
+              self.submitReg();
+            }else{
+              self.otpValidate(true);
+            }
+          }
+        },
+        {
+          text:'Cancel',
+          role:'cancel'
+        }
+      ]
+    });
+    if(iv){
+      al.setTitle("Invalid OTP code!")
+    }
+    al.present();
+  }
+
   submitReg(){
   	let load = this.loader.create({
 	    spinner: 'crescent',
@@ -159,8 +213,8 @@ export class SignUpPage {
   }
 
   stat(event){
-  	console.log(this.userData);
-  	if(this.userData.userName == '' || this.userData.email == '' || this.userData.mobile == '' || this.userData.password == '' || this.userData.password != this.confirmPass || !this.agreement){
+  	//console.log(this.userData);
+  	if(this.userData.userName == '' || this.userData.email == '' || this.userData.mobile.toString().length < 10 || this.userData.password == '' || this.userData.password != this.confirmPass || !this.agreement){
   		return true;
   	}
   	else{

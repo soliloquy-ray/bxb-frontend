@@ -10,8 +10,9 @@ import { user } from '../../models/user';
 import { intlPrefixes } from '../../ext/mob_prefixes';
 import { config } from '../../ext/config';
 
-import { Http, Headers, RequestOptions } from '@angular/http';
+//import { Http, Headers, RequestOptions } from '@angular/http';
 import { AppProvider } from '../../providers/app/app';
+import { DbProvider } from '../../providers/db/db';
 
 /**
  * Generated class for the SignUpPage page.
@@ -50,7 +51,7 @@ export class SignUpPage {
 	mdl : Modal;
 	env = config[location.origin].backend;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer,  private modal: ModalController, private loader: LoadingController, private http: Http, private appProvider: AppProvider, private alert:AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer,  private modal: ModalController, private loader: LoadingController, private db: DbProvider, private appProvider: AppProvider, private alert:AlertController) {
   	this.dt = this.navParams.get('data');
   }
 
@@ -183,10 +184,6 @@ export class SignUpPage {
   	});
   	load.present();
 
-  	let hdr = new Headers;
-  	hdr.append('Content-Type','application/json');
-  	let rq = new RequestOptions;
-  	rq.headers = hdr;
   	let uData = {
   		login:this.userData.userName,
   		password: this.userData.password,
@@ -195,7 +192,8 @@ export class SignUpPage {
   		id:this.userData.employeeId
   	};
 
-  	this.http.post(`${this.env}/api.php?q=signup`,uData, rq).toPromise()
+  	//this.http.post(`${this.env}/api.php?q=signup`,uData, rq).toPromise()
+    this.db.signUp(uData)
   			.then(res=>{
   				load.dismiss();
   				console.log(res.text());

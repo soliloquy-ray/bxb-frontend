@@ -15,6 +15,24 @@ export class DbProvider {
   constructor(public http: Http) {
   }
 
+  async signUp(uData){
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+
+  	return this.http.post(`${this.env}/api.php?q=signup`,uData, rq).toPromise();
+  }
+
+  async checkTin(uData){
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+
+  	return this.http.post(`${this.env}/api.php?q=get_by_tin`,uData, rq).toPromise();
+  }
+
   createNewLoan(uData):Promise<any>{
 	let hdr = new Headers;
 	hdr.append('Content-Type','application/json');

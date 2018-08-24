@@ -4,7 +4,8 @@ import { IonicPage, NavController, NavParams, LoadingController, ToastController
 import { LoginPage } from '../login/login';
 import { SignUpPage } from '../sign-up/sign-up';
 
-import { Http, Headers, RequestOptions } from '@angular/http';
+//import { Http, Headers, RequestOptions } from '@angular/http';
+import { DbProvider } from '../../providers/db/db';
 
 import { config } from '../../ext/config';
 
@@ -23,7 +24,7 @@ declare var mobilecheck; //fn to check for screen type
 })
 export class SignupTinPage {
 	tin: string;
-  //birth : {day,month,year} = {day:1,month:1,year:1971};
+  b : {day,month,year} = {day:'01',month:'01',year:1971};
 	birth : String = new Date("1971-01-01").toISOString();
   birthday: any;
 	isMobile : boolean = mobilecheck();
@@ -39,7 +40,7 @@ export class SignupTinPage {
 
 	months = {"01":"Jan","02":"Feb","03":"Mar","04":"Apr","05":"May","06":"Jun","07":"Jul","08":"Aug","09":"Sep","10":"Oct","11":"Nov","12":"Dec"};
 	@ViewChild('tin') input_tin: ElementRef;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private loader: LoadingController, private http: Http, private toast: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private loader: LoadingController, private db: DbProvider, private toast: ToastController) {
 
   	for(let i = 1; i<=12; i++){
   		let st = (i<10?"0"+i.toString():i.toString());
@@ -69,18 +70,14 @@ export class SignupTinPage {
     });
     this.load.present();
 
+    if(!this.isMobile) this.birthday = this.b;
     let brt = `${this.birthday.year}-${("0"+this.birthday.month).slice(-2)}-${("0"+this.birthday.day).slice(-2)}`;
   		
   	//let uData = {tin:this.tin,ccode:this.ccode,birth:brt};
   	let uData = {tin:this.tin,birth:brt};
-  	console.log(uData);
-  	let hdr = new Headers;
-  	hdr.append('Content-Type','application/json');
-  	let rq = new RequestOptions;
-  	rq.headers = hdr;
   	
-  	this.http.post(`${this.env}/api.php?q=get_by_tin`,uData, rq)
-  			.toPromise()
+  	//this.http.post(`${this.env}/api.php?q=get_by_tin`,uData, rq).toPromise()
+    this.db.checkTin(uData)
   			.then(res=>{
   				let rs = res.json();
   				if(rs[0]){

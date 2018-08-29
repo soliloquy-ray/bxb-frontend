@@ -17,7 +17,7 @@ export class FootComponent {
   }
 
   ngAfterViewInit(){
-  	console.info(this.compact);
+  	//console.info(this.compact);
   }
 
   toHome(){

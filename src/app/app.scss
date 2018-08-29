@@ -221,3 +221,7 @@ ion-menu{
     top: 0;
   }
 }
+
+.button-md:hover:not(.disable-hover){
+	background-color:inherit;
+}

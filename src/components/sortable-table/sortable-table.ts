@@ -50,7 +50,10 @@ export class SortableTableComponent {
   	else{
   		let lns = this.data.filter(a=>{
   			let cc = this.hdr.some((e,ind)=>{
-  				if(!a.hasOwnProperty(e)) return false;
+  				if(e.indexOf(".") > 0 && this.nesting(a,e).toString().toLowerCase().indexOf(val) > -1){
+  					return true;
+  				}else if(!a.hasOwnProperty(e)) return false;
+  				 
   				if(a[e].toString().toLowerCase().indexOf(val) > -1){
   					return true;
   				}

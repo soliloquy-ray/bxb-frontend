@@ -6,7 +6,7 @@ page-login {
 
 		}
 		section.main-content{
-			background-image:url('../../assets/imgs/login-bg.png');
+			//background-image:url('../../assets/imgs/login-bg.png');
 			background-size:cover;
 			background-repeat:no-repeat;
 			background-position:center;
@@ -40,6 +40,8 @@ page-login {
 				display:block;
 				padding:0 10vw;
 				text-align:center;
+				color:inherit;
+				font-family:inherit;
 
 				ion-row{
 					width:30rem;
@@ -47,16 +49,25 @@ page-login {
 					margin:auto;
 					padding-top:2.25vh;
 					max-width:calc(100% - 10vw);
+					color:inherit;
+					font-family:inherit;
+
+					ion-col{
+						color:inherit;
+						font-family:inherit;
+					}
+
 					input{
 						margin-top: 20px;
 					    border: 0;
 					    outline: 0;
 					    background: transparent;
 					    border-bottom: 1px solid white;
-					    color: white;
+					    color: inherit;
 					    width: 100%;
 					    font-size: 20px;
-					    font-family:'Raleway', sans-serif;
+					    //font-family:'Raleway', sans-serif;
+					    font-family:inherit;
 
 					    &::placeholder{
 					    	color:inherit;
@@ -85,12 +96,18 @@ page-login {
 					display:block;
 					clear:both;
 					margin-top:1.8vh;
+					font-family:inherit;
 					button[ion-button]{
 						background:transparent;
-						color:#fff;
-						font-family: 'Raleway', sans-serif;
+						color:inherit;
+						//font-family: 'Raleway', sans-serif;
+						font-family: inherit;
 						text-transform:none;
 						font-size:18px;
+						box-shadow:none;
+						span{
+							font-family:inherit;
+						}
 					}
 				}
 

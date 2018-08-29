@@ -302,6 +302,27 @@
 	 				<p>Documentation Submitted</p>
 	 			</span>
 	 		</ion-row>
+	 		<ion-row class="center" *ngIf="bxbForm.docSubmitted">
+	 			<p class="label">&nbsp;</p>
+	 			<span class="content nobg">
+		 			<ion-col>
+		 				<ion-checkbox name="secRegist" [(ngModel)]="bxbForm.docs.secRegist"></ion-checkbox>
+		 				SEC Registration
+		 			</ion-col>
+		 			<ion-col>
+		 				<ion-checkbox name="bir2307" [(ngModel)]="bxbForm.docs.bir2307"></ion-checkbox>
+		 				BIR Form 2307
+		 			</ion-col><br/>
+		 			<ion-col>
+		 				<ion-checkbox name="finstat" [(ngModel)]="bxbForm.docs.finStat"></ion-checkbox>
+		 				Financial Statement
+		 			</ion-col>
+		 			<ion-col>
+		 				<ion-checkbox name="infosheet" [(ngModel)]="bxbForm.docs.gis"></ion-checkbox>
+		 				General Information Sheet.
+		 			</ion-col>
+	 			</span>
+	 		</ion-row>
 	 		<ion-row>
 	 			<button ion-button (tap)="submitReg()">Create Account</button>
 	 		</ion-row>

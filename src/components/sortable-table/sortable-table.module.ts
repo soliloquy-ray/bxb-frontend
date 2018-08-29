@@ -1,16 +1,19 @@
 import {NgModule} from '@angular/core';
 import { SortableTableComponent } from "./sortable-table";
 import {IonicModule} from "ionic-angular/index";
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
     imports:[
-        IonicModule
+        IonicModule,
+        NgxPaginationModule
     ],
     declarations: [
         SortableTableComponent
     ],
     exports: [
-        SortableTableComponent
+        SortableTableComponent,
+        NgxPaginationModule
     ]
 })
 export class SortableTableComponentModule {

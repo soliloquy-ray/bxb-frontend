@@ -103,25 +103,28 @@ page-add-company{
 					padding:0.5vw;
 
 
-					&.center span{
-						display:table;
-						width:100%;
-						text-align:center;
-						padding:0.5vh;
+					&.center{
+						margin:0;
+						span{
+							display:table;
+							width:100%;
+							text-align:center;
+							padding:0.5vh;
 
-						input[type=checkbox], ion-checkbox{
-							display:inline-table;
-							margin:0;
-							clear:both;
-							padding:1vh;
-							vertical-align:middle;
-							height:2.5vh;
-							width:2.5vh;
-							cursor:pointer;
-						}
+							input[type=checkbox], ion-checkbox{
+								display:inline-table;
+								margin:0;
+								clear:both;
+								padding:1vh;
+								vertical-align:middle;
+								height:2.5vh;
+								width:2.5vh;
+								cursor:pointer;
+							}
 
-						a{
-							cursor:pointer;
+							a{
+								cursor:pointer;
+							}
 						}
 					}
 					p{
@@ -164,6 +167,11 @@ page-add-company{
 						&.nobg{
 							box-shadow: none;
 							background-color:transparent;
+							display:table;
+							ion-col{
+								width:47%;
+								display:inline-block;
+							}
 						}
 
 						input,select,ion-select,textarea{

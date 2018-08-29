@@ -33,6 +33,20 @@ export class LoginPage {
 	userData:login = {username:"", pass:""};
 	isMobile: boolean = mobilecheck();
   env = config[location.origin].backend;
+  cp: string = "";
+  bgs = {
+      "bxb":{
+        "bg":"url('../../assets/imgs/login-bg.png')",
+        "logo":"../../assets/imgs/bxb-white-logo-2.svg",
+        "style":"color:white;font-family:'Raleway';"
+      },
+      "bell":{
+        "bg":"url('../../assets/imgs/tmp-img.png')",
+        "logo":"../../assets/imgs/notifbell.png",
+        "style":"color:black;font-family:'Roboto',sans-serif;"
+      },
+    };
+  bgimg: string;
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private http: Http, private toast: ToastController, private loader: LoadingController) {
   	console.log(this.env);
   }
@@ -57,6 +71,17 @@ export class LoginPage {
           break;
       }
     }
+
+    this.assignStyle().then(c=>{
+      let sct = document.querySelector('section.main-content');
+      sct.setAttribute('style',c['style']);
+    });
+  }
+
+  async assignStyle():Promise<any>{
+    let comps = this.navParams.get('company') || 'bxb';
+    this.cp = this.bgs[comps];
+    return this.cp;
   }
 
   toReg(){

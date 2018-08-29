@@ -18,11 +18,13 @@ import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
 import { TermsPage } from '../pages/terms/terms';
 import { PrivacyPolicyPage } from '../pages/privacy-policy/privacy-policy';
 import { LoansPage } from '../pages/loans/loans';
+import { ActivityLogPage } from '../pages/activity-log/activity-log';
 
 /* employee pages */
 import { EmployeeDashboardPage } from '../pages/employee-dashboard/employee-dashboard';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { EmployeeLoansPage } from '../pages/employee-loans/employee-loans';
+//import { CDashboardPage } from '../pages/c-dashboard/c-dashboard';
 
 /* hr pages */
 import { EmployeesPage } from '../pages/employees/employees';
@@ -50,6 +52,7 @@ import { DetailVerificationPage } from '../pages/detail-verification/detail-veri
 
 import { HttpModule } from '@angular/http';
 import { DragScrollModule } from 'ngx-drag-scroll';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { DbProvider } from '../providers/db/db';
 import { AppProvider } from '../providers/app/app';
 import { CookieService } from 'ngx-cookie-service';
@@ -85,7 +88,9 @@ var pages = [
   PretermPage,
   AddCompanyPage,
   StatementsPage,
-  SoaPage
+  SoaPage,
+  ActivityLogPage
+  //CDashboardPage
 ];
 
 @NgModule({
@@ -95,9 +100,11 @@ var pages = [
     BrowserModule,
     HttpModule,
     DragScrollModule,
+    NgxPaginationModule,
     IonicModule.forRoot(MyApp, {}, {
       links: [
         { component: HomePage, name: 'Home', segment: 'home' },
+        { component: LoginPage, name: 'LoginPage', segment: 'login/:company/portal' },
         { component: LoginPage, name: 'LoginPage', segment: 'login' },
         { component: SignUpPage, name: 'SignUpPage', segment: 'sign-up' },
         { component: ForgotPasswordPage, name: 'ForgotPasswordPage', segment: 'forgot' },
@@ -126,6 +133,7 @@ var pages = [
         { component: AddCompanyPage, name: 'AddCompanyPage', segment: 'add-company' },
         { component: StatementsPage, name: 'StatementsPage', segment: 'management/soa' },
         { component: SoaPage, name: 'SoaPage', segment: 'statement-of-account' },
+        { component: ActivityLogPage, name: 'ActivityLogPage', segment: 'activitylog' },
       ]
     })
   ],

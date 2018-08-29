@@ -37,7 +37,7 @@
 			% Repaid
 		</ion-col-->
 	</ion-row>
-	<ion-row justify-content-center class="data" *ngFor = "let rowData of searched; let i = index">
+	<ion-row justify-content-center class="data" *ngFor = "let rowData of searched | paginate:{ itemsPerPage:10, currentPage: p}; let i = index">
 		<ion-col *ngFor = "let dt of hdr;">
 			<div class="{{dt}}" *ngIf="frm[dt]=='number'">{{rowData[dt] | number:'1.0-2'}}</div>
 			<div class="{{dt}}" *ngIf="frm[dt]=='currency'">{{rowData[dt] | currency:'PHP':'symbol-narrow':'1.2-2'}}</div>
@@ -73,10 +73,11 @@
 			{{(rowData?.repaid * 100) | number:'1.1-2'}} %
 		</ion-col-->
 	</ion-row>
+	<pagination-controls (pageChange)="p = $event"></pagination-controls>
 </ion-grid>
 <ion-grid class="table" id="srt-mobile">
 	<ion-row style="width:100%;">
-		<ion-col col-12 style="width:100%; box-shadow: 0 0 3px 0 #333" class="data" *ngFor = "let rowData of searched; let i = index;">
+		<ion-col col-12 style="width:100%; box-shadow: 0 0 3px 0 #333" class="data" *ngFor = "let rowData of searched | paginate:{ itemsPerPage:10, currentPage: p}; let i = index;">
 			<ion-row>
 				<ion-col>
 					<p class="label">{{hdrTitles[hdr[0]]}}</p>
@@ -125,4 +126,5 @@
 			</div>
 		</ion-col>
 	</ion-row>
+	<pagination-controls (pageChange)="p = $event"></pagination-controls>
 </ion-grid>

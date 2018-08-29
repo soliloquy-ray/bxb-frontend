@@ -5,9 +5,9 @@
   Ionic pages and navigation.
 -->
 <ion-content>
-	<section class="main-content" [ngClass]="{'mobile':isMobile}">
+	<section class="main-content" [ngClass]="{'mobile':isMobile}" [ngStyle]="{'background-image':cp?.bg}">
 		<header>
-			<img src="../../assets/imgs/bxb-white-logo-2.svg"/>
+			<img src="{{cp?.logo}}"/>
 		</header>
 
 		<div class="main">

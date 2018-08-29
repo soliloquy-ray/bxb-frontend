@@ -57,7 +57,13 @@ export class AddCompanyPage {
   	bxbForm: any = {
   		idNumber: '',
   		docSubmitted: false,
-  		notes: ''
+  		notes: '',
+  		docs:{
+  			secRegist:false,
+  			bir2307:false,
+  			finStat:false,
+  			gis:false
+  		}
   	};
 
 	confirmPass: string = '';

@@ -45,6 +45,11 @@ export class LoginPage {
         "logo":"../../assets/imgs/notifbell.png",
         "style":"color:black;font-family:'Roboto',sans-serif;"
       },
+      "toyota":{
+        "bg":"url('../../assets/test/toyota/bg.jpg')",
+        "logo":"../../assets/test/toyota/logo.png",
+        "style":"color:white;font-family:'Calibri';text-shadow:0px 0px 12px #000;"
+      }
     };
   bgimg: string;
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private http: Http, private toast: ToastController, private loader: LoadingController) {

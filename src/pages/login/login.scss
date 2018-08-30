@@ -97,6 +97,7 @@ page-login {
 					clear:both;
 					margin-top:1.8vh;
 					font-family:inherit;
+					text-shadow:inherit;
 					button[ion-button]{
 						background:transparent;
 						color:inherit;
@@ -105,6 +106,7 @@ page-login {
 						text-transform:none;
 						font-size:18px;
 						box-shadow:none;
+						text-shadow:inherit;
 						span{
 							font-family:inherit;
 						}

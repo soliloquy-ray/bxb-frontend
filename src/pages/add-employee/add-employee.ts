@@ -1,12 +1,14 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, MenuController, LoadingController, ToastController } from 'ionic-angular';
 
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { LoginPage } from '../login/login';
-import { user } from '../../models/user';
+import { EmployeesPage } from '../employees/employees';
 
 import { intlPrefixes } from '../../ext/mob_prefixes';
+
+import { DbProvider } from '../../providers/db/db';
 
 /**
  * Generated class for the SignUpPage page.
@@ -22,17 +24,30 @@ declare var mobilecheck; //fn to check for screen type
   templateUrl: 'add-employee.html',
 })
 export class AddEmployeePage {
-	userData: user = {
+	userData: any = {
   		firstName:"",
   		middleName:"",
   		lastName:"",
-  		userName: "",
+  		tin: "",
+  		company: "",
+  		gender: "",
   		email: "",
-  		companyCode: "",
-  		employeeId: "",
-  		payrollAccount: "",
+  		hiredDate: "",
   		password: "",
-  		mobile: ""	
+  		mobile: "",
+      birthday: "",
+      position: "",
+      entity: "",
+      type: "",
+      division: "",
+      netSalary: "",
+      grossSalary: "",
+      bankName: "",
+      vacationLeave: 0,
+      sickLeave: 0,
+      maternityLeave: 0,
+      paternityLeave: 0,
+      companyId: 1
   	};
 	confirmPass: string = '';
 	prefixes = this.sanitizer.bypassSecurityTrustHtml(intlPrefixes);
@@ -40,7 +55,7 @@ export class AddEmployeePage {
 	dt;
 	prefix:string = '63';
   @ViewChild('prev') prev: ElementRef;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer, private alert: AlertController, private menu: MenuController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer, private alert: AlertController, private menu: MenuController, private db: DbProvider, private loader: LoadingController, private toast: ToastController) {
   	
   }
 
@@ -62,18 +77,42 @@ export class AddEmployeePage {
   }
 
   submitReg(){
-  	let alert = this.alert.create({
-  		enableBackdropDismiss: true,
-  		title: "No backend",
-  		message: "Coming soon",
-  		buttons:[
-  		{
-  			text:"Ok",
-  			role:'cancel'
-  		}]
-  	});
+    this.userData.mobile = this.prefix + this.userData.mobile;
+    let uData = this.userData;
 
-  	alert.present();
+    let load = this.loader.create({
+          spinner: 'crescent',
+          dismissOnPageChange: true,
+          showBackdrop: true,
+          content: `Processing...`,
+          enableBackdropDismiss:false
+      });
+    load.present();
+
+    this.db.manAddEmp(uData).then(res=>{
+      load.dismiss();
+      if(res.text() === "true"){
+        this.navCtrl.setRoot(EmployeesPage,{},{animate:true, direction:"forward"});
+      }else{
+        let toast = this.toast.create({
+          message: 'An error occurred. Please try again later.',
+          duration: 3000,
+          position: 'top',
+          cssClass:`fail`
+        });
+        toast.present();
+      }
+    }).catch(err=>{
+      load.dismiss();
+      let toast = this.toast.create({
+        message: 'An error occurred. Please try again later.',
+        duration: 3000,
+        position: 'top',
+        cssClass:`fail`
+      });
+      toast.present();
+      console.warn(err);
+    });
   }
 
   goToTerms(){

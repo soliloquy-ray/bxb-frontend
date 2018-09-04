@@ -89,4 +89,17 @@ export class AppProvider {
     return otp == this.decrypter(this.cookie.get('bxo'));
   }
 
+
+  async uploadCSV(fl){
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+
+	let json = JSON.stringify(fl);
+
+	return this.http.post(`${this.env}/api.php?q=uploadcsv`,{data:fl}, rq)
+			.toPromise();
+  }
+
 }

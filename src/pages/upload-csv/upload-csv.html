@@ -1,0 +1,18 @@
+<ion-content [ngClass]="{'mobile':isMobile()}">
+	<top-bar></top-bar>
+	<side-bar *ngIf = "!isMobile()" [highlights]="'uploadcsv'"></side-bar>
+
+	<section class="main-content">
+		<div class="body">
+
+			<input type="file" name="csv" (change)="see($event)" accept=".csv,.xls,.xlsx"/>
+
+			<button ion-button name="submit" [disabled]="!uploadRdy" (tap)="sendToBack()">
+				Upload
+			</button>
+		</div>
+
+		<foot></foot>		
+	</section>
+
+</ion-content>

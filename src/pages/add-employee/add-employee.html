@@ -37,10 +37,18 @@
 	 		</ion-row>
 	 		<ion-row>
 	 			<p class="label">
-	 				Employee ID
+	 				TIN
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="employeeId" [(ngModel)] = "userData.employeeId" [value] = "userData.employeeId" />
+	 				<input type="text" name="tin" [(ngModel)] = "userData.tin" [value] = "userData.tin" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Company
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="company" [(ngModel)] = "userData.company" [value] = "userData.company" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -49,14 +57,6 @@
 	 			</p>
 	 			<span class="content">
 	 				<input type="text" name="email" [(ngModel)] = "userData.email" [value] = "userData.email" />
-	 			</span>
-	 		</ion-row>
-	 		<ion-row>
-	 			<p class="label">
-	 				Password
-	 			</p>
-	 			<span class="content">
-	 				<input type="text" name="password" [(ngModel)] = "userData.password" [value] = "userData.password" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row class="bot">
@@ -164,7 +164,7 @@
 	 				Vacation Leave
 	 			</p>
 	 			<span class="content">
-	 				<input type="number" name="vacationLeave" [(ngModel)] = "userData.vacationLeave" [value] = "userData.vacationLeave" />
+	 				<input type="number" name="vacationLeave" min="0" step="1" [(ngModel)] = "userData.vacationLeave" [value] = "userData.vacationLeave" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -172,7 +172,7 @@
 	 				Sick Leave
 	 			</p>
 	 			<span class="content">
-	 				<input type="number" name="sickLeave" [(ngModel)] = "userData.sickLeave" [value] = "userData.sickLeave" />
+	 				<input type="number" name="sickLeave" min="0" step="1" [(ngModel)] = "userData.sickLeave" [value] = "userData.sickLeave" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -180,7 +180,7 @@
 	 				Maternity Leaves
 	 			</p>
 	 			<span class="content">
-	 				<input type="number" name="maternityLeave" [(ngModel)] = "userData.maternityLeave" [value] = "userData.maternityLeave" />
+	 				<input type="number" name="maternityLeave" min="0" step="1"  [(ngModel)] = "userData.maternityLeave" [value] = "userData.maternityLeave" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -188,11 +188,11 @@
 	 				Paternity Leaves
 	 			</p>
 	 			<span class="content">
-	 				<input type="number" name="paternityLeave" [(ngModel)] = "userData.paternityLeave" [value] = "userData.paternityLeave" />
+	 				<input type="number" name="paternityLeave" min="0" step="1"  [(ngModel)] = "userData.paternityLeave" [value] = "userData.paternityLeave" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
-	 			<button ion-button (tap)="submitReg()">Update Account</button>
+	 			<button ion-button (tap)="submitReg()">Create Account</button>
 	 		</ion-row>
 	 	</form>
 	 

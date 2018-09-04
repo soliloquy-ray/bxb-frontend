@@ -24,6 +24,15 @@ export class DbProvider {
   	return this.http.post(`${this.env}/api.php?q=signup`,uData, rq).toPromise();
   }
 
+  async manAddEmp(uData){
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+
+  	return this.http.post(`${this.env}/api.php?q=manual_add_employee`,{emp:uData}, rq).toPromise();
+  }
+
   async checkTin(uData){
 	let hdr = new Headers;
 	hdr.append('Content-Type','application/json');

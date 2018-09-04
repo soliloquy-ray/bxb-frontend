@@ -28,6 +28,12 @@
           <b>Dashboard</b>
       </a>
     </ion-item>
+    <ion-item [ngClass]="{'selected':gethl()=='uploadcsv'}" *ngIf="accountType == 'hr'">
+      <a class="link" href='/#/upload-csv'>
+        <ion-icon name="cloud-upload"></ion-icon>
+        <b>Upload CSV</b>
+      </a>
+    </ion-item>
     <ion-item [ngClass]="{'selected':gethl()=='education'}" *ngIf="accountType == 'employee'">
       <a class="link" href='/#/education'>
   			<ion-icon name="md-book"></ion-icon>

@@ -32,6 +32,7 @@ import { HrDashboardPage } from '../pages/hr-dashboard/hr-dashboard';
 import { AddEmployeePage } from '../pages/add-employee/add-employee';
 import { EditEmployeePage } from '../pages/edit-employee/edit-employee';
 import { SoaPage } from '../pages/soa/soa';
+import { UploadCsvPage } from '../pages/upload-csv/upload-csv';
 
 /* superuser pages */
 import { SuperDashboardPage } from '../pages/super-dashboard/super-dashboard';
@@ -89,8 +90,8 @@ var pages = [
   AddCompanyPage,
   StatementsPage,
   SoaPage,
-  ActivityLogPage
-  //CDashboardPage
+  ActivityLogPage,
+  UploadCsvPage
 ];
 
 @NgModule({
@@ -134,6 +135,7 @@ var pages = [
         { component: StatementsPage, name: 'StatementsPage', segment: 'management/soa' },
         { component: SoaPage, name: 'SoaPage', segment: 'statement-of-account' },
         { component: ActivityLogPage, name: 'ActivityLogPage', segment: 'activitylog' },
+        { component: UploadCsvPage, name: 'UploadCsvPage', segment: 'upload-csv' },
       ]
     })
   ],

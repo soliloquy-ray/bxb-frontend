@@ -1,11 +1,12 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, MenuController, LoadingController, ToastController } from 'ionic-angular';
 
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { LoginPage } from '../login/login';
 
 import { intlPrefixes } from '../../ext/mob_prefixes';
+import { DbProvider } from '../../providers/db/db';
 
 declare var mobilecheck; //fn to check for screen type
 
@@ -16,23 +17,26 @@ declare var mobilecheck; //fn to check for screen type
 })
 export class AddCompanyPage {
 	companyData: any = {
-  		companyCode:"",
+  		//companyCode:"",
   		companyName:"",
-  		tradeName:"",
+  		//tradeName:"",
+  		country:"",
   		address: "",
-  		SECnum: "",
-  		tin: "",
-  		type: "",
-  		industry: "",
-  		minYear: "",
-  		mobile: ""
+  		city: "",
+  		zip: ""
+  		//SECnum: "",
+  		//tin: "",
+  		//type: "",
+  		//industry: "",
+  		//minYear: "",
+  		//mobile: ""
   	};
   	companyRep: any = {
-  		firstName:'',
-  		lastName:'',
+  		//firstName:'',
+  		//lastName:'',
   		mobile:'',
-  		landline:'',
-  		email:''
+  		phone:'',
+  		//email:''
   	};
 
   	bankDetails: any = {
@@ -44,20 +48,24 @@ export class AddCompanyPage {
   	};
 
   	controlPanel: any = {
-  		salaryCutoff1:'',
+  		/*salaryCutoff1:'',
   		salaryCutoff2:'',
   		soaDate1:'',
   		soaDate2:'',
   		username:'',
   		password:'',
   		status:'active',
-  		netSalaryRule:0,
+  		netSalaryRule:0,*/
+  		minRate: 0,
+  		maxRate: 0,
+  		minLoan: 0,
+  		maxLoan: 0
   	};
 
   	bxbForm: any = {
-  		idNumber: '',
+  		//idNumber: '',
   		docSubmitted: false,
-  		notes: '',
+  		//notes: '',
   		docs:{
   			secRegist:false,
   			bir2307:false,
@@ -72,7 +80,7 @@ export class AddCompanyPage {
 	dt;
 	prefix:string = '63';
   @ViewChild('prev') prev: ElementRef;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer, private alert: AlertController, private menu: MenuController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer, private alert: AlertController, private menu: MenuController, private db: DbProvider, private toast: ToastController, private loader : LoadingController) {
   	
   }
 
@@ -94,18 +102,24 @@ export class AddCompanyPage {
   }
 
   submitReg(){
-  	let alert = this.alert.create({
-  		enableBackdropDismiss: true,
-  		title: "No backend",
-  		message: "Coming soon",
-  		buttons:[
-  		{
-  			text:"Ok",
-  			role:'cancel'
-  		}]
-  	});
+    let load = this.loader.create({
+          spinner: 'crescent',
+          dismissOnPageChange: true,
+          showBackdrop: true,
+          content: `Processing...`,
+          enableBackdropDismiss:false
+      });
+    load.present();
 
-  	alert.present();
+  	let dt = {...this.companyData,...this.companyRep,...this.bankDetails,...this.controlPanel,...this.bxbForm};
+  	
+  	this.db.newCompany(dt).then(res=>{
+  		load.dismiss();
+  		console.log(res);
+  	}).catch(err=>{
+  		load.dismiss();
+  		console.warn(err);
+  	});
   }
 
   goToTerms(){

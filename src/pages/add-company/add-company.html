@@ -13,14 +13,14 @@
 		 	</div>
 
 		 	<span class="header">General Information</span>
-	 		<ion-row>
+	 		<!--ion-row>
 	 			<p class="label">
 	 				Company Code
 	 			</p>
 	 			<span class="content">
 	 				<input type="text" name="companyCode" [(ngModel)] = "companyData.companyCode"/>
 	 			</span>
-	 		</ion-row>
+	 		</ion-row-->
 	 		<ion-row>
 	 			<p class="label">
 	 				Company Name
@@ -29,12 +29,22 @@
 	 				<input type="text" name="companyName" [(ngModel)] = "companyData.companyName" />
 	 			</span>
 	 		</ion-row>
-	 		<ion-row>
+	 		<!--ion-row>
 	 			<p class="label">
 	 				Business / Trade Names
 	 			</p>
 	 			<span class="content">
 	 				<input type="text" name="tradeName" [(ngModel)] = "companyData.tradeName"/>
+	 			</span>
+	 		</ion-row-->
+	 		<ion-row>
+	 			<p class="label">
+	 				Country
+	 			</p>
+	 			<span class="content">
+	 				<select name="country" [(ngModel)]="companyData.country">
+	 					<option value="Philippines" selected="true">Philippines</option>
+	 				</select>
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -46,6 +56,22 @@
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
+	 			<p class="label">
+	 				City
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="address" [(ngModel)] = "companyData.city"/>
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Zip Code
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="zip" [(ngModel)] = "companyData.zip"/>
+	 			</span>
+	 		</ion-row>
+	 		<!--ion-row>
 	 			<p class="label">
 	 				SEC Registration No.
 	 			</p>
@@ -104,8 +130,8 @@
                     	<ion-option value="Others">Others</ion-option>    
                     </ion-select>
 	 			</span>
-	 		</ion-row>
-	 		<ion-row>
+	 		</ion-row-->
+	 		<!--ion-row>
 	 			<p class="label">
 	 				Minumum Year
 	 			</p>
@@ -113,6 +139,8 @@
 	 				<input type="text" name="minYear" [(ngModel)] = "companyData.minYear" />
 	 			</span>
 	 		</ion-row>
+
+	 		<!-- Authorized Representative ->
 		 	<span class="header">Authorized Representative</span>
 	 		<ion-row>
 	 			<p class="label">
@@ -129,7 +157,7 @@
 	 			<span class="content">
 	 				<input type="text" name="firstName" [(ngModel)] = "companyRep.firstName"/>
 	 			</span>
-	 		</ion-row>
+	 		</ion-row-->
 
 		 	<span class="header">Contact Information</span>
 	 		<ion-row class="bot">
@@ -146,17 +174,17 @@
 	 				Landline
 	 			</p>
 	 			<span class="content">
-	 				<input type="number" name="landline" [(ngModel)] = "companyRep.landline" />
+	 				<input type="number" name="phone" [(ngModel)] = "companyRep.phone" />
 	 			</span>
 	 		</ion-row>
-	 		<ion-row>
+	 		<!--ion-row>
 	 			<p class="label">
 	 				Email
 	 			</p>
 	 			<span class="content">
 	 				<input type="email" name="email" [(ngModel)] = "companyRep.email" />
 	 			</span>
-	 		</ion-row>
+	 		</ion-row-->
 
 		 	<span class="header">Bank Account Details</span>
 	 		<ion-row>
@@ -201,7 +229,7 @@
 	 		</ion-row>
 
 		 	<span class="header">Company Control Panel</span>
-	 		<ion-row>
+	 		<!--ion-row>
 	 			<p class="label">
 	 				Salary Cutoff 1
 	 			</p>
@@ -268,17 +296,49 @@
 	 			<span class="content">
 	 				<input type="number" name="netSalaryRule" [(ngModel)] = "controlPanel.netSalaryRule" />
 	 			</span>
+	 		</ion-row-->
+	 		<ion-row>
+	 			<p class="label">
+	 				Minimum Loan
+	 			</p>
+	 			<span class="content">
+	 				<input type="number" step="500" min="0" name="minLoan" [(ngModel)] = "controlPanel.minLoan" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Max Loan
+	 			</p>
+	 			<span class="content">
+	 				<input type="number" step="500" min="0" name="maxLoan" [(ngModel)] = "controlPanel.maxLoan" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Minimum Rate
+	 			</p>
+	 			<span class="content">
+	 				<input type="number" min="0" step="0.005" name="minRate" [(ngModel)] = "controlPanel.minRate" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Max Rate
+	 			</p>
+	 			<span class="content">
+	 				<input type="number" min="0" step="0.005" name="maxRate" [(ngModel)] = "controlPanel.maxRate" />
+	 			</span>
 	 		</ion-row>
 
 		 	<span class="header">For BXB Only</span>
-	 		<ion-row>
+	 		<!--ion-row>
 	 			<p class="label">
 	 				Intermediary ID No.
 	 			</p>
 	 			<span class="content">
 	 				<input type="text" name="idNumber" [(ngModel)] = "bxbForm.idNumber" />
 	 			</span>
-	 		</ion-row>
+	 		</ion-row-->
 	 		<!--ion-row>
 	 			<p class="label">
 	 				Documentation Submitted
@@ -286,7 +346,7 @@
 	 			<span class="content nobg">
 					<ion-toggle [checked]="bxbForm.docSubmitted"></ion-toggle>
 	 			</span>
-	 		</ion-row-->
+	 		</ion-row>
 	 		<ion-row>
 	 			<p class="label">
 	 				Notes
@@ -295,7 +355,7 @@
 	 				<textarea name="notes" [(ngModel)] = "bxbForm.notes">
 	 				</textarea>
 	 			</span>
-	 		</ion-row>
+	 		</ion-row-->
 	 		<ion-row class="center">
 	 			<span>
 	 				<ion-checkbox name="docSubmitted" [(ngModel)]="bxbForm.docSubmitted"></ion-checkbox>

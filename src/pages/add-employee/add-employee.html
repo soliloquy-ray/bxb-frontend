@@ -192,7 +192,7 @@
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
-	 			<button ion-button (tap)="submitReg()">Create Account</button>
+	 			<button ion-button (tap)="submitReg()" [disabled] = "!readyForSubmit()">Create Account</button>
 	 		</ion-row>
 	 	</form>
 	 

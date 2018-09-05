@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, LoadingController, Modal, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, LoadingController, Modal, AlertController, ToastController } from 'ionic-angular';
 
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -51,7 +51,7 @@ export class SignUpPage {
 	mdl : Modal;
 	env = config[location.origin].backend;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer,  private modal: ModalController, private loader: LoadingController, private db: DbProvider, private appProvider: AppProvider, private alert:AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer,  private modal: ModalController, private loader: LoadingController, private db: DbProvider, private appProvider: AppProvider, private alert:AlertController, private toast: ToastController) {
   	this.dt = this.navParams.get('data');
   }
 
@@ -175,6 +175,7 @@ export class SignUpPage {
   }
 
   submitReg(){
+    let self = this;
   	let load = this.loader.create({
 	    spinner: 'crescent',
 	    dismissOnPageChange: true,
@@ -183,7 +184,6 @@ export class SignUpPage {
 	    enableBackdropDismiss:false
   	});
   	load.present();
-
   	let uData = {
   		login:this.userData.userName,
   		password: this.userData.password,
@@ -197,10 +197,26 @@ export class SignUpPage {
   			.then(res=>{
   				load.dismiss();
   				console.log(res.text());
-  				this.toHome();
+          let tst = self.toast.create({
+            message: 'Account Created.',
+            duration: 3000,
+            position: 'top',
+            cssClass:`success`
+          });
+          tst.onDidDismiss(data=>{
+            self.toHome();
+          });
+          tst.present();
   			})
   			.catch(err=>{
   				load.dismiss();
+          let tst = self.toast.create({
+            message: 'An error occurred. Please try again later.',
+            duration: 3000,
+            position: 'top',
+            cssClass:`fail`
+          });
+          tst.present();
   				console.warn(err);
   			});
   }

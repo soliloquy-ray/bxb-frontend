@@ -115,6 +115,27 @@ export class AddEmployeePage {
     });
   }
 
+  readyForSubmit() : boolean{
+    let u = this.userData;
+    return ( u.firstName != "" && 
+      u.middleName != "" && 
+      u.lastName != "" &&
+      u.tin.toString().length >= 9 &&
+      u.company != "" &&
+      u.gender != "" &&
+      u.email != "" &&
+      u.hiredDate != "" &&
+      u.mobile.toString().length >= 10 &&
+      u.birthday != "" &&
+      u.position != "" &&
+      u.entity != "" &&
+      u.type != "" &&
+      u.division != "" &&
+      u.netSalary > 0 && 
+      u.grossSalary > 0 &&
+      u.bankName != "" );
+  }
+
   goToTerms(){
   	window.open(window.location.origin+"/#/terms");
   	//this.navCtrl.setRoot(TermsPage,{},{animate:true, direction:"forward"});

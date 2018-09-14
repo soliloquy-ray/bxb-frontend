@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, LoadingController, ModalController, Modal } from 'ionic-angular';
 
 import { AppProvider } from '../../providers/app/app';
+import { Http, Headers, RequestOptions } from '@angular/http';
 
 @IonicPage()
 @Component({
@@ -14,12 +15,31 @@ export class UploadCsvPage {
 	bdy:string[] = [];
 	headerRows:number = 0;
   	uploadRdy: boolean = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private app: AppProvider, private loader: LoadingController, private modal: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private app: AppProvider, private loader: LoadingController, private modal: ModalController, private http:Http) {
   }
 
   ionViewDidEnter() {
   	this.menu.close();
   	localStorage.page = 'uploadcsv';
+  }
+
+  setupCSV($event){
+    let self = this;
+  	let file: File = $event.target.files[0];
+  	if(!file) return ;
+    let fd = new FormData();
+    fd.append('file',file);
+
+    let hdr = new Headers;
+    //hdr.append('Content-Type','multipart/form-data');
+    let rq = new RequestOptions;
+    rq.headers = hdr;
+
+
+    this.http.post('http://localhost/bxb-test-php/image_uploader.php',fd,rq)
+              .toPromise()
+              .then(console.log)
+              .catch(console.info);
   }
 
   see(e){

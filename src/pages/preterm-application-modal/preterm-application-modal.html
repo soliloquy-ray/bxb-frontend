@@ -1,0 +1,60 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title><ion-icon style="margin:0 1vw;" name="ios-information-circle-outline"></ion-icon>Preterm Application
+  	<!--ion-icon (tap)="close()" name="ios-close" style="float:right;"></ion-icon--></ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content (window:resize)="reorient($event)">
+
+	<section class="content" [ngClass]="{'mobile':isMobile}">
+		<span class="header">
+			<div class="title">
+				<ion-icon name="md-information-circle"></ion-icon>
+				BXB Preterm
+			</div>
+
+		</span>
+
+		<div class="body">
+			<ion-row>
+				<ion-col class="bundle">
+					<ion-row>
+						<ion-col class="label">Name</ion-col>
+						<ion-col class="data">{{user?.name}}</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col class="label">Employee ID</ion-col>
+						<ion-col class="data">{{user?.empID}}</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col class="label">Principal</ion-col>
+						<ion-col class="data">{{loan?.principal | number:'1.0-2'}}</ion-col>
+					</ion-row>
+				</ion-col>
+				<ion-col class="bundle">
+					<ion-row>
+						<ion-col class="label">Preterm Fee</ion-col>
+						<ion-col class="data">{{loanFee | number:'1.0-2'}}</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col class="label">Amount Due</ion-col>
+						<ion-col class="data">{{due | number: '1.0-2'}}</ion-col>
+					</ion-row>
+					
+				</ion-col>
+			</ion-row>
+		</div>
+	</section>
+	
+</ion-content>
+<ion-footer>
+	<button ion-button (tap)="close()">
+		<ion-icon name="ios-close-circle-outline"></ion-icon>
+		Close
+	</button>
+</ion-footer>

@@ -50,6 +50,7 @@ import { EmpDisclosureStatementModalPage } from '../pages/emp-disclosure-stateme
 import { EmployeeInfoModalPage } from '../pages/employee-info-modal/employee-info-modal';
 import { TermsModalPage } from '../pages/terms-modal/terms-modal';
 import { DetailVerificationPage } from '../pages/detail-verification/detail-verification';
+import { PretermApplicationModalPage } from '../pages/preterm-application-modal/preterm-application-modal';
 
 import { HttpModule } from '@angular/http';
 import { DragScrollModule } from 'ngx-drag-scroll';
@@ -57,6 +58,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { DbProvider } from '../providers/db/db';
 import { AppProvider } from '../providers/app/app';
 import { CookieService } from 'ngx-cookie-service';
+import { MediaProvider } from '../providers/media/media';
 
 var pages = [
   MyApp,
@@ -91,7 +93,8 @@ var pages = [
   StatementsPage,
   SoaPage,
   ActivityLogPage,
-  UploadCsvPage
+  UploadCsvPage,
+  PretermApplicationModalPage
 ];
 
 @NgModule({
@@ -136,6 +139,7 @@ var pages = [
         { component: SoaPage, name: 'SoaPage', segment: 'statement-of-account' },
         { component: ActivityLogPage, name: 'ActivityLogPage', segment: 'activitylog' },
         { component: UploadCsvPage, name: 'UploadCsvPage', segment: 'upload-csv' },
+        { component: PretermApplicationModalPage, name: 'PretermApplicationModalPage', segment: 'preterm-modal' },
       ]
     })
   ],
@@ -147,7 +151,8 @@ var pages = [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CookieService,
     DbProvider,
-    AppProvider
+    AppProvider,
+    MediaProvider
   ]
 })
 export class AppModule {}

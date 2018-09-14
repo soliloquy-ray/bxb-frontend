@@ -59,6 +59,8 @@ export class EmployeeDashboardPage {
 	dates : Array<{paymentDate,paymentNum,amt,bal}> = [];
   	env = config[location.origin].backend;
   	userData = JSON.parse(localStorage.userData);
+
+  submitFlag : boolean = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private db: DbProvider, private alert: AlertController, private loader: LoadingController, private toast:ToastController, private appProvider: AppProvider, private cookie: CookieService) {
   }
 
@@ -155,7 +157,15 @@ export class EmployeeDashboardPage {
   		}
   	}
   	else{
-  		initDay = 30;
+      if(mn == 2){
+        initDay = 28;
+        if(yr%4 == 0){
+          initDay = 29;
+        }
+      }
+      else{
+  		  initDay = 30;
+      }
   		++mn;
   		if(mn >= 13){
   			++yr;
@@ -166,7 +176,7 @@ export class EmployeeDashboardPage {
   	for(let i = 0; i<this.paydays; i++){
   		let dt = `${yr}-${('0'+mn).slice(-2)}-${initDay}`;
   		this.dates.push({paymentDate:dt, paymentNum:(i+1), amt:this.deductionPerPayDay, bal:((this.paydays * this.interestRate * this.creditToUse) + this.creditToUse) - (this.deductionPerPayDay * (i+1))});
-  		if(initDay == 30){
+  		if(initDay != 15){
   			initDay = 15;
   			++mn;
   			if(mn >= 13){
@@ -174,7 +184,15 @@ export class EmployeeDashboardPage {
   				mn=1;
   			}
   		}else{
-  			initDay = 30;
+        if(mn == 2){
+          initDay = 28;
+          if(yr%4 == 0){
+            initDay = 29;
+          }
+        }
+        else{
+          initDay = 30;
+        }
   		}
   	}
   	console.log(this.dates);
@@ -239,6 +257,7 @@ export class EmployeeDashboardPage {
 					text:'Proceed',
 					handler: data=>{
 						if(self.appProvider.checkOtp(data.otp)){
+              self.submitFlag = true;
               self.createNewLoan();
             }else{
               self.addLoan(true);

@@ -78,6 +78,7 @@ export class AddEmployeePage {
 
   submitReg(){
     this.userData.mobile = this.prefix + this.userData.mobile;
+    let self = this;
     let uData = this.userData;
 
     let load = this.loader.create({
@@ -92,7 +93,16 @@ export class AddEmployeePage {
     this.db.manAddEmp(uData).then(res=>{
       load.dismiss();
       if(res.text() === "true"){
-        this.navCtrl.setRoot(EmployeesPage,{},{animate:true, direction:"forward"});
+        let toast = this.toast.create({
+          message: 'Employee has been added',
+          duration: 3000,
+          position: 'top',
+          cssClass:`success`
+        });
+        toast.onDidDismiss(d=>{
+          self.navCtrl.setRoot(EmployeesPage,{},{animate:true, direction:"forward"});
+        });
+        toast.present();
       }else{
         let toast = this.toast.create({
           message: 'An error occurred. Please try again later.',

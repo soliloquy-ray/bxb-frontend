@@ -6,6 +6,7 @@ import { SubmoduleComponentModule } from './submodule/submodule.module';
 import { HeaderTitleComponentModule } from './header-title/header-title.module';
 import { SortableTableComponentModule } from './sortable-table/sortable-table.module';
 import { LoanComponentModule } from './loan/loan.module';
+import { PretermComponentModule } from './preterm/preterm.module';
 @NgModule({
 	declarations: [],
 	imports: [],
@@ -15,6 +16,7 @@ import { LoanComponentModule } from './loan/loan.module';
     SubmoduleComponentModule,
     HeaderTitleComponentModule,
     SortableTableComponentModule,
-    LoanComponentModule]
+    LoanComponentModule,
+    PretermComponentModule]
 })
 export class ComponentsModule {}

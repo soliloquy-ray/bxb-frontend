@@ -202,29 +202,24 @@ export class LoansPage {
   	//console.info($event);
   }
 
-  search($event){
-  	let val = $event.target.value.toLowerCase();
-  	if(val.trim() == ""){
-  		this.searched = this.loans;
-  	}
-  	else{
-  		let lns = this.loans.pending.filter(a=>{if(a.amt.toLowerCase().indexOf(val) > -1 || a.firstName.toLowerCase().indexOf(val) > -1 || a.inceptionDate.toLowerCase().indexOf(val) > -1 || a.lastName.toLowerCase().indexOf(val) > -1 || a.purpose.toLowerCase().indexOf(val) > -1 || a.term.toString().toLowerCase().indexOf(val) > -1 || a.transID.toLowerCase().indexOf(val) > -1) return a;});
-  		console.log(lns);
-  		this.searched = {'pending':lns};
-  	}
-
-  }
-
   showModal(i:{index:number,val:any}){
   	let ind = JSON.parse(i.val);
   	let self = this;
   	let lndta = this.ln.getLoan();
   	console.log(lndta);
   	ind.loan = lndta;
+
+    this.db.getSchedofPayment(ind['LoanID']).then(res=>{
+      console.log(res);
+      self.mod = self.modal.create(DisclosureStatementPage,{data:ind,payments:res,user:ind.userData},{cssClass:`whitemodal ${self.isMobile() ? "mobile" : ""}`});
+      self.mod.present();
+    }).catch(console.warn);
+
+/*
   	this.ln.getDates(ind.applicationDate).then(dt=>{
 	  	self.mod = this.modal.create(DisclosureStatementPage,{data:ind, payments:dt, user:ind.userData},{cssClass:`whitemodal ${self.isMobile() ? "mobile" : ""}`});
 	  	self.mod.present();
-  	});
+  	});*/
   }
 
 }

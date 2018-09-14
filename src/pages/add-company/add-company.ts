@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, AlertController, MenuController, L
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { LoginPage } from '../login/login';
+import { CompaniesPage } from '../companies/companies';
 
 import { intlPrefixes } from '../../ext/mob_prefixes';
 import { DbProvider } from '../../providers/db/db';
@@ -102,6 +103,7 @@ export class AddCompanyPage {
   }
 
   submitReg(){
+  	let self = this;
     let load = this.loader.create({
           spinner: 'crescent',
           dismissOnPageChange: true,
@@ -115,9 +117,35 @@ export class AddCompanyPage {
   	
   	this.db.newCompany(dt).then(res=>{
   		load.dismiss();
-  		console.log(res);
+    	if(res.text() === "true"){
+	        let toast = this.toast.create({
+	          message: 'Company has been created',
+	          duration: 3000,
+	          position: 'top',
+	          cssClass:`success`
+	        });
+	        toast.onDidDismiss(d=>{
+	          self.navCtrl.setRoot(CompaniesPage,{},{animate:true, direction:"forward"});
+	        });
+	        toast.present();
+    	}else{
+    	  let toast = this.toast.create({
+    	    message: 'An error occurred. Please try again later.',
+    	    duration: 3000,
+    	    position: 'top',
+    	    cssClass:`fail`
+    	  });
+    	  toast.present();
+    	}
   	}).catch(err=>{
   		load.dismiss();
+    	let toast = this.toast.create({
+    	  message: 'An error occurred. Please try again later.',
+    	  duration: 3000,
+    	  position: 'top',
+    	  cssClass:`fail`
+    	});
+    	toast.present();
   		console.warn(err);
   	});
   }

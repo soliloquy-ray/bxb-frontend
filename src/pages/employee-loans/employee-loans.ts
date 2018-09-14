@@ -1,9 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Modal, ModalController, MenuController, LoadingController, Loading } from 'ionic-angular';
 
 import { DisclosureStatementPage } from '../disclosure-statement/disclosure-statement';
+import { EmpDisclosureStatementModalPage } from '../emp-disclosure-statement-modal/emp-disclosure-statement-modal';
+import { PretermApplicationModalPage } from '../preterm-application-modal/preterm-application-modal';
 
 import { DbProvider } from '../../providers/db/db';
+
+import { LoanComponent } from '../../components/loan/loan';
+import { PretermComponent } from '../../components/preterm/preterm';
 /**
  * Generated class for the EmployeeLoansPage page.
  *
@@ -105,8 +110,27 @@ export class EmployeeLoansPage {
 			"bal":0
 		}
 	];
+	userData = JSON.parse(localStorage.userData);
+	actions = [
+		{
+			"icon":"md-information-circle",
+			"class":"display-disclosure"
+		}
+	];
 
-  	userData = JSON.parse(localStorage.userData);/*{
+	actionsApproved = [
+		{
+			"icon":"md-information-circle",
+			"class":"display-disclosure"
+		},
+		{
+			"icon":"md-warning",
+			"class":"preterm-loan"
+		}
+	];
+	@ViewChild('p_loan') ln: LoanComponent;
+	@ViewChild('p_term') pt: LoanComponent;
+	/*{
   		firstName:"Per",
   		middleName:"Sohn",
   		lastName:"McPherson",
@@ -134,18 +158,18 @@ export class EmployeeLoansPage {
     this.load.present();
     let pr1 = this.db.getEmpLoansByStatus(1).then(rs=>{
     	self.loans.pending = rs;
-    	return rs;
+    	Promise.resolve(rs);
     });
    
 
     let pr2 = this.db.getEmpLoansByStatus(2).then(rs=>{
     	self.loans.approved = rs;
-    	return rs;
+    	Promise.resolve(rs);
     });
 
     let pr3 = this.db.getEmpLoansByStatus(4).then(rs=>{
     	self.loans.cancel = rs;
-    	return rs;
+    	Promise.resolve(rs);
     });
 
     Promise.all([pr1,pr2,pr3]).then(()=>{
@@ -167,6 +191,41 @@ export class EmployeeLoansPage {
   	//console.info($event);
   }
 
+  doAction(e:{index:number,val:any}){
+  	//this.ln.p = e.val.
+  	console.log(e.val);
+  	let ev = JSON.parse(e.val);
+  	this.ln.p = ev.principal;
+  	this.ln.t = ev.numberPaydays;
+  	this.ln.sdate = ev.applicationDate;
+  	this.ln.getLoan();
+  	this.showModal(e, true);
+  }
+
+
+  doActiveAction(i:{index:number,val:any}){
+  	console.log(i);
+  	let ev = JSON.parse(i.val);
+  	this.ln.p = ev.principal;
+  	this.ln.t = ev.numberPaydays;
+  	this.ln.sdate = ev.applicationDate;
+  	if(i.index == 0){
+  		this.showModal(i);
+  	}else if(i.index == 1){
+  		this.showPretermForm(i);
+  	}
+  }
+
+  showPretermForm(i){
+  	let ind = JSON.parse(i.val);
+  	let usr = {name:this.userData.Name_First + " " +this.userData.Name_Last, empID: this.userData.master_id};
+  	let loan = {principal:ind.principal, id:ind.LoanID, interest:ind.interest};
+
+  	this.mod = this.modal.create(PretermApplicationModalPage,{user:usr,loan:loan},{cssClass:`whitemodal xs ${this.isMobile() ? "mobile" : ""}`});
+  	this.mod.present();
+  }
+
+/*
   showModal(i){
   	this.userData.firstName = this.userData.Name_First;
   	this.userData.lastName = this.userData.Name_Last;
@@ -174,12 +233,29 @@ export class EmployeeLoansPage {
   	this.mod = this.modal.create(DisclosureStatementPage,{data:this.loans.pending[i], payments:this.payments, user:this.userData},{cssClass:`whitemodal ${this.isMobile() ? "mobile" : ""}`});
   	this.mod.present();
   }
+*/
 
- /* expand(e){
-  	let el = <HTMLElement>e.target.closest('ion-col.data');
-  	let ex = <HTMLElement>el.querySelector('.expandable');
-  	ex.className.toString().match(/expanded/);
-  }*/
+  showModal(i, fe:boolean = false){
+  	let ind = JSON.parse(i.val);
+  	let self = this;
+  	let lndta = this.ln.getLoan();
+  	console.log(lndta);
+  	ind.loan = lndta;
+
+  	if(fe){
+	  	this.ln.getDates(ind.applicationDate).then(dt=>{
+		  	self.mod = this.modal.create(EmpDisclosureStatementModalPage,{data:ind.loan, payments:dt, user:self.userData},{cssClass:`whitemodal ${self.isMobile() ? "mobile" : ""}`});
+		  	self.mod.present();
+	  	});
+	 }else{
+	 	this.db.getSchedofPayment(ind['LoanID']).then(res=>{
+	      console.log(res);
+	      self.mod = self.modal.create(EmpDisclosureStatementModalPage,{data:ind.loan,payments:res, user:self.userData},{cssClass:`whitemodal ${self.isMobile() ? "mobile" : ""}`});
+	      self.mod.present();
+	    }).catch(console.warn);
+	 }
+
+	}
 
   expand(i){
   	if(this.expanded == i+1){

@@ -45,8 +45,10 @@ export class AppProvider {
   	let ln = alph.length-1;
   	let kh = "";
   	for(let i=0;i<=9;i++){
-  		let ind = Math.random()*ln;
-  		kh += alph[ ind <= 0 ? 0 : Math.floor(ind) ];
+  		let ind = Math.floor(Math.random()*ln);
+  		kh += alph[ ind <= 0 ? 0 : ind ];
+  		alph = alph.replace(alph[ ind <= 0 ? 0 : ind ],'');
+  		--ln;
   	}
   	this.cookie.set('bkhsh',this.garbager(kh));
   }

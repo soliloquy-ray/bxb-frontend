@@ -67,7 +67,7 @@
 			<div class="credit-form">
 				<ion-row>
 					<ion-col col-9>
-						Over how many months do you wish to repay the credit?
+						Over how many paydays do you wish to repay the credit?
 					</ion-col>
 					<ion-col col-3>
 						<input type="number" min="1" maxlength="6" [max]="maxPaydays" step="1" [(ngModel)]="paydays" [disabled]="isMobile()" (change)="getDates()"/>
@@ -120,7 +120,7 @@
 				</ion-col>
 			</ion-row>
 		</div>
-		<button ion-button (tap)="viewTerms()" [disabled]="purpose.trim() == ''">Confirm</button>
+		<button ion-button (tap)="viewTerms()" [disabled]="purpose.trim() == '' || submitFlag">Confirm</button>
 		<foot></foot>
 	</section>
 

@@ -102,6 +102,15 @@ ion-modal.whitemodal{
 			left:calc(calc(100% - 650px) / 2);
 		}
 	}
+
+	&.xs:not(.mobile){
+		div.modal-wrapper{
+			width:calc(650px);
+			left:calc(calc(100% - 650px) / 2);
+			height:400px;
+			max-height:350px;
+		}
+	}
 }
 
 ion-toast{
@@ -224,4 +233,8 @@ ion-menu{
 
 .button-md:hover:not(.disable-hover){
 	//background-color:inherit;
+}
+
+input[readonly="true"]{
+	cursor:not-allowed;
 }

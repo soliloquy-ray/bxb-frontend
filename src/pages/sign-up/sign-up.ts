@@ -10,7 +10,7 @@ import { user } from '../../models/user';
 import { intlPrefixes } from '../../ext/mob_prefixes';
 import { config } from '../../ext/config';
 
-//import { Http, Headers, RequestOptions } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { AppProvider } from '../../providers/app/app';
 import { DbProvider } from '../../providers/db/db';
 
@@ -51,7 +51,7 @@ export class SignUpPage {
 	mdl : Modal;
 	env = config[location.origin].backend;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer,  private modal: ModalController, private loader: LoadingController, private db: DbProvider, private appProvider: AppProvider, private alert:AlertController, private toast: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer,  private modal: ModalController, private loader: LoadingController, private db: DbProvider, private appProvider: AppProvider, private alert:AlertController, private toast: ToastController, private http:Http) {
   	this.dt = this.navParams.get('data');
   }
 
@@ -70,13 +70,13 @@ export class SignUpPage {
   		firstName:data.Name_First,
   		middleName:data.Name_Middle,
   		lastName:data.Name_Last,
-		userName: "",
-		email: "",
-		companyCode: data.company_name,
-		employeeId: data.master_id,
-		payrollAccount: data.Payroll_Account,
-		password: "",
-		mobile: ""	
+  		userName: "",
+  		email: "",
+  		companyCode: data.company_name,
+  		employeeId: data.master_id,
+  		payrollAccount: data.Payroll_Account,
+  		password: "",
+  		mobile: ""	
   	};
 
   	this.ccode = data.company_name;
@@ -112,12 +112,25 @@ export class SignUpPage {
 
   takePic($event){
     let self = this;
+    let fd = new FormData();
     if($event.target.files && $event.target.files[0]){
     	//self.uploadFile($event.target.files[0]);
     	console.log($event.target.files[0]);
+      fd.append('file',$event.target.files[0]);
     	let nurl = URL.createObjectURL($event.target.files[0]);
     	self.prev.nativeElement.src = nurl;
     }
+
+    let hdr = new Headers;
+    //hdr.append('Content-Type','multipart/form-data');
+    let rq = new RequestOptions;
+    rq.headers = hdr;
+
+
+    this.http.post('http://localhost/bxb-test-php/image_uploader.php',fd,rq)
+              .toPromise()
+              .then(console.log)
+              .catch(console.info);
 
   }
 

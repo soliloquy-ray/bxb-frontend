@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { config } from '../../ext/config';
 
+import { LoadingController } from 'ionic-angular';
 /*
   Generated class for the DbProvider provider.
 
@@ -12,7 +13,7 @@ import { config } from '../../ext/config';
 export class DbProvider {
 
   	env = config[location.origin].backend;
-  constructor(public http: Http) {
+  constructor(public http: Http, private loader: LoadingController) {
   }
 
   async signUp(uData){
@@ -62,6 +63,48 @@ export class DbProvider {
   	);
   }
 
+  async addSchedofPayment(uData,loanID):Promise<any>{
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+
+  	return this.http.post(`${this.env}/api.php?q=add_payment_sched`,{paysched:uData,id:loanID}, rq).toPromise();
+  }
+
+  async getSchedofPayment(id):Promise<any>{
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+
+
+  	let load = this.loader.create({
+      spinner: 'crescent',
+      showBackdrop: true,
+      content: `Loading Data...`,
+      dismissOnPageChange: true
+    });
+    load.present();
+
+  	return this.http.post(`${this.env}/api.php?q=get_payment_sched_by_id`,{loanID:id}, rq)
+  					.toPromise()
+  					.then(res=>{
+  						let r = Array.from(res.json());
+  						let x = r.map(a=>{
+  							let b = {
+  								paymentDate:a['payDate'].split(" ")[0],
+  								paymentNum:a['payCount'],
+  								amt:a['payAmount'],
+  								bal:a['balance']
+  							}
+  							return b;
+  						});
+  						load.dismiss();
+  						return x;
+  					});
+  }
+
   getLoansByStatus(stat):Promise<any>{
 	let hdr = new Headers;
 	hdr.append('Content-Type','application/json');
@@ -84,7 +127,6 @@ export class DbProvider {
 
 
   getEmpLoansByStatus(stat):Promise<any>{
-
 	let hdr = new Headers;
 	hdr.append('Content-Type','application/json');
 	let rq = new RequestOptions;

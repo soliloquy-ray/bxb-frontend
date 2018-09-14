@@ -171,4 +171,15 @@ export class LoginPage {
   reorient(){
   	this.isMobile = mobilecheck();
   }
+
+  async testApi(){
+    let hdr = new Headers;
+    hdr.append('Content-Type','application/json');
+    let rq = new RequestOptions;
+    rq.headers = hdr;
+
+    this.http.post(`https://bxb-backend-php.azurewebsites.net/api.php?q=test`,{},rq).toPromise()
+        .then(console.log)
+        .catch(console.info)
+  }
 }

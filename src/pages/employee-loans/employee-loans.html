@@ -36,6 +36,8 @@
 		<!-- start of loans -->
 		<ion-row>
 			<ion-col col-12>
+				<loan #p_loan></loan>
+				<preterm #p_term></preterm>
 				<submodule [title]="'Portfolio Loans/Loan Status'">
 					
 					<ion-segment [(ngModel)]="loanStatus" color="primary" (ionChange)="segmentChanged($event)">
@@ -55,7 +57,7 @@
 
 					<div [ngSwitch]="loanStatus" class='segmentable'>
 						<div *ngSwitchCase = "'pending'">
-							<sortable-table *ngIf="loans.pending.length > 0" [data]="loans?.pending" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles"></sortable-table>
+							<sortable-table *ngIf="loans.pending.length > 0" [data]="loans?.pending" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles" [actions]="actions" (t)="doAction($event)"></sortable-table>
 							<p class="no-data" *ngIf="loans.pending.length == 0">
 								No data
 							</p>
@@ -66,7 +68,7 @@
 								<ion-icon name="ios-search"></ion-icon>
 								<input type="text" (ionInput)="search($event)" placeholder="Search any fields"/>
 							</span-->
-							<sortable-table *ngIf="loans.approved.length > 0" [data]="loans?.approved" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles"></sortable-table>
+							<sortable-table *ngIf="loans.approved.length > 0" [data]="loans?.approved" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles" [actions]="actionsApproved" (t)="doActiveAction($event)"></sortable-table>
 							<p class="no-data" *ngIf="loans.approved.length == 0">
 								No data
 							</p>

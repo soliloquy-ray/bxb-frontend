@@ -142,6 +142,7 @@ export class AdminCreditPage {
 	load.present();
   	let pr1 = this.db.getLoansByStatus(1).then(rs=>{
     	self.loans.pending = rs;
+      load.setContent('Loading Pending loans');
     	console.log(self.loans.pending);
     	return rs;
     });
@@ -149,6 +150,7 @@ export class AdminCreditPage {
 
     let pr2 = this.db.getLoansByStatus(2).then(rs=>{
     	self.loans.activeLoans = rs;
+      load.setContent('Loading Active loans');
     	console.log(self.loans.activeLoans);
     	return rs;
     });
@@ -182,9 +184,9 @@ export class AdminCreditPage {
 
   doAction(i:{index:number,val:any}){
   	if(i.index == 0){
-  		this.showDisclosureModal(JSON.parse(i.val));
+  		this.showDisclosureModal(JSON.parse(i.val), true);
   	}else if(i.index == 1){
-  		this.showApproveAlert(JSON.parse(i.val)['LoanID']);
+  		this.showApproveAlert(JSON.parse(i.val));
   	}
   }
 
@@ -205,19 +207,35 @@ export class AdminCreditPage {
   	this.mod.present();
   }*/
 
-  showDisclosureModal(i){
+  showDisclosureModal(i,fe:boolean = false){
   	console.log(i);
   	let ind = i;
   	let self = this;
-  	this.p_loan.p = ind.principal;
-  	this.p_loan.t = ind.numberPaydays;
-  	this.p_loan.sdate = ind.applicationDate;
-  	let lndta = this.p_loan.getLoan();
-  	ind.loan = lndta;
-  	this.p_loan.getDates(ind.applicationDate).then(dt=>{
-	  	self.mod = this.modal.create(DisclosureStatementPage,{data:ind, payments:dt, user:ind.userData},{cssClass:`whitemodal ${self.isMobile() ? "mobile" : ""}`});
-	  	self.mod.present();
-  	});
+    this.p_loan.p = ind.principal;
+    this.p_loan.t = ind.numberPaydays;
+    this.p_loan.sdate = ind.applicationDate;
+    let lndta = this.p_loan.getLoan();
+    ind.loan = lndta;
+
+    /** USES FRONTEND COMPUTATION **/
+    if(fe){
+      this.p_loan.p = ind.principal;
+      this.p_loan.t = ind.numberPaydays;
+      this.p_loan.sdate = ind.applicationDate;
+      let lndta = this.p_loan.getLoan();
+      ind.loan = lndta;
+  	  this.p_loan.getDates(ind.applicationDate).then(dt=>{
+  	  	self.mod = this.modal.create(DisclosureStatementPage,{data:ind, payments:dt, user:ind.userData},{cssClass:`whitemodal ${self.isMobile() ? "mobile" : ""}`});
+  	  	self.mod.present();
+    	});
+    }
+    else{ // stored db values      
+      this.db.getSchedofPayment(i['LoanID']).then(res=>{
+        console.log(res);
+        self.mod = self.modal.create(DisclosureStatementPage,{data:ind,payments:res,user:ind.userData},{cssClass:`whitemodal ${self.isMobile() ? "mobile" : ""}`});
+        self.mod.present();
+      }).catch(console.warn);
+    }
   }
 
   showApproveAlert(id){
@@ -242,38 +260,54 @@ export class AdminCreditPage {
           text: 'Proceed',
           handler: data => {
           	let ld = self.loader.create({
-		      spinner: 'crescent',
-		      dismissOnPageChange: true,
-		      showBackdrop: true,
-		      content: `Processing...`,
-		      enableBackdropDismiss:false
-			});
-			ld.present();
-            self.db.updateLoanStatus(2,id).then(res=>{
+      		      spinner: 'crescent',
+      		      dismissOnPageChange: true,
+      		      showBackdrop: true,
+      		      content: `Processing...`,
+      		      enableBackdropDismiss:false
+      			});
+			      ld.present();
+            self.db.updateLoanStatus(2,id['LoanID']).then(res=>{
+              /* set up sched of payments */
+              let ind = id;
+              let self = this;
+              self.p_loan.p = ind.principal;
+              self.p_loan.t = ind.numberPaydays;
+              self.p_loan.sdate = ind.applicationDate;
+              let lndta = self.p_loan.getLoan();
+              ind.loan = lndta;
+              self.p_loan.getDates(ind.applicationDate).then(dt=>{
+                console.log(dt);
+                self.db.addSchedofPayment(dt,id['LoanID']).then(console.info).catch(console.warn);
+              }).catch(console.warn);
+              /* end of setup  */
+
             	let toast = this.toast.create({
-				  message: 'Loan Approved',
-				  duration: 3000,
-				  position: 'top',
-				  cssClass:`success`
-				});
-				toast.present();
+      				  message: 'Loan Approved',
+      				  duration: 3000,
+      				  position: 'top',
+      				  cssClass:`success`
+      				});
+				      toast.present();
             	ld.dismiss().catch(()=>{});
             	self.initLoans();
             	console.log(res);
             }).catch(err=>{
             	let toast = this.toast.create({
-				  message: 'Loan Approval Failed',
-				  duration: 3000,
-				  position: 'top',
-				  cssClass:`fail`
-				});
-				toast.present();
+      				  message: 'Loan Approval Failed',
+      				  duration: 3000,
+      				  position: 'top',
+      				  cssClass:`fail`
+      				});
+				      toast.present();
             	ld.dismiss().catch(()=>{});
             	self.initLoans();
             	console.warn(err);
             });
-          }
-        }
+          
+          } // end of button handler
+
+        } // end of button
       ]
     });
     conf.present();

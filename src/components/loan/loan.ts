@@ -65,7 +65,14 @@ export class LoanComponent {
   		}
   	}
   	else{
-  		initDay = 30;
+  		if(mn == 2){
+  			initDay = 28;
+	          if(yr%4 == 0){
+	            initDay = 29;
+	          }
+  		}else{
+  			initDay = 30;
+  		}
   		/*++mn;
   		if(mn >= 13){
   			++yr;
@@ -76,7 +83,7 @@ export class LoanComponent {
   	for(let i = 0; i<this.t; i++){
   		let dt = `${yr}-${('0'+mn).slice(-2)}-${initDay}`;
   		this.dates.push({paymentDate:dt, paymentNum:(i+1), amt:dppd, bal:((this.t * r * p) + p) - (dppd * (i+1))});
-  		if(initDay == 30){
+  		if(initDay != 15){
   			initDay = 15;
   			++mn;
   			if(mn >= 13){
@@ -84,7 +91,15 @@ export class LoanComponent {
   				mn=1;
   			}
   		}else{
-  			initDay = 30;
+  			if(mn == 2){
+  				initDay = 28;
+		          if(yr%4 == 0){
+		            initDay = 29;
+		          }
+  			}
+  			else{
+  				initDay = 30;
+  			}
   		}
   	}
   	console.log(this.dates);

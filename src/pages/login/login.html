@@ -7,7 +7,7 @@
 <ion-content>
 	<section class="main-content" [ngClass]="{'mobile':isMobile}" [ngStyle]="{'background-image':cp?.bg}">
 		<header>
-			<img src="{{cp?.logo}}"/>
+			<img src="{{cp?.logo}}" (tap)="testApi()"/>
 		</header>
 
 		<div class="main">

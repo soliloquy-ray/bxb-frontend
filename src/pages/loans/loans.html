@@ -25,7 +25,7 @@
 
 					<div [ngSwitch]="loanStatus" class='segmentable'>
 						<div *ngSwitchCase = "'pending'">
-							<sortable-table *ngIf="loans.pending.length > 0" [data]="loans?.pending" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles" [actions]="actions" (t)="test($event)"></sortable-table>
+							<sortable-table *ngIf="loans.pending.length > 0" [data]="loans?.pending" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles" [actions]="actions" (t)="test($event,true)"></sortable-table>
 							<p class="no-data" *ngIf="loans.pending.length == 0">
 								No data
 							</p>

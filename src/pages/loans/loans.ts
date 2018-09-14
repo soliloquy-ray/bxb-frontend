@@ -155,7 +155,7 @@ export class LoansPage {
     });
   }
 
-  test(e:{index:number,val:any}){
+  test(e:{index:number,val:any},fe:boolean = false){
   	//this.ln.p = e.val.
   	console.log(e.val);
   	let ev = JSON.parse(e.val);
@@ -163,7 +163,7 @@ export class LoansPage {
   	this.ln.t = ev.numberPaydays;
   	this.ln.sdate = ev.applicationDate;
   	this.ln.getLoan();
-  	this.showModal(e);
+  	this.showModal(e, fe);
   }
 
   /*getLoansByStatus(stat):Promise<any>{
@@ -202,24 +202,27 @@ export class LoansPage {
   	//console.info($event);
   }
 
-  showModal(i:{index:number,val:any}){
+  showModal(i:{index:number,val:any}, fe:boolean = false){
   	let ind = JSON.parse(i.val);
   	let self = this;
   	let lndta = this.ln.getLoan();
   	console.log(lndta);
   	ind.loan = lndta;
 
-    this.db.getSchedofPayment(ind['LoanID']).then(res=>{
-      console.log(res);
-      self.mod = self.modal.create(DisclosureStatementPage,{data:ind,payments:res,user:ind.userData},{cssClass:`whitemodal ${self.isMobile() ? "mobile" : ""}`});
-      self.mod.present();
-    }).catch(console.warn);
+  	if(fe){
 
-/*
-  	this.ln.getDates(ind.applicationDate).then(dt=>{
-	  	self.mod = this.modal.create(DisclosureStatementPage,{data:ind, payments:dt, user:ind.userData},{cssClass:`whitemodal ${self.isMobile() ? "mobile" : ""}`});
-	  	self.mod.present();
-  	});*/
+	  	this.ln.getDates(ind.applicationDate).then(dt=>{
+		  	self.mod = this.modal.create(DisclosureStatementPage,{data:ind, payments:dt, user:ind.userData},{cssClass:`whitemodal ${self.isMobile() ? "mobile" : ""}`});
+		  	self.mod.present();
+	  	});
+	}else{
+	    this.db.getSchedofPayment(ind['LoanID']).then(res=>{
+	      console.log(res);
+	      self.mod = self.modal.create(DisclosureStatementPage,{data:ind,payments:res,user:ind.userData},{cssClass:`whitemodal ${self.isMobile() ? "mobile" : ""}`});
+	      self.mod.present();
+	    }).catch(console.warn);
+	}
+
   }
 
 }

@@ -13,7 +13,10 @@ import { LoadingController } from 'ionic-angular';
 export class DbProvider {
 
   	env = config[location.origin].backend;
+  	dtNow;
   constructor(public http: Http, private loader: LoadingController) {
+  	let dt = new Date();
+  	this.dtNow = dt.getUTCFullYear()+"-"+("0"+(dt.getUTCMonth().valueOf()+2)).slice(-2)+"-"+dt.getUTCDate();
   }
 
   async signUp(uData){
@@ -102,6 +105,63 @@ export class DbProvider {
   						});
   						load.dismiss();
   						return x;
+  					});
+  }
+
+  async getSOAByDate(date1 = '1971-01-01', date2 = this.dtNow, cid: number = 1):Promise<any>{
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+
+
+  	let load = this.loader.create({
+      spinner: 'crescent',
+      showBackdrop: true,
+      content: `Loading Data...`,
+      dismissOnPageChange: true
+    });
+    load.present();
+
+    let params = {
+    	date1:date1,
+    	date2:date2,
+    	cid:cid
+    };
+
+  	return this.http.post(`${this.env}/api.php?q=get_soa_by_date`,{soa:params}, rq)
+  					.toPromise()
+  					.then(res=>{
+  						load.dismiss();
+  						return Promise.resolve(res);
+  					});
+  }
+
+	async getSOAPaySchedByDate(date, cid: number = 1):Promise<any>{
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+
+
+  	let load = this.loader.create({
+      spinner: 'crescent',
+      showBackdrop: true,
+      content: `Loading Data...`,
+      dismissOnPageChange: true
+    });
+    load.present();
+
+    let params = {
+    	date:date,
+    	cid:cid
+    };
+
+  	return this.http.post(`${this.env}/api.php?q=get_soa_details_by_date`,{soa:params}, rq)
+  					.toPromise()
+  					.then(res=>{
+  						load.dismiss();
+  						return Promise.resolve(res);
   					});
   }
 

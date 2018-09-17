@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
+import { DbProvider } from '../../providers/db/db';
 /**
  * Generated class for the StatementOfAccountPage page.
  *
@@ -71,11 +72,19 @@ export class StatementOfAccountPage {
 			"status":"Active"
 		}
 	];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private view: ViewController) {
+	data;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private view: ViewController, private db: DbProvider) {
+  	this.data = this.navParams.get('data');
+  	console.log(this.data);
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad StatementOfAccountPage');
+    //console.log('ionViewDidLoad StatementOfAccountPage');
+
+  	this.db.getSOAPaySchedByDate(this.data.billPeriod).then(res=>{
+  		this.prevBalance = [];
+  		this.currentBalance = res.json();
+  	}).catch(console.warn);
   }
 
   print(){

@@ -26,24 +26,24 @@
 		</ion-row>
 		<ion-row>
 			<ion-col col-7>
-				SOA Ref# 2018835
+				SOA Ref# {{data?.soaNo}}
 			</ion-col>
 			<ion-col col-2>
 				Billing Period
 			</ion-col>
 			<ion-col col-3>
-				07-15-2018 to 07-30-2018
+				- {{data?.billPeriod}}
 			</ion-col>
 		</ion-row>
 		<ion-row>
 			<ion-col col-7>
-				6805 Ayala Avenue Condominium Corporation	
+				{{data?.company}}	
 			</ion-col>
 			<ion-col col-2>
 				Due Date	
 			</ion-col>
 			<ion-col col-3>
-				07-30-2018
+				{{data?.billPeriod}}
 			</ion-col>
 		</ion-row>
 		<ion-row>
@@ -54,7 +54,7 @@
 				Amount Due	
 			</ion-col>
 			<ion-col col-3>
-				14,929.16
+				{{data?.amt | number:'1.0-2'}}
 			</ion-col>
 		</ion-row>
 		<ion-row>
@@ -76,7 +76,7 @@
 				Total Amount Due
 			</ion-col>
 			<ion-col col-3>
-				14,929.16
+				{{data?.amt |  number:'1.0-2'}}
 			</ion-col>
 		</ion-row>
 		<hr class="blocker">

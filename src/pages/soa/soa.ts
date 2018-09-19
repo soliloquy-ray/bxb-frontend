@@ -51,7 +51,8 @@ export class SoaPage {
 	};
 	sampKeys = ["pdf","billPeriod","amt","soaNo","refNo","status"];
 	formats = {
-		'amt':'currency'
+		'amt':'currency',
+		'status':'textDecorated'
 	};
 	actions = [
 		{

@@ -34,12 +34,12 @@
         <b>Upload CSV</b>
       </a>
     </ion-item>
-    <ion-item [ngClass]="{'selected':gethl()=='education'}" *ngIf="accountType == 'employee'">
+    <!--ion-item [ngClass]="{'selected':gethl()=='education'}" *ngIf="accountType == 'employee'">
       <a class="link" href='/#/education'>
   			<ion-icon name="md-book"></ion-icon>
         <b>Financial Education</b>
     	</a>
-  	</ion-item>
+  	</ion-item-->
   	<ion-item [ngClass]="{'selected':gethl()=='creditsum'}">
       <a class="link" href='/#/management/loans' *ngIf="getAccountType() == 'super'">
         <svg enable-background="new 0 0 433.5 433.5" version="1.1" viewBox="0 0 433.5 433.5" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
@@ -104,7 +104,7 @@
           <b>Activity Log</b>
       </a>
     </ion-item>
-    <ion-item [ngClass]="{'selected':hl=='logs'}" *ngIf="accountType == 'super'">
+    <ion-item [ngClass]="{'selected':hl=='controller'}" *ngIf="accountType == 'super'">
       <a class="link">
         <ion-icon name="ios-list-box"></ion-icon>
           <b>Super Controller</b>

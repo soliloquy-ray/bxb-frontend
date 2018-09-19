@@ -49,6 +49,33 @@ sortable-table {
 						text-align:left;
 					}
 
+					b.decorated{
+						text-transform:uppercase;
+						position:relative;
+						top:0;
+						left:0;
+						height:100%;
+						padding:0.75vh;
+						width:100%;
+						color:#fff;
+						background-color:#3174d7;
+
+						&.clickable{
+							cursor:pointer;
+						}
+
+						&.unpaid{
+							background-color:#d9534f;
+						}
+
+						&.paid{
+							background-color:#5cb85c;
+							&.not{
+								background-color:#d9534f;
+							}
+						}
+					}
+
 
 					ion-icon{
 
@@ -143,7 +170,31 @@ sortable-table {
 						max-width:49%;
 						div{
 							font-family:'Roboto',sans-serif;
+							text-align:left;
 
+							b.decorated{
+								text-transform:uppercase;
+								position:relative;
+								top:0;
+								left:0;
+								height:100%;
+								padding:0.75vh;
+								width:100%;
+								color:#fff;
+								background-color:#3174d7;
+
+								&.clickable{
+									cursor:pointer;
+								}
+
+								&.unpaid{
+									background-color:#d9534f;
+								}
+
+								&.paid{
+									background-color:#5cb85c;
+								}
+							}
 						}
 						p.title{
 							margin:0;

@@ -158,18 +158,18 @@ export class EmployeeLoansPage {
     this.load.present();
     let pr1 = this.db.getEmpLoansByStatus(1).then(rs=>{
     	self.loans.pending = rs;
-    	Promise.resolve(rs);
+    	return Promise.resolve(rs);
     });
    
 
     let pr2 = this.db.getEmpLoansByStatus(2).then(rs=>{
     	self.loans.approved = rs;
-    	Promise.resolve(rs);
+    	return Promise.resolve(rs);
     });
 
     let pr3 = this.db.getEmpLoansByStatus(4).then(rs=>{
     	self.loans.cancel = rs;
-    	Promise.resolve(rs);
+    	return Promise.resolve(rs);
     });
 
     Promise.all([pr1,pr2,pr3]).then(()=>{

@@ -59,7 +59,9 @@ export class StatementsPage {
 	};
 	sampKeys = ["pdf","company","billPeriod","amt","soaNo","refNo","companyAct","mgtAct"];
 	formats = {
-		'amt':'currency'
+		'amt':'currency',
+		'companyAct':'textDecorated',
+		'mgtAct':'textEvent'
 	};
 	actions = [
 		{

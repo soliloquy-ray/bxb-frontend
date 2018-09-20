@@ -81,7 +81,18 @@ export class SignupTinPage {
   			.then(res=>{
   				let rs = res.json();
   				if(rs[0]){
-  					self.navCtrl.setRoot(SignUpPage,{data:rs[0]},{animate:true, direction:"top"});
+            if(rs[0].hasOwnProperty('error')){
+              let tst = self.toast.create({
+                message:"User has already signed up. Please login instead.",
+                cssClass:"fail",
+                duration:3000,
+                dismissOnPageChange: true,
+                position:"top"
+              });
+              tst.present();
+            }else{
+  					  self.navCtrl.setRoot(SignUpPage,{data:rs[0]},{animate:true, direction:"top"});
+            }
   				}else{	
 	  				let tst = self.toast.create({
 	  					message:"Signup failed. Please check your credentials and try again.",

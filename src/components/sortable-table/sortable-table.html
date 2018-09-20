@@ -44,7 +44,7 @@
 			<div class="{{dt}}" *ngIf="frm[dt]=='percent'">{{(rowData[dt] * 100) | number:'1.1-2'}} %</div>
 			<div class="{{dt}}" *ngIf="frm[dt]=='nested'">{{nesting(rowData,dt)}}</div>
 			<div class="{{dt}}" *ngIf="frm[dt]=='textDecorated'"><b class='decorated {{rowData[dt]}}'>{{rowData[dt]}}</b></div>
-			<div class="{{dt}}" *ngIf="frm[dt]=='textEvent'" (tap)="emitter(i,toJson(rowData))"><b class='decorated clickable {{rowData[dt]}}'>{{rowData[dt]}}</b></div>
+			<div class="{{dt}}" *ngIf="frm[dt]=='textEvent'" (tap)="emitter(rowData[dt],toJson(rowData))"><b class='decorated clickable {{rowData[dt]}}'>{{rowData[dt]}}</b></div>
 			<div class="{{dt}}" *ngIf="!frm[dt]">{{rowData[dt]}}</div>
 		</ion-col>
 		<ion-col *ngIf="acts.length > 0">
@@ -101,7 +101,7 @@
 					<div class="{{hdr[ind]}}" *ngIf="frm[hdr[ind]]=='percent'">{{(rowData[hdr[ind]] * 100) | number:'1.1-2'}} %</div>
 					<div class="{{hdr[ind]}}" *ngIf="frm[hdr[ind]]=='nested'">{{nesting(rowData,hdr[ind])}}</div>
 					<div class="{{hdr[ind]}}" *ngIf="frm[hdr[ind]]=='textDecorated'"><b class='decorated {{rowData[hdr[ind]]}}'>{{rowData[hdr[ind]]}}</b></div>
-					<div class="{{hdr[ind]}}" *ngIf="frm[hdr[ind]]=='textEvent'" (tap)="emitter('0',toJson(rowData))"><b class='decorated {{rowData[hdr[ind]]}}'>{{rowData[hdr[ind]]}}</b></div>
+					<div class="{{hdr[ind]}}" *ngIf="frm[hdr[ind]]=='textEvent'" (tap)="emitter(rowData[hdr[ind]],toJson(rowData))"><b class='decorated {{rowData[hdr[ind]]}}'>{{rowData[hdr[ind]]}}</b></div>
 					<div class="{{hdr[ind]}}" *ngIf="!frm[hdr[ind]]">{{rowData[hdr[ind]]}}</div>
 				</span>
 				<span class="item" *ngIf="acts.length > 0">

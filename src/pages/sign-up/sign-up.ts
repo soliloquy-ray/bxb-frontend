@@ -50,6 +50,7 @@ export class SignUpPage {
 	ccode: string;
 	mdl : Modal;
 	env = config[location.origin].backend;
+  usernameAvailable: boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer,  private modal: ModalController, private loader: LoadingController, private db: DbProvider, private appProvider: AppProvider, private alert:AlertController, private toast: ToastController, private http:Http) {
   	this.dt = this.navParams.get('data');
@@ -135,6 +136,7 @@ export class SignUpPage {
   }
 
   startReg(){
+    if(this.stat(this.userData) || !this.usernameAvailable) return false;
     let self = this;
     let load = this.loader.create({
         spinner: 'crescent',
@@ -248,77 +250,11 @@ export class SignUpPage {
   		return false;
   	}
   }
-/*
-	uploadFile(file) {
-	    let load = this.loader.create({
-	      spinner: 'crescent',
-	      dismissOnPageChange: true,
-	      showBackdrop: true,
-	      content: `Please wait...`,
-	      enableBackdropDismiss:true});
-	    load.present();
-			let self = this;
-	    var url = `https://api.cloudinary.com/v1_1/${self.cloudName}/image/upload`;
-	    var xhr = new XMLHttpRequest();
-	    var fd = new FormData();
-	    xhr.open('POST', url, true);
-	    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-	    
-	    loadImage.parseMetaData(file, function(data){
-	         let oren = 0;
-	         if(data.exif){
-	           oren = data.exif.get('Orientation');
-	         }
 
-	      loadImage(file,
-
-	        function(img){
-	          let base64data = img.toDataURL("image/jpeg");
-	          //let img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
-	          xhr.onreadystatechange = function(e) {
-	            if (xhr.readyState == 4 && xhr.status == 200) {
-	              // File uploaded successfully
-	              var response = JSON.parse(xhr.responseText);
-	              console.log(response);
-		          self.prod = response;
-		          let bgImg = response['secure_url'];
-		          //self.tags = self.getTags(response);
-
-	              textapi.imageTags({
-	              	url:bgImg
-	              },
-	              function(error,resp) {
-	              	if(error === null){
-	              		console.log(resp);
-			            self.fire.newImage(resp).then(console.log).catch(console.info);
-				        self.dataLoaded = true;
-				        self.bgImg = bgImg;
-			            self.tags = self.getTags(resp);
-			            load.dismiss();
-	              	}
-	              });
-	              
-	            }
-	          }
-
-	          let pid = file.name;
-	          fd.append('file', base64data);
-	          fd.append('public_id', pid);
-	          fd.append('timestamp', self.tstamp.toString());
-	          fd.append('upload_preset',self.uploadPreset);
-	          //fd.append('categorization', self.tagging);
-	          //fd.append('auto_tagging','0.25');
-	          xhr.send(fd);
-	        },
-
-	        {
-	          canvas:true,
-	          orientation:oren,
-	          maxWidth:800,
-	          maxHeight:800
-	        }
-	       )
-	    });
-
-	} */
+  checkUname(event){
+    console.log(event.target.value);
+    this.db.checkUsernameIfExists(event.target.value).then(res=>{
+      this.usernameAvailable = res;
+    }).catch(console.warn);
+  }
 }

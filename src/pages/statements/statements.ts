@@ -96,7 +96,11 @@ export class StatementsPage {
   }
 
   doAction(i:{index:number,val:any}){
-  	this.showSOA(JSON.parse(i.val));
+  	if(i.index.toString().toLowerCase()=="confirm"){
+  		console.log(i.val);
+  	}else{
+  		this.showSOA(JSON.parse(i.val));
+  	}
   }
 
   showSOA(i){

@@ -25,8 +25,11 @@
 	 				Username
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="userName" [(ngModel)] = "userData.userName" />
+	 				<input type="text" name="userName" [(ngModel)] = "userData.userName" (change)="checkUname($event)"/>
 	 			</span>
+	 			<p class="error" *ngIf="!usernameAvailable">
+	 				Username already exists!
+	 			</p>
 	 		</ion-row>
 	 		<ion-row>
 	 			<p class="label">
@@ -68,7 +71,7 @@
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
-	 			<button ion-button (tap)="startReg()" [disabled]="stat(userData)">Create Account</button>
+	 			<button ion-button (tap)="startReg()" [disabled]="stat(userData) || !usernameAvailable">Create Account</button>
 	 		</ion-row>
 	 		<!--ion-row>
 	 			<p class="label">

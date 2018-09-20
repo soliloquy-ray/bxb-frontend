@@ -154,7 +154,13 @@ ion-toast{
     padding: 2vh 0;
     width:100%;
 }
-
+p.error{
+	text-align: center;
+    padding: 1vw;
+    display: block;
+    width: 100%;
+    color: #f00;
+}
 /*
 ion-range.range{
 	padding:8px 0;

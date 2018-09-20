@@ -228,5 +228,49 @@ export class DbProvider {
 	);
   }
 
+  async getCompanyByID(id):Promise<any>{
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+
+	return (
+		this.http.post(`${this.env}/api.php?q=get_company_by_id`,{cid:id}, rq)
+			.toPromise()
+			.then(res=>{
+				//console.log(res.json());
+				return res.json();
+			})
+			.catch(err=>{
+				console.warn(err);
+				return {};
+			})
+	);
+  }
+
+  async checkUsernameIfExists(uname):Promise<any>{
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+
+	return (
+		this.http.post(`${this.env}/api.php?q=check_user_exists`,{uname:uname}, rq)
+			.toPromise()
+			.then(res=>{
+				console.log(res.text());
+				if(res.text() == ""){
+					return true;
+				}
+				else{
+					return false;
+				}
+			})
+			.catch(err=>{
+				console.warn(err);
+				return {};
+			})
+	);
+  }
 
 }

@@ -5,7 +5,10 @@ import { EmployeeInfoModalPage } from '../employee-info-modal/employee-info-moda
 
 import { DragScrollComponent } from 'ngx-drag-scroll';
 
+import { DbProvider } from '../../providers/db/db';
+
 import { StatementOfAccountPage } from '../statement-of-account/statement-of-account';
+import { AddHrPage } from '../add-hr/add-hr';
 /**
  * Generated class for the AdminCreditPage page.
  *
@@ -76,7 +79,7 @@ export class CompaniesPage {
 			companyID:7
 		}
 	];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private db: DbProvider) {
   }
 
   ionViewDidEnter() {
@@ -106,6 +109,10 @@ export class CompaniesPage {
   		i.snapOffset = 85;
   		i.scrollbarHidden = true;
   	});
+  }
+
+  addHR(cid){
+  	this.navCtrl.setRoot(AddHrPage,{cid:cid},{animate:true, direction:"top"});
   }
 
 }

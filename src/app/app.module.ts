@@ -19,6 +19,7 @@ import { TermsPage } from '../pages/terms/terms';
 import { PrivacyPolicyPage } from '../pages/privacy-policy/privacy-policy';
 import { LoansPage } from '../pages/loans/loans';
 import { ActivityLogPage } from '../pages/activity-log/activity-log';
+import { AdminLoginPage } from '../pages/admin-login/admin-login';
 
 /* employee pages */
 import { EmployeeDashboardPage } from '../pages/employee-dashboard/employee-dashboard';
@@ -43,6 +44,7 @@ import { FlaggingPage } from '../pages/flagging/flagging';
 import { PretermPage } from '../pages/preterm/preterm';
 import { AddCompanyPage } from '../pages/add-company/add-company';
 import { StatementsPage } from '../pages/statements/statements';
+import { AddHrPage } from '../pages/add-hr/add-hr';
 
 /* modals */
 import { DisclosureStatementPage } from '../pages/disclosure-statement/disclosure-statement';
@@ -94,7 +96,9 @@ var pages = [
   SoaPage,
   ActivityLogPage,
   UploadCsvPage,
-  PretermApplicationModalPage
+  PretermApplicationModalPage,
+  AddHrPage,
+  AdminLoginPage
 ];
 
 @NgModule({
@@ -140,6 +144,8 @@ var pages = [
         { component: ActivityLogPage, name: 'ActivityLogPage', segment: 'activitylog' },
         { component: UploadCsvPage, name: 'UploadCsvPage', segment: 'upload-csv' },
         { component: PretermApplicationModalPage, name: 'PretermApplicationModalPage', segment: 'preterm-modal' },
+        { component: AddHrPage, name: 'AddHrPage', segment: 'add-hr' },
+        { component: AdminLoginPage, name: 'AdminLoginPage', segment: 'admin-login' },
       ]
     })
   ],

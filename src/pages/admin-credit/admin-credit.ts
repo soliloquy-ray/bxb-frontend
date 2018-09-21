@@ -6,6 +6,7 @@ import { EmployeeInfoModalPage } from '../employee-info-modal/employee-info-moda
 //import { DragScrollComponent } from 'ngx-drag-scroll';
 import { DisclosureStatementPage } from '../disclosure-statement/disclosure-statement';
 
+import { AppProvider } from '../../providers/app/app';
 import { DbProvider } from '../../providers/db/db';
 
 import { LoanComponent } from '../../components/loan/loan';
@@ -121,7 +122,7 @@ export class AdminCreditPage {
 			"bal":0
 		}
 	];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private db: DbProvider, private loader: LoadingController, private alert: AlertController, private toast: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private db: DbProvider, private app: AppProvider, private loader: LoadingController, private alert: AlertController, private toast: ToastController) {
   }
 
   ionViewDidEnter() {
@@ -282,6 +283,10 @@ export class AdminCreditPage {
               }).catch(console.warn);
               /* end of setup  */
 
+              self.app.sendLoanApproved(ind.userData.mobile)
+                  .then(console.log)
+                  .catch(console.info);
+                  
             	let toast = this.toast.create({
       				  message: 'Loan Approved',
       				  duration: 3000,

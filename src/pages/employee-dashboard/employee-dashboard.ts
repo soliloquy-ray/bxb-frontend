@@ -259,6 +259,9 @@ export class EmployeeDashboardPage {
 						if(self.appProvider.checkOtp(data.otp)){
               self.submitFlag = true;
               self.createNewLoan();
+              self.appProvider.sendLoanApproval(self.loan.amt,self.userData.mobile.slice(-10))
+              .then(console.info)
+              .catch(console.warn)
             }else{
               self.addLoan(true);
             }

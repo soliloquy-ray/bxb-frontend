@@ -28,15 +28,39 @@ export class AppProvider {
   }
 
   sendOTPmsg(otp:string, mobile:number){
-  	if(this.cookie.get('bxo')) otp = this.cookie.get('bxo');
-	let hdr = new Headers;
-	hdr.append('Content-Type','application/json');
-	let rq = new RequestOptions;
-	rq.headers = hdr;
-	
-	mobile = parseInt(mobile.toString().slice(-10));
+    if(this.cookie.get('bxo')) otp = this.cookie.get('bxo');
+  let hdr = new Headers;
+  hdr.append('Content-Type','application/json');
+  let rq = new RequestOptions;
+  rq.headers = hdr;
+  
+  mobile = parseInt(mobile.toString().slice(-10));
+    return (
+      this.http.post(`${this.env}/api.php?q=gen_otp`,{mobile:mobile, otp:otp, h: this.cookie.get('bkhsh')}, rq).toPromise()
+    );
+  }
+
+  sendLoanApproval(amt:number, mobile:number){
+    let hdr = new Headers;
+    hdr.append('Content-Type','application/json');
+    let rq = new RequestOptions;
+    rq.headers = hdr;
+    
+    mobile = parseInt(mobile.toString().slice(-10));
+    return (
+      this.http.post(`${this.env}/api.php?q=send_sms_loan_approval`,{mobile:mobile, amt:amt}, rq).toPromise()
+    );
+  }
+
+  sendLoanApproved(mobile:number){
+  	let hdr = new Headers;
+  	hdr.append('Content-Type','application/json');
+  	let rq = new RequestOptions;
+  	rq.headers = hdr;
+  	
+  	mobile = parseInt(mobile.toString().slice(-10));
   	return (
-  		this.http.post(`${this.env}/api.php?q=gen_otp`,{mobile:mobile, otp:otp, h: this.cookie.get('bkhsh')}, rq).toPromise()
+  		this.http.post(`${this.env}/api.php?q=send_sms_loan_approved`,{mobile:mobile}, rq).toPromise()
   	);
   }
 

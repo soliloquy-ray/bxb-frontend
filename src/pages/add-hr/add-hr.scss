@@ -1,4 +1,4 @@
-page-add-employee {
+page-add-hr {
 
 	ion-content{
 
@@ -26,63 +26,6 @@ page-add-employee {
 				display:block;
 				padding:5vh 0;
 				text-align:center;
-
-				div.uploader{
-					position:relative;
-					display:block;
-					clear:both;
-					margin: 0 auto 5vh;
-					height:125px;
-					width:125px;
-					border-radius:100%;
-					overflow:hidden;
-					box-shadow: 0 0 3px 4px #30b0ff;
-
-					input{
-						z-index:2;
-						position:absolute;
-						opacity:0;
-						height:100%;
-						width:100%;
-						top:0;
-						left:0;
-						right:0;
-						bottom:0;
-						cursor:pointer;
-					}
-
-					ion-avatar{
-						display:block;
-						position:relative;
-						z-index:1;
-						height:100%;
-						width:100%;
-
-						&::after{
-							content:"Upload photo";
-							display:block;
-							position:absolute;
-							background-color:rgba(50,50,50,0.4);
-							color:#fff;
-							bottom:0;
-							left:0;
-							right:0;
-							width:100%;
-							height:auto;
-							padding:12px 0 20px;
-							text-align:center;
-						}
-
-
-						img{
-							height:100%;
-							width:100%;
-							display:block;
-							object-fit:cover;
-							object-position:center;
-						}
-					}
-				}
 				
 				ion-row{
 					width:60vw;
@@ -167,27 +110,6 @@ page-add-employee {
 						}
 
 					}// end of content
-
-					&.bot{
-						span.content{
-							padding:0;
-							box-shadow:none;
-
-							select{
-								border:0;
-								display:inline-block;
-								width:25%;
-								font-size:11px;
-								text-align-last:center;
-								position:relative;
-								height:45px;
-								border-radius:8px 0px 0 8px;
-								box-shadow: 0 0 2px 0 #333;
-								float:left;
-								background-color: #f7f7f7;
-							}
-						}
-					}
 
 				}// end of ion-row-
 

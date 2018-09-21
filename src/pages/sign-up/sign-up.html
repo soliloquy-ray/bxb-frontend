@@ -28,7 +28,7 @@
 	 				<input type="text" name="userName" [(ngModel)] = "userData.userName" (change)="checkUname($event)"/>
 	 			</span>
 	 			<p class="error" *ngIf="!usernameAvailable">
-	 				Username already exists!
+	 				Username not available!
 	 			</p>
 	 		</ion-row>
 	 		<ion-row>

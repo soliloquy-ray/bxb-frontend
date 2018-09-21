@@ -253,7 +253,16 @@ export class SignUpPage {
 
   checkUname(event){
     console.log(event.target.value);
+    let load = this.loader.create({
+      spinner: 'crescent',
+      dismissOnPageChange: true,
+      showBackdrop: true,
+      content: `Checking username availability...`,
+      enableBackdropDismiss:false
+    });
+    load.present();
     this.db.checkUsernameIfExists(event.target.value).then(res=>{
+      load.dismiss();
       this.usernameAvailable = res;
     }).catch(console.warn);
   }

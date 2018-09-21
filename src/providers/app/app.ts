@@ -128,4 +128,19 @@ export class AppProvider {
 			.toPromise();
   }
 
+  getLoanValues(p:number = 1000, t:number = 1, r: number = 0.025,processingFeeRate: number = 0.035, collectionFeeRate: number = 0.015, docFeeRate : number = 0.0075){
+
+    return {
+      amt:Math.round(p),
+      udi:t * r * p,
+      grossCashout:Math.round(p),
+      processingFund:p * processingFeeRate,
+      collectionFund:p * collectionFeeRate,
+      docFee:p * docFeeRate,
+      totalDeductions:p * processingFeeRate + p * collectionFeeRate + p * docFeeRate,
+      netCashout:Math.round(p) - (p * processingFeeRate + p * collectionFeeRate + p * docFeeRate),
+      totalPayment:(t * r * p) + Math.round(p)
+    };
+  }
+
 }

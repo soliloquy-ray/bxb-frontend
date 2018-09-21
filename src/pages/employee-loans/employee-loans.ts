@@ -148,32 +148,35 @@ export class EmployeeLoansPage {
 
   ionViewDidLoad() {
   	let self = this;
-  	this.load = this.loader.create({
+  	let load = this.loader.create({
 	  spinner: 'crescent',
 	  dismissOnPageChange: true,
 	  showBackdrop: true,
-	  content: `Loading Data...`,
+	  content: `Loading Pending loans`,
 	  enableBackdropDismiss:false
 	});
-    this.load.present();
+	load.present();
     let pr1 = this.db.getEmpLoansByStatus(1).then(rs=>{
     	self.loans.pending = rs;
+      	load.setContent('Loading Active loans');
     	return Promise.resolve(rs);
     });
    
 
     let pr2 = this.db.getEmpLoansByStatus(2).then(rs=>{
     	self.loans.approved = rs;
+      	load.setContent('Loading Completed loans');
     	return Promise.resolve(rs);
     });
 
     let pr3 = this.db.getEmpLoansByStatus(4).then(rs=>{
     	self.loans.cancel = rs;
+      	load.setContent('Compiling');
     	return Promise.resolve(rs);
     });
 
     Promise.all([pr1,pr2,pr3]).then(()=>{
-    	this.load.dismiss().catch(()=>{});
+    	load.dismiss().catch(()=>{});
     });
 
   }

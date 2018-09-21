@@ -137,21 +137,31 @@ export class AdminCreditPage {
 		      spinner: 'crescent',
 		      dismissOnPageChange: true,
 		      showBackdrop: true,
-		      content: `Loading Data...`,
+		      content: `Loading Pending loans`,
 		      enableBackdropDismiss:false
 			});
 	load.present();
   	let pr1 = this.db.getLoansByStatus(1).then(rs=>{
-    	self.loans.pending = rs;
-      load.setContent('Loading Pending loans');
+    	self.loans.pending = rs.map(a=>{
+        let x = a;
+        let ln = self.app.getLoanValues(a.principal,a.term);
+        x.processFund = ln.netCashout;
+        return x;
+      });
+      load.setContent('Loading Active loans');
     	console.log(self.loans.pending);
     	return rs;
     });
    
 
     let pr2 = this.db.getLoansByStatus(2).then(rs=>{
-    	self.loans.activeLoans = rs;
-      load.setContent('Loading Active loans');
+    	self.loans.activeLoans = rs.map(a=>{
+        let x = a;
+        let ln = self.app.getLoanValues(a.principal,a.term);
+        x.processFund = ln.netCashout;
+        return x;
+      });
+      load.setContent('Compiling');
     	console.log(self.loans.activeLoans);
     	return rs;
     });
@@ -286,7 +296,7 @@ export class AdminCreditPage {
               self.app.sendLoanApproved(ind.userData.mobile)
                   .then(console.log)
                   .catch(console.info);
-                  
+
             	let toast = this.toast.create({
       				  message: 'Loan Approved',
       				  duration: 3000,

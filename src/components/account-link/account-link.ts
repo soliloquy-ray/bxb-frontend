@@ -26,11 +26,15 @@ export class AccountLinkComponent {
   }
 
   logout(){
+    let path = '';
+     if(localStorage.accountType != 'employee') path = '#/admin-login';
     localStorage.removeItem('accountType');
     localStorage.removeItem('userData');
+    localStorage.removeItem('roleId');
+    localStorage.removeItem('companyId');
   	this.viewCtrl.dismiss();
   	//this.nav.setRoot(LoginPage,{},{animate:true, direction:"forward"});
-  	window.location.href = location.origin+"/";
+  	window.location.href = location.origin+"/"+path;
   }
 
 }

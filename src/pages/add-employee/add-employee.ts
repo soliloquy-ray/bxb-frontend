@@ -40,20 +40,21 @@ export class AddEmployeePage {
       entity: "",
       type: "",
       division: "",
-      netSalary: "",
-      grossSalary: "",
+      netSalary: 0,
+      grossSalary: 0,
       bankName: "",
       vacationLeave: 0,
       sickLeave: 0,
       maternityLeave: 0,
       paternityLeave: 0,
-      companyId: 1
+      companyId: localStorage.companyId
   	};
 	confirmPass: string = '';
 	prefixes = this.sanitizer.bypassSecurityTrustHtml(intlPrefixes);
 	isMobile : boolean = mobilecheck();
 	dt;
 	prefix:string = '63';
+  submitFlag : boolean = false;
   @ViewChild('prev') prev: ElementRef;
   constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer, private alert: AlertController, private menu: MenuController, private db: DbProvider, private loader: LoadingController, private toast: ToastController) {
   	
@@ -80,7 +81,7 @@ export class AddEmployeePage {
     this.userData.mobile = this.prefix + this.userData.mobile;
     let self = this;
     let uData = this.userData;
-
+    this.submitFlag = true;
     let load = this.loader.create({
           spinner: 'crescent',
           dismissOnPageChange: true,

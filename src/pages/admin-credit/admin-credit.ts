@@ -141,7 +141,7 @@ export class AdminCreditPage {
 		      enableBackdropDismiss:false
 			});
 	load.present();
-  	let pr1 = this.db.getLoansByStatus(1).then(rs=>{
+  	let pr1 = this.db.getLoansByStatus(1, null).then(rs=>{
     	self.loans.pending = rs.map(a=>{
         let x = a;
         let ln = self.app.getLoanValues(a.principal,a.term);
@@ -154,7 +154,7 @@ export class AdminCreditPage {
     });
    
 
-    let pr2 = this.db.getLoansByStatus(2).then(rs=>{
+    let pr2 = this.db.getLoansByStatus(2, null).then(rs=>{
     	self.loans.activeLoans = rs.map(a=>{
         let x = a;
         let ln = self.app.getLoanValues(a.principal,a.term);

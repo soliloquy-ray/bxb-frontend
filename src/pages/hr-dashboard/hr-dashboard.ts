@@ -50,10 +50,10 @@ export class HrDashboardPage {
 	  enableBackdropDismiss:false
 	});
 	load.present();
-  	this.db.getLoansByStatus(1).then(res=>{
+  	this.db.getLoansByStatus(1, localStorage.companyId).then(res=>{
   		return res;
   	}).then(r=>{
-  		self.db.getLoansByStatus(2).then(rs=>{
+  		self.db.getLoansByStatus(2, localStorage.companyId).then(rs=>{
   			self.credits = r.concat(rs);
   			load.dismiss().catch(()=>{});
   		})

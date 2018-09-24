@@ -7,6 +7,14 @@
 	 		<h2>Create Company HR</h2>
 	 		<ion-row>
 	 			<p class="label">
+	 				Company ID
+	 			</p>
+	 			<span class="content">
+	 				<input type="number" min="0" step="1" name="companyId" [(ngModel)] = "hrData.companyId"/>
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
 	 				Company Login
 	 			</p>
 	 			<span class="content">
@@ -18,7 +26,7 @@
 	 				Password
 	 			</p>
 	 			<span class="content">
-	 				<input type="password" name="pass" [(ngModel)] = "hrData.pass" />
+	 				<input type="password" name="password" [(ngModel)] = "hrData.password" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -28,6 +36,23 @@
 	 			<span class="content">
 	 				<input type="password" name="confirmPass" [(ngModel)] = "confirmPass" />
 	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Email
+	 			</p>
+	 			<span class="content">
+	 				<input type="text" name="email" [(ngModel)] = "hrData.email" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row class="bot">
+	 			<p class="label">
+	 				Mobile
+	 			</p>
+	 			<span class="content">
+		 			<select [innerHTML] = "prefixes" name="prefix" [(ngModel)]="prefix"></select>
+		 			<input class="short" type="number" name="mobile" [(ngModel)] = "hrData.mobile"/>
+		 		</span>
 	 		</ion-row>
 	 		<ion-row>
 	 			<button ion-button (tap)="submitReg()" [disabled] = "!readyForSubmit()">Create Account</button>

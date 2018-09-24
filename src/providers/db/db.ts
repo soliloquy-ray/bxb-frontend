@@ -28,6 +28,24 @@ export class DbProvider {
   	return this.http.post(`${this.env}/api.php?q=signup`,uData, rq).toPromise();
   }
 
+  async addCompanyHR(uData){
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+
+  	return this.http.post(`${this.env}/api.php?q=add_hr`,uData, rq).toPromise();
+  }
+
+  async getPendingLoanCount(){
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+
+  	return this.http.post(`${this.env}/api.php?q=get_pending_loan_count`,{cid:null}, rq).toPromise();
+  }
+
   async manAddEmp(uData){
 	let hdr = new Headers;
 	hdr.append('Content-Type','application/json');
@@ -108,7 +126,7 @@ export class DbProvider {
   					});
   }
 
-  async getSOAByDate(date1 = '1971-01-01', date2 = this.dtNow, cid: number = 1):Promise<any>{
+  async getSOAByDate(cid: number = 1, date1 = '1971-01-01', date2 = this.dtNow):Promise<any>{
 	let hdr = new Headers;
 	hdr.append('Content-Type','application/json');
 	let rq = new RequestOptions;
@@ -165,14 +183,14 @@ export class DbProvider {
   					});
   }
 
-  getLoansByStatus(stat):Promise<any>{
+  getLoansByStatus(stat, cid = 1):Promise<any>{
 	let hdr = new Headers;
 	hdr.append('Content-Type','application/json');
 	let rq = new RequestOptions;
 	rq.headers = hdr;
 
 	return (
-		this.http.post(`${this.env}/api.php?q=hr_get_loan_by_status`,{status:stat}, rq)
+		this.http.post(`${this.env}/api.php?q=hr_get_loan_by_status`,{status:stat, cid:cid}, rq)
 			.toPromise()
 			.then(res=>{
 				//console.log(res.json());

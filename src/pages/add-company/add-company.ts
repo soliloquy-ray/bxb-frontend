@@ -80,6 +80,7 @@ export class AddCompanyPage {
 	isMobile : boolean = mobilecheck();
 	dt;
 	prefix:string = '63';
+  submitFlag : boolean = false;
   @ViewChild('prev') prev: ElementRef;
   constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer, private alert: AlertController, private menu: MenuController, private db: DbProvider, private toast: ToastController, private loader : LoadingController) {
   	
@@ -112,7 +113,7 @@ export class AddCompanyPage {
           enableBackdropDismiss:false
       });
     load.present();
-
+    this.submitFlag = true;
   	let dt = {...this.companyData,...this.companyRep,...this.bankDetails,...this.controlPanel,...this.bxbForm};
   	
   	this.db.newCompany(dt).then(res=>{
@@ -168,6 +169,23 @@ export class AddCompanyPage {
       self.prev.nativeElement.src = nurl;
     }
 
+  }
+
+  readyForSubmit(){
+    let cd = this.companyData;
+    let cr = this.companyRep;
+    let bd = this.bankDetails;
+    return ( cd.companyName != "" && 
+      cd.country != "" && 
+      cd.address != "" &&
+      cd.city != "" &&
+      cd.zip != "" &&
+      cr.mobile.toString().length >= 9 &&
+      bd.bankName != "" &&
+      bd.bankAddress != "" &&
+      bd.bankBranch != "" &&
+      bd.accountNumber != "" &&
+      bd.swiftCode != "");
   }
 
   

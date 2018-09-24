@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 
 import { LoansPage } from '../loans/loans';
+
+import { DbProvider } from '../../providers/db/db';
+
 /**
  * Generated class for the SuperDashboardPage page.
  *
@@ -29,7 +32,7 @@ interface creditSummary {
 })
 export class SuperDashboardPage {
 
-	deets: string = `<a href='/#/loans'>Details&nbsp;&gt;</a>`;
+	deets: string = `<a href='/#/management/loans'>Details&nbsp;&gt;</a>`;
 	isMobile : boolean = mobilecheck();
 	companies : creditSummary[] = [{
 		companyName:"6805 Ayala Avenue Condominium Corporation",
@@ -112,11 +115,15 @@ export class SuperDashboardPage {
 		borrowersByGender:0
 	}
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController) {
+	pendingApprovals:number;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private db: DbProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SuperDashboardPage');
+    this.db.getPendingLoanCount().then(res=>{
+    	this.pendingApprovals = parseInt(res.text());
+    }).catch(console.warn)
   }
 
   ionViewDidEnter() {

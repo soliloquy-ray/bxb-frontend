@@ -132,7 +132,7 @@
 	 				Net Salary
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="netSalary" [(ngModel)] = "userData.netSalary" />
+	 				<input type="number" step="100" min="1000" name="netSalary" [(ngModel)] = "userData.netSalary" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -140,7 +140,7 @@
 	 				Gross Salary
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="grossSalary" [(ngModel)] = "userData.grossSalary" />
+	 				<input type="number" step="100" min="1000" name="grossSalary" [(ngModel)] = "userData.grossSalary" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -192,7 +192,7 @@
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
-	 			<button ion-button (tap)="submitReg()" [disabled] = "!readyForSubmit()">Create Account</button>
+	 			<button ion-button (tap)="submitReg()" [disabled] = "!readyForSubmit() || submitFlag">Create Account</button>
 	 		</ion-row>
 	 	</form>
 	 

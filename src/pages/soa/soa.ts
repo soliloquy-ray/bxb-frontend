@@ -62,12 +62,16 @@ export class SoaPage {
 	];
 
 	mod:Modal;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, /*private db: DbProvider, private loader: LoadingController,*/ private modal: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private db: DbProvider, private loader: LoadingController, private modal: ModalController) {
   }
 
   ionViewDidEnter() {
   	this.menu.close();
   	localStorage.page = 'soa';
+
+  	this.db.getSOAByDate(localStorage.companyId).then(res=>{
+  		this.soas = res.json();
+  	}).catch(console.warn);
   }
 
 

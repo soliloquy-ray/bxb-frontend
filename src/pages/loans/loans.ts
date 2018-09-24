@@ -134,18 +134,18 @@ export class LoansPage {
 	  enableBackdropDismiss:false
 	});
 	load.present();
-  	let pr1 = this.db.getLoansByStatus(1).then(rs=>{
+  	let pr1 = this.db.getLoansByStatus(1, localStorage.companyId).then(rs=>{
     	self.loans.pending = rs;
     	return rs;
     });
    
 
-    let pr2 = this.db.getLoansByStatus(2).then(rs=>{
+    let pr2 = this.db.getLoansByStatus(2, localStorage.companyId).then(rs=>{
     	self.loans.approved = rs;
     	return rs;
     });
 
-    let pr3 = this.db.getLoansByStatus(4).then(rs=>{
+    let pr3 = this.db.getLoansByStatus(4, localStorage.companyId).then(rs=>{
     	self.loans.cancel = rs;
     	return rs;
     });

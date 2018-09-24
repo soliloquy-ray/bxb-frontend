@@ -128,8 +128,8 @@ export class AppProvider {
 			.toPromise();
   }
 
-  getLoanValues(p:number = 1000, t:number = 1, r: number = 0.025,processingFeeRate: number = 0.035, collectionFeeRate: number = 0.015, docFeeRate : number = 0.0075){
-
+  getLoanValues(p:number = 1000, t:number = 1, rt: number = 0.025,processingFeeRate: number = 0.035, collectionFeeRate: number = 0.015, docFeeRate : number = 0.0075){
+    let r = rt/2;
     return {
       amt:Math.round(p),
       udi:t * r * p,

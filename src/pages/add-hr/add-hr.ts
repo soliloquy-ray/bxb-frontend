@@ -2,7 +2,9 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, MenuController, LoadingController, ToastController } from 'ionic-angular';
 
 import { DomSanitizer } from '@angular/platform-browser';
+import { CompaniesPage } from '../companies/companies';
 
+import { intlPrefixes } from '../../ext/mob_prefixes';
 import { DbProvider } from '../../providers/db/db';
 
 /**
@@ -22,11 +24,14 @@ export class AddHrPage {
 	hrData: any = {
   		login:'',
   		password:'',
+  		mobile:'',
+  		email:'',
       companyId: 0
   	};
 	confirmPass: string = '';
 	isMobile : boolean = mobilecheck();
 	dt;
+	prefixes = this.sanitizer.bypassSecurityTrustHtml(intlPrefixes);
 	prefix:string = '63';
   constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer, private alert: AlertController, private menu: MenuController, private db: DbProvider, private loader: LoadingController, private toast: ToastController) {
   	this.hrData.companyId = this.navParams.get('cid') || 1;
@@ -38,6 +43,7 @@ export class AddHrPage {
   }
 
   ngAfterViewInit(){
+  	console.log(this.hrData);
   }
 
   toHome(){
@@ -49,10 +55,11 @@ export class AddHrPage {
   }
 
   submitReg(){
+    this.hrData.mobile = this.prefix + this.hrData.mobile;
     let self = this;
     let uData = this.hrData;
-    console.log(uData);
-    /*let load = this.loader.create({
+    console.log(this.hrData);
+    let load = this.loader.create({
           spinner: 'crescent',
           dismissOnPageChange: true,
           showBackdrop: true,
@@ -61,17 +68,17 @@ export class AddHrPage {
       });
     load.present();
 
-    this.db.manAddEmp(uData).then(res=>{
+    this.db.addCompanyHR(uData).then(res=>{
       load.dismiss();
-      if(res.text() === "true"){
+      if(res.text() === '1'){
         let toast = this.toast.create({
-          message: 'Employee has been added',
+          message: 'HR Account has been added',
           duration: 3000,
           position: 'top',
           cssClass:`success`
         });
         toast.onDidDismiss(d=>{
-          self.navCtrl.setRoot(EmployeesPage,{},{animate:true, direction:"forward"});
+          self.navCtrl.setRoot(CompaniesPage,{},{animate:true, direction:"forward"});
         });
         toast.present();
       }else{
@@ -93,14 +100,16 @@ export class AddHrPage {
       });
       toast.present();
       console.warn(err);
-    });*/
+    });
   }
 
   readyForSubmit() : boolean{
     let u = this.hrData;
     return ( u.login != "" && 
-      u.pass != "" && 
-      u.pass == this.confirmPass &&
+      u.password != "" && 
+      u.email != "" &&
+      u.mobile.toString().length == 10 &&
+      u.password == this.confirmPass &&
       u.companyId > 0);
   }
 

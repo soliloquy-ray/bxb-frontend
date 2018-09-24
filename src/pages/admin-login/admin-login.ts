@@ -70,12 +70,13 @@ export class AdminLoginPage {
           localStorage.accountType = 'super';
           this.navCtrl.setRoot(SuperDashboardPage,{},{animate:true, direction:"forward"});
           return ;
-    }else if(this.userData.username == "hr" && this.userData.pass == "pass"){
+    }
+    /*else if(this.userData.username == "hr" && this.userData.pass == "pass"){
           localStorage.userData = [];
           localStorage.accountType = 'hr';
           this.navCtrl.setRoot(HrDashboardPage,{},{animate:true, direction:"forward"});
           return ;
-    }
+    }*/
 
   	let self = this;
   	let uData = this.userData;
@@ -92,7 +93,7 @@ export class AdminLoginPage {
 	      enableBackdropDismiss:false});
 	load.present();
 
-  	this.http.post(`${this.env}/api.php?q=login`,uData, rq)
+  	this.http.post(`${this.env}/api.php?q=admin-login`,uData, rq)
   			.toPromise()
   			.then(res=>{
   				/*load.dismiss();
@@ -105,10 +106,12 @@ export class AdminLoginPage {
   				}  				*/
           load.dismiss();
           let uDt = res.json();
-          if(!uDt.hasOwnProperty('master_id')){
+          if(!uDt.hasOwnProperty('companyid')){
             this.launchToast('Invalid login','fail');
           }else{
             localStorage.accountType = 'hr';
+            localStorage.companyId = uDt.companyid;
+            localStorage.roleId = uDt.roleid;
             self.navCtrl.setRoot(HrDashboardPage,{},{animate:true, direction:"forward"});
           }
           //id = id[0].master_id;

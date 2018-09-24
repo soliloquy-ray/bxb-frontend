@@ -124,6 +124,11 @@ export class SuperDashboardPage {
     this.db.getPendingLoanCount().then(res=>{
     	this.pendingApprovals = parseInt(res.text());
     }).catch(console.warn)
+
+    this.db.getCompanyByID(null).then(res=>{
+    	this.companies = res;
+
+    }).catch(console.warn);
   }
 
   ionViewDidEnter() {

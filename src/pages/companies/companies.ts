@@ -34,49 +34,49 @@ export class CompaniesPage {
 			companyCode:"001",
 			totalEmployees:13,
 			activeAvailments:102000,
-			companyID:1
+			CompanyID:1
 		},
 		{
 			companyName:"BXB Employee Solutions Corp",
 			companyCode:"002",
 			totalEmployees:5,
 			activeAvailments:114000,
-			companyID:2
+			CompanyID:2
 		},
 		{
 			companyName:"Thirty One Digital Media Solutions Inc.",
 			companyCode:"31D",
 			totalEmployees:26,
 			activeAvailments:64000,
-			companyID:3
+			CompanyID:3
 		},
 		{
 			companyName:"test company",
 			companyCode:"test1",
 			totalEmployees:26,
 			activeAvailments:0,
-			companyID:4
+			CompanyID:4
 		},
 		{
 			companyName:"Mermida's Company",
 			companyCode:"123",
 			totalEmployees:5,
 			activeAvailments:0,
-			companyID:5
+			CompanyID:5
 		},
 		{
 			companyName:"Baked Studios",
 			companyCode:"Baked",
 			totalEmployees:4,
 			activeAvailments:0,
-			companyID:6
+			CompanyID:6
 		},
 		{
 			companyName:"Richelle Company",
 			companyCode:"12345",
 			totalEmployees:5,
 			activeAvailments:0,
-			companyID:7
+			CompanyID:7
 		}
 	];
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private db: DbProvider) {
@@ -85,6 +85,9 @@ export class CompaniesPage {
   ionViewDidEnter() {
   	this.menu.close();
   	localStorage.page = 'companies';
+  	this.db.getCompanyByID(null).then(res=>{
+  		this.cmpny = res;
+  	}).catch(console.warn);
   }
 
   ionViewWillLeave(){

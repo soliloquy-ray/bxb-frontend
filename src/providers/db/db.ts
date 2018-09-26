@@ -126,7 +126,7 @@ export class DbProvider {
   					});
   }
 
-  async getSOAByDate(cid: number = 1, date1 = '1971-01-01', date2 = this.dtNow):Promise<any>{
+  async getSOAByDate(cid = null, date2 = this.dtNow, date1 = '1971-01-01'):Promise<any>{
 	let hdr = new Headers;
 	hdr.append('Content-Type','application/json');
 	let rq = new RequestOptions;

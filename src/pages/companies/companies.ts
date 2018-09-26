@@ -8,6 +8,7 @@ import { DragScrollComponent } from 'ngx-drag-scroll';
 import { DbProvider } from '../../providers/db/db';
 
 import { StatementOfAccountPage } from '../statement-of-account/statement-of-account';
+import { SoaFilterModalPage } from '../soa-filter-modal/soa-filter-modal';
 import { AddHrPage } from '../add-hr/add-hr';
 /**
  * Generated class for the AdminCreditPage page.
@@ -103,7 +104,7 @@ export class CompaniesPage {
   }
 
   showSOA(i){
-  	this.mod = this.modal.create(StatementOfAccountPage,{data:i},{cssClass:`whitemodal  ${this.isMobile ? "mobile" : ""}`});
+  	this.mod = this.modal.create(SoaFilterModalPage,{id:i},{cssClass:`whitemodal xs  ${this.isMobile ? "mobile" : ""}`});
   	this.mod.present();
   }
 

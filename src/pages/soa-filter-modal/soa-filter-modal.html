@@ -1,0 +1,64 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>SET SOA DATE
+  	<ion-icon (tap)="close()" name="ios-close" style="float:right;"></ion-icon></ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding id="printarea">
+	<section class="main-content">
+		<ion-row>
+			<p class="label">
+				Select Month
+			</p>
+		</ion-row>
+		<ion-row>
+
+	 		<span class="content month">
+		 		<select name="month" [(ngModel)] = "month">
+		 			<option *ngFor = "let m of monthArr; let i=index" [value]="m">{{months[m]}}</option>
+		 		</select>
+		 	</span>
+		</ion-row>
+		<br/>
+		<ion-row>
+			<p class="label">
+				Select Year
+			</p>
+		</ion-row>
+		<ion-row>
+	 		<span class="content year">
+		 		<select name="year" [(ngModel)] = "year">
+		 			<option *ngFor = "let y of yearArr; let i=index" [value]="y">{{y}}</option>
+		 		</select>
+		 	</span>
+		</ion-row>
+		<br/>
+		<ion-row>
+			<p class="label">
+				Select Paydate
+			</p>
+		</ion-row>
+		<ion-row>
+			<ion-col col-1>
+		 		<input type="radio" name="paydate" [(ngModel)]="paydate" value="15">15
+		 	</ion-col>
+		 	<ion-col col-1>
+		 		<input type="radio" name="paydate" [(ngModel)]="paydate" value="30">30
+		 	</ion-col>		 	
+		</ion-row>
+	</section>
+</ion-content>
+
+<ion-footer>
+	<button class="print" ion-button (tap)="soaSearch()">
+		<ion-icon name="md-eye"></ion-icon>
+		Preview
+	</button>
+	<button ion-button (tap)="close()">
+		<ion-icon name="ios-close-circle-outline"></ion-icon>
+		Close
+	</button>
+</ion-footer>

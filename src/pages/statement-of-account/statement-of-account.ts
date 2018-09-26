@@ -73,15 +73,15 @@ export class StatementOfAccountPage {
 		}
 	];
 	data;
+	cid;
   constructor(public navCtrl: NavController, public navParams: NavParams, private view: ViewController, private db: DbProvider) {
-  	this.data = this.navParams.get('data');
-  	console.log(this.data);
+  	this.data = this.navParams.get('data') || [];
   }
 
   ionViewDidLoad() {
     //console.log('ionViewDidLoad StatementOfAccountPage');
 
-  	this.db.getSOAPaySchedByDate(this.data.billPeriod).then(res=>{
+  	this.db.getSOAPaySchedByDate(this.data.billPeriod,this.data.CompanyID).then(res=>{
   		this.prevBalance = [];
   		this.currentBalance = res.json();
   	}).catch(console.warn);

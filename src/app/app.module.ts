@@ -45,6 +45,7 @@ import { PretermPage } from '../pages/preterm/preterm';
 import { AddCompanyPage } from '../pages/add-company/add-company';
 import { StatementsPage } from '../pages/statements/statements';
 import { AddHrPage } from '../pages/add-hr/add-hr';
+import { SoaFilterModalPage } from '../pages/soa-filter-modal/soa-filter-modal';
 
 /* modals */
 import { DisclosureStatementPage } from '../pages/disclosure-statement/disclosure-statement';
@@ -98,7 +99,8 @@ var pages = [
   UploadCsvPage,
   PretermApplicationModalPage,
   AddHrPage,
-  AdminLoginPage
+  AdminLoginPage,
+  SoaFilterModalPage
 ];
 
 @NgModule({
@@ -144,8 +146,9 @@ var pages = [
         { component: ActivityLogPage, name: 'ActivityLogPage', segment: 'activitylog' },
         { component: UploadCsvPage, name: 'UploadCsvPage', segment: 'upload-csv' },
         { component: PretermApplicationModalPage, name: 'PretermApplicationModalPage', segment: 'preterm-modal' },
-        { component: AddHrPage, name: 'AddHrPage', segment: 'add-hr' },
+        { component: AddHrPage, name: 'AddHrPage', segment: 'add-hr/:cid' },
         { component: AdminLoginPage, name: 'AdminLoginPage', segment: 'admin-login' },
+        { component: SoaFilterModalPage, name: 'SoaFilterModalPage', segment: 'soa-filter-modal' },
       ]
     })
   ],

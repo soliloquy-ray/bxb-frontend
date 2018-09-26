@@ -80,13 +80,13 @@ export class SortableTableComponent {
 		  		if(this.nesting(a,e).toString().toLowerCase() > this.nesting(b,e).toString().toLowerCase()) return 1;
 		  		return 0;
 		  	});
-		}else{
-	  		return a.sort((a,b)=>{
-		  		if(this.nesting(a,e).toString().toLowerCase() < this.nesting(b,e).toString().toLowerCase()) return 1;
-		  		if(this.nesting(a,e).toString().toLowerCase() > this.nesting(b,e).toString().toLowerCase()) return -1;
-		  		return 0;
-		  	});
-		}
+  		}else{
+  	  	return a.sort((a,b)=>{
+  		  	if(this.nesting(a,e).toString().toLowerCase() < this.nesting(b,e).toString().toLowerCase()) return 1;
+  		  	if(this.nesting(a,e).toString().toLowerCase() > this.nesting(b,e).toString().toLowerCase()) return -1;
+  		  	return 0;
+  		  });
+  		}
   	}
   	else if(!isNaN(a[0][e]*1)){
 	  	if(this.sort_type){
@@ -97,32 +97,40 @@ export class SortableTableComponent {
 		  		if(ax > bx) return 1;
 		  		return 0;
 		  	});
-		}else{
-	  		return a.sort((a,b)=>{
-		  		let ax = a[e]*1;
-		  		let bx = b[e]*1;
-		  		if(ax < bx) return 1;
-		  		if(ax > bx) return -1;
-		  		return 0;
-		  	});
-		}
+  		}else{
+  	  	return a.sort((a,b)=>{
+  		  	let ax = a[e]*1;
+  		  	let bx = b[e]*1;
+  		  	if(ax < bx) return 1;
+  		  	if(ax > bx) return -1;
+  		  	return 0;
+  		  });
+  		}
   	}else{
 	  	if(this.sort_type){
 	  		return a.sort((a,b)=>{
-		  		if(a[e].toString().toLowerCase() < b[e].toString().toLowerCase()) return -1;
-		  		if(a[e].toString().toLowerCase() > b[e].toString().toLowerCase()) return 1;
+		  		if(this.clean(a[e]).toString().toLowerCase() < this.clean(b[e]).toString().toLowerCase()) return -1;
+		  		if(this.clean(a[e]).toString().toLowerCase() > this.clean(b[e]).toString().toLowerCase()) return 1;
 		  		return 0;
 		  	});
-		}else{
-	  		return a.sort((a,b)=>{
-		  		if(a[e].toString().toLowerCase() < b[e].toString().toLowerCase()) return 1;
-		  		if(a[e].toString().toLowerCase() > b[e].toString().toLowerCase()) return -1;
-		  		return 0;
-		  	});
-		}
-	}
+  		}else{
+  	  	return a.sort((a,b)=>{
+  		  	if(this.clean(a[e]).toString().toLowerCase() < this.clean(b[e]).toString().toLowerCase()) return 1;
+  		  	if(this.clean(a[e]).toString().toLowerCase() > this.clean(b[e]).toString().toLowerCase()) return -1;
+  		  	return 0;
+  		  });
+  		}
+  	}
   }
 
+  clean(val){
+    if(val){
+      return val;
+    }
+    else{
+      return 0;
+    }
+  }
 
   expand(i){
   	if(this.expanded == i+1){

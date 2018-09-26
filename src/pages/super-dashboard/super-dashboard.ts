@@ -99,9 +99,13 @@ export class SuperDashboardPage {
 	};
 	sampKeysC = Object.keys(this.companies[0]);
 	formatsC = {
+		'memberEmployees':'number',
+		'activeEmployees':'number',
+		'totalCreditAvailment':'number',
 		'principalOutstanding':'number',
 		'maxPortfolio':'number',
-		'riskRatio':'number'
+		'riskRatio':'number',
+		'membershipYears':'number'
 	};
 
 	bxbPortfolio = {

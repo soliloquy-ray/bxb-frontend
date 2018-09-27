@@ -31,37 +31,7 @@ export class EmployeeLoansPage {
 	expanded = 0;
 	load : Loading;
 	loans = {
-		'pending':[/*
-		{
-			'transID':'0',
-			'inceptionDate':'07-30-2018',
-			'creditAvailNumber':'48',
-			'rate':0.025,
-			'term':10,
-			'amt':1000,
-			'purpose':'Major Purchase',
-			'repaid':0
-		},
-		{
-			'transID':'1',
-			'inceptionDate':'07-30-2018',
-			'creditAvailNumber':'49',
-			'rate':0.025,
-			'term':5,
-			'amt':30000,
-			'purpose':'Help out a friend',
-			'repaid':0.3
-		},
-		{
-			'transID':'2',
-			'inceptionDate':'08-01-2018',
-			'creditAvailNumber':'47',
-			'rate':0.025,
-			'term':8,
-			'amt':50000,
-			'purpose':'Emergency Fund',
-			'repaid':0.5
-		}*/],
+		'pending':[],
 		'approved':[],
 		'cancel':[],
 		'completed':[]

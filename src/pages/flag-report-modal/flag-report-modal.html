@@ -1,0 +1,46 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Employee Flag Report
+  	<ion-icon (tap)="close()" name="ios-close" style="float:right;"></ion-icon></ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding id="printarea">
+	<section class="main-content">
+		<ion-row>
+			<p class="label">
+				Reason to flag an employee.
+			</p>
+		</ion-row>
+		<ion-row>
+
+	 		<span class="content">
+		 		<select [(ngModel)]="reason">
+		 			<option *ngFor="let o of options; let i = index;" value="{{i}}">{{o}}</option>
+		 		</select>
+		 	</span>
+		</ion-row>
+		<br/>
+		<ion-row>
+			<p class="label">
+				Comment
+			</p>
+		</ion-row>
+		<ion-row>
+	 		<span class="content">
+		 		<textarea [(ngModel)]="comment"></textarea>
+		 	</span>
+		</ion-row>
+	</section>
+</ion-content>
+
+<ion-footer>
+	<button ion-button (tap)="proceed()">
+		Proceed
+	</button>
+	<button ion-button (tap)="close()">
+		Close
+	</button>
+</ion-footer>

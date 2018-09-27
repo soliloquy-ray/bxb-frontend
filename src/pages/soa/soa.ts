@@ -52,6 +52,7 @@ export class SoaPage {
 	sampKeys = ["pdf","billPeriod","amt","soaNo","refNo","status"];
 	formats = {
 		'amt':'currency',
+		'pdf':'textEvent',
 		'status':'textDecorated'
 	};
 	actions = [
@@ -86,8 +87,14 @@ export class SoaPage {
   	this.navCtrl.setRoot(LoansPage,{},{animate:true, direction:"top"});
   }
 
-  doAction(i:{index:number,val:any}){
-  	this.showSOA(JSON.parse(i.val));
+  doAction(i:{index:any,val:any}){
+  	if(i.index=="PDF"){
+  		let dt = JSON.parse(i.val);
+  		let link = `${this.db.env}/templates/soa-template.php?cid=${dt.CompanyID}&d1=${dt.billPeriod}&d2=${dt.billPeriod}`;
+  		window.open(link);
+  	}else{
+  		this.showSOA(JSON.parse(i.val));
+  	}
   }
 
   showSOA(i){

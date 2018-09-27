@@ -1,11 +1,11 @@
-import { Component, ViewChildren, QueryList } from '@angular/core';
+import { Component} from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, Modal, ModalController } from 'ionic-angular';
 
 import { EmployeeInfoModalPage } from '../employee-info-modal/employee-info-modal';
 import { EditEmployeePage } from '../edit-employee/edit-employee';
 import { AddEmployeePage } from '../add-employee/add-employee';
 
-import { DragScrollComponent } from 'ngx-drag-scroll';
+import { FlagReportModalPage } from '../flag-report-modal/flag-report-modal';
 /**
  * Generated class for the HrDashboardPage page.
  *
@@ -95,6 +95,16 @@ export class EmployeesPage {
 			"grossSalary":70000
 		}
 	];
+	actions = [
+		{
+			"icon":"ios-contact",
+			"class":"edit-employee"
+		},
+		{
+			"icon":"md-flag",
+			"class":"flag-employee"
+		}
+	];
 	hdrTitlesE = {
 		'companyID':'Company ID',
 		'firstName':'First Name',
@@ -135,7 +145,6 @@ export class EmployeesPage {
 	mod: Modal;
 	pendingMembers = [];
 	isMobile : boolean = mobilecheck();
-	@ViewChildren(DragScrollComponent) ds : QueryList<DragScrollComponent>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController) {
   }
@@ -158,10 +167,6 @@ export class EmployeesPage {
   }
 
   ngAfterViewInit(){
-  	this.ds.forEach(i=>{
-  		i.snapOffset = 85;
-  		i.scrollbarHidden = true;
-  	});
   }
 
   editEmp(dt){
@@ -170,6 +175,11 @@ export class EmployeesPage {
 
   addNew(){
   	this.navCtrl.setRoot(AddEmployeePage,{},{animate:true, direction:"top"});
+  }
+
+  doAction(e){
+  	let mod = this.modal.create(FlagReportModalPage, {id:e.val.companyID}, {cssClass:`whitemodal xs  ${this.isMobile ? "mobile" : ""}`});
+  	mod.present();
   }
 
 }

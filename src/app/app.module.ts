@@ -54,6 +54,7 @@ import { EmployeeInfoModalPage } from '../pages/employee-info-modal/employee-inf
 import { TermsModalPage } from '../pages/terms-modal/terms-modal';
 import { DetailVerificationPage } from '../pages/detail-verification/detail-verification';
 import { PretermApplicationModalPage } from '../pages/preterm-application-modal/preterm-application-modal';
+import { FlagReportModalPage } from '../pages/flag-report-modal/flag-report-modal';
 
 import { HttpModule } from '@angular/http';
 import { DragScrollModule } from 'ngx-drag-scroll';
@@ -100,7 +101,8 @@ var pages = [
   PretermApplicationModalPage,
   AddHrPage,
   AdminLoginPage,
-  SoaFilterModalPage
+  SoaFilterModalPage,
+  FlagReportModalPage
 ];
 
 @NgModule({
@@ -149,6 +151,7 @@ var pages = [
         { component: AddHrPage, name: 'AddHrPage', segment: 'add-hr/:cid' },
         { component: AdminLoginPage, name: 'AdminLoginPage', segment: 'admin-login' },
         { component: SoaFilterModalPage, name: 'SoaFilterModalPage', segment: 'soa-filter-modal' },
+        { component: FlagReportModalPage, name: 'FlagReportModalPage', segment: 'flag-report-modal' },
       ]
     })
   ],

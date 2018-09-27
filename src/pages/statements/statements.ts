@@ -59,6 +59,7 @@ export class StatementsPage {
 	};
 	sampKeys = ["pdf","company","billPeriod","amt","soaNo","refNo","companyAct","mgtAct"];
 	formats = {
+		'pdf':'textEvent',
 		'amt':'currency',
 		'companyAct':'textDecorated',
 		'mgtAct':'textEvent'
@@ -98,6 +99,11 @@ export class StatementsPage {
   doAction(i:{index:number,val:any}){
   	if(i.index.toString().toLowerCase()=="confirm"){
   		console.log(i.val);
+  	}else
+  	if(i.index.toString()=="PDF"){
+  		let dt = JSON.parse(i.val);
+  		let link = `${this.db.env}/templates/soa-template.php?cid=${dt.CompanyID}&d1=${dt.billPeriod}&d2=${dt.billPeriod}`;
+  		window.open(link);
   	}else{
   		this.showSOA(JSON.parse(i.val));
   	}

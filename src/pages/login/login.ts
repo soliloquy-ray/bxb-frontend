@@ -10,6 +10,8 @@ import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { config } from '../../ext/config';
+
+import { AppProvider } from '../../providers/app/app';
 /**
  * Generated class for the LoginPage page.
  *
@@ -52,7 +54,7 @@ export class LoginPage {
       }
     };
   bgimg: string;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private http: Http, private toast: ToastController, private loader: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private http: Http, private toast: ToastController, private loader: LoadingController, private app: AppProvider) {
   	console.log(this.env);
   }
 
@@ -141,6 +143,7 @@ export class LoginPage {
           }else{
             localStorage.userData = JSON.stringify(uDt);
             localStorage.accountType = 'employee';
+            this.app.setCompanyDetails(uDt.CompanyID);
             self.navCtrl.setRoot(EmployeeDashboardPage,{},{animate:true, direction:"forward"});
           }
           //id = id[0].master_id;

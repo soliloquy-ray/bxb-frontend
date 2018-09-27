@@ -23,7 +23,7 @@
 					<span>
 						<p>Available Credit</p>
 						<b class="available">
-							{{availableCredit | currency:'PHP':'symbol-narrow':'1.2-2'}}
+							{{availableCredit | currency:'PHP':'symbol-narrow':'1.2-2'}} / {{(availableCredit+outstandingCredit) | currency:'PHP':'symbol-narrow':'1.2-2'}}
 						</b>
 					</span>
 					<span id="available-bar" class="bar">

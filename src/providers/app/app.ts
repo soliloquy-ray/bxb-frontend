@@ -4,6 +4,7 @@ import { config } from '../../ext/config';
 
 import { CookieService } from 'ngx-cookie-service';
 
+import { DbProvider } from '../db/db';
 /*
   Generated class for the AppProvider provider.
 
@@ -14,7 +15,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class AppProvider {
 
   	env = config[location.origin].backend;
-  constructor(private http: Http, private cookie: CookieService) {
+  constructor(private http: Http, private cookie: CookieService, private db: DbProvider) {
   }
 
   generateOTP(max:number = 999999, min: number = 100000, age: number = 5):string{
@@ -141,6 +142,12 @@ export class AppProvider {
       netCashout:Math.round(p) - (p * processingFeeRate + p * collectionFeeRate + p * docFeeRate),
       totalPayment:(t * r * p) + Math.round(p)
     };
+  }
+
+  async setCompanyDetails(id:number){
+    this.db.getCompanyByID(id).then(res=>{
+      localStorage.setItem('company',JSON.stringify(res[0]));
+    }).catch(console.warn);
   }
 
 }

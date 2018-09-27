@@ -42,6 +42,9 @@ export class SideBarComponent {
   logout(){
     localStorage.removeItem('accountType');
     localStorage.removeItem('userData');
+    localStorage.removeItem('roleId');
+    localStorage.removeItem('companyId');
+    localStorage.removeItem('company');
     this.goToLink('/');
   }
 

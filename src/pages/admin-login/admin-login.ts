@@ -9,6 +9,8 @@ import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { config } from '../../ext/config';
+
+import { AppProvider } from '../../providers/app/app';
 /**
  * Generated class for the LoginPage page.
  *
@@ -35,7 +37,7 @@ export class AdminLoginPage {
   cp: string = "";
   
   bgImg: string = "url('../../assets/imgs/login-bg.png')";
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private http: Http, private toast: ToastController, private loader: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private http: Http, private toast: ToastController, private loader: LoadingController, private app: AppProvider) {
   	console.log(this.env);
   }
 
@@ -112,6 +114,7 @@ export class AdminLoginPage {
             localStorage.accountType = 'hr';
             localStorage.companyId = uDt.companyid;
             localStorage.roleId = uDt.roleid;
+            self.app.setCompanyDetails(uDt.companyid);
             self.navCtrl.setRoot(HrDashboardPage,{},{animate:true, direction:"forward"});
           }
           //id = id[0].master_id;

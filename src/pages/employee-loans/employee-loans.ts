@@ -132,9 +132,17 @@ export class EmployeeLoansPage {
     	return Promise.resolve(rs);
     });
    
-
+    let reducer = (a,b)=>parseFloat(a.principal)+parseFloat(b.principal);
     let pr2 = this.db.getEmpLoansByStatus(2).then(rs=>{
+    	let total = 0;
+      	if(rs.length > 1)  total = rs.reduce(reducer);
+      	else if(rs.length == 1) total = rs[0].principal;
     	self.loans.approved = rs;
+	    this.outstandingCredit = total;
+	    this.availableCredit -= total;
+	    if(this.availableCredit <= 0){
+	      this.availableCredit = 0;
+	    }
       	load.setContent('Loading Completed loans');
     	return Promise.resolve(rs);
     });

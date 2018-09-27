@@ -23,7 +23,7 @@
 					<span>
 						<p>Available Credit</p>
 						<b class="available">
-							{{availableCredit | currency:'PHP':'symbol-narrow':'1.2-2'}}
+							{{availableCredit | currency:'PHP':'symbol-narrow':'1.2-2'}} / {{(availableCredit+outstandingCredit) | currency:'PHP':'symbol-narrow':'1.2-2'}}
 						</b>
 					</span>
 					<span id="available-bar" class="bar">
@@ -120,7 +120,7 @@
 				</ion-col>
 			</ion-row>
 		</div>
-		<button ion-button (tap)="viewTerms()" [disabled]="purpose.trim() == '' || submitFlag">Confirm</button>
+		<button ion-button (tap)="viewTerms()" [disabled]="purpose.trim() == '' || submitFlag || creditToUse <= 0 || hasPendingLoan">Confirm</button>
 		<foot></foot>
 	</section>
 

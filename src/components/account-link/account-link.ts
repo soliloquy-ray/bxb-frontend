@@ -32,6 +32,7 @@ export class AccountLinkComponent {
     localStorage.removeItem('userData');
     localStorage.removeItem('roleId');
     localStorage.removeItem('companyId');
+    localStorage.removeItem('company');
   	this.viewCtrl.dismiss();
   	//this.nav.setRoot(LoginPage,{},{animate:true, direction:"forward"});
   	window.location.href = location.origin+"/"+path;

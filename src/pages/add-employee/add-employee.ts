@@ -24,12 +24,13 @@ declare var mobilecheck; //fn to check for screen type
   templateUrl: 'add-employee.html',
 })
 export class AddEmployeePage {
+  jsdt = JSON.parse(localStorage.company);
 	userData: any = {
   		firstName:"",
   		middleName:"",
   		lastName:"",
   		tin: "",
-  		company: "",
+  		company: this.jsdt.companyName,
   		gender: "",
   		email: "",
   		hiredDate: "",

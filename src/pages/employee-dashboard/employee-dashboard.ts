@@ -61,12 +61,44 @@ export class EmployeeDashboardPage {
   	userData = JSON.parse(localStorage.userData);
 
   submitFlag : boolean = false;
+
+  hasPendingLoan:boolean = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private db: DbProvider, private alert: AlertController, private loader: LoadingController, private toast:ToastController, private appProvider: AppProvider, private cookie: CookieService) {
   }
 
   ionViewDidEnter() {
   	this.menu.close();
   	localStorage.page = 'dashboard';
+
+    this.getActiveLoanAmt().then(res=>{
+      this.outstandingCredit = res;
+      this.availableCredit -= res;
+      if(this.availableCredit <= 0){
+        this.availableCredit = 0;
+        this.min = 0;
+        this.creditToUse = 0;
+        let alert = this.alert.create({
+          title: 'Credit Loan at Maximum',
+          subTitle: "You have reached your maximum loan amount.",
+          buttons: ['Dismiss'],
+          enableBackdropDismiss:true
+        });
+        alert.present();
+      }
+    });
+    this.getPendingLoansCount().then(res=>{
+      this.hasPendingLoan = res > 0;
+      if(this.hasPendingLoan){
+
+        let alert = this.alert.create({
+          title: 'Pending Loan',
+          subTitle: "You can't apply for a new loan because you have a loan currently pending approval.",
+          buttons: ['Dismiss'],
+          enableBackdropDismiss:true
+        });
+        alert.present();
+      }
+    });
   }
 
   ionViewWillLeave(){
@@ -217,6 +249,7 @@ export class EmployeeDashboardPage {
 @documentFee float **/
 
   viewTerms(){
+    if(this.purpose.trim() == '' || this.submitFlag || this.creditToUse <= 0 || this.hasPendingLoan) return false;
     let trms = this.modal.create(TermsModalPage,{int:true});
     let self = this;
     trms.onDidDismiss(trip=>{
@@ -285,6 +318,24 @@ self.appProvider.sendOTPmsg(otp,9988560026).then(res=>{
   console.log(res);
 }).catch(console.warn);
 */
+
+  async getPendingLoansCount(){
+    let ret :number = 0;
+    await this.db.getEmpLoansByStatus(1).then(res=>{
+      ret = res.length;
+    }).catch(console.warn);
+    return ret;
+  }
+
+  async getActiveLoanAmt(){
+    let total :number = 0;
+    let reducer = (a,b)=>parseFloat(a.principal)+parseFloat(b.principal);
+    await this.db.getEmpLoansByStatus(2).then(res=>{
+      if(res.length > 1)  total = res.reduce(reducer);
+      else if(res.length == 1) total = res[0].principal;
+    }).catch(console.warn);
+    return total;
+  }
 
 	createNewLoan(){
     let self = this;

@@ -58,7 +58,7 @@ export class EmployeeDashboardPage {
 	loan : loanModel;
 	dates : Array<{paymentDate,paymentNum,amt,bal}> = [];
   	env = config[location.origin].backend;
-  	userData = JSON.parse(localStorage.userData);
+  	userData = localStorage.userData;
 
   submitFlag : boolean = false;
 
@@ -67,6 +67,12 @@ export class EmployeeDashboardPage {
   }
 
   ionViewDidEnter() {
+
+    if( typeof this.userData == "undefined" || this.userData == ""){
+      this.logout();
+      return ;
+    }
+
   	this.menu.close();
   	localStorage.page = 'dashboard';
 
@@ -390,6 +396,12 @@ self.appProvider.sendOTPmsg(otp,9988560026).then(res=>{
 	  				console.warn(err);
 	  			})
 	}
+
+  logout(){
+    localStorage.removeItem('userData');
+    window.location.href = '/#/login';
+    return 0;
+  }
 
 
 

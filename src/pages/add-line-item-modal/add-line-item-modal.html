@@ -1,0 +1,43 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Add Line Item
+  	<ion-icon (tap)="close()" name="ios-close" style="float:right;"></ion-icon></ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding id="printarea">
+	<section class="main-content">
+		<ion-row>
+			<p class="label">
+				Label
+			</p>
+		</ion-row>
+		<ion-row>
+	 		<span class="content">
+		 		<input type="text" name="label" [(ngModel)]="label"/>
+		 	</span>
+		</ion-row>
+		<br/>
+		<ion-row>
+			<p class="label">
+				Value
+			</p>
+		</ion-row>
+		<ion-row>
+	 		<span class="content">
+		 		<input type="number" name="amt" [(ngModel)]="amt"/>
+		 	</span>
+		</ion-row>
+	</section>
+</ion-content>
+
+<ion-footer>
+	<button ion-button (tap)="proceed()">
+		Submit
+	</button>
+	<button ion-button (tap)="close()">
+		Cancel
+	</button>
+</ion-footer>

@@ -15,7 +15,7 @@ import { StatementOfAccountPage } from '../statement-of-account/statement-of-acc
 export class SoaPage {
 
 	soas = [
-		{
+		/*{
 			pdf:'PDF',
 			billPeriod:'07-30-2018',
 			amt:14929.16,
@@ -38,7 +38,7 @@ export class SoaPage {
 			soaNo:'2018847',
 			refNo:'',
 			status:'not paid'
-		}
+		}*/
 	];
 
 	hdrTitles = {

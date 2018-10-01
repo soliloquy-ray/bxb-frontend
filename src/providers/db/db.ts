@@ -291,4 +291,18 @@ export class DbProvider {
 	);
   }
 
+  async uploadCsvFile(fn:string = ''){
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+
+	let fname = fn.replace(/\s/g,'_');
+
+	return (
+		this.http.post(`${this.env}/api.php?q=uploadcsv`,{fname:fname}, rq)
+			.toPromise()
+		);
+  }
+
 }

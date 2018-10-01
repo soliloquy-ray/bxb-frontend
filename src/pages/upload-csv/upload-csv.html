@@ -5,7 +5,7 @@
 	<section class="main-content">
 		<div class="body">
 
-			<input type="file" name="csv" (change)="see($event)" accept=".csv,.xls,.xlsx"/>
+			<input type="file" name="csv" (change)="setupCSV($event)" accept=".csv,.xls,.xlsx"/>
 
 			<button ion-button name="submit" [disabled]="!uploadRdy" (tap)="sendToBack()">
 				Upload

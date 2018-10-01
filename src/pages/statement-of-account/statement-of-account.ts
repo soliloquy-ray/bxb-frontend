@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
 
 import { DbProvider } from '../../providers/db/db';
+
+import { AddLineItemModalPage } from '../add-line-item-modal/add-line-item-modal';
 /**
  * Generated class for the StatementOfAccountPage page.
  *
@@ -74,13 +76,25 @@ export class StatementOfAccountPage {
 	];
 	data;
 	cid;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private view: ViewController, private db: DbProvider) {
+	lineItems: Array<{label:string,amt:number}> = [];
+	lineTotal: number = 0;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private view: ViewController, private db: DbProvider, private modal: ModalController) {
   	this.data = this.navParams.get('data') || [];
   }
 
   ionViewDidLoad() {
     //console.log('ionViewDidLoad StatementOfAccountPage');
+    if(this.data.length < 1){
+    	this.db.getSOAByDate(1,'2018-09-30','2018-09-30').then(res=>{
+	  		this.data = res.json()[0];
+	  		this.populateData();
+	  	}).catch(console.warn);
+    }else{
+    	this.populateData();
+    }
+  }
 
+  populateData(){
   	this.db.getSOAPaySchedByDate(this.data.billPeriod,this.data.CompanyID).then(res=>{
   		this.prevBalance = [];
   		this.currentBalance = res.json();
@@ -89,6 +103,40 @@ export class StatementOfAccountPage {
 
   print(){
   	window.print();
+  }
+
+  addItem(){
+  	let mod = this.modal.create(AddLineItemModalPage,{sub:false},{cssClass:`whitemodal xs`});
+  	mod.onDidDismiss(a=>{
+  		console.log(a);
+  		if(a.label && a.amt){
+  			this.lineItems.push({label:a.label,amt:a.amt});
+  		}
+  		this.getLineItemsTotal();
+  	})
+  	mod.present();
+  }
+
+  remItem(){
+  	let mod = this.modal.create(AddLineItemModalPage,{sub:true},{cssClass:`whitemodal xs`});
+  	mod.onDidDismiss(a=>{
+  		console.log(a);
+  		if(a.label && a.amt){
+  			this.lineItems.push({label:a.label,amt:a.amt});
+  		}
+  		this.getLineItemsTotal();
+  	})
+  	mod.present();
+  }
+
+  async getLineItemsTotal(){
+  	let red = 0;
+  	await
+    this.lineItems.map(a=>{
+    	red += a.amt;
+    });
+    console.log(red);
+    this.lineTotal = red*-1;
   }
 
   close(){

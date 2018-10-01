@@ -15,7 +15,7 @@ import { StatementOfAccountPage } from '../statement-of-account/statement-of-acc
 export class StatementsPage {
 
 	soas = [
-		{
+		/*{
 			pdf:'PDF',
 			company:'6805 Ayala Avenue Condominium Corporation',
 			billPeriod:'07-30-2018',
@@ -44,7 +44,7 @@ export class StatementsPage {
 			refNo:'',
 			companyAct:'not paid',
 			mgtAct:'confirm'
-		}
+		}*/
 	];
 
 	hdrTitles = {

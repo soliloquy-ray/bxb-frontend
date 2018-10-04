@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, Modal, ModalController, MenuContro
 import { DisclosureStatementPage } from '../disclosure-statement/disclosure-statement';
 import { EmpDisclosureStatementModalPage } from '../emp-disclosure-statement-modal/emp-disclosure-statement-modal';
 import { PretermApplicationModalPage } from '../preterm-application-modal/preterm-application-modal';
+import { EmployeePretermFormPage } from '../employee-preterm-form/employee-preterm-form';
 
 import { DbProvider } from '../../providers/db/db';
 
@@ -133,8 +134,10 @@ export class EmployeeLoansPage {
   	//console.info($event);
   }
 
-  initLoans(){
+  async initLoans(){
 
+  	this.availableCredit = 50000;
+  	this.outstandingCredit = 0;
   	let self = this;
   	let load = this.loader.create({
 	  spinner: 'crescent',
@@ -151,12 +154,12 @@ export class EmployeeLoansPage {
     });
    
     let reducer = (a,b)=>parseFloat(a.principal)+parseFloat(b.principal);
-    let pr2 = this.db.getEmpLoansByStatus(2).then(rs=>{
+    let pr2 = await this.db.getEmpLoansByStatus(2).then(rs=>{
     	let total = 0;
       	if(rs.length > 1)  total = rs.reduce(reducer);
       	else if(rs.length == 1) total = rs[0].principal;
     	self.loans.approved = rs;
-	    this.outstandingCredit = parseFloat(total.toString());
+	    this.outstandingCredit += parseFloat(total.toString());
 	    this.availableCredit -= parseFloat(total.toString());
 	    if(this.availableCredit <= 0){
 	      this.availableCredit = 0;
@@ -166,7 +169,15 @@ export class EmployeeLoansPage {
     });
 
     let pr3 = this.db.getEmpLoansByStatus(4).then(rs=>{
+    	let total = 0;
+      	if(rs.length > 1)  total = rs.reduce(reducer);
+      	else if(rs.length == 1) total = rs[0].principal;
     	self.loans.cancel = rs;
+    	this.outstandingCredit += parseFloat(total.toString());
+	    this.availableCredit -= parseFloat(total.toString());
+	    if(this.availableCredit <= 0){
+	      this.availableCredit = 0;
+	    }
       	load.setContent('Compiling');
     	return Promise.resolve(rs);
     });
@@ -202,17 +213,26 @@ export class EmployeeLoansPage {
   	}
   }
 
+  doPretermAction(i:{index:number,val:any}){
+  	console.log(i);
+  	let ev = JSON.parse(i.val);
+  	
+  	this.mod = this.modal.create(EmployeePretermFormPage,{data:ev},{cssClass:`whitemodal sm ${this.isMobile() ? "mobile" : ""}`});
+  	this.mod.present();
+  }
+
   showPretermForm(i){
   	let ind = JSON.parse(i.val);
   	let usr = {name:this.userData.Name_First + " " +this.userData.Name_Last, empID: this.userData.master_id};
   	let loan = {principal:ind.principal, id:ind.LoanID, interest:ind.interest};
 
   	this.mod = this.modal.create(PretermApplicationModalPage,{user:usr,loan:loan},{cssClass:`whitemodal xs ${this.isMobile() ? "mobile" : ""}`});
-  	this.mod.onDidDismiss(()=>{
-  		this.initLoans();
+  	this.mod.onDidDismiss(ret=>{
+  		if(ret) this.initLoans();
   	})
   	this.mod.present();
   }
+
 
 /*
   showModal(i){

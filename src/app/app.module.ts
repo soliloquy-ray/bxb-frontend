@@ -56,6 +56,7 @@ import { DetailVerificationPage } from '../pages/detail-verification/detail-veri
 import { PretermApplicationModalPage } from '../pages/preterm-application-modal/preterm-application-modal';
 import { FlagReportModalPage } from '../pages/flag-report-modal/flag-report-modal';
 import { AddLineItemModalPage } from '../pages/add-line-item-modal/add-line-item-modal';
+import { EmployeePretermFormPage } from '../pages/employee-preterm-form/employee-preterm-form';
 
 import { HttpModule } from '@angular/http';
 import { DragScrollModule } from 'ngx-drag-scroll';
@@ -104,7 +105,8 @@ var pages = [
   AdminLoginPage,
   SoaFilterModalPage,
   FlagReportModalPage,
-  AddLineItemModalPage
+  AddLineItemModalPage,
+  EmployeePretermFormPage
 ];
 
 @NgModule({
@@ -155,6 +157,7 @@ var pages = [
         { component: SoaFilterModalPage, name: 'SoaFilterModalPage', segment: 'soa-filter-modal' },
         { component: FlagReportModalPage, name: 'FlagReportModalPage', segment: 'flag-report-modal' },
         { component: AddLineItemModalPage, name: 'AddLineItemModalPage', segment: 'add-line-item-modal' },
+        { component: EmployeePretermFormPage, name: 'EmployeePretermFormPage', segment: 'employee-preterm-modal' },
       ]
     })
   ],

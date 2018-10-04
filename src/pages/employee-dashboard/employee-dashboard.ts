@@ -340,6 +340,10 @@ self.appProvider.sendOTPmsg(otp,9988560026).then(res=>{
       if(res.length > 1)  total = res.reduce(reducer);
       else if(res.length == 1) total = res[0].principal;
     }).catch(console.warn);
+    await this.db.getEmpLoansByStatus(4).then(res=>{
+      if(res.length > 1) total += res.reduce(reducer);
+      else if(res.length == 1) total += res[0].principal;
+    })
     return total;
   }
 

@@ -50,7 +50,7 @@ export class PretermApplicationModalPage {
   }
 
   close(){
-  	this.view.dismiss();
+  	this.view.dismiss(false);
   }
 
   submit(){
@@ -59,7 +59,7 @@ export class PretermApplicationModalPage {
           this.db.updateLoanStatus(4,this.loan.id)
              .then(res=>{
                console.info(res);
-               this.view.dismiss();
+               this.view.dismiss(true);
              })
              .catch(console.warn);
     }).catch(err=>{

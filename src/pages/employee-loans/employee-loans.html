@@ -82,9 +82,13 @@
 								<ion-icon name="ios-search"></ion-icon>
 								<input type="text" (ionInput)="search($event)" placeholder="Search any fields"/>
 							</span-->
-							<sortable-table *ngIf="loans.cancel.length > 0"[data]="loans?.cancel" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles"></sortable-table>
+							<sortable-table *ngIf="loans.cancel.length > 0"[data]="loans?.cancel" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles" [actions]="actions" (t)="doPretermAction($event)"></sortable-table>
 							<p class="no-data" *ngIf="loans.cancel.length == 0">
 								No data
+							</p>
+
+							<p class="notif" *ngIf="loans.cancel.length > 0">
+								Please settle this amount and pay to bxb’s bank account
 							</p>
 						</div>
 

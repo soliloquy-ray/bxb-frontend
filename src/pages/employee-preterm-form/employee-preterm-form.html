@@ -1,0 +1,126 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>
+  	<ion-icon (tap)="close()" name="ios-close" style="float:right;"></ion-icon></ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding id="printarea">
+	<section class="main-content">
+		<span class="header">
+			<img src="../assets/imgs/logo.png"/>
+		</span>
+		<ion-row>
+			<ion-col col-4>
+				<p class="head">
+					Pretermination Form
+				</p>
+			</ion-col>
+			<ion-col col-4>
+				<p class="head">
+					Company Code
+				</p>
+			</ion-col>
+			<ion-col col-4>
+				<p class="head">
+					{{user?.CompanyID}}
+				</p>
+			</ion-col>
+		</ion-row>
+
+		<ion-row>
+			<ion-col col-4>
+				{{user?.Name_First}} {{user?.Name_Last}}
+			</ion-col>
+			<ion-col col-4>
+				Date of Availment
+			</ion-col>
+			<ion-col col-4>
+				{{loan?.applicationDate}}
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col col-4>
+				SOA Ref#
+			</ion-col>
+			<ion-col col-4>
+				Amount of Availment
+			</ion-col>
+			<ion-col col-4>
+				{{getAmtDue() |  currency:'PHP':'symbol-narrow':'1.2-2'}}
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col col-4>
+				Preterm Interest: {{loanInterest | number:'1.0-2' }}
+			</ion-col>
+		</ion-row>
+		<br/>
+		<hr class="blocker">
+		<ion-row>
+			<p class="head">
+				Preterm Balance
+			</p>
+		</ion-row>
+		<ion-row>
+	 		<ion-col col-2>
+				<p class="head">
+					Transaction ID
+				</p>
+	 		</ion-col>
+	 		<ion-col col-2>
+				<p class="head">
+					Date of Inception
+				</p>
+	 		</ion-col>
+	 		<ion-col col-2>
+				<p class="head">
+					Credit Availment Number
+				</p>
+	 		</ion-col>
+	 		<ion-col col-2>
+				<p class="head">
+					Preterm Interest 
+				</p>
+	 		</ion-col>
+	 		<ion-col col-2>
+				<p class="head">
+					Amount
+				</p>
+	 		</ion-col>
+	 		<ion-col col-2>
+				<p class="head">
+					Reason
+				</p>
+	 		</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col col-2>
+				{{loan?.LoanID}}
+			</ion-col>
+			<ion-col col-2>
+				{{loan?.applicationDate}}
+			</ion-col>
+			<ion-col col-2>
+				{{loan?.LoanID}}
+			</ion-col>
+			<ion-col col-2>
+				{{loanInterest |  currency:'PHP':'symbol-narrow':'1.2-2'}}
+			</ion-col>
+			<ion-col col-2>
+				{{getAmtDue() |  currency:'PHP':'symbol-narrow':'1.2-2'}}
+			</ion-col>
+			<ion-col col-2>
+				{{loan?.note}}
+			</ion-col>
+		</ion-row>
+	</section>
+</ion-content>
+
+<ion-footer>
+	<button ion-button (tap)="close()">
+		Close
+	</button>
+</ion-footer>

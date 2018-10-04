@@ -117,6 +117,24 @@ export class EmployeeLoansPage {
   }
 
   ionViewDidLoad() {
+  	this.initLoans();
+  }
+
+  ionViewDidEnter() {
+  	this.menu.close();
+  	localStorage.page = 'creditsum';
+  }
+
+  isMobile(){
+  	return localStorage.view == "mobile";
+  }
+
+  segmentChanged($event){
+  	//console.info($event);
+  }
+
+  initLoans(){
+
   	let self = this;
   	let load = this.loader.create({
 	  spinner: 'crescent',
@@ -138,8 +156,8 @@ export class EmployeeLoansPage {
       	if(rs.length > 1)  total = rs.reduce(reducer);
       	else if(rs.length == 1) total = rs[0].principal;
     	self.loans.approved = rs;
-	    this.outstandingCredit = total;
-	    this.availableCredit -= total;
+	    this.outstandingCredit = parseFloat(total.toString());
+	    this.availableCredit -= parseFloat(total.toString());
 	    if(this.availableCredit <= 0){
 	      this.availableCredit = 0;
 	    }
@@ -157,19 +175,6 @@ export class EmployeeLoansPage {
     	load.dismiss().catch(()=>{});
     });
 
-  }
-
-  ionViewDidEnter() {
-  	this.menu.close();
-  	localStorage.page = 'creditsum';
-  }
-
-  isMobile(){
-  	return localStorage.view == "mobile";
-  }
-
-  segmentChanged($event){
-  	//console.info($event);
   }
 
   doAction(e:{index:number,val:any}){
@@ -203,6 +208,9 @@ export class EmployeeLoansPage {
   	let loan = {principal:ind.principal, id:ind.LoanID, interest:ind.interest};
 
   	this.mod = this.modal.create(PretermApplicationModalPage,{user:usr,loan:loan},{cssClass:`whitemodal xs ${this.isMobile() ? "mobile" : ""}`});
+  	this.mod.onDidDismiss(()=>{
+  		this.initLoans();
+  	})
   	this.mod.present();
   }
 

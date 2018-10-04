@@ -30,6 +30,7 @@ page-add-line-item-modal {
 				border:0;
 				box-shadow: 0 0 2px 0px #333;
 				padding:1vh 0.5vh;
+				width:100%;
 			
 				textarea{
 					border:none;
@@ -85,11 +86,11 @@ page-add-line-item-modal {
 	ion-footer{
 		text-align:right;
 		button[ion-button]{
-			background-color:inherit;
+			//background-color:inherit;
 			border-radius:8px;
 			border:0;
 			box-shadow:0 0 2px 1px #888;
-			color:#333;
+			//color:#333;
 			display:inline-table;
 			padding:0 2vh;
 

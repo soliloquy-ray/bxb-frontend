@@ -77,8 +77,8 @@ export class EmployeeDashboardPage {
   	localStorage.page = 'dashboard';
 
     this.getActiveLoanAmt().then(res=>{
-      this.outstandingCredit = res;
-      this.availableCredit -= res;
+      this.outstandingCredit = parseFloat(res.toString());
+      this.availableCredit -= parseFloat(res.toString());
       if(this.availableCredit <= 0){
         this.availableCredit = 0;
         this.min = 0;

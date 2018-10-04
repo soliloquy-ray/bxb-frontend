@@ -305,4 +305,28 @@ export class DbProvider {
 		);
   }
 
+  async addLineItem(lineItem){
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+
+	return (
+		this.http.post(`${this.env}/api.php?q=add_line_item`,{lineItem:lineItem}, rq)
+			.toPromise()
+		);
+  }
+
+  async loanPretermReq(loan){
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+
+	return (
+		this.http.post(`${this.env}/api.php?q=loan_preterm_request`,{loan:loan}, rq)
+			.toPromise()
+		);
+  }
+
 }

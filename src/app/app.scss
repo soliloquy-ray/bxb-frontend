@@ -108,7 +108,16 @@ ion-modal.whitemodal{
 			width:calc(650px);
 			left:calc(calc(100% - 650px) / 2);
 			height:400px;
-			max-height:350px;
+			max-height:400px;
+		}
+	}
+
+	&.xxs:not(.mobile){
+		div.modal-wrapper{
+			width:calc(300px);
+			left:calc(calc(100% - 300px) / 2);
+			height:300px;
+			max-height:300px;
 		}
 	}
 }

@@ -13,7 +13,7 @@ import { DbProvider } from '../../providers/db/db';
 })
 export class PretermPage {
 
-	preterm = [
+	preterm = [/*
 		{
 			firstName:"Michaelle",
 			lastName:"Benedicto",
@@ -33,33 +33,50 @@ export class PretermPage {
 			amt:12543.75,
 			reason:"Flag",
 			status:"Flag"
-		}
+		}*/
 	];
 
 	hdrTitles = {
-		'firstName':'First Name',
-		'lastName':'Last Name',
-		'loanIdentification':'Loan Identification',
-		'company':'Company',
-		'terms':'Terms',
-		'amt':'Amount',
+		'userData.Name_First':'First Name',
+		'userData.Name_Last':'Last Name',
+		'LoanID':'Loan Identification',
+		'userData.Company':'Company',
+		'term':'Terms',
+		'principal':'Amount',
 		'reason':'Reason',
 		'status':'Status'
 	};
-	sampKeys = ["firstName","lastName","loanIdentification","company","terms","amt","reason","status"];
+	sampKeys = ['userData.Name_First','userData.Name_Last','LoanID','userData.Company','term','principal','reason','status'];
 	formats = {
-		'loanIdentification':'number',
-		'terms':'number',
-		'amt':'currency'
+		'LoanID':'number',
+		'term':'number',
+		'principal':'currency',
+		'userData.Name_First':'nested',
+		'userData.Name_Last':'nested',
+		'userData.Company':'nested'
 	};
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController/*, private db: DbProvider, private loader: LoadingController*/) {
+	actions = [
+		{
+			"icon":"md-information-circle",
+			"class":"display-disclosure"
+		},
+		{
+			"icon":"ios-thumbs-up",
+			"class":"approve"
+		},
+		{
+			"icon":"ios-thumbs-down",
+			"class":"reject"
+		}
+	];
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private db: DbProvider, private loader: LoadingController) {
   }
 
   ionViewDidEnter() {
   	this.menu.close();
   	localStorage.page = 'preterm';
 
-  	/*
+  	
 	let load = this.loader.create({
 	  spinner: 'crescent',
 	  dismissOnPageChange: true,
@@ -68,14 +85,10 @@ export class PretermPage {
 	  enableBackdropDismiss:false
 	});
 	load.present();
-  	this.db.getLoansByStatus(1).then(res=>{
-  		return res;
-  	}).then(r=>{
-  		self.db.getLoansByStatus(2).then(rs=>{
-  			self.credits = r.concat(rs);
-  			load.dismiss().catch(()=>{});
-  		})
-  	});*/
+  	this.db.getLoansByStatus(4).then(res=>{
+  		this.preterm = res;
+  		load.dismiss();
+  	}).catch(console.warn);
   }
 
 

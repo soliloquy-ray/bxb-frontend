@@ -17,7 +17,7 @@ import { AddLineItemModalPage } from '../add-line-item-modal/add-line-item-modal
   templateUrl: 'statement-of-account.html',
 })
 export class StatementOfAccountPage {		
-	currentBalance = [{
+	currentBalance = [/*{
 			"transDate":"2018-04-15",
 			"creditAvailmentNumber":4,
 			"memberID":"00202",
@@ -40,9 +40,9 @@ export class StatementOfAccountPage {
 			"repaymentAmt":2395.83,
 			"status":"Active"
 		},
-	];	
+	*/];	
 
-	prevBalance = [{
+	prevBalance = [/*{
 			"transDate":"2018-04-15",
 			"creditAvailmentNumber":4,
 			"firstName":"George Miguel",
@@ -72,12 +72,13 @@ export class StatementOfAccountPage {
 			"transType":"Credit Availment",
 			"repaymentAmt":479.16,
 			"status":"Active"
-		}
+		}*/
 	];
 	data;
 	cid;
-	lineItems: Array<{label:string,amt:number}> = [];
+	lineItems: Array<{label:string,amt:number,payId:number,bal:number,seqNo:number}> = [];
 	lineTotal: number = 0;
+	accountType: string = localStorage.accountType;
   constructor(public navCtrl: NavController, public navParams: NavParams, private view: ViewController, private db: DbProvider, private modal: ModalController) {
   	this.data = this.navParams.get('data') || [];
   }
@@ -106,11 +107,12 @@ export class StatementOfAccountPage {
   }
 
   addItem(){
-  	let mod = this.modal.create(AddLineItemModalPage,{sub:false},{cssClass:`whitemodal xs`});
+  	let mod = this.modal.create(AddLineItemModalPage,{sub:false,payments:this.currentBalance.concat(this.prevBalance)},{cssClass:`whitemodal xs`});
   	mod.onDidDismiss(a=>{
   		console.log(a);
   		if(a.label && a.amt){
-  			this.lineItems.push({label:a.label,amt:a.amt});
+  			this.lineItems.push({label:a.label,amt:a.amt,payId:a.payId,bal:a.bal,seqNo:a.seqNum});
+  			this.db.addLineItem({payId:a.payId,loanId:a.loanId,payDate:this.data.billPeriod,payCount:a.seqNum,payAmount:a.amt,balance:a.bal}).then(console.info).catch(console.warn);
   		}
   		this.getLineItemsTotal();
   	})
@@ -118,11 +120,12 @@ export class StatementOfAccountPage {
   }
 
   remItem(){
-  	let mod = this.modal.create(AddLineItemModalPage,{sub:true},{cssClass:`whitemodal xs`});
+  	let mod = this.modal.create(AddLineItemModalPage,{sub:true,payments:this.currentBalance.concat(this.prevBalance)},{cssClass:`whitemodal xs`});
   	mod.onDidDismiss(a=>{
   		console.log(a);
   		if(a.label && a.amt){
-  			this.lineItems.push({label:a.label,amt:a.amt});
+  			this.lineItems.push({label:a.label,amt:a.amt,payId:a.payId,bal:a.bal,seqNo:a.seqNum});
+  			this.db.addLineItem({payId:a.payId,loanId:a.loanId,payDate:this.data.billPeriod,payCount:a.seqNum,payAmount:a.amt,balance:a.bal}).then(console.info).catch(console.warn);
   		}
   		this.getLineItemsTotal();
   	})
@@ -141,5 +144,9 @@ export class StatementOfAccountPage {
 
   close(){
   	this.view.dismiss();
+  }
+
+  submit(){
+  	console.log('submitting this '+JSON.stringify(this.data));
   }
 }

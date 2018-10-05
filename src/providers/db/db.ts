@@ -329,4 +329,16 @@ export class DbProvider {
 		);
   }
 
+  async changeUserPassword(id: number = 0, pass: string = ''){
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+
+	return (
+		this.http.post(`${this.env}/api.php?q=changepass`,{id:id, pass:pass}, rq)
+			.toPromise()
+		);
+  }
+
 }

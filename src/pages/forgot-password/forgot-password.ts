@@ -23,7 +23,7 @@ export class ForgotPasswordPage {
 	email: string;
 	isMobile : boolean = mobilecheck();
   env = config[location.origin].backend;
-  ls = localStorage.lastSent;
+  ls = localStorage.lastSent || 0;
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private loader: LoadingController) {
   }
 

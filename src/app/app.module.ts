@@ -20,6 +20,7 @@ import { PrivacyPolicyPage } from '../pages/privacy-policy/privacy-policy';
 import { LoansPage } from '../pages/loans/loans';
 import { ActivityLogPage } from '../pages/activity-log/activity-log';
 import { AdminLoginPage } from '../pages/admin-login/admin-login';
+import { PwResetPage } from '../pages/pw-reset/pw-reset';
 
 /* employee pages */
 import { EmployeeDashboardPage } from '../pages/employee-dashboard/employee-dashboard';
@@ -57,6 +58,7 @@ import { PretermApplicationModalPage } from '../pages/preterm-application-modal/
 import { FlagReportModalPage } from '../pages/flag-report-modal/flag-report-modal';
 import { AddLineItemModalPage } from '../pages/add-line-item-modal/add-line-item-modal';
 import { EmployeePretermFormPage } from '../pages/employee-preterm-form/employee-preterm-form';
+import { AdminPretermFormPage } from '../pages/admin-preterm-form/admin-preterm-form';
 
 import { HttpModule } from '@angular/http';
 import { DragScrollModule } from 'ngx-drag-scroll';
@@ -106,7 +108,9 @@ var pages = [
   SoaFilterModalPage,
   FlagReportModalPage,
   AddLineItemModalPage,
-  EmployeePretermFormPage
+  EmployeePretermFormPage,
+  AdminPretermFormPage,
+  PwResetPage
 ];
 
 @NgModule({
@@ -158,6 +162,8 @@ var pages = [
         { component: FlagReportModalPage, name: 'FlagReportModalPage', segment: 'flag-report-modal' },
         { component: AddLineItemModalPage, name: 'AddLineItemModalPage', segment: 'add-line-item-modal' },
         { component: EmployeePretermFormPage, name: 'EmployeePretermFormPage', segment: 'employee-preterm-modal' },
+        { component: AdminPretermFormPage, name: 'AdminPretermFormPage', segment: 'admin-preterm-modal' },
+        { component: PwResetPage, name: 'PwResetPage', segment: 'reset-pw/:c' },
       ]
     })
   ],

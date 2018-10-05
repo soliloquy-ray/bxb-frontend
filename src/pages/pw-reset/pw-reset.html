@@ -1,0 +1,48 @@
+<ion-content (window:resize)="reorient($event)">
+	<ion-fab top left *ngIf="!isMobile">
+		<button ion-fab (tap)="toHome()"></button>
+		<!--ion-fab-list side="right">
+		   <button ion-fab mini>Button</button>
+		   <button ion-fab mini>Button 2</button>
+		</ion-fab-list-->
+	 </ion-fab>
+
+	 <section class="main" [ngClass]="{'mobile':isMobile}">
+	 	<form name="employee-data">
+		 	<span class="header" *ngIf = "isMobile">
+		 		<button ion-button (tap)="toHome()"></button>
+		 	</span>
+	 		<h2>Password Reset</h2>
+	 		<ion-row>
+	 			<p class="label">
+	 				Enter New Password
+	 			</p>
+	 			<span class="content">
+	 				<input type="password" name="pw" [(ngModel)] = "pw" required="true" />
+	 			</span>
+	 		</ion-row>
+	 		<ion-row>
+	 			<p class="label">
+	 				Confirm Password
+	 			</p>
+	 			<span class="content" [ngClass] = "{'err':!isValid()}">
+	 				<input type="password" name="con" [(ngModel)] = "con" required="true" />
+	 			</span>
+	 		</ion-row>
+	 		
+	 		<!--ion-row>
+	 			<p class="label">
+	 				Company Code
+	 			</p>
+	 			<span class="content" [ngClass] = "{'err':(ccode.length < 1)}">
+	 				<input type="text" name="ccode" [(ngModel)] = "ccode" placeholder="abc123" required="true" />
+	 			</span>
+	 		</ion-row-->
+	 		<ion-row>
+	 			<button ion-button (tap)="submit()" [disabled]="!isValid()">Submit</button>
+	 		</ion-row>
+	 	</form>
+	 	<foot></foot>
+	 </section>
+
+</ion-content>

@@ -1,5 +1,5 @@
 import { Component, ViewChildren, QueryList } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, Modal, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, Modal, ModalController, LoadingController } from 'ionic-angular';
 
 import { EmployeeInfoModalPage } from '../employee-info-modal/employee-info-modal';
 
@@ -69,15 +69,29 @@ export class CompaniesPage {
 			"title":"Delete"
 		}
 	];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private db: DbProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private db: DbProvider, private loader: LoadingController) {
   }
 
   ionViewDidEnter() {
   	this.menu.close();
   	localStorage.page = 'companies';
-  	this.db.getCompanyByID(null).then(res=>{
+
+  	this.initializeData();
+  }
+
+  async initializeData(){
+  	let load = this.loader.create({
+      spinner: 'crescent',
+      showBackdrop: true,
+      content: `Loading Data...`,
+      dismissOnPageChange: true
+    });
+    load.present();
+  	await this.db.getCompanyByID(null).then(res=>{
   		this.cmpny = res;
   	}).catch(console.warn);
+
+  	load.dismiss();
   }
 
   ionViewWillLeave(){

@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, Modal, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, Modal, ModalController, LoadingController } from 'ionic-angular';
 
 import { EmployeeInfoModalPage } from '../employee-info-modal/employee-info-modal';
 import { EditEmployeePage } from '../edit-employee/edit-employee';
@@ -142,19 +142,32 @@ export class EmployeesPage {
 	pendingMembers = [];
 	isMobile : boolean = mobilecheck();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private db: DbProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private db: DbProvider, private loader: LoadingController) {
   }
 
   ionViewDidEnter() {
   	this.menu.close();
   	localStorage.page = 'employees';
 
-  	this.db.getActiveMembers(localStorage.companyId).then(res=>{
+  	this.initializeData();
+  }
+
+  async initializeData(){
+  	let load =  this.loader.create({
+      spinner: 'crescent',
+      showBackdrop: true,
+      content: `Loading Data...`,
+      dismissOnPageChange: true
+    });
+    load.present();
+  	await this.db.getActiveMembers(localStorage.companyId).then(res=>{
   		this.activeEmployees = res.json();
-  	})
-  	this.db.getAllMembers(localStorage.companyId).then(res=>{
+  	});
+  	await this.db.getAllMembers(localStorage.companyId).then(res=>{
   		this.employees = res.json();
-  	})
+  	});
+  	load.dismiss();
+
   }
 
   ionViewWillLeave(){

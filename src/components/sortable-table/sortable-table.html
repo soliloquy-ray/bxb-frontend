@@ -48,7 +48,10 @@
 			<div class="{{dt}}" *ngIf="!frm[dt]">{{rowData[dt]}}</div>
 		</ion-col>
 		<ion-col *ngIf="acts.length > 0">
-			<ion-icon *ngFor = "let a of acts;let nd = index;" id="{{a?.class}}-{{i}}" name="{{a?.icon}}" (tap)="emitter(nd,toJson(rowData))"></ion-icon>
+			<b *ngFor = "let a of acts;let nd = index;" class="icon-container">
+				<ion-icon  *ngIf="a?.class != 'text'" name="{{a?.icon}}" title="{{a?.title}}" (tap)="emitter(nd,toJson(rowData))"></ion-icon>
+				<a *ngIf="a?.class == 'text'" name="{{a?.icon}}" title="{{a?.title}}" (tap)="emitter(nd,toJson(rowData))">{{a?.title}}</a>
+			</b>
 		</ion-col>
 		<!--ion-col >
 			{{rowData?.transID}}
@@ -105,7 +108,10 @@
 					<div class="{{hdr[ind]}}" *ngIf="!frm[hdr[ind]]">{{rowData[hdr[ind]]}}</div>
 				</span>
 				<span class="item" *ngIf="acts.length > 0">
-					<ion-icon *ngFor = "let a of acts;let nd = index;" id="{{a?.class}}-{{i}}" name="{{a?.icon}}" (tap)="emitter(nd,toJson(rowData))"></ion-icon>
+					<b *ngFor = "let a of acts;let nd = index;" class="icon-container">
+						<ion-icon  *ngIf="a?.class != 'text'" name="{{a?.icon}}" title="{{a?.title}}" (tap)="emitter(nd,toJson(rowData))"></ion-icon>
+						<a *ngIf="a?.class == 'text'" name="{{a?.icon}}" title="{{a?.title}}" (tap)="emitter(nd,toJson(rowData))">{{a?.title}}</a>
+					</b>
 				</span>
 				<!--span class="item">
 					<p class="title">Rate</p>

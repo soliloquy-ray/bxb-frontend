@@ -7,7 +7,12 @@
 		<ion-row>
 			<ion-col col-12>
 				<submodule [title]="'Companies'" [searchbar]="true">
-					<drag-scroll #ds1 class="table-container" [drag-scroll-y-disabled]="true" >
+					<sortable-table *ngIf="cmpny.length > 0" [data]="cmpny" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles" [actions]="actions" (t)="doAction($event)"></sortable-table>
+					<loan #p_loan></loan>
+					<p class="no-data" *ngIf="cmpny.length == 0">
+						No data
+					</p>
+					<!--drag-scroll #ds1 class="table-container" [drag-scroll-y-disabled]="true" >
 						<table>
 						<tr style="width:100%;" class="header">
 							<td>
@@ -54,7 +59,7 @@
 							</td>
 						</tr>
 						</table>
-					</drag-scroll>
+					</drag-scroll-->
 				</submodule>
 				<button ion-button class="add-company" (tap)="addNew()">
 					<ion-icon name="md-add-circle">

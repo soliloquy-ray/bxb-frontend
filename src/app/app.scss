@@ -253,3 +253,21 @@ ion-menu{
 input[readonly="true"]{
 	cursor:not-allowed;
 }
+
+ion-icon.icon{
+	&.ion-ios-thumbs-down{
+		color:darkred !important;
+	}
+	
+	&.ion-md-flag{
+		color:darkred !important;
+	}
+
+	&.ion-md-warning{
+		color:darkred !important;
+	}
+
+	&.ion-ios-thumbs-up{
+		color:forestgreen !important;
+	}
+}

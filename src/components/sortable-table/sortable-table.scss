@@ -76,6 +76,21 @@ sortable-table {
 						}
 					}
 
+					b.icon-container{
+
+						&:not(:first-of-type){
+							margin-left:0.5vw;
+						}
+
+						a{
+							cursor:pointer;
+						    text-transform:uppercase;
+							&:not(:first-of-type){
+								margin-left:0.5vw;
+							}
+						}
+					}
+
 
 					ion-icon{
 
@@ -86,9 +101,6 @@ sortable-table {
 					    -webkit-user-drag: none;
 					    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 					    cursor:pointer;
-						&:not(:first-of-type){
-							margin-left:0.5vw;
-						}
 					}
 				}
 			}

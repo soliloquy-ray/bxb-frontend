@@ -80,6 +80,43 @@ export class CompaniesPage {
 			CompanyID:7
 		}
 	];
+
+	hdrTitles = {
+		'companyName':'Company Name',
+		'companyCode':'Company Code',
+		'totalEmployees':'Total Number Employees Members',
+		'activeAvailments':'Active Availments'
+	};
+	sampKeys = ['companyName','companyCode','totalEmployees','activeAvailments'];
+	formats = {
+	};
+	actions = [
+		{
+			"icon":"md-information-circle",
+			"class":"text",
+			"title":"View SOA"
+		},
+		{
+			"icon":"ios-person-add",
+			"class":"text",
+			"title":"Add HR"
+		},
+		{
+			"icon":"ios-people",
+			"class":"text",
+			"title":"Employees"
+		},
+		{
+			"icon":"md-lock",
+			"class":"text",
+			"title":"Hold"
+		},
+		{
+			"icon":"ios-close-circle",
+			"class":"text",
+			"title":"Delete"
+		}
+	];
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private db: DbProvider) {
   }
 
@@ -117,6 +154,24 @@ export class CompaniesPage {
 
   addHR(cid){
   	this.navCtrl.setRoot(AddHrPage,{cid:cid},{animate:true, direction:"top"});
+  }
+
+  doAction(i:{index,val}){
+  	let v = JSON.parse(i.val);
+  	console.log(i,v);
+  	switch (i.index) {
+  		case 0:
+  			this.showSOA(v.CompanyID);
+  			// code...
+  			break;
+  		case 1:
+  			this.addHR(v.CompanyID);
+  			break;
+  		
+  		default:
+  			// code...
+  			break;
+  	}
   }
 
 }

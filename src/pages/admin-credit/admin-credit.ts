@@ -82,7 +82,7 @@ export class AdminCreditPage {
 			"class":"display-disclosure"
 		},
 		{
-			"icon":"md-checkmark-circle-outline",
+			"icon":"ios-thumbs-up",
 			"class":"approve-loan"
 		}
 	];
@@ -92,7 +92,7 @@ export class AdminCreditPage {
 			"class":"display-disclosure"
 		},
 		{
-			"icon":"ios-close-circle",
+			"icon":"ios-thumbs-down",
 			"class":"npl"
 		}
 	];

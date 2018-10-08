@@ -44,10 +44,6 @@ export class PretermPage {
 		{
 			"icon":"ios-thumbs-up",
 			"class":"approve"
-		},
-		{
-			"icon":"ios-thumbs-down",
-			"class":"reject"
 		}
 	];
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private db: DbProvider, private loader: LoadingController, private modal: ModalController, private alert: AlertController) {

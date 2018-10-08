@@ -5,13 +5,9 @@ import { EmployeeInfoModalPage } from '../employee-info-modal/employee-info-moda
 import { EditEmployeePage } from '../edit-employee/edit-employee';
 import { AddEmployeePage } from '../add-employee/add-employee';
 
+import { DbProvider } from '../../providers/db/db';
+
 import { FlagReportModalPage } from '../flag-report-modal/flag-report-modal';
-/**
- * Generated class for the HrDashboardPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 declare var mobilecheck; //fn to check for screen type
 
 @IonicPage()
@@ -146,12 +142,19 @@ export class EmployeesPage {
 	pendingMembers = [];
 	isMobile : boolean = mobilecheck();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private db: DbProvider) {
   }
 
   ionViewDidEnter() {
   	this.menu.close();
   	localStorage.page = 'employees';
+
+  	this.db.getActiveMembers(localStorage.companyId).then(res=>{
+  		this.activeEmployees = res.json();
+  	})
+  	this.db.getAllMembers(localStorage.companyId).then(res=>{
+  		this.employees = res.json();
+  	})
   }
 
   ionViewWillLeave(){
@@ -177,9 +180,20 @@ export class EmployeesPage {
   	this.navCtrl.setRoot(AddEmployeePage,{},{animate:true, direction:"top"});
   }
 
-  doAction(e){
-  	let mod = this.modal.create(FlagReportModalPage, {id:e.val.companyID}, {cssClass:`whitemodal xs  ${this.isMobile ? "mobile" : ""}`});
-  	mod.present();
+  doAction(e:{index,val}){
+  	switch (e.index) {
+  		case 0:
+  			// code...
+  			break;
+  		case 1:
+		  	let mod = this.modal.create(FlagReportModalPage, {id:e.val.companyID}, {cssClass:`whitemodal xxs  ${this.isMobile ? "mobile" : ""}`});
+		  	mod.present();
+  			break;
+  		
+  		default:
+  			// code...
+  			break;
+  	}
   }
 
 }

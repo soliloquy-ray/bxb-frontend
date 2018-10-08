@@ -19,12 +19,14 @@ export class SortableTableComponent {
   @Input('fn') fn : Array<any>;
   @Input('header_titles') hdrTitles : any;
   @Input('actions') acts: Array<any> = [];
+  @Input('id') pageId : string = Math.ceil(Math.random()*99999).toString();
   @Output('t') t = new EventEmitter;
   h_ctr = [];
   sorting:string = '';
   sort_type:boolean = false;
   expanded = 0;
   searched: Array<any> = [];
+  config:{ itemsPerPage:number, currentPage: any, id: string}
   constructor(private cdr: ChangeDetectorRef) {
   }
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, ModalController, LoadingController } from 'ionic-angular';
 
 import { DbProvider } from '../../providers/db/db';
 
@@ -76,10 +76,11 @@ export class StatementOfAccountPage {
 	];
 	data;
 	cid;
-	lineItems: Array<{label:string,amt:number,payId:number,bal:number,seqNo:number}> = [];
+	lineItems: Array<{label:string,amt:number,payId:number,bal:number,seqNo:number,loanId:number}> = [];
 	lineTotal: number = 0;
 	accountType: string = localStorage.accountType;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private view: ViewController, private db: DbProvider, private modal: ModalController) {
+	submitted: boolean = false;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private view: ViewController, private db: DbProvider, private modal: ModalController, private loader: LoadingController) {
   	this.data = this.navParams.get('data') || [];
   }
 
@@ -95,11 +96,21 @@ export class StatementOfAccountPage {
     }
   }
 
-  populateData(){
-  	this.db.getSOAPaySchedByDate(this.data.billPeriod,this.data.CompanyID).then(res=>{
+  async populateData(){
+  	this.lineItems = [];
+  	await this.db.getSOAPaySchedByDate(this.data.billPeriod,this.data.CompanyID).then(res=>{
   		this.prevBalance = [];
   		this.currentBalance = res.json();
   	}).catch(console.warn);
+
+  	this.currentBalance.map(a=>{
+  		this.db.getLineItems(a.loanId,this.data.billPeriod).then(res=>{
+  			let rs = res.json();
+  			this.lineItems = this.lineItems.concat(rs);
+  			if(rs.length > 0) this.submitted = true;
+  			this.getLineItemsTotal();
+  		}).catch(console.warn);
+  	})
   }
 
   print(){
@@ -107,12 +118,12 @@ export class StatementOfAccountPage {
   }
 
   addItem(){
-  	let mod = this.modal.create(AddLineItemModalPage,{sub:false,payments:this.currentBalance.concat(this.prevBalance)},{cssClass:`whitemodal xs`});
+  	let mod = this.modal.create(AddLineItemModalPage,{sub:false,payments:this.currentBalance.concat(this.prevBalance)},{cssClass:`whitemodal xxs`});
   	mod.onDidDismiss(a=>{
   		console.log(a);
   		if(a.label && a.amt){
-  			this.lineItems.push({label:a.label,amt:a.amt,payId:a.payId,bal:a.bal,seqNo:a.seqNum});
-  			this.db.addLineItem({payId:a.payId,loanId:a.loanId,payDate:this.data.billPeriod,payCount:a.seqNum,payAmount:a.amt,balance:a.bal}).then(console.info).catch(console.warn);
+  			this.lineItems.push({label:a.label,amt:a.amt,payId:a.payId,bal:a.bal,seqNo:a.seqNum,loanId:a.loanId});
+  			//this.db.addLineItem({payId:a.payId,loanId:a.loanId,payDate:this.data.billPeriod,payCount:a.seqNum,payAmount:a.amt,balance:a.bal}).then(console.info).catch(console.warn);
   		}
   		this.getLineItemsTotal();
   	})
@@ -120,12 +131,11 @@ export class StatementOfAccountPage {
   }
 
   remItem(){
-  	let mod = this.modal.create(AddLineItemModalPage,{sub:true,payments:this.currentBalance.concat(this.prevBalance)},{cssClass:`whitemodal xs`});
+  	let mod = this.modal.create(AddLineItemModalPage,{sub:true,payments:this.currentBalance.concat(this.prevBalance)},{cssClass:`whitemodal xxs`});
   	mod.onDidDismiss(a=>{
   		console.log(a);
   		if(a.label && a.amt){
-  			this.lineItems.push({label:a.label,amt:a.amt,payId:a.payId,bal:a.bal,seqNo:a.seqNum});
-  			this.db.addLineItem({payId:a.payId,loanId:a.loanId,payDate:this.data.billPeriod,payCount:a.seqNum,payAmount:a.amt,balance:a.bal}).then(console.info).catch(console.warn);
+  			this.lineItems.push({label:a.label,amt:a.amt,payId:a.payId,bal:a.bal,seqNo:a.seqNum,loanId:a.loanId});  
   		}
   		this.getLineItemsTotal();
   	})
@@ -136,7 +146,7 @@ export class StatementOfAccountPage {
   	let red = 0;
   	await
     this.lineItems.map(a=>{
-    	red += a.amt;
+    	red += parseFloat(a.amt.toString());
     });
     console.log(red);
     this.lineTotal = red*-1;
@@ -146,7 +156,19 @@ export class StatementOfAccountPage {
   	this.view.dismiss();
   }
 
-  submit(){
+  async submit(){
+  	let load = this.loader.create({
+      spinner: 'crescent',
+      showBackdrop: true,
+      content: `Submitting Data...`,
+      dismissOnPageChange: true
+    });
+    load.present();
   	console.log('submitting this '+JSON.stringify(this.data));
+  	await this.lineItems.map(a=>{
+  		this.db.addLineItem({payId:a.payId,loanId:a.loanId,payDate:this.data.billPeriod,payCount:a.seqNo,payAmount:a.amt,balance:a.bal}).then(console.info).catch(console.warn);
+  	})
+  	this.submitted = true;
+  	load.dismiss();
   }
 }

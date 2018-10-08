@@ -75,6 +75,23 @@ page-disclosure-statement {
 							    width: 1vw;
 							    background-color: #fff;
 							}
+
+							ion-col[col-12]{
+								text-align:right;
+								b{
+									float:left;
+								}
+							}
+
+							[col-5]{
+								p{
+									text-align:right;
+									margin:1vh 0 0;
+									font-family:'Roboto',sans-serif;
+									font-weight:normal;
+								}
+							}
+						
 						}
 
 						&.label{

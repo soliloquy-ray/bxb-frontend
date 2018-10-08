@@ -15,10 +15,16 @@ page-add-line-item-modal {
 	}
 
 	ion-content{
+
+		.scroll-content{
+			padding:0.5vh;
+		}
+
 		section.main-content{
 
 			p.label{
 				font-weight:bolder;
+				margin: 0.75vh 0 0;
 			}
 
 			span.content{

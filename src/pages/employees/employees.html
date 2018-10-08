@@ -31,7 +31,7 @@
 		<ion-row>
 			<ion-col col-12>
 				<submodule [title]="'Active Members'" *ngIf="activeEmployees.length > 0">
-					<sortable-table [data]="activeEmployees" [headers]="sampKeysA" [formats]="formatsA" [header_titles]="hdrTitlesA" [actions]="actions" (t)="doAction($event)"></sortable-table>
+					<sortable-table [data]="activeEmployees" [headers]="sampKeysA" [formats]="formatsA" [header_titles]="hdrTitlesA" [actions]="actions" (t)="doAction($event)" [id]="'activeMembers'"></sortable-table>
 					
 				</submodule>
 			</ion-col>
@@ -41,7 +41,7 @@
 		<ion-row>
 			<ion-col col-12>
 				<submodule [title]="'Members'"  *ngIf="employees.length > 0">
-					<sortable-table [data]="employees" [headers]="sampKeysE" [formats]="formatsE" [header_titles]="hdrTitlesE"></sortable-table>
+					<sortable-table [data]="employees" [headers]="sampKeysE" [formats]="formatsE" [header_titles]="hdrTitlesE" [id]="'members'"></sortable-table>
 					
 				</submodule>
 			</ion-col>
@@ -51,7 +51,7 @@
 		<ion-row>
 			<ion-col col-12>
 				<submodule [title]="'Pending Member Registration'" *ngIf="pendingMembers.length > 0">
-					<sortable-table [data]="pendingMembers" [headers]="sampKeysP" [formats]="formatsP" [header_titles]="hdrTitlesP"></sortable-table>
+					<sortable-table [data]="pendingMembers" [headers]="sampKeysP" [formats]="formatsP" [header_titles]="hdrTitlesP" [id]="'pendingMembers'"></sortable-table>
 					
 				</submodule>
 			</ion-col>
@@ -61,7 +61,7 @@
 		<ion-row>
 			<ion-col col-12>
 				<submodule [title]="'Flagged Members'" *ngIf="flaggedEmployees.length > 0">
-					<sortable-table [data]="flaggedEmployees" [headers]="sampKeysF" [formats]="formatsF" [header_titles]="hdrTitlesF"></sortable-table>
+					<sortable-table [data]="flaggedEmployees" [headers]="sampKeysF" [formats]="formatsF" [header_titles]="hdrTitlesF" [id]="'flaggedMembers'"></sortable-table>
 					
 				</submodule>
 			</ion-col>

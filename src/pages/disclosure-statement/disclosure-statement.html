@@ -41,7 +41,7 @@
 			<ion-row>
 				<ion-col class="bundle">
 					<ion-row>
-						<ion-col class="label">UDI</ion-col>
+						<ion-col class="label">Interest</ion-col>
 						<ion-col class="data">{{loan?.loan.udi | currency:'PHP':'symbol-narrow':'1.2-2'}}</ion-col>
 					</ion-row>
 				</ion-col>
@@ -51,6 +51,46 @@
 					<ion-row>
 						<ion-col class="label">Gross Cash Out</ion-col>
 						<ion-col class="data">{{loan?.principal | currency:'PHP':'symbol-narrow':'1.2-2'}}</ion-col>
+					</ion-row>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col class="bundle">
+					<ion-row>
+						<ion-col style="font-weight:bolder" col-4>ADD</ion-col>
+						<ion-col style="font-weight:bolder" col-5>Less</ion-col>
+						<ion-col style="font-weight:bolder;white-space: nowrap;" col-3>Reference</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col col-4>&nbsp;</ion-col>
+						<ion-col col-5>Processing Fund
+							<p>{{loan?.loan.processingFund | number:'1.2-2'}}</p>
+						</ion-col>
+						<ion-col col-3>&nbsp;</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col col-4>&nbsp;</ion-col>
+						<ion-col col-5>Collection Fund
+							<p>{{loan?.loan.collectionFund | number:'1.2-2'}}</p>
+						</ion-col>
+						<ion-col col-3>&nbsp;</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col col-4>&nbsp;</ion-col>
+						<ion-col col-5>Doc. Fee
+							<p>{{loan?.loan.docFee | number:'1.2-2'}}</p>
+						</ion-col>
+						<ion-col col-3>&nbsp;</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col col-4>&nbsp;</ion-col>
+						<ion-col col-5>Total Deductions
+							<p>{{loan?.loan.totalDeductions | number:'1.2-2'}}</p>
+						</ion-col>
+						<ion-col col-3>&nbsp;</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col col-12><b class="label">NET CASH OUT</b>{{loan?.loan.netCashout | number:'1.2-2'}}</ion-col>
 					</ion-row>
 				</ion-col>
 			</ion-row>

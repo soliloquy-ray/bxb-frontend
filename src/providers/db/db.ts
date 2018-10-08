@@ -341,4 +341,40 @@ export class DbProvider {
 		);
   }
 
+  async getActiveMembers(id: number = 0){
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+
+	return (
+		this.http.post(`${this.env}/api.php?q=get_active_members`,{cid:id}, rq)
+			.toPromise()
+		);
+  }
+
+  async getAllMembers(id: number = 0){
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+
+	return (
+		this.http.post(`${this.env}/api.php?q=get_all_members`,{cid:id}, rq)
+			.toPromise()
+		);
+  }
+
+  async getLineItems(id: number = 0, sched){
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+
+	return (
+		this.http.post(`${this.env}/api.php?q=get_line_items_by_id`,{loanid:id, sched:sched}, rq)
+			.toPromise()
+		);
+  }
+
 }

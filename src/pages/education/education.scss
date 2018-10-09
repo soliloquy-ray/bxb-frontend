@@ -1,0 +1,101 @@
+page-education {
+	ion-content.content{
+		background-color:#f7f7f7;
+
+		side-bar{
+			section.content{
+				background-color: transparent;
+			}
+		}
+
+		&.mobile{
+
+			section.main-content{
+				padding: 1vh 5vw;
+				font-size:2.5vh;
+
+			}
+		}
+
+		section.main-content{
+			display:block;
+			padding:1vh 2vw 1vh;
+			margin-left:0.5vw;
+			padding-left:$side-bar-width;
+
+			p.header-top{
+				font-size:24px;
+				font-weight: 700;
+			}
+
+			div.video-segment{
+				display:block;
+				clear:both;
+				margin:2vh auto;
+
+				iframe{
+					width:600px;
+					height:400px;
+					margin:0 auto;
+					display:table;
+				}
+			}
+
+			div.quiz{
+				padding:1vh 5vw;
+				display:block;
+				width:100%;
+
+				span.item{
+					display:block;
+					width:100%;
+					margin:1vh auto;
+
+					p.question{
+						font-size:16px;
+						font-weight:500;
+						margin:0.5vh auto;
+					}
+
+					span.choices{
+						display:block;
+						clear:both;
+						width:100%;
+						margin:1vh auto;
+
+						div.selection{
+							width:100%;
+							white-space:nowrap;
+							display:block;
+							margin:1vh auto;
+							padding:1vh;
+
+							input{
+								display:inline;
+								vertical-align:middle
+							}
+
+							b{
+								display:inline;
+								vertical-align:middle;
+							}
+						}
+					}
+				}
+			}
+		
+
+			button[ion-button]{
+				background-color:#315A96;
+				padding:3vh 8vw;
+				border-radius:20px;
+				margin:10vh auto 2vh;
+				display:block;
+				text-transform:uppercase;
+			}
+		} // end of section.main-content	
+
+
+	}
+
+}

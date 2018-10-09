@@ -26,6 +26,7 @@ import { PwResetPage } from '../pages/pw-reset/pw-reset';
 import { EmployeeDashboardPage } from '../pages/employee-dashboard/employee-dashboard';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { EmployeeLoansPage } from '../pages/employee-loans/employee-loans';
+import { EducationPage } from '../pages/education/education';
 //import { CDashboardPage } from '../pages/c-dashboard/c-dashboard';
 
 /* hr pages */
@@ -110,7 +111,8 @@ var pages = [
   AddLineItemModalPage,
   EmployeePretermFormPage,
   AdminPretermFormPage,
-  PwResetPage
+  PwResetPage,
+  EducationPage
 ];
 
 @NgModule({
@@ -164,6 +166,7 @@ var pages = [
         { component: EmployeePretermFormPage, name: 'EmployeePretermFormPage', segment: 'employee-preterm-modal' },
         { component: AdminPretermFormPage, name: 'AdminPretermFormPage', segment: 'admin-preterm-modal' },
         { component: PwResetPage, name: 'PwResetPage', segment: 'reset-pw/:c' },
+        { component: EducationPage, name: 'EducationPage', segment: 'education' },
       ]
     })
   ],

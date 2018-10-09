@@ -1,0 +1,129 @@
+<ion-content [ngClass]="{'mobile':isMobile()}">
+	<top-bar></top-bar>
+	<side-bar *ngIf = "!isMobile()" [highlights]="'education'"></side-bar>
+
+	<section class="main-content">
+		
+		<p class="header-top">
+			Financial Education
+		</p>
+		<div class="video-segment">
+			<iframe src="//youtube.com/embed/WVfaxLDyrTc" frameborder="0" allowfullscreen></iframe>
+		</div>
+
+		<blockquote>
+			<p>
+			Educators work to include a wide array of studies within the required curriculum for young adults. However, according to FORBES, there’s a key component of life in which students of all ages aren’t gaining enough knowledge.</p>
+
+			<p>Even though financial literacy is crucial to successful “adulting,” FORBES reports that a mere 17 states require high school students to take a course on financial literacy. These courses have proven to have a direct impact on a student’s ability to make wise financial decisions. Plus, students who have some personal finance classes under their belts are much more likely to successfully save money, budget wisely and invest smarter. </p>
+
+			<p>Perhaps we should reevaluate how we’re educating students (or not educating students) on these important life aspects. Until that change happens, though, here are the five key concepts, as listed by FORBES, to work on in order to improve your financial literacy. Mastering these aspects won’t always be easy but, with a little bit of practice, will benefit you for a lifetime. </p>
+
+			<ol>
+			<li><b>Budgeting Basics</b>
+				<br/>
+
+				<p>Creating and maintaining a budget is one of the most basic aspects of staying on top of your finances. In this modern day, it’s easier than ever to create a budget with the help of websites and apps, such as Mint.com. </p>
+
+				<p>It doesn’t matter if math isn’t your strong suit - thanks to these user-friendly tools, everyone can get help with keeping their finances on track. And, when utilized properly, they'll keep you in the know about where your money is actually going. </p>
+
+				<p>Without following a budget, it’s difficult to hold yourself accountable on where your money is coming from and what it’s going toward, so mastering the basics of budgeting is where any financial novice should begin.</p>
+			</li>
+			<li><b>The Impact of Interest</b>
+
+				<p>While you may touch upon the concepts within a mathematics course, it’s important to understand different aspects, like compound interest. Why? Not only can it help you save even more, but it can make the difference between borrowing a small amount and paying back much more than you need to for years to come. </p>
+
+				<p>Understanding the ins and outs of interest can impact your finances more than you likely realize, so it’s an important concept to gain a better understand of early on in life.</p>
+			</li>
+
+			<li><b>Staying Savvy by Saving</b>
+
+				<p>Obviously, saving is an important aspects of maintaining a healthy financial situation. But, the majority of students don’t prioritize this aspect as much as they should. It’s easy to ignore things like retirement since it seems so far off in the future. </p>
+				<p>Learning to save early on can help you gain the knowledge, practice and set of skills you’ll utilize throughout your entire life.</p> 
+
+				<p>Beginners can start working on this concept in the simplest sense, like saving money for a higher-ticket item they desire. Working toward a goal is key here and students need to understand that there’s a lot of value in paying yourself first – because the bills will always be there. Having peace of mind? Well, that comes with practice, diligence and patience, all qualities you’ll develop when mastering your savings skill set.</p>
+			</li>
+
+			<li><b>The Credit-Debt Roller-coaster</b>
+
+				<p>Maybe roller-coaster isn’t the right term – perhaps, downward spiral is more accurate. Meaning: it’s much easier to lose credit than gain it and many students don’t realize how easy it is to ruin their credit – and how difficult it can be to regain credit – before it’s too late. That’s why it’s crucial to provide knowledge on debt earlier than later. </p>
+
+				<p>Credit can be an extremely useful tool – if it’s managed correctly. Making rash decisions when you’re young can end up costing you throughout adulthood so it’s important to grasp the concepts and tools behind responsible credit practices as early on as possible.</p>
+			</li>
+			<li><b>Identity Theft Issues & Safety</b>
+
+				<p>In this modern day and age, identity theft is more prevalent than ever. Since everything is digital and just about everyone has shopped online at one point or another, your financial information is more vulnerable to fraud. Understanding this concept, along with preventative measures, like password protection and limiting the amount of information shared online can be the key to maintaining safe accounts or, inversely, can lead to financial ruin.</p>
+
+				<p>While it’s not a fool proof science (people can be safe and things do still happen) it’s important to safeguard your finances as best as possible to avoid the threats that exist. </p>
+			</li>
+			</ol>
+		</blockquote>
+
+		<div class="short quiz">
+
+			<span class="item i1">
+				<p class="question">
+					1. What is the correct answer?
+				</p>
+				<span class="choices c1">
+					<div class="selection s1">
+						<input type="radio" name="c1" value="a"/>
+						<b class="text">This one</b>
+					</div>
+					<div class="selection s2">
+						<input type="radio" name="c1" value="b"/>
+						<b class="text">No, this one</b>
+					</div>
+					<div class="selection s3">
+						<input type="radio" name="c1" value="c"/>
+						<b class="text">Pick me</b>
+					</div>
+				</span>
+			</span>
+
+			<span class="item i2">
+				<p class="question">
+					2. What is the correct answer for question #2?
+				</p>
+				<span class="choices c1">
+					<div class="selection s1">
+						<input type="radio" name="c2" value="a"/>
+						<b class="text">This one</b>
+					</div>
+					<div class="selection s2">
+						<input type="radio" name="c2" value="b"/>
+						<b class="text">No, this one</b>
+					</div>
+					<div class="selection s3">
+						<input type="radio" name="c2" value="c"/>
+						<b class="text">Pick me</b>
+					</div>
+				</span>
+			</span>
+
+			<span class="item i3">
+				<p class="question">
+					2. What is the correct answer for the third question?
+				</p>
+				<span class="choices c1">
+					<div class="selection s1">
+						<input type="radio" name="c3" value="a"/>
+						<b class="text">This one</b>
+					</div>
+					<div class="selection s2">
+						<input type="radio" name="c3" value="b"/>
+						<b class="text">No, this one</b>
+					</div>
+					<div class="selection s3">
+						<input type="radio" name="c3" value="c"/>
+						<b class="text">Pick me</b>
+					</div>
+				</span>
+			</span>
+
+		</div>
+
+		<foot></foot>
+	</section>
+
+</ion-content>

@@ -294,8 +294,12 @@
 
 		<ion-row>
 			<ion-col col-12>
-				<submodule [title]="'Non-Performing Loan'" [searchbar]="true">
-					<!--drag-scroll #ds4 class="table-container" -->
+				<submodule [title]="'Non-Performing Loan'">
+					<sortable-table *ngIf="loans?.npLoans.length > 0" [data]="loans?.npLoans" [headers]="nplKeys" [formats]="nplFormats" [header_titles]="nplTitles" (t)="doNPLAction($event)"></sortable-table>
+					<p class="no-data" *ngIf="loans.npLoans.length == 0">
+						No data
+					</p>
+					<!--drag-scroll #ds4 class="table-container" >
 						<table>
 						<tr style="width:100%;" class="header">
 							<td>
@@ -331,7 +335,7 @@
 							</td>
 						</tr>
 						</table>
-					<!--/drag-scroll-->
+					<--/drag-scroll-->
 				</submodule>
 			</ion-col>
 		</ion-row> 

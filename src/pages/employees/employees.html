@@ -41,7 +41,7 @@
 		<ion-row>
 			<ion-col col-12>
 				<submodule [title]="'Members'"  *ngIf="employees.length > 0">
-					<sortable-table [data]="employees" [headers]="sampKeysE" [formats]="formatsE" [header_titles]="hdrTitlesE" [id]="'members'"></sortable-table>
+					<sortable-table [data]="employees" [headers]="sampKeysE" [formats]="formatsE" [header_titles]="hdrTitlesE" [actions]="actionsP" (t)="doAction($event)" [id]="'members'"></sortable-table>
 					
 				</submodule>
 			</ion-col>

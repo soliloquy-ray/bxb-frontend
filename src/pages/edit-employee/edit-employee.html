@@ -10,7 +10,7 @@
 	 				First Name
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="firstName" [(ngModel)] = "userData.firstName" [value] = "userData.firstName" />
+	 				<input type="text" name="firstName" [(ngModel)] = "userData.firstName" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -18,7 +18,7 @@
 	 				Middle Name
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="middleName" [(ngModel)] = "userData.middleName" [value] = "userData.middleName" />
+	 				<input type="text" name="middleName" [(ngModel)] = "userData.middleName" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -26,7 +26,7 @@
 	 				Last Name
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="lastName" [(ngModel)] = "userData.lastName" [value] = "userData.lastName" />
+	 				<input type="text" name="lastName" [(ngModel)] = "userData.lastName" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -34,7 +34,7 @@
 	 				Employee ID
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="employeeId" [(ngModel)] = "userData.employeeId" [value] = "userData.employeeId" />
+	 				<input type="text" name="employeeId" [(ngModel)] = "userData.employeeId" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -42,7 +42,7 @@
 	 				Email
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="email" [(ngModel)] = "userData.email" [value] = "userData.email" />
+	 				<input type="text" name="email" [(ngModel)] = "userData.email" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -50,7 +50,7 @@
 	 				Password
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="password" [(ngModel)] = "userData.password" [value] = "userData.password" />
+	 				<input type="text" name="password" [(ngModel)] = "userData.password" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row class="bot">
@@ -59,7 +59,7 @@
 	 			</p>
 	 			<span class="content">
 		 			<select [innerHTML] = "prefixes" name="prefix" [(ngModel)]="prefix"></select>
-		 			<input class="short" type="number" name="mobile" [(ngModel)] = "userData.mobile" [value] = "userData.mobile" />
+		 			<input class="short" type="number" name="mobile" [(ngModel)] = "userData.mobile" />
 		 		</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -67,7 +67,7 @@
 	 				Date Hired
 	 			</p>
 	 			<span class="content">
-	 				<input type="date" name="hiredDate" [(ngModel)] = "userData.hiredDate" [value] = "" />
+	 				<input type="date" name="hiredDate" [(ngModel)] = "userData.hiredDate" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -76,8 +76,8 @@
 	 			</p>
 	 			<span class="content">
 		 			<select name="gender" [(ngModel)]="userData.gender">
-		 				<option value="male">Male</option>
-		 				<option value="female">Female</option>
+		 				<option value="m">Male</option>
+		 				<option value="f">Female</option>
 		 			</select>
 		 		</span>
 	 		</ion-row>
@@ -86,7 +86,7 @@
 	 				Birthdate
 	 			</p>
 	 			<span class="content">
-	 				<input type="date" name="birthday" [(ngModel)] = "userData.birthday" [value] = "" />
+	 				<input type="date" name="birthday" [(ngModel)] = "userData.birthday" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -94,7 +94,7 @@
 	 				Position
 	 			</p>
 	 			<span class="content">
-	 				<input type="text" name="position" [(ngModel)] = "userData.position" [value] = "position" />
+	 				<input type="text" name="position" [(ngModel)] = "userData.position" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -158,7 +158,7 @@
 	 				Vacation Leave
 	 			</p>
 	 			<span class="content">
-	 				<input type="number" name="vacationLeave" [(ngModel)] = "userData.vacationLeave" [value] = "userData.vacationLeave" />
+	 				<input type="number" min="0" name="vacationLeave" [(ngModel)] = "userData.vacationLeave" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -166,7 +166,7 @@
 	 				Sick Leave
 	 			</p>
 	 			<span class="content">
-	 				<input type="number" name="sickLeave" [(ngModel)] = "userData.sickLeave" [value] = "userData.sickLeave" />
+	 				<input type="number" min="0" name="sickLeave" [(ngModel)] = "userData.sickLeave" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -174,7 +174,7 @@
 	 				Maternity Leaves
 	 			</p>
 	 			<span class="content">
-	 				<input type="number" name="maternityLeave" [(ngModel)] = "userData.maternityLeave" [value] = "userData.maternityLeave" />
+	 				<input type="number" min="0" name="maternityLeave" [(ngModel)] = "userData.maternityLeave" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
@@ -182,7 +182,7 @@
 	 				Paternity Leaves
 	 			</p>
 	 			<span class="content">
-	 				<input type="number" name="paternityLeave" [(ngModel)] = "userData.paternityLeave" [value] = "userData.paternityLeave" />
+	 				<input type="number" min="0" name="paternityLeave" [(ngModel)] = "userData.paternityLeave" />
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>

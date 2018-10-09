@@ -31,26 +31,49 @@ export class AdminCreditPage {
 	'completedLoans' :  [],
 	'activeLoans' :  [],
 	npLoans :  [
-		{
-			company:"Thirty One Digital Media Solutions Inc.",
-			totalCreditAvailment:3,
-			amt:11941.66,
-			companyID:1
-		},
-		{
-			company:"BXB Employee Solutions Corp",
-			totalCreditAvailment:1,
-			amt:17758.32,
-			companyID:2
-		},
-		{
-			company:"6805 Ayala Avenue Condominium Corporation",
-			totalCreditAvailment:16,
-			amt:31668.73,
-			companyID:3
-		}
 	]
 };
+
+  mosDef = [
+    {
+      company:"Thirty One Digital Media Solutions Inc.",
+      soaBillPeriod:'2018-09-30',
+      late15: 0,
+      late30:11941.66,
+      late30p:0,
+      total:11941.66
+    },
+    {
+      company:"BXB Employee Solutions Corp",
+      soaBillPeriod:'2018-09-15',
+      late15: 17758.32,
+      late30:0,
+      late30p:0,
+      total:17758.32
+    },
+    {
+      company:"6805 Ayala Avenue Condominium Corporation",
+      soaBillPeriod:'2018-09-30',
+      late15: 31668.73,
+      late30:0,
+      late30p:0,
+      total:31668.73
+    }];
+
+  nplTitles = {
+    'company':'Company',
+    'late15':'1 - 15',
+    'late30':'16 - 30',
+    'late30p':'31+',
+    'total':'Total'
+  };
+  nplKeys = ['company','late15','late30','late30p','total'];
+  nplFormats = {
+    'late15':'numberEvent',
+    'late30':'numberEvent',
+    'late30p':'numberEvent',
+    'total':'currency'
+  };
 
 
 	hdrTitles = {
@@ -131,7 +154,7 @@ export class AdminCreditPage {
   	this.initLoans();
   }
 
-  initLoans(){
+  async initLoans(){
   	let self = this;
   	let load = this.loader.create({
 		      spinner: 'crescent',
@@ -169,6 +192,23 @@ export class AdminCreditPage {
     Promise.all([pr1,pr2]).then(()=>{
     	load.dismiss().catch(()=>{});
     });
+
+    let totals = {company:"TOTAL",
+      soaBillPeriod:'',
+      late15: 0,
+      late30:0,
+      late30p:0,
+      total:0}
+    await self.mosDef.map(a=>{
+      totals.late15 += parseFloat(a.late15.toString());
+      totals.late30 += parseFloat(a.late30.toString());
+      totals.late30p += parseFloat(a.late30p.toString());
+      totals.total += parseFloat(a.total.toString());
+    });
+
+    self.mosDef.push(totals);
+
+    self.loans.npLoans = self.mosDef;
   }
   
   isMobile(){
@@ -192,6 +232,10 @@ export class AdminCreditPage {
 	  		v.isMobile();
 	  	});
     }
+
+  doNPLAction(i:{index,val}){
+    console.log(i);
+  }
 
   doAction(i:{index:number,val:any}){
   	if(i.index == 0){

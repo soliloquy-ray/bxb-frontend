@@ -101,6 +101,12 @@ export class EmployeesPage {
 			"class":"flag-employee"
 		}
 	];
+	actionsP = [
+		{
+			"icon":"ios-contact",
+			"class":"edit-employee"
+		}
+	];
 	hdrTitlesE = {
 		'companyID':'Company ID',
 		'firstName':'First Name',
@@ -197,6 +203,8 @@ export class EmployeesPage {
   	switch (e.index) {
   		case 0:
   			// code...
+  			let dt = JSON.parse(e.val);
+  			this.editEmp(dt);
   			break;
   		case 1:
 		  	let mod = this.modal.create(FlagReportModalPage, {id:e.val.companyID}, {cssClass:`whitemodal xxs  ${this.isMobile ? "mobile" : ""}`});

@@ -41,10 +41,11 @@
 		<ion-col *ngFor = "let dt of hdr;">
 			<div class="{{dt}}" *ngIf="frm[dt]=='number'">{{rowData[dt] | number:'1.0-2'}}</div>
 			<div class="{{dt}}" *ngIf="frm[dt]=='currency'">{{rowData[dt] | currency:'PHP':'symbol-narrow':'1.2-2'}}</div>
-			<div class="{{dt}}" *ngIf="frm[dt]=='percent'">{{(rowData[dt] * 100) | number:'1.1-2'}} %</div>
+			<div class="{{dt}}" *ngIf="frm[dt]=='percent'">{{(rowData[dt] * 100) | number:'1.0-2'}} %</div>
 			<div class="{{dt}}" *ngIf="frm[dt]=='nested'">{{nesting(rowData,dt)}}</div>
 			<div class="{{dt}}" *ngIf="frm[dt]=='textDecorated'"><b class='decorated {{rowData[dt]}}'>{{rowData[dt]}}</b></div>
 			<div class="{{dt}}" *ngIf="frm[dt]=='textEvent'" (tap)="emitter(rowData[dt],toJson(rowData))"><b class='decorated clickable {{rowData[dt]}}'>{{rowData[dt]}}</b></div>
+			<div class="{{dt}}" *ngIf="frm[dt]=='numberEvent' && rowData[dt]!=0" (tap)="emitter(rowData[dt],toJson(rowData))"><b class='decorated clickable {{rowData[dt]}}'>{{rowData[dt] | number:'1.0-2'}}</b></div>
 			<div class="{{dt}}" *ngIf="!frm[dt]">{{rowData[dt]}}</div>
 		</ion-col>
 		<ion-col *ngIf="acts.length > 0">
@@ -63,7 +64,7 @@
 			{{rowData?.creditAvailNumber}}
 		</ion-col>
 		<ion-col >
-			{{(rowData?.rate * 100) | number:'1.1-2'}} %
+			{{(rowData?.rate * 100) | number:'1.0-2'}} %
 		</ion-col>
 		<ion-col >
 			{{rowData?.term}}
@@ -75,7 +76,7 @@
 			{{rowData?.purpose}}
 		</ion-col>
 		<ion-col>
-			{{(rowData?.repaid * 100) | number:'1.1-2'}} %
+			{{(rowData?.repaid * 100) | number:'1.0-2'}} %
 		</ion-col-->
 	</ion-row>
 	<pagination-controls id="{{pageId}}" (pageChange)="p = $event"></pagination-controls>
@@ -101,10 +102,11 @@
 					<p class="title">{{hdrTitles[hdr[ind]]}}</p>
 					<div class="{{hdr[ind]}}" *ngIf="frm[hdr[ind]]=='number'">{{rowData[hdr[ind]] | number:'1.0-2'}}</div>
 					<div class="{{hdr[ind]}}" *ngIf="frm[hdr[ind]]=='currency'">{{rowData[hdr[ind]] | currency:'PHP':'symbol-narrow':'1.2-2'}}</div>
-					<div class="{{hdr[ind]}}" *ngIf="frm[hdr[ind]]=='percent'">{{(rowData[hdr[ind]] * 100) | number:'1.1-2'}} %</div>
+					<div class="{{hdr[ind]}}" *ngIf="frm[hdr[ind]]=='percent'">{{(rowData[hdr[ind]] * 100) | number:'1.0-2'}} %</div>
 					<div class="{{hdr[ind]}}" *ngIf="frm[hdr[ind]]=='nested'">{{nesting(rowData,hdr[ind])}}</div>
 					<div class="{{hdr[ind]}}" *ngIf="frm[hdr[ind]]=='textDecorated'"><b class='decorated {{rowData[hdr[ind]]}}'>{{rowData[hdr[ind]]}}</b></div>
 					<div class="{{hdr[ind]}}" *ngIf="frm[hdr[ind]]=='textEvent'" (tap)="emitter(rowData[hdr[ind]],toJson(rowData))"><b class='decorated {{rowData[hdr[ind]]}}'>{{rowData[hdr[ind]]}}</b></div>
+					<div class="{{hdr[ind]}}" *ngIf="frm[hdr[ind]]=='numberEvent' && rowData[hdr[ind]]!=0" (tap)="emitter(rowData[hdr[ind]],toJson(rowData))"><b class='decorated {{rowData[hdr[ind]]}}'>{{rowData[hdr[ind]] | number:'1.0-2'}}</b></div>
 					<div class="{{hdr[ind]}}" *ngIf="!frm[hdr[ind]]">{{rowData[hdr[ind]]}}</div>
 				</span>
 				<span class="item" *ngIf="acts.length > 0">
@@ -115,7 +117,7 @@
 				</span>
 				<!--span class="item">
 					<p class="title">Rate</p>
-					{{(rowData?.rate * 100) | number:'1.1-2'}} %
+					{{(rowData?.rate * 100) | number:'1.0-2'}} %
 				</span>
 				<span class="item">
 					<p class="title">Term</p>
@@ -131,7 +133,7 @@
 				</span>
 				<span class="item">
 					<p class="title">Repaid</p>
-					{{(rowData?.repaid * 100) | number:'1.1-2'}} %
+					{{(rowData?.repaid * 100) | number:'1.0-2'}} %
 				</span-->
 			</div>
 		</ion-col>

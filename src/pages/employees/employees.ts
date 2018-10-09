@@ -18,7 +18,7 @@ declare var mobilecheck; //fn to check for screen type
 export class EmployeesPage {
 
 	activeEmployees = [
-		{
+		/*{
 			"companyID":"18-002",
 			"firstName":"George Miguel",
 			"lastName":"Winternitz",
@@ -36,7 +36,7 @@ export class EmployeesPage {
 			"creditLine":50000,
 			"netSalary":50000,
 			"grossSalary":70000
-		}
+		}*/
 	];
 	hdrTitlesA = {
 		'companyID':'Company ID',
@@ -48,7 +48,7 @@ export class EmployeesPage {
 		'netSalary':'Net Salary',
 		'grossSalary':'Gross Salary'
 	};
-	sampKeysA = Object.keys(this.activeEmployees[0]);
+	sampKeysA = ['companyID','firstName','lastName','usedCredit','unusedCredit','creditLine','netSalary','grossSalary'];
 	formatsA = {
 		'usedCredit':'currency',
 		'unusedCredit':'currency',
@@ -58,7 +58,7 @@ export class EmployeesPage {
 	};
 
 	employees = [
-		{
+		/*{
 			"companyID":"18-003",
 			"firstName":"Amanda",
 			"lastName":"Winternitz",
@@ -89,8 +89,9 @@ export class EmployeesPage {
 			"email":"blue.endaya@gmail.com",
 			"netSalary":50000,
 			"grossSalary":70000
-		}
+		}*/
 	];
+	sampKeysE = ['companyID','firstName','lastName','email','netSalary','grossSalary'];
 	actions = [
 		{
 			"icon":"ios-contact",
@@ -115,7 +116,6 @@ export class EmployeesPage {
 		'netSalary':'Net Salary',
 		'grossSalary':'Gross Salary'
 	};
-	sampKeysE = Object.keys(this.employees[0]);
 	formatsE = {
 		'netSalary':'currency',
 		'grossSalary':'currency'
@@ -147,8 +147,15 @@ export class EmployeesPage {
 	mod: Modal;
 	pendingMembers = [];
 	isMobile : boolean = mobilecheck();
-
+	cid:number = 0;
+	accountType = localStorage.accountType;
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private db: DbProvider, private loader: LoadingController) {
+  	if(this.accountType=="super"){
+  		this.cid = this.navParams.get('cid');
+  	}
+  	else{
+  		this.cid = localStorage.companyId;
+  	}
   }
 
   ionViewDidEnter() {
@@ -166,10 +173,10 @@ export class EmployeesPage {
       dismissOnPageChange: true
     });
     load.present();
-  	await this.db.getActiveMembers(localStorage.companyId).then(res=>{
+  	await this.db.getActiveMembers(this.cid).then(res=>{
   		this.activeEmployees = res.json();
   	});
-  	await this.db.getAllMembers(localStorage.companyId).then(res=>{
+  	await this.db.getAllMembers(this.cid).then(res=>{
   		this.employees = res.json();
   	});
   	load.dismiss();

@@ -10,7 +10,7 @@
 					Employees
 				</p>
 
-				<div class="nav">
+				<div class="nav" *ngIf="accountType!='super'">
 					<ion-row>
 						<ion-col col-6>
 							&nbsp;
@@ -30,9 +30,13 @@
 
 		<ion-row>
 			<ion-col col-12>
-				<submodule [title]="'Active Members'" *ngIf="activeEmployees.length > 0">
-					<sortable-table [data]="activeEmployees" [headers]="sampKeysA" [formats]="formatsA" [header_titles]="hdrTitlesA" [actions]="actions" (t)="doAction($event)" [id]="'activeMembers'"></sortable-table>
-					
+				<submodule [title]="'Active Members'">
+					<div>
+						<sortable-table *ngIf="activeEmployees.length > 0" [data]="activeEmployees" [headers]="sampKeysA" [formats]="formatsA" [header_titles]="hdrTitlesA" [actions]="actions" (t)="doAction($event)" [id]="'activeMembers'"></sortable-table>
+						<p class="no-data" *ngIf="activeEmployees.length == 0">
+							No data
+						</p>
+					</div>
 				</submodule>
 			</ion-col>
 		</ion-row>
@@ -40,9 +44,13 @@
 
 		<ion-row>
 			<ion-col col-12>
-				<submodule [title]="'Members'"  *ngIf="employees.length > 0">
-					<sortable-table [data]="employees" [headers]="sampKeysE" [formats]="formatsE" [header_titles]="hdrTitlesE" [actions]="actionsP" (t)="doAction($event)" [id]="'members'"></sortable-table>
-					
+				<submodule [title]="'Members'">
+					<div>
+						<sortable-table *ngIf="employees.length > 0" [data]="employees" [headers]="sampKeysE" [formats]="formatsE" [header_titles]="hdrTitlesE" [actions]="actionsP" (t)="doAction($event)" [id]="'members'"></sortable-table>
+						<p class="no-data" *ngIf="employees.length == 0">
+							No data
+						</p>
+					</div>
 				</submodule>
 			</ion-col>
 		</ion-row> 

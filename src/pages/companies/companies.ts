@@ -8,6 +8,7 @@ import { DragScrollComponent } from 'ngx-drag-scroll';
 import { DbProvider } from '../../providers/db/db';
 
 import { StatementOfAccountPage } from '../statement-of-account/statement-of-account';
+import { EmployeesPage } from '../employees/employees';
 import { SoaFilterModalPage } from '../soa-filter-modal/soa-filter-modal';
 import { AddHrPage } from '../add-hr/add-hr';
 /**
@@ -122,6 +123,10 @@ export class CompaniesPage {
   	this.navCtrl.setRoot(AddHrPage,{cid:cid},{animate:true, direction:"top"});
   }
 
+  toEmployees(cid){
+  	this.navCtrl.setRoot(EmployeesPage,{cid:cid},{animate:true, direction:"top"});
+  }
+
   doAction(i:{index,val}){
   	let v = JSON.parse(i.val);
   	console.log(i,v);
@@ -133,7 +138,9 @@ export class CompaniesPage {
   		case 1:
   			this.addHR(v.CompanyID);
   			break;
-  		
+  		case 2:
+  			this.toEmployees(v.CompanyID);
+  			break;
   		default:
   			// code...
   			break;

@@ -17,6 +17,12 @@ page-education {
 			}
 		}
 
+		hr{
+			height:0.4vh;
+			background-color:#333;
+			margin:5vh auto;
+		}
+
 		section.main-content{
 			display:block;
 			padding:1vh 2vw 1vh;
@@ -46,6 +52,12 @@ page-education {
 				display:block;
 				width:100%;
 
+				p.title{
+					font-size:4vh;
+					margin:3vh auto 2vh;
+					width:100%;
+				}
+
 				span.item{
 					display:block;
 					width:100%;
@@ -68,11 +80,36 @@ page-education {
 							white-space:nowrap;
 							display:block;
 							margin:1vh auto;
-							padding:1vh;
+							padding:0.5vh;
 
-							input{
-								display:inline;
-								vertical-align:middle
+							a{
+								display:inline-block;
+								vertical-align:middle;
+								height:1.3vw;
+								width:1.3vw;
+								position:relative;
+								border-radius:100%;
+								border:1px solid #333;
+								input{
+									position:absolute;
+									top:0;
+									left:0;
+									height:100%;
+									width:100%;
+									opacity:0;
+								}
+								&.checked{
+									&:after{
+										content:"";
+										position:absolute;
+										top:0.15vw;
+										left:0.15vw;
+										height:calc(1vw - 2px);
+										width:calc(1vw - 2px);
+										background-color:steelblue;
+										border-radius:100%;
+									}
+								}
 							}
 
 							b{

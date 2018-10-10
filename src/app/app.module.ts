@@ -68,6 +68,7 @@ import { DbProvider } from '../providers/db/db';
 import { AppProvider } from '../providers/app/app';
 import { CookieService } from 'ngx-cookie-service';
 import { MediaProvider } from '../providers/media/media';
+import { PipesModule } from '../pipes/pipes.module';
 
 var pages = [
   MyApp,
@@ -123,6 +124,7 @@ var pages = [
     HttpModule,
     DragScrollModule,
     NgxPaginationModule,
+    PipesModule.forRoot(),
     IonicModule.forRoot(MyApp, {}, {
       links: [
         { component: HomePage, name: 'Home', segment: 'home' },

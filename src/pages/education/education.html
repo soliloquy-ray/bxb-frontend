@@ -11,6 +11,8 @@
 			<iframe src="//youtube.com/embed/WVfaxLDyrTc" frameborder="0" allowfullscreen></iframe>
 		</div>
 
+		<hr class="divider">
+
 		<blockquote>
 			<p>
 			Educators work to include a wide array of studies within the required curriculum for young adults. However, according to FORBES, there’s a key component of life in which students of all ages aren’t gaining enough knowledge.</p>
@@ -59,33 +61,71 @@
 			</ol>
 		</blockquote>
 
-		<div class="short quiz">
+		<hr class="divider">
 
-			<span class="item i1">
+		<div class="short quiz">
+			<p class="title">
+				Short Quiz - True or False (5 items)
+			</p>
+
+			<span class="item i{{i+1}}" *ngFor="let q of trueOrFalse; let i = index">
 				<p class="question">
-					1. What is the correct answer?
+					{{i+1}}. {{q?.q}}
 				</p>
-				<span class="choices c1">
+				<span class="choices c{{i+1}}">
 					<div class="selection s1">
-						<input type="radio" name="c1" value="a"/>
-						<b class="text">This one</b>
+						<a class="checkmark">
+							<input type="radio" name="s1" value="1" (change)="choose($event)" [(ngModel)]="trueOrFalse[i].s"/>
+						</a>
+						<b class="text">{{q.c[1]}}</b>
 					</div>
 					<div class="selection s2">
-						<input type="radio" name="c1" value="b"/>
-						<b class="text">No, this one</b>
-					</div>
-					<div class="selection s3">
-						<input type="radio" name="c1" value="c"/>
-						<b class="text">Pick me</b>
+						<a class="checkmark">
+							<input type="radio" name="s1" value="0" (change)="choose($event)" [(ngModel)]="trueOrFalse[i].s"/>
+						</a>
+						<b class="text">{{q.c[0]}}</b>
 					</div>
 				</span>
 			</span>
 
-			<span class="item i2">
+			
+
+		</div>
+
+		<hr class="divider">
+
+		<div class="long quiz">
+			<p class="title">
+				Long Quiz - Multiple Choice (10 items)
+			</p>
+
+			<span class="item i1" *ngFor="let q of multipleChoice; let i = index">
+				<p class="question">
+					{{i+1}}. {{q?.q}}
+				</p>
+				<span class="choices c{{i+1}}">
+					<div class="selection s{{j+1}}" *ngFor="let s of q.c | keys; let j = index">
+						<a class="checkmark">
+							<input type="radio" name="c{{i+1}}" value="{{getChoiceKey(j)}}" (change)="choose($event)" [(ngModel)]="multipleChoice[i].s"/>
+						</a>
+						<b class="text">{{s}}</b>
+					</div>
+					<!--div class="selection s2">
+						<input type="radio" name="c{{j}}" value="{{j}}"/>
+						<b class="text">No, this one</b>
+					</div>
+					<div class="selection s3">
+						<input type="radio" name="c{{j}}" value="{{j}}"/>
+						<b class="text">Pick me</b>
+					</div-->
+				</span>
+			</span>
+
+			<!--span class="item i2">
 				<p class="question">
 					2. What is the correct answer for question #2?
 				</p>
-				<span class="choices c1">
+				<span class="choices c2">
 					<div class="selection s1">
 						<input type="radio" name="c2" value="a"/>
 						<b class="text">This one</b>
@@ -103,9 +143,9 @@
 
 			<span class="item i3">
 				<p class="question">
-					2. What is the correct answer for the third question?
+					3. What is the correct answer for the third question?
 				</p>
-				<span class="choices c1">
+				<span class="choices c3">
 					<div class="selection s1">
 						<input type="radio" name="c3" value="a"/>
 						<b class="text">This one</b>
@@ -119,7 +159,7 @@
 						<b class="text">Pick me</b>
 					</div>
 				</span>
-			</span>
+			</span-->
 
 		</div>
 

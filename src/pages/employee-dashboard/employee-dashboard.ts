@@ -61,7 +61,7 @@ export class EmployeeDashboardPage {
   	userData = localStorage.userData;
 
   submitFlag : boolean = false;
-
+  leaving: boolean = false;
   hasPendingLoan:boolean = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private modal: ModalController, private db: DbProvider, private alert: AlertController, private loader: LoadingController, private toast:ToastController, private appProvider: AppProvider, private cookie: CookieService) {
   }
@@ -89,7 +89,7 @@ export class EmployeeDashboardPage {
           buttons: ['Dismiss'],
           enableBackdropDismiss:true
         });
-        alert.present();
+        if(!this.leaving) alert.present();
       }
     });
     this.getPendingLoansCount().then(res=>{
@@ -102,12 +102,13 @@ export class EmployeeDashboardPage {
           buttons: ['Dismiss'],
           enableBackdropDismiss:true
         });
-        alert.present();
+        if(!this.leaving) alert.present();
       }
     });
   }
 
   ionViewWillLeave(){
+    this.leaving = true;
   }
 
   isMobile(){

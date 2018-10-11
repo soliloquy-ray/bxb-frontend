@@ -180,6 +180,26 @@ export class EducationPage {
 	}
   ];
 
+
+  matching = [
+	{
+		q:"Item 1",
+		a:""
+	},
+	{
+		q:"Item 2",
+		a:""
+	},
+	{
+		q:"Item 3",
+		a:""
+	},
+	{
+		q:"Item 4",
+		a:""
+	}
+  ]
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad EducationPage');
   	localStorage.page = 'education';
@@ -208,13 +228,27 @@ export class EducationPage {
 
   }
 
-  choose(e){
-  	let p = <HTMLSpanElement> e.target.parentNode.parentNode.parentNode;
-  	let a = p.getElementsByTagName("a");
-  	for(let i = 0; i < a.length; i++){
-  		a.item(i).className = a.item(i).className.replace("checked","");
-  	}
-  	e.target.parentNode.classList.toggle('checked');
+  setAnswer(index:number,j){
+  	this.multipleChoice[index].s = j;
+  }
+
+  drag(e){
+  	//console.log(e);
+    e.dataTransfer.setData("text", e.target.id);
+  }
+
+  drop(e,i){
+  	console.log('drop to ',e.target);
+    e.preventDefault();
+    let data = e.dataTransfer.getData("text");
+    let inp = e.target.getElementsByTagName("input")[0] || e.target;
+    //console.log(data,inp);
+    //inp.value = document.getElementById(data).innerText;
+    this.matching[i].a = document.getElementById(data).innerText;
+  }
+
+  allowDrop(e){
+    e.preventDefault();
   }
 
 }

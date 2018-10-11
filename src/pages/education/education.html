@@ -65,7 +65,7 @@
 
 		<div class="short quiz">
 			<p class="title">
-				Short Quiz - True or False (5 items)
+				Short Quiz - True or False ({{trueOrFalse.length}} items)
 			</p>
 
 			<span class="item i{{i+1}}" *ngFor="let q of trueOrFalse; let i = index">
@@ -74,14 +74,14 @@
 				</p>
 				<span class="choices c{{i+1}}">
 					<div class="selection s1">
-						<a class="checkmark">
-							<input type="radio" name="s1" value="1" (change)="choose($event)" [(ngModel)]="trueOrFalse[i].s"/>
+						<a class="checkmark" [ngClass]="{'checked':trueOrFalse[i].s == '1'}">
+							<input type="radio" name="s1" value="1" [(ngModel)]="trueOrFalse[i].s"/>
 						</a>
 						<b class="text">{{q.c[1]}}</b>
 					</div>
 					<div class="selection s2">
-						<a class="checkmark">
-							<input type="radio" name="s1" value="0" (change)="choose($event)" [(ngModel)]="trueOrFalse[i].s"/>
+						<a class="checkmark" [ngClass]="{'checked':trueOrFalse[i].s == '0'}">
+							<input type="radio" name="s1" value="0" [(ngModel)]="trueOrFalse[i].s"/>
 						</a>
 						<b class="text">{{q.c[0]}}</b>
 					</div>
@@ -96,7 +96,7 @@
 
 		<div class="long quiz">
 			<p class="title">
-				Long Quiz - Multiple Choice (10 items)
+				Long Quiz - Multiple Choice ({{multipleChoice.length}} items)
 			</p>
 
 			<span class="item i1" *ngFor="let q of multipleChoice; let i = index">
@@ -105,61 +105,53 @@
 				</p>
 				<span class="choices c{{i+1}}">
 					<div class="selection s{{j+1}}" *ngFor="let s of q.c | keys; let j = index">
-						<a class="checkmark">
-							<input type="radio" name="c{{i+1}}" value="{{getChoiceKey(j)}}" (change)="choose($event)" [(ngModel)]="multipleChoice[i].s"/>
+						<a class="checkmark" [ngClass]="{'checked':multipleChoice[i].s == getChoiceKey(j)}">
+							<input type="radio" name="c{{i+1}}" value="{{getChoiceKey(j)}}" [(ngModel)]="multipleChoice[i].s"/>
 						</a>
-						<b class="text">{{s}}</b>
-					</div>
-					<!--div class="selection s2">
-						<input type="radio" name="c{{j}}" value="{{j}}"/>
-						<b class="text">No, this one</b>
-					</div>
-					<div class="selection s3">
-						<input type="radio" name="c{{j}}" value="{{j}}"/>
-						<b class="text">Pick me</b>
-					</div-->
-				</span>
-			</span>
-
-			<!--span class="item i2">
-				<p class="question">
-					2. What is the correct answer for question #2?
-				</p>
-				<span class="choices c2">
-					<div class="selection s1">
-						<input type="radio" name="c2" value="a"/>
-						<b class="text">This one</b>
-					</div>
-					<div class="selection s2">
-						<input type="radio" name="c2" value="b"/>
-						<b class="text">No, this one</b>
-					</div>
-					<div class="selection s3">
-						<input type="radio" name="c2" value="c"/>
-						<b class="text">Pick me</b>
+						<b class="text" (tap)="setAnswer(i,getChoiceKey(j))">{{s}}</b>
 					</div>
 				</span>
 			</span>
 
-			<span class="item i3">
-				<p class="question">
-					3. What is the correct answer for the third question?
-				</p>
-				<span class="choices c3">
-					<div class="selection s1">
-						<input type="radio" name="c3" value="a"/>
-						<b class="text">This one</b>
-					</div>
-					<div class="selection s2">
-						<input type="radio" name="c3" value="b"/>
-						<b class="text">No, this one</b>
-					</div>
-					<div class="selection s3">
-						<input type="radio" name="c3" value="c"/>
-						<b class="text">Pick me</b>
-					</div>
-				</span>
-			</span-->
+		</div>
+
+		<hr class="divider">
+
+		<div class="matching quiz">
+			<p class="title">
+				Matching Type ({{matching.length}} items)
+			</p>
+
+			<ion-row>
+				<ion-col col-6 class="head">
+					<p><b>Items</b></p>
+					<ion-row *ngFor="let m of matching; let i = index;">
+						<ion-col col-12>
+							<div class="dropper" (drop)="drop($event,i)" (dragover)="allowDrop($event)">
+								<input type="text" [(ngModel)]="matching[i].a" readonly="true" [ngClass]="{'answered':matching[i].a != ''}"/>
+							</div>
+							<span class="text">{{i+1}}. {{m?.q}}</span>
+						</ion-col>
+					</ion-row>
+				</ion-col>
+				<ion-col col-6 class="head">
+					<p><b>Answers</b></p>
+					<ion-row>
+						<ion-col col-12>
+							<div class="answer" id="ans1" draggable="true" (dragstart)="drag($event)">Answer Key 1</div>
+						</ion-col>
+						<ion-col col-12>
+							<div class="answer"  id="ans2" draggable="true" (dragstart)="drag($event)">Answer Key 2</div>
+						</ion-col>
+						<ion-col col-12>
+							<div class="answer"  id="ans3" draggable="true" (dragstart)="drag($event)">Answer Key 3</div>
+						</ion-col>
+						<ion-col col-12>
+							<div class="answer"  id="ans4" draggable="true" (dragstart)="drag($event)">Answer Key 4</div>
+						</ion-col>
+					</ion-row>
+				</ion-col>
+			</ion-row>
 
 		</div>
 

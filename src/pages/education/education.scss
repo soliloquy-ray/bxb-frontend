@@ -85,8 +85,8 @@ page-education {
 							a{
 								display:inline-block;
 								vertical-align:middle;
-								height:1.3vw;
-								width:1.3vw;
+								height:2.5vh;
+								width:2.5vh;
 								position:relative;
 								border-radius:100%;
 								border:1px solid #333;
@@ -102,10 +102,10 @@ page-education {
 									&:after{
 										content:"";
 										position:absolute;
-										top:0.15vw;
-										left:0.15vw;
-										height:calc(1vw - 2px);
-										width:calc(1vw - 2px);
+										top:0vh;
+										left:0vh;
+										height:calc(2.5vh - 2px);
+										width:calc(2.5vh - 2px);
 										background-color:steelblue;
 										border-radius:100%;
 									}
@@ -117,6 +117,47 @@ page-education {
 								vertical-align:middle;
 							}
 						}
+					}
+				}
+
+				&.matching{
+					div.dropper{
+						display:inline-block;
+						width:auto;
+						vertical-align:bottom;
+						input{
+							display:block;
+							clear:both;
+							border-radius:8px;
+							padding:0.5vh 0;
+							border:none;
+							box-shadow: 0 0 2px 1px #333;
+							text-align:center;
+							width:16vh;
+							&.answered{
+								color:#fff;
+								background-color:steelblue;
+							}
+						}
+					}
+					span.text{
+						display:inline-block;
+						width:auto;
+						vertical-align:bottom;
+						margin-left:0.5vw;
+					}
+
+					div.answer{
+						display:block;
+						clear:both;
+						border-radius:8px;
+						padding:0.5vh 0;
+						border:none;
+						box-shadow: 0 0 2px 1px #333;
+						color:#fff;
+						background-color:steelblue;
+						text-align:center;
+						width:16vh;
 					}
 				}
 			}

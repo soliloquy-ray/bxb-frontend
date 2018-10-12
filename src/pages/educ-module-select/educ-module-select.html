@@ -1,0 +1,19 @@
+<ion-content [ngClass]="{'mobile':isMobile()}">
+	<top-bar></top-bar>
+	<side-bar *ngIf = "!isMobile()" [highlights]="'education'"></side-bar>
+
+	<section class="main-content">
+
+		<p class="header-top">
+			Select a module to begin
+		</p>
+
+
+		<div class="selections">
+			<div class="module" *ngFor="let m of modules; let i = index" (tap)="goToModule(i+1)" [ngClass]="{'disabled':isnAvailable(i)}">
+				<p><b>{{m.text}}</b></p>
+			</div>
+		</div>
+
+	</section>
+</ion-content>

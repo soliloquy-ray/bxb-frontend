@@ -1,0 +1,58 @@
+page-educ-module-select {
+	ion-content.content{
+		background-color:#f7f7f7;
+
+		side-bar{
+			section.content{
+				background-color: transparent;
+			}
+		}
+
+		section.main-content{
+			display:block;
+			padding:1vh 2vw 1vh;
+			margin-left:0.5vw;
+			padding-left:$side-bar-width;
+
+			p.header-top{
+				font-size:24px;
+				font-weight: 700;
+			}
+
+			div.selections{
+				padding: 5vw;
+
+				div.module {
+				    width: calc(50% - 1vh);
+				    display: inline-block;
+				    text-align: center;
+				    padding: 2vh 5vh;
+				    text-transform: uppercase;
+				    font-weight: 700;
+				    font-size: 3vh;
+				    letter-spacing: 0.1vh;
+				    box-shadow: 0 0 2vh 0 #324767;
+				    margin: 0.5vh;
+				    color: #fff;
+				    background-color: #3174D6;
+				    cursor: pointer;
+
+				    &:hover{
+				    	background-color:#324767;
+				    	box-shadow: 0 0 2vh 0 #3174D6;
+				    }
+
+				    &.disabled{
+				    	cursor:not-allowed;
+				    	background-color:#78869a;
+				    }
+				}
+			}
+
+		}
+
+		&.mobile{
+
+		}
+	}
+}

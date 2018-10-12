@@ -15,7 +15,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class EducationPage {
 
+	modId:number;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+  	this.modId = this.navParams.get('id') || 1;
   }
 
   multipleChoice = [

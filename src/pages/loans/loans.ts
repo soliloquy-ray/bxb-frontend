@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, ModalController, Modal, LoadingController } from 'ionic-angular';
 
 import { DisclosureStatementPage } from '../disclosure-statement/disclosure-statement';
+import { AdminPretermFormPage } from '../admin-preterm-form/admin-preterm-form';
 
 import { DbProvider } from '../../providers/db/db';
 
@@ -164,6 +165,15 @@ export class LoansPage {
   	this.ln.sdate = ev.applicationDate;
   	this.ln.getLoan();
   	this.showModal(e, fe);
+  }
+
+  doPretermAction(i:{index:number,val:any}){
+  	console.log(i);
+	let data = JSON.parse(i.val);
+	let user = data.userData;
+  	
+  	this.mod = this.modal.create(AdminPretermFormPage,{data:data,user:user},{cssClass:`whitemodal sm ${this.isMobile() ? "mobile" : ""}`});
+  	this.mod.present();
   }
 
   /*getLoansByStatus(stat):Promise<any>{

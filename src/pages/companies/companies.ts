@@ -9,6 +9,7 @@ import { DbProvider } from '../../providers/db/db';
 
 import { StatementOfAccountPage } from '../statement-of-account/statement-of-account';
 import { EmployeesPage } from '../employees/employees';
+import { AddCompanyPage } from '../add-company/add-company';
 import { SoaFilterModalPage } from '../soa-filter-modal/soa-filter-modal';
 import { AddHrPage } from '../add-hr/add-hr';
 /**
@@ -145,6 +146,10 @@ export class CompaniesPage {
   			// code...
   			break;
   	}
+  }
+
+  addNew(){
+  	this.navCtrl.setRoot(AddCompanyPage,{},{animate:true, direction:"top"});
   }
 
 }

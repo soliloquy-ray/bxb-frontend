@@ -29,13 +29,17 @@ export class EditEmployeePage {
 		employeeId: "",
 		payrollAccount: "",
 		password: "",
-		mobile: ""	
+		mobile: "",
+    vacationLeave: 0,
+    sickLeave: 0	
   	};
 	prefixes = this.sanitizer.bypassSecurityTrustHtml(intlPrefixes);
 	prefix:string = '63';
   constructor(public navCtrl: NavController, private navParams: NavParams, private sanitizer:DomSanitizer) {
   	console.log(this.navParams.data);
     this.userData = this.navParams.get('data');
+    this.userData.vacationLeave = Math.round(this.userData.vacationLeave);
+    this.userData.sickLeave = Math.round(this.userData.sickLeave);
   }
 
   ionViewDidLoad() {

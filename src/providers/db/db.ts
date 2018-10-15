@@ -16,7 +16,7 @@ export class DbProvider {
   	dtNow;
   constructor(public http: Http, private loader: LoadingController) {
   	let dt = new Date();
-  	this.dtNow = dt.getUTCFullYear()+"-"+("0"+(dt.getUTCMonth().valueOf()+2)).slice(-2)+"-"+dt.getUTCDate();
+  	this.dtNow = dt.getUTCFullYear()+"-"+("0"+(dt.getUTCMonth().valueOf()+1)).slice(-2)+"-"+dt.getUTCDate();
   }
 
   async signUp(uData){

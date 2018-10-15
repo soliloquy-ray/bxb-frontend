@@ -237,12 +237,38 @@ ion-menu{
     visibility: hidden;
   }
   #printarea, #printarea * {
+  	margin-top:0;
     visibility: visible;
   }
   #printarea {
     position: absolute;
     left: 0;
     top: 0;
+    height:100%;
+    width:100%;
+    display:table;
+    margin:0;
+    padding:0;
+    div.body{
+    	padding-top:0;
+    	padding-bottom:0;
+    	.bundle, .bundle *{
+    		margin-top:0;
+    		margin-left:0;
+    		padding-top:0;
+    		padding-bottom:0;
+    	}
+    }
+    span.header{
+    	div.title{
+    		padding-top:0.15vh;
+    		padding-bottom:0.35vh;
+    	}
+    }
+  }
+
+  .noprint{
+  	display:none !important;
   }
 }
 

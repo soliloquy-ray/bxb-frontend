@@ -8,6 +8,22 @@ page-educ-module-select {
 			}
 		}
 
+		&.mobile{
+
+			section.main-content{
+				padding: 1vh 1vw;
+				font-size:2.5vh;
+
+				div.selections{
+					padding:2vh;
+
+					div.module{
+				    	padding: 2vh 0vh;
+					}
+				}
+			}
+		}
+
 		section.main-content{
 			display:block;
 			padding:1vh 2vw 1vh;
@@ -29,7 +45,7 @@ page-educ-module-select {
 				    padding: 2vh 5vh;
 				    text-transform: uppercase;
 				    font-weight: 700;
-				    font-size: 3vh;
+				    font-size: 2.5vh;
 				    letter-spacing: 0.1vh;
 				    box-shadow: 0 0 2vh 0 #324767;
 				    margin: 0.5vh;

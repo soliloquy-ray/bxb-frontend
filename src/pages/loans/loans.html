@@ -15,11 +15,11 @@
 					    <ion-segment-button value="approved">
 					    	Approved
 					    </ion-segment-button>
-						<ion-segment-button value="cancel">
-							Cancel
-					    </ion-segment-button>
 					    <ion-segment-button value="completed">
 					    	Completed
+					    </ion-segment-button>
+						<ion-segment-button value="cancel">
+							Pending Pre-termination
 					    </ion-segment-button>
 					</ion-segment>
 
@@ -126,7 +126,7 @@
 							
 						</div>
 						<div *ngSwitchCase = "'cancel'">
-							<sortable-table *ngIf="loans.cancel.length > 0" [data]="loans?.cancel" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles" [actions]="actions" (t)="test($event)"></sortable-table>
+							<sortable-table *ngIf="loans.cancel.length > 0" [data]="loans?.cancel" [headers]="sampKeys" [formats]="formats" [header_titles]="hdrTitles" [actions]="actions" (t)="doPretermAction($event)"></sortable-table>
 							<p class="no-data" *ngIf="loans.cancel.length == 0">
 								No data
 							</p>

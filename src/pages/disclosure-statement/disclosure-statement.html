@@ -16,14 +16,14 @@
 
 <ion-content padding>
 
-	<section class="content" [ngClass]="{'mobile':isMobile()}">
+	<section class="content" [ngClass]="{'mobile':isMobile()}" id="printarea">
 		<span class="header">
 			<div class="title">
 				<ion-icon name="md-information-circle"></ion-icon>
 				BXB Disclosure and Payment Schedule
 			</div>
 
-			<button class="print" ion-button (tap)="print()">
+			<button class="print noprint" ion-button (tap)="print()">
 				<ion-icon name="md-print"></ion-icon>
 				Print
 			</button>
@@ -57,8 +57,8 @@
 			<ion-row>
 				<ion-col class="bundle">
 					<ion-row>
-						<ion-col style="font-weight:bolder" col-4>ADD</ion-col>
-						<ion-col style="font-weight:bolder" col-5>Less</ion-col>
+						<ion-col style="font-weight:bolder" col-4>&nbsp;</ion-col>
+						<ion-col style="font-weight:bolder" col-5>Processing Fees</ion-col>
 						<ion-col style="font-weight:bolder;white-space: nowrap;" col-3>Reference</ion-col>
 					</ion-row>
 					<ion-row>
@@ -206,7 +206,7 @@
 			</ion-row>
 		</div>
 
-		<p class="disclaimer">
+		<p class="disclaimer noprint">
 			To view the terms and conditions of this availment you may click <a class="link" (tap)="openTermsModal()">here</a>
 		</p>
 	</section>

@@ -54,7 +54,7 @@
 				Amount Due	
 			</ion-col>
 			<ion-col col-3>
-				{{data?.amt | number:'1.0-2'}}
+				{{data?.amt | currency:'PHP':'symbol-narrow':'1.0-2'}}
 			</ion-col>
 		</ion-row>
 		<ion-row>
@@ -76,7 +76,7 @@
 				Other Fees
 			</ion-col>
 			<ion-col col-3>
-				{{(lineTotal * -1) | number:'1.0-2'}}
+				{{(lineTotal * -1) | currency:'PHP':'symbol-narrow':'1.0-2'}}
 			</ion-col>
 		</ion-row>
 		<ion-row>
@@ -87,7 +87,7 @@
 				Total Amount Due
 			</ion-col>
 			<ion-col col-3>
-				{{(data?.amt - lineTotal) |  number:'1.0-2'}}
+				{{(data?.amt - lineTotal) |  currency:'PHP':'symbol-narrow':'1.0-2'}}
 			</ion-col>
 		</ion-row>
 		<hr class="blocker">

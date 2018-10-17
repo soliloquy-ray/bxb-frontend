@@ -58,7 +58,7 @@ export class EmployeeDashboardPage {
 	loan : loanModel;
 	dates : Array<{paymentDate,paymentNum,amt,bal}> = [];
   	env = config[location.origin].backend;
-  	userData = localStorage.userData;
+  	userData = JSON.parse(localStorage.userData);
 
   submitFlag : boolean = false;
   leaving: boolean = false;

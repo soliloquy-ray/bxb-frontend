@@ -401,4 +401,16 @@ export class DbProvider {
 		);
   }
 
+  async userUpdate(user){
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+
+	return (
+		this.http.post(`${this.env}/api.php?q=user_update`,{user:user}, rq)
+			.toPromise()
+		);
+  }
+
 }

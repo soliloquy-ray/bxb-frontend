@@ -29,14 +29,14 @@
 	 				<input type="text" name="lastName" [(ngModel)] = "userData.lastName" />
 	 			</span>
 	 		</ion-row>
-	 		<ion-row>
+	 		<!--ion-row>
 	 			<p class="label">
 	 				Employee ID
 	 			</p>
-	 			<span class="content">
-	 				<input type="text" name="employeeId" [(ngModel)] = "userData.employeeId" />
-	 			</span>
-	 		</ion-row>
+	 			<span class="content"-->
+	 				<input type="hidden" name="employeeId" [(ngModel)] = "userData.employeeId" />
+	 			<!--/span>
+	 		</ion-row-->
 	 		<ion-row>
 	 			<p class="label">
 	 				Email
@@ -45,14 +45,14 @@
 	 				<input type="text" name="email" [(ngModel)] = "userData.email" />
 	 			</span>
 	 		</ion-row>
-	 		<ion-row>
+	 		<!--ion-row>
 	 			<p class="label">
 	 				Password
 	 			</p>
 	 			<span class="content">
 	 				<input type="text" name="password" [(ngModel)] = "userData.password" />
 	 			</span>
-	 		</ion-row>
+	 		</ion-row-->
 	 		<ion-row class="bot">
 	 			<p class="label">
 	 				Mobile
@@ -186,7 +186,7 @@
 	 			</span>
 	 		</ion-row>
 	 		<ion-row>
-	 			<button ion-button (tap)="submitReg()">Update Account</button>
+	 			<button ion-button (tap)="submitReg()" [disabled]="canSubmit">Update Account</button>
 	 		</ion-row>
 	 	</form>
 

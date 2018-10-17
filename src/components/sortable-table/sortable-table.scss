@@ -74,6 +74,10 @@ sortable-table {
 								background-color:#d9534f;
 							}
 						}
+
+						&.confirmed{
+							background-color:#5cb85c;
+						}
 					}
 
 					b.icon-container{
@@ -204,6 +208,13 @@ sortable-table {
 								}
 
 								&.paid{
+									background-color:#5cb85c;
+									&.not{
+										background-color:#d9534f;
+									}
+								}
+
+								&.confirmed{
 									background-color:#5cb85c;
 								}
 							}

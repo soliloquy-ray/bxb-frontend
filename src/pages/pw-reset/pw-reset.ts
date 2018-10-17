@@ -68,8 +68,7 @@ export class PwResetPage {
   	return (
   		this.pw != "" &&
   		this.con != "" &&
-  		this.pw == this.con &&
-  		this.id != 0
+  		this.pw == this.con
   		);
   }
 

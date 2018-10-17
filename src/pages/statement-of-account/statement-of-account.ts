@@ -17,63 +17,9 @@ import { AddLineItemModalPage } from '../add-line-item-modal/add-line-item-modal
   templateUrl: 'statement-of-account.html',
 })
 export class StatementOfAccountPage {		
-	currentBalance = [/*{
-			"transDate":"2018-04-15",
-			"creditAvailmentNumber":4,
-			"memberID":"00202",
-			"firstName":"George Miguel",
-			"lastName":"Winternitz",
-			"seqNo":"9/12",
-			"empID":"18-002",
-			"transType":"Credit Availment",
-			"repaymentAmt":479.16,
-			"status":"Active"
-		},{
-			"transDate":"2018-08-07",
-			"creditAvailmentNumber":41,
-			"memberID":"00252",
-			"firstName":"Ray",
-			"lastName":"Santos",
-			"seqNo":"1/12",
-			"empID":"123",
-			"transType":"Credit Availment",
-			"repaymentAmt":2395.83,
-			"status":"Active"
-		},
-	*/];	
+	currentBalance = [];	
 
-	prevBalance = [/*{
-			"transDate":"2018-04-15",
-			"creditAvailmentNumber":4,
-			"firstName":"George Miguel",
-			"lastName":"Winternitz",
-			"seqNo":"7/12",
-			"empID":"18-002",
-			"transType":"Credit Availment",
-			"repaymentAmt":479.16,
-			"status":"Active"
-		},{
-			"transDate":"2018-04-27",
-			"creditAvailmentNumber":8,
-			"firstName":"George Miguel",
-			"lastName":"Winternitz",
-			"seqNo":"4/4",
-			"empID":"18-002",
-			"transType":"Credit Availment",
-			"repaymentAmt":8400,
-			"status":"Preterminated"
-		},{
-			"transDate":"2018-04-15",
-			"creditAvailmentNumber":4,
-			"firstName":"Ray",
-			"lastName":"Santos",
-			"seqNo":"8/12",
-			"empID":"18-002",
-			"transType":"Credit Availment",
-			"repaymentAmt":479.16,
-			"status":"Active"
-		}*/
-	];
+	prevBalance = [];
 	data;
 	cid;
 	lineItems: Array<{label:string,amt:number,payId:number,bal:number,seqNo:number,loanId:number}> = [];
@@ -103,14 +49,14 @@ export class StatementOfAccountPage {
   		this.currentBalance = res.json();
   	}).catch(console.warn);
 
-  	this.currentBalance.map(a=>{
-  		this.db.getLineItems(a.loanId,this.data.billPeriod).then(res=>{
-  			let rs = res.json();
-  			this.lineItems = this.lineItems.concat(rs);
-  			if(rs.length > 0) this.submitted = true;
-  			this.getLineItemsTotal();
-  		}).catch(console.warn);
-  	})
+  	if(this.data.statusID != 1) this.submitted = true;
+
+  	this.db.getLineItems(this.data.CompanyID,this.data.billPeriod).then(res=>{
+  		let rs = res.json();
+  		this.lineItems = this.lineItems.concat(rs);
+  		if(rs.length > 0) this.submitted = true;
+  		this.getLineItemsTotal();
+  	}).catch(console.warn);
   }
 
   print(){
@@ -166,8 +112,9 @@ export class StatementOfAccountPage {
     load.present();
   	console.log('submitting this '+JSON.stringify(this.data));
   	await this.lineItems.map(a=>{
-  		this.db.addLineItem({payId:a.payId,loanId:a.loanId,payDate:this.data.billPeriod,payCount:a.seqNo,payAmount:a.amt,balance:a.bal}).then(console.info).catch(console.warn);
+  		this.db.addLineItem({payId:a.payId,payDate:this.data.billPeriod,reconDescription:a.label,payAmount:a.amt,companyID:this.data.CompanyID}).then(console.info).catch(console.warn);
   	})
+  	this.db.finalizeSOA(this.data.CompanyID,this.data.billPeriod).then(console.info).catch(console.warn);
   	this.submitted = true;
   	load.dismiss();
   }

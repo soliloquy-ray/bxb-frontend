@@ -16,7 +16,7 @@ export class DbProvider {
   	dtNow;
   constructor(public http: Http, private loader: LoadingController) {
   	let dt = new Date();
-  	this.dtNow = dt.getUTCFullYear()+"-"+("0"+(dt.getUTCMonth().valueOf()+1)).slice(-2)+"-"+dt.getUTCDate();
+  	this.dtNow = dt.getUTCFullYear()+"-"+("0"+(dt.getUTCMonth().valueOf()+2)).slice(-2)+"-"+dt.getUTCDate();
   }
 
   async signUp(uData){
@@ -372,7 +372,31 @@ export class DbProvider {
 	rq.headers = hdr;
 
 	return (
-		this.http.post(`${this.env}/api.php?q=get_line_items_by_id`,{loanid:id, sched:sched}, rq)
+		this.http.post(`${this.env}/api.php?q=get_line_items_by_id`,{cid:id, sched:sched}, rq)
+			.toPromise()
+		);
+  }
+
+  async finalizeSOA(id: number = 0, sched){
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+
+	return (
+		this.http.post(`${this.env}/api.php?q=finalize_soa`,{cid:id, sched:sched}, rq)
+			.toPromise()
+		);
+  }
+
+  async soaStatusUpdate(soa:{id:number,status:number,data:string}){
+	let hdr = new Headers;
+	hdr.append('Content-Type','application/json');
+	let rq = new RequestOptions;
+	rq.headers = hdr;
+
+	return (
+		this.http.post(`${this.env}/api.php?q=soa_status_update`,{soa:soa}, rq)
 			.toPromise()
 		);
   }

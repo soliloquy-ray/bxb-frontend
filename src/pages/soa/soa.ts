@@ -71,7 +71,14 @@ export class SoaPage {
   	localStorage.page = 'soa';
 
   	this.db.getSOAByDate(localStorage.companyId).then(res=>{
-  		this.soas = res.json();
+  		let soa = <Array<any>>res.json();
+  		this.soas = soa.filter(a=>{
+  			if(parseInt(a.statusID) > 1){
+  				return true;
+  			}else{
+  				return false
+  			}
+  		});
   	}).catch(console.warn);
   }
 

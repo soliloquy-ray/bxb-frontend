@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, LoadingController, ModalController, Modal } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, LoadingController, ModalController, Modal, AlertController, ToastController } from 'ionic-angular';
 
 import { LoansPage } from '../loans/loans';
 
@@ -48,7 +48,7 @@ export class StatementsPage {
 	];
 
 	hdrTitles = {
-		'pdf':'PDF',
+		'pdf':'',
 		'company':'Name',
 		'billPeriod':'Billing Period',
 		'amt':'Amount Due',
@@ -72,18 +72,21 @@ export class StatementsPage {
 	];
 
 	mod:Modal;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private db: DbProvider, private loader: LoadingController, private modal: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private db: DbProvider, private loader: LoadingController, private modal: ModalController, private alert:AlertController, private toast:ToastController) {
   }
 
   ionViewDidEnter() {
   	this.menu.close();
   	localStorage.page = 'soa';
 
+  	this.populateData();
+  }
+
+  async populateData(){
   	this.db.getSOAByDate().then(res=>{
   		this.soas = res.json();
   	}).catch(console.warn);
   }
-
 
   ionViewWillLeave(){
   }
@@ -98,7 +101,12 @@ export class StatementsPage {
 
   doAction(i:{index:number,val:any}){
   	if(i.index.toString().toLowerCase()=="confirm"){
-  		console.log(i.val);
+  		let dt = JSON.parse(i.val);
+  		if(dt['statusID'] === "2"){
+  			this.showApproveAlert(dt['soaID']);
+  		}else{
+  			this.showSOA(dt);
+  		}
   	}else
   	if(i.index.toString()=="PDF"){
   		let dt = JSON.parse(i.val);
@@ -107,6 +115,60 @@ export class StatementsPage {
   	}else{
   		this.showSOA(JSON.parse(i.val));
   	}
+  }
+
+
+  showApproveAlert(id){
+  	let self = this;
+  	console.log(id);
+  	let conf = this.alert.create({
+      title: 'Reference No.',
+      inputs: [
+        {
+          name: 'refno',
+          placeholder: 'Reference Number'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Close',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Proceed',
+          handler: data => {
+          	let ref = data.refno;
+          	let load = this.loader.create({
+		      spinner: 'crescent',
+		      showBackdrop: true,
+		      content: `Processing...`,
+		      dismissOnPageChange: true
+          	})
+          	this.db.soaStatusUpdate({id:id,status:3,data:ref})
+          		.then(res=>{
+          			load.dismiss();
+          			if(res){
+          				let tst = this.toast.create({message:"Payment processed", cssClass:"success", duration: 3000, position: 'top'})
+          				tst.present();
+          			}else{
+          				let tst = this.toast.create({message:"Something went wrong. Please try again later", cssClass:"fail", duration: 3000, position: 'top'})
+          				tst.present();
+          			}
+  					this.populateData();
+          		})
+          		.catch(err=>{
+          			load.dismiss();
+          			let tst = this.toast.create({message:"Something went wrong. Please try again later", cssClass:"fail", duration: 3000, position: 'top'})
+          			tst.present();
+          			console.warn(err);
+          		})
+          }
+      }]
+ 	});
+
+ 	conf.present();
   }
 
   showSOA(i){

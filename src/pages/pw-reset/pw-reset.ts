@@ -24,13 +24,14 @@ export class PwResetPage {
 	pw:string = '';
 	con:string = '';
 	id: number = 0;
-	code: string;
+	code: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private loader: LoadingController, private db: DbProvider, private toast: ToastController) {
-  	this.code = this.navParams.get('c') || '';
+  	this.code = JSON.parse(atob(this.navParams.get('c'))) || '';
+  	this.id = this.code.master_id;
   }
 
   ionViewDidLoad() {
-  	console.log(this.code);
+
   }
 
   toHome(){
@@ -38,10 +39,29 @@ export class PwResetPage {
   }
 
   submit(){
-  	if(this.id == 0 || this.pw == "") return ;
+  	//if(this.id == 0 || this.pw == "") return ;
+  	let self = this;
+  	let load = this.loader.create({
+        spinner: 'crescent',
+        dismissOnPageChange: true,
+        showBackdrop: true,
+        content: `Processing...`,
+  	});
+  	load.present();
   	this.db.changeUserPassword(this.id,this.pw).then(res=>{
+  		load.dismiss();
+  		let tst = this.toast.create({message:"Password has been changed.", position:"top", cssClass:"success", duration:3000});
+  		tst.onDidDismiss(()=>{
+  			self.navCtrl.setRoot(LoginPage,{}, {animate:true,direction:"forward"});
+  		});
+  		tst.present();
   		console.info(res);
-  	}).catch(console.warn)
+  	}).catch(err=>{
+  		load.dismiss();
+  		let tst = this.toast.create({message:"Password change failed.", position:"top", cssClass:"fail", duration:3000});
+  		tst.present();
+  		console.warn(err);
+  	})
   }
 
   isValid():boolean{

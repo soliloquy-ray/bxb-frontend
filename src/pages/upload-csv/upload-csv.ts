@@ -19,6 +19,7 @@ export class UploadCsvPage {
   	uploadRdy: boolean = false;
   	fd;
   	file: File;
+  	errors : Array<any> = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private app: AppProvider, private loader: LoadingController, private modal: ModalController, private http:Http, private db:DbProvider) {
   }
 
@@ -87,12 +88,22 @@ export class UploadCsvPage {
   }
 
   async checkValidity(d:Array<any>){
-  	let i = d.every((v,i)=>{
+  	let self = this;
+  	let res = d.every((v,ind)=>{
   		let dt = v.split(",");
-  		console.log(this.hdr[i],dt[i]);
+  		//console.log(this.hdr[i],dt[i]);
+  		self.errors = dt.map((a,i)=>{
+  			return !self.checkFieldVal(a,i,ind)
+  		})
   		return dt.length == this.headerRows;
   	});
-  	return i;
+  	return res;
+  }
+
+  checkFieldVal(v,i,line:number):boolean{
+  	console.log(v,i,line);
+  	if(v == "" || i == "") return false;
+  	return true;
   }
 
   ionViewWillLeave(){

@@ -44,7 +44,6 @@ export class EditEmployeePage {
     this.userData = this.navParams.get('data');
     this.userData.vacationLeave = Math.round(this.userData.vacationLeave);
     this.userData.sickLeave = Math.round(this.userData.sickLeave);
-    this.userData.mobile = this.prefix+this.userData.mobile;
   }
 
   ionViewDidLoad() {
